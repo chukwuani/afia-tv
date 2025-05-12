@@ -1,34 +1,32 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { usePathname } from "next/navigation"
-import Image from "next/image"
-import Link from "next/link"
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-import { siteConfig } from "@/config"
+import { siteConfig } from "@/config";
 
-import { cn } from "@/lib/utils"
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { AlignJustify } from "lucide-react"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { AlignJustify } from "lucide-react";
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 
 export function MobileNav() {
-  const pathname = usePathname()
-  const { isDesktop } = useMediaQuery()
+  const { isDesktop } = useMediaQuery();
 
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = React.useState(false);
 
-  if (isDesktop) return null
+  if (isDesktop) return null;
 
   return (
     <section className="flex lg:hidden gap-3 items-center justify-between">
@@ -87,7 +85,7 @@ export function MobileNav() {
 
                               <AccordionContent>
                                 <div className="flex flex-col space-y-2">
-                                  {item.items?.map((subItem, index) => (
+                                  {item.items?.map((subItem) => (
                                     <Link
                                       key={subItem.title}
                                       href={subItem.href}
@@ -132,9 +130,7 @@ export function MobileNav() {
                   </Link>
 
                   <div className="w-full">
-                    <Button
-                      className="relative rounded-full z-10 h-11 w-fit text-sm shadow-lg transition-shadow duration-300 hover:shadow-xl"
-                    >
+                    <Button className="relative rounded-full z-10 h-11 w-fit text-sm shadow-lg transition-shadow duration-300 hover:shadow-xl">
                       Get Started
                     </Button>
                   </div>
@@ -145,39 +141,39 @@ export function MobileNav() {
         </Sheet>
       </section>
     </section>
-  )
+  );
 }
 
-interface MobileLinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  href: string
-  disabled?: boolean
-  pathname: string
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
+// interface MobileLinkProps
+//   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+//   href: string
+//   disabled?: boolean
+//   pathname: string
+//   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+// }
 
-function MobileLink({
-  children,
-  href,
-  disabled,
-  pathname,
-  setOpen,
-  className,
-  ...props
-}: MobileLinkProps) {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        "text-foreground/60 transition-colors hover:text-foreground text-lg leading-tight capitalize py-3",
-        href === pathname && "text-brand hover:text-brand font-bold",
-        disabled && "pointer-events-none hover:no-underline opacity-60",
-        className
-      )}
-      onClick={() => setOpen(false)}
-      {...props}
-    >
-      {children}
-    </Link>
-  )
-}
+// function MobileLink({
+//   children,
+//   href,
+//   disabled,
+//   pathname,
+//   setOpen,
+//   className,
+//   ...props
+// }: MobileLinkProps) {
+//   return (
+//     <Link
+//       href={href}
+//       className={cn(
+//         "text-foreground/60 transition-colors hover:text-foreground text-lg leading-tight capitalize py-3",
+//         href === pathname && "text-brand hover:text-brand font-bold",
+//         disabled && "pointer-events-none hover:no-underline opacity-60",
+//         className
+//       )}
+//       onClick={() => setOpen(false)}
+//       {...props}
+//     >
+//       {children}
+//     </Link>
+//   )
+// }

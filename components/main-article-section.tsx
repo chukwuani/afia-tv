@@ -1,5 +1,3 @@
-import { Separator } from "@/components/ui/separator";
-
 export default function MainArticleSection() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-16 px-6 lg:px-12">

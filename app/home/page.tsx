@@ -6,9 +6,6 @@ import { ContainerByAnima } from "@/components/ContainerByAnima";
 import { HeaderByAnima } from "@/components/HeaderByAnima";
 import { SectionByAnima } from "@/components/SectionByAnima";
 import { SectionWrapperByAnima } from "@/components/SectionWrapperByAnima";
-import TestimonialsSection from "@/components/testimonial";
-import WorkflowPage from "@/components/workflow";
-import Preview from "@/components/preview";
 
 const HomePage = () => {
   return (

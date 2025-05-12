@@ -10,20 +10,6 @@ import { cn } from "@/lib/utils";
 import { Heading } from "../heading";
 
 export const HeaderByAnima = () => {
-  // Data for the headline words to enable mapping
-  const headlineFirstRow = [
-    { text: "Make", left: "13px" },
-    { text: "every", left: "174px" },
-    { text: "second", left: "333px" },
-    { text: "count", left: "540px" },
-  ];
-
-  const headlineSecondRow = [
-    { text: "with", left: "122px" },
-    { text: "Pro+", left: "311px" },
-    { text: "edits", left: "452px" },
-  ];
-
   return (
     <header className="flex flex-col items-center pt-32 relative w-full">
       {/* Background glow effect */}

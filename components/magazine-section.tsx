@@ -55,8 +55,8 @@ export default function MagazineSection() {
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
-              A wicker chair outside is a comfortable sight to see, but there's
-              a natural warmth that the look brings inside.
+              A wicker chair outside is a comfortable sight to see, but
+              there&apos;s a natural warmth that the look brings inside.
             </p>
           </div>
 
@@ -72,8 +72,8 @@ export default function MagazineSection() {
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
-              A wicker chair outside is a comfortable sight to see, but there's
-              a natural warmth that the look brings inside.
+              A wicker chair outside is a comfortable sight to see, but
+              there&apos;s a natural warmth that the look brings inside.
             </p>
           </div>
         </div>
@@ -116,8 +116,8 @@ export default function MagazineSection() {
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
-              A wicker chair outside is a comfortable sight to see, but there's
-              a natural warmth that the look brings inside.
+              A wicker chair outside is a comfortable sight to see, but
+              there&apos;s a natural warmth that the look brings inside.
             </p>
           </div>
 
@@ -128,8 +128,8 @@ export default function MagazineSection() {
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
-              A wicker chair outside is a comfortable sight to see, but there's
-              a natural warmth that the look brings inside.
+              A wicker chair outside is a comfortable sight to see, but
+              there&apos;s a natural warmth that the look brings inside.
             </p>
           </div>
         </div>

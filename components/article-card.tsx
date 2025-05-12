@@ -1,11 +1,4 @@
-import type { Article } from "@/types";
-import Image from "next/image";
-
-interface ArticleCardProps {
-  article: Article;
-}
-
-export function ArticleCard({ article }: ArticleCardProps) {
+export function ArticleCard() {
   return (
     <div>
       <img

@@ -5,7 +5,6 @@ import { EB_Garamond } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config";
 import { Navbar } from "@/components/layout/navbar";
-import Footer from "@/components/footer";
 
 const cormorantGaramond = localFont({
   src: [

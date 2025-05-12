@@ -15,8 +15,6 @@ import { siteConfig } from "@/config";
 import { Shell } from "@/components/shell";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="w-full flex justify-center p-6 sm:p-12 sm:pb-4 bg-brand-25 z-20 relative">
       <Shell className="!p-0">

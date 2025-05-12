@@ -3,7 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -21,8 +20,6 @@ import { cn } from "@/lib/utils";
 import { Icons } from "../icons";
 
 export const Navbar = () => {
-  const pathname = usePathname();
-
   return (
     <>
       <nav className="font-san sticky top-0 z-50 h-16 content-center w-full bg-background backdrop-blur-xl transition-all px-4 md:px-12">
