@@ -7,7 +7,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 
-export const NavWrapperByAnima = (): JSX.Element => {
+export const NavWrapperByAnima = () => {
   // Navigation menu items
   const navItems = [
     { label: "Services", href: "#" },

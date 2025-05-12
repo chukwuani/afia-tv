@@ -10,7 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-export const ContainerWrapperByAnima = (): JSX.Element => {
+export const ContainerWrapperByAnima = () => {
   // Video data for the carousel
   const videos = [
     {

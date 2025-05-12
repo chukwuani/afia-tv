@@ -52,7 +52,7 @@ const features = [
   },
 ];
 
-export const DivWrapperByAnima = (): JSX.Element => {
+export const DivWrapperByAnima = () => {
   return (
     <section className="flex items-center justify-center px-[60px] py-[72px] w-full">
       <div className="flex flex-col max-w-[1080px] items-center gap-[78px] px-[25px]">

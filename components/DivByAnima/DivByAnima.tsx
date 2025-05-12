@@ -32,7 +32,7 @@ const testimonials = [
   },
 ];
 
-export const DivByAnima = (): JSX.Element => {
+export const DivByAnima = () => {
   return (
     <section className="w-full py-[72px] flex justify-center">
       <div className="flex flex-col max-w-[1200px] items-center gap-[100px] px-[25px]">
