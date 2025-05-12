@@ -21,7 +21,7 @@ const Hero2 = () => {
 
             <p className="mt-6 text-base font-normal lg:text-lg text-muted-foreground text-pretty max-w-xl mx-auto">
               Get the latest news and in-depth analysis from Southeast Nigeria.
-              Delivering today's stories with our unique perspective.
+              Delivering today&apos;s stories with our unique perspective.
             </p>
 
             <div

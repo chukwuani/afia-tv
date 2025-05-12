@@ -29,7 +29,7 @@ export const HeaderByAnima = () => {
               <div className="relative w-full text-center">
                 <p className="text-lg font-inter font-medium text-muted-foreground sm:text-xl tracking-[-0.90px] leading-[33px]">
                   Connecting you to the Heart of the Southeast. Discover the
-                  Richness and Diversity of Our Region's Stories.
+                  Richness and Diversity of Our Region&apos;s Stories.
                 </p>
               </div>
             </div>

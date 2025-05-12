@@ -142,7 +142,7 @@ export default function Footer() {
                   Information you can trust
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  We are Afia TV, Southeastern Nigeria's first regional
+                  We are Afia TV, Southeastern Nigeria&apos;s first regional
                   television channel on DSTV & GOTV. We are dedicated to telling
                   and promoting the business, good governance, lifestyle and
                   cultural stories of the southeasterners across the world. We

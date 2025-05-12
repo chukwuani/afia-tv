@@ -13,7 +13,7 @@ const JoinNewsletterForm = () => {
           Subscribe to receive our newsletter!
         </h3>
         <p className="text-center font-inter text-base text-muted-foreground max-w-[400px] font-normal">
-          The week's best stories, handpicked by our editors, in your inbox
+          The week&apos;s best stories, handpicked by our editors, in your inbox
           every Tuesday and Friday.
         </p>
       </div>

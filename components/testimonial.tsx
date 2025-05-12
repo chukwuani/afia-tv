@@ -1,4 +1,3 @@
-
 import { Icons } from "./icons";
 
 export default function TestimonialsSection() {
@@ -60,7 +59,8 @@ export default function TestimonialsSection() {
             </div>
             <p className="font-imaginative-timing-328979-framer-app-semantic-button font-[number:var(--imaginative-timing-328979-framer-app-semantic-button-font-weight)] text-imaginative-timing-328979framerappboulder text-[length:var(--imaginative-timing-328979-framer-app-semantic-button-font-size)] tracking-[var(--imaginative-timing-328979-framer-app-semantic-button-letter-spacing)] leading-[var(--imaginative-timing-328979-framer-app-semantic-button-line-height)] [font-style:var(--imaginative-timing-328979-framer-app-semantic-button-font-style)]">
               Plexora helped us launch a stunning and fully optimized website in
-              record time. It's incredibly intuitive, highly responsive, and
+              record time. It&apos;s incredibly intuitive, highly responsive,
+              and
               <br />
               <br />
               packed with useful features that make website building and
@@ -87,7 +87,7 @@ export default function TestimonialsSection() {
               <Icons.x className="w-5 h-5 text-[#000000]" />
             </div>
             <p className="font-imaginative-timing-328979-framer-app-semantic-button font-[number:var(--imaginative-timing-328979-framer-app-semantic-button-font-weight)] text-imaginative-timing-328979framerappboulder text-[length:var(--imaginative-timing-328979-framer-app-semantic-button-font-size)] tracking-[var(--imaginative-timing-328979-framer-app-semantic-button-letter-spacing)] leading-[var(--imaginative-timing-328979-framer-app-semantic-button-line-height)] [font-style:var(--imaginative-timing-328979-framer-app-semantic-button-font-style)]">
-              Absolutely love Plexora! It's efficient, well-structured, and
+              Absolutely love Plexora! It&apos;s efficient, well-structured, and
               takes the hassle out of website creation.
             </p>
           </div>
