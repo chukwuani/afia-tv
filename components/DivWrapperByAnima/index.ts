@@ -1,1 +1,0 @@
-export { DivWrapperByAnima } from "./DivWrapperByAnima";

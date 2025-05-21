@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { EB_Garamond } from "next/font/google";
 
 import "./globals.css";
 import { siteConfig } from "@/config";
@@ -25,7 +24,7 @@ const cormorantGaramond = localFont({
 const inter = localFont({
   src: [
     {
-      path: "../public/fonts/inter/Inter-Regular.ttf",
+      path: "../public/fonts/haffer.woff2",
       weight: "400",
       style: "normal",
     },
@@ -37,8 +36,6 @@ const inter = localFont({
   ],
   variable: "--font-inter",
 });
-
-const EBGaramond = EB_Garamond({ subsets: ["latin"], variable: "--font-eb" });
 
 export const metadata: Metadata = {
   title: siteConfig.title,
@@ -54,7 +51,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cormorantGaramond.variable} ${inter.variable} ${EBGaramond.variable} antialiased font-inter`}
+        suppressHydrationWarning
+        className={`${cormorantGaramond.variable} ${inter.variable} antialiased font-inter`}
       >
         <Navbar />
         {children}

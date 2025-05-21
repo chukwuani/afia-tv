@@ -35,11 +35,9 @@ export function MobileNav() {
           <SheetTrigger asChild>
             <Button
               variant="ghost"
-              size="icon"
-              className="flex justify-end hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 lg:hidden"
+              className="rounded-full w-fit relative size-[2.5rem] items-center justify-center bg-accent"
             >
-              <AlignJustify size={24} />
-              <span className="sr-only">Toggle Menu</span>
+              <div className="animated-menu-icon"></div>
             </Button>
           </SheetTrigger>
 

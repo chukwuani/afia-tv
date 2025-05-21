@@ -32,10 +32,10 @@ export const Navbar = () => {
               <div className="flex items-center justify-center rounded-full">
                 <span className="sr-only">Afia</span>
                 <Image
-                  className="w-[110px] max-w-none"
+                  className="w-[100px] h-10 max-w-none"
                   width={100}
-                  height={60}
-                  src="/images/afia_logo.png"
+                  height={40}
+                  src="/images/afia_logo.svg"
                   alt="Afia Logo"
                 />
               </div>

@@ -1,1 +1,0 @@
-export { SectionByAnima } from "./SectionByAnima";

@@ -25,6 +25,7 @@
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
+  --color-brand: var(--brand);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
@@ -73,7 +74,7 @@
   var(--imaginative-timing-328979framerappwhite-alabaster);
 }
 
-:root {
+/* :root {
   --radius: 0.625rem;
   --brand: oklab(69.7695% .149122 .135014 / .9);
   --background: oklab(0.99 0 0);
@@ -122,9 +123,10 @@
   --imaginative-timing-328979framerappwhite-10: rgba(255, 255, 255, 0.1);
   --imaginative-timing-328979framerappwhite-7: rgba(255, 255, 255, 0.07);
   --imaginative-timing-328979framerappwhite-alabaster: rgba(255, 255, 255, 1);
-}
+} */
 
-.dark {
+:root {
+  --brand: oklab(69.7695% .149122 .135014 / .9);
   --background: oklch(0 0 0);
   --foreground: oklch(0.985 0.002 247.839);
   --card: oklch(0.21 0.034 264.665);
@@ -137,7 +139,7 @@
   --secondary-foreground: oklch(0.985 0.002 247.839);
   --muted: oklch(0.278 0.033 256.848);
   --muted-foreground: oklch(0.707 0.022 261.325);
-  --accent: oklch(0.278 0.033 256.848);
+  --accent: oklch(1 0 0 / 0.04);
   --accent-foreground: oklch(0.985 0.002 247.839);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
@@ -156,6 +158,21 @@
   --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+
+    --imaginative-timing-328979framerappalabaster: rgba(250, 250, 250, 1);
+  --imaginative-timing-328979framerappblack: rgba(0, 0, 0, 1);
+  --imaginative-timing-328979framerappblack-10: rgba(0, 0, 0, 0.1);
+  --imaginative-timing-328979framerappblaze-orange: rgba(255, 106, 0, 1);
+  --imaginative-timing-328979framerappboulder: rgba(117, 117, 117, 1);
+  --imaginative-timing-328979framerappcaribbean-green: rgba(0, 217, 134, 1);
+  --imaginative-timing-328979framerappdusty-gray: rgba(153, 153, 153, 1);
+  --imaginative-timing-328979framerappmine-shaft: rgba(34, 34, 34, 1);
+  --imaginative-timing-328979framerappoutrageous-orange: rgba(255, 103, 25, 1);
+  --imaginative-timing-328979framerappsunshade: rgba(255, 147, 38, 1);
+  --imaginative-timing-328979framerappwhite: rgba(255, 255, 255, 1);
+  --imaginative-timing-328979framerappwhite-10: rgba(255, 255, 255, 0.1);
+  --imaginative-timing-328979framerappwhite-7: rgba(255, 255, 255, 0.07);
+  --imaginative-timing-328979framerappwhite-alabaster: rgba(255, 255, 255, 1);
 }
 
 @layer base {
@@ -165,4 +182,35 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.animated-menu-icon, .animated-menu-icon:before, .animated-menu-icon:after
+ {
+    transition: transform .25s;
+}
+
+.animated-menu-icon, .animated-menu-icon:before, .animated-menu-icon:after {
+    width: 1.125rem;
+    height: .125rem;
+    border-radius: .125rem;
+    background-color: var(--color);
+    transform: rotate(0);
+}
+.animated-menu-icon {
+    --color: var(--secondary-foreground);
+    position: absolute;
+}
+
+.animated-menu-icon:before {
+    top: -.3125rem;
+}
+
+.animated-menu-icon:after {
+    top: .3125rem;
+}
+
+.animated-menu-icon:before, .animated-menu-icon:after {
+    position: absolute;
+    left: 0;
+    content: "";
 }

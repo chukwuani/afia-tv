@@ -1,1 +1,0 @@
-export { SectionWrapperByAnima } from "./SectionWrapperByAnima";

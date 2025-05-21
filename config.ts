@@ -977,46 +977,6 @@ export const siteConfig = {
   ] satisfies MainNavItem[],
   footerNav: [
     {
-      title: "About",
-      items: [
-        {
-          title: "Our History",
-          href: "/",
-          external: false,
-        },
-        {
-          title: "Careers",
-          href: "/",
-          external: false,
-        },
-        {
-          title: "Team",
-          href: "/",
-          external: false,
-        },
-      ],
-    },
-    {
-      title: "Contact",
-      items: [
-        {
-          title: "Help center",
-          href: "/",
-          external: false,
-        },
-        {
-          title: "Contact us",
-          href: "/",
-          external: false,
-        },
-        {
-          title: "Advertise with us",
-          href: "/",
-          external: false,
-        },
-      ],
-    },
-    {
       title: "Browse",
       items: [
         {
@@ -1071,6 +1031,46 @@ export const siteConfig = {
         },
         {
           title: "MSS",
+          href: "/",
+          external: false,
+        },
+      ],
+    },
+    {
+      title: "About",
+      items: [
+        {
+          title: "Our History",
+          href: "/",
+          external: false,
+        },
+        {
+          title: "Careers",
+          href: "/",
+          external: false,
+        },
+        {
+          title: "Team",
+          href: "/",
+          external: false,
+        },
+      ],
+    },
+    {
+      title: "Contact",
+      items: [
+        {
+          title: "Help center",
+          href: "/",
+          external: false,
+        },
+        {
+          title: "Contact us",
+          href: "/",
+          external: false,
+        },
+        {
+          title: "Advertise with us",
           href: "/",
           external: false,
         },
