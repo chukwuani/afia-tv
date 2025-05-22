@@ -9,11 +9,22 @@ import { Heading } from "@/components/heading";
 import { cn } from "@/lib/utils";
 
 const HeroSection = () => {
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = React.useState(false);
+
+  // --- Mute/Unmute Handler ---
+  const handleMuteUnmute = (): void => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted; // Toggle the muted property of the video element
+      setIsMuted(videoRef.current.muted); // Update our state to reflect the actual mute status
+    }
+  };
+
   return (
-    <section className="flex flex-col items-center pt-32 relative w-full">
+    <section className="flex flex-col items-center pt-28 relative w-full">
       {/* Background glow effect */}
-      <svg
-        className="absolute -bottom-10 right-0 -z-10 opacity-60"
+      {/* <svg
+        className="absolute -bottom-10 right-0 -z-10 opacity-60 max-lg:h-[700px]"
         width="501"
         height="892"
         viewBox="0 0 501 892"
@@ -70,7 +81,7 @@ const HeroSection = () => {
             width="894.24"
             height="891.701"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
             <feFlood flood-opacity="0" result="BackgroundImageFix" />
             <feBlend
@@ -91,7 +102,7 @@ const HeroSection = () => {
             width="383.59"
             height="495.75"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
             <feFlood flood-opacity="0" result="BackgroundImageFix" />
             <feBlend
@@ -112,7 +123,7 @@ const HeroSection = () => {
             width="474.385"
             height="411.256"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
             <feFlood flood-opacity="0" result="BackgroundImageFix" />
             <feBlend
@@ -133,7 +144,7 @@ const HeroSection = () => {
             width="495.49"
             height="494.283"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
             <feFlood flood-opacity="0" result="BackgroundImageFix" />
             <feBlend
@@ -154,7 +165,7 @@ const HeroSection = () => {
             width="513.172"
             height="464.099"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
             <feFlood flood-opacity="0" result="BackgroundImageFix" />
             <feBlend
@@ -175,7 +186,7 @@ const HeroSection = () => {
             width="560.557"
             height="513.43"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
             <feFlood flood-opacity="0" result="BackgroundImageFix" />
             <feBlend
@@ -196,7 +207,7 @@ const HeroSection = () => {
             width="656.426"
             height="470.705"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
             <feFlood flood-opacity="0" result="BackgroundImageFix" />
             <feBlend
@@ -211,20 +222,20 @@ const HeroSection = () => {
             />
           </filter>
         </defs>
-      </svg>
+      </svg> */}
 
-      <div className="flex flex-col max-w-[1200px] items-center gap-[100px] px-[32px] py-0 relative w-full">
-        <div className="flex flex-col w-full max-w-[1150px] items-center justify-center gap-8">
+      <div className="flex flex-col max-w-[1200px] items-center gap-[100px]  py-0 relative w-full">
+        <div className="flex flex-col w-full max-w-[1150px] items-center justify-center gap-8 px-[32px]">
           <div className="flex flex-col w-full max-w-[1150px] items-center justify-center gap-7">
             {/* Headline text */}
-            <Heading className="text-[8vw] leading-none lg:text-4xl xl:text-[80px] text-balance font-garamond font-normal text-center">
+            <Heading className="text-[8vw] leading-none lg:text-4xl xl:text-[80px] text-balance font-sans font-bold text-center">
               Telling the Stories That Matter to You - Culture. Stories.
               Connection.
             </Heading>
 
             {/* Subheading text */}
             <div className="flex flex-col max-w-[480px] w-full items-center relative text-center">
-              <p className="font-inter font-medium text-imaginative-timing-328979framerappboulder tracking-[-.3px] leading-[1.3] text-[1.125rem]">
+              <p className="font-Inter font-meFum text-imaginative-timing-328979framerappboulder tracking-[-.3px] leading-[1.3] text-[1.125rem]">
                 Connecting you to the Heart of the Southeast. Discover the
                 Richness and Diversity of Our Region&apos;s Stories.
               </p>
@@ -238,7 +249,7 @@ const HeroSection = () => {
           >
             <div className="w-auto max-w-80">
               <Link
-                href="/products"
+                href="/news"
                 className={cn(
                   buttonVariants({ variant: "default" }),
                   "relative rounded-full z-10 h-14 text-base px-5 font-inter text-[0.75rem] tracking-[2.4px] uppercase"
@@ -251,34 +262,31 @@ const HeroSection = () => {
         </div>
 
         {/* Video/image preview card */}
-        <Card className="w-full max-w-[1150px] h-[650px] rounded-[28px] rounded-bl-none rounded-br-none overflow-hidden border-0 p-0 z-10">
+        <Card className="w-full max-w-[1150px] max-h-[650px] rounded-[28px] max-md:rounded-none rounded-bl-none rounded-br-none overflow-hidden border-0 p-0 z-10">
           <div className="relative w-full h-full">
             <video
+              ref={videoRef}
               className="object-cover bg-cover size-full max-h-[650px]"
-              autoPlay
               loop
-              muted
               playsInline
+              autoPlay
+              muted
+              poster="/images/hero_thumbnail.jpg"
             >
-              <source src="/video-sample.mp4" />
+              <source src="https://8kvl2urisy.ufs.sh/f/BxfEHnSVCZL4vxwHSP8DDBPdWyeYsSAVJ6GiLj4hFrO89xgl" />
             </video>
 
             {/* Pause button */}
-            <div className="absolute bottom-6 left-6">
-              <Badge className="flex items-center gap-[3px] pl-2 pr-[15px] py-[7px] bg-imaginative-timing-328979framerappwhite-7 rounded-[1000px] backdrop-blur-[12.5px]">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  focusable="false"
-                  viewBox="0 0 24 24"
-                  className="select-none size-4 inline-block fill-white flex-shrink-0 overflow-hidden z-10 rounded-full"
-                >
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path>
-                </svg>
+            <button
+              onClick={handleMuteUnmute}
+              className="absolute bottom-6 left-6"
+            >
+              <Badge className="flex items-center gap-[3px] px-[15px] py-[7px] bg-imaginative-timing-328979framerappwhite-7 rounded-[1000px] backdrop-blur-[12.5px]">
                 <span className="[font-family:'Inter',Helvetica] font-medium text-white text-[13.6px] tracking-[-0.14px] leading-[16.8px]">
-                  Pause
+                  {isMuted ? "Unmute" : "Mute"}
                 </span>
               </Badge>
-            </div>
+            </button>
           </div>
         </Card>
       </div>

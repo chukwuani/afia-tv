@@ -16,14 +16,16 @@ export default function BrandSection() {
           <h1 className="text-4xl sm:text-5xl font-garamond mb-6">Afia TV</h1>
 
           <p className="text-imaginative-timing-328979framerappboulder mb-8">
-            We are Afia TV, Southeastern Nigeria's first regional television
-            channel on DSTV ch.254 and GOTV ch.17. We are dedicated to promoting
-            the business, lifestyle and cultural stories of the region across
-            the world.
+            We are Afia TV, Southeastern Nigeria&apos;s first regional
+            television channel on DSTV ch.254 and GOTV ch.17. We are dedicated
+            to promoting the business, lifestyle and cultural stories of the
+            region across the world.
           </p>
 
           <Link
-            href="#"
+            href="https://afiatv.net/about"
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: "default" }),
               "inline-block bg-black text-white px-8 !py-3 rounded-full font-medium uppercase tracking-wide !text-sm h-auto"
@@ -36,7 +38,7 @@ export default function BrandSection() {
             <img
               className="size-full rounded-[12px] rounded-b-none object-cover"
               alt=""
-              src={"/images/afia-tv.jpg"}
+              src={"/images/AFIA_LOGO_BLACK_ORANGE.jpg"}
             />
           </div>
         </div>
@@ -79,13 +81,13 @@ export default function BrandSection() {
           </h1>
 
           <p className="text-imaginative-timing-328979framerappboulder mb-8">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit lectus
-            aliquet magna eu sed. Vulputate convallis convallis et felis
-            accumsan accumsan orci sed sapien.
+            Afia Cinema is a Film and Television series division, founded under
+            AfiaTV to create and project stories of Igbo origin for the global
+            Igbo audience.
           </p>
 
           <Link
-            href="#"
+            href="https://www.youtube.com/@AfiaCinema"
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
@@ -97,9 +99,12 @@ export default function BrandSection() {
           </Link>
         </section>
 
-        <div className="h-[300px] w-full rounded-2xl rounded-b-none overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-transparent z-10"></div>
-          <div className="absolute bottom-0 right-0 w-full h-full bg-gradient-to-tr from-transparent via-pink-100 to-orange-100 opacity-70"></div>
+        <div className="mt-12 h-[300px] w-full rounded-2xl rounded-b-none overflow-hidden relative">
+          <img
+            className="size-full rounded-[12px] rounded-b-none object-cover"
+            alt=""
+            src={"/images/afia_cinema.png"}
+          />
         </div>
       </div>
     </div>

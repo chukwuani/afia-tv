@@ -1,21 +1,36 @@
-import BlogSection from "@/components/blog-section";
-import JoinNewsletterForm from "@/components/layout/join-newsletter";
-import MagazineSection from "@/components/magazine-section";
-import MainArticleSection from "@/components/main-article-section";
-import SocialSection from "@/components/social-section";
-import SportsSection from "@/components/sports-section";
+"use client";
 
-export default function Home() {
+import HeroSection from "@/components/hero-section";
+import BrandSection from "@/components/brand-section";
+import OtherServices from "@/components/other-services";
+import Events from "@/components/events";
+
+import ContactForm from "@/components/contact-form";
+
+import FooterSection from "@/components/footer-section";
+import ObuzoSection from "@/components/obuzo-section";
+import { Navbar } from "@/components/layout/navbar";
+
+const HomePage = () => {
   return (
-    <>
-      <MainArticleSection />
-      <BlogSection />
+    <main className="relative w-full">
+      <Navbar />
 
-      <MagazineSection />
-      <SocialSection />
-      <SportsSection />
+      <HeroSection />
 
-      <JoinNewsletterForm />
-    </>
+      <BrandSection />
+
+      <OtherServices />
+
+      <ObuzoSection />
+
+      <Events />
+
+      <ContactForm />
+
+      <FooterSection />
+    </main>
   );
-}
+};
+
+export default HomePage;

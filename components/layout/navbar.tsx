@@ -40,51 +40,51 @@ export const Navbar = () => {
                 />
               </div>
             </Link>
-
-            <NavigationMenu className="hidden md:flex">
-              <NavigationMenuList>
-                {siteConfig.mainNav.map((item) =>
-                  item?.items ? (
-                    <NavigationMenuItem key={item.title}>
-                      <NavigationMenuTrigger className="font-inter text-[0.75rem] tracking-[2.4px] uppercase group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                        {item.title}
-                      </NavigationMenuTrigger>
-
-                      <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                          {item.items.map((item) => (
-                            <ListItem
-                              key={item.title}
-                              title={item.title}
-                              href={item.href}
-                            >
-                              {item.description}
-                            </ListItem>
-                          ))}
-                        </ul>
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
-                  ) : (
-                    item.href && (
-                      <NavigationMenuItem
-                        key={item.title}
-                        className="text-lg font-normal"
-                      >
-                        <Link href={item.href} legacyBehavior passHref>
-                          <NavigationMenuLink className="font-inter text-[0.75rem] uppercase tracking-[2.4px] group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                            {item.title}
-                          </NavigationMenuLink>
-                        </Link>
-                      </NavigationMenuItem>
-                    )
-                  )
-                )}
-              </NavigationMenuList>
-            </NavigationMenu>
           </section>
 
+          <NavigationMenu className="hidden md:flex">
+            <NavigationMenuList>
+              {siteConfig.mainNav.map((item) =>
+                item?.items ? (
+                  <NavigationMenuItem key={item.title}>
+                    <NavigationMenuTrigger className="font-inter text-[0.75rem] tracking-[2.4px] uppercase group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                      {item.title}
+                    </NavigationMenuTrigger>
+
+                    <NavigationMenuContent className="!bg-black">
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-accent">
+                        {item.items.map((item) => (
+                          <ListItem
+                            key={item.title}
+                            title={item.title}
+                            href={item.href}
+                          >
+                            {item.description}
+                          </ListItem>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                ) : (
+                  item.href && (
+                    <NavigationMenuItem
+                      key={item.title}
+                      className="text-lg font-normal"
+                    >
+                      <Link href={item.href} legacyBehavior passHref>
+                        <NavigationMenuLink className="font-inter text-[0.75rem] uppercase tracking-[2.4px] group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                          {item.title}
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                  )
+                )
+              )}
+            </NavigationMenuList>
+          </NavigationMenu>
+
           <div className="hidden md:flex items-center gap-4">
-            <Icons.search className="size-[18px]" />
+            {/* <Icons.search className="size-[18px]" /> */}
             <Link
               href="/contact"
               className={cn(
@@ -127,7 +127,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+          <p className="line-clamp-2 text-sm leading-snug text-imaginative-timing-328979framerappboulder">
             {children}
           </p>
         </Link>

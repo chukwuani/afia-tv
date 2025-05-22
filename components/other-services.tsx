@@ -9,13 +9,15 @@ const serviceCards = [
     description:
       "We provide full audio and ISO camera recording for sports, e-gaming, music concerts, awards ceremonies, corporate events, and television shows.",
     iconSrc: "/xo0oezdjfm9kcn4wsgltnqxngu-svg.svg",
+    size: "w-[34px] h-[34px]",
   },
   {
     id: 4,
     title: "Live streaming services",
     description:
       "We offer live streaming services for events, enabling our clients to reach a wider audience.",
-    iconSrc: "/55zqjfkhabkzybuijbpbjjkonxs-svg.svg",
+    iconSrc: "/images/live_streaming.svg",
+    size: "w-[44px] h-[44px]",
   },
 ];
 
@@ -30,9 +32,9 @@ const OtherServices = () => {
             className="h-[280px] bg-[#ffffff0b] rounded-[28px] overflow-hidden shadow-none border-none"
           >
             <CardContent className="flex flex-col justify-between h-full p-6">
-              <div className="w-[34px] h-[34px]">
+              <div className={`${service.size}`}>
                 <img
-                  className="w-[34px] h-[34px]"
+                  className={`${service.size}`}
                   alt={`${service.title} icon`}
                   src={service.iconSrc}
                 />

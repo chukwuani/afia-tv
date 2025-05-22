@@ -12,7 +12,6 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { Button, buttonVariants } from "@/components/ui/button";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { AlignJustify } from "lucide-react";
 
 import {
   Accordion,
@@ -20,6 +19,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Icons } from "../icons";
 
 export function MobileNav() {
   const { isDesktop } = useMediaQuery();
@@ -45,23 +45,21 @@ export function MobileNav() {
             <section className="w-full flex flex-col h-full">
               <section className="flex flex-col h-full justify-between gap-4">
                 <section className="flex flex-col gap-5">
-                  <Link
+                  {/* <Link
                     href="/"
                     className="flex items-center gap-2 font-normal font-san"
                   >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full">
-                      <span className="sr-only">Sinphox</span>
+                    <div className="flex items-center justify-center rounded-full">
+                      <span className="sr-only">Afia</span>
                       <Image
-                        src="/Sinphox-Logo-Small.png"
-                        width={50}
-                        height={50}
-                        alt=""
+                        className="w-[100px] h-10 max-w-none"
+                        width={100}
+                        height={40}
+                        src="/images/afia_logo.svg"
+                        alt="Afia Logo"
                       />
                     </div>
-                    <span className="text-[28px] font-medium tracking-[-1.6px]">
-                      Sinphox
-                    </span>
-                  </Link>
+                  </Link> */}
 
                   <section className="-mx-2 flex flex-1 flex-col">
                     {siteConfig.mainNav.map((item, index) => (
@@ -89,11 +87,6 @@ export function MobileNav() {
                                       href={subItem.href}
                                       className="w-full justify-start group items-center gap-x-2.5 group inline-flex rounded-md bg-background px-2 py-4 text-sm font-normal hover:underline hover:text-accent-foreground focus:underline focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline transition ml-3"
                                     >
-                                      <subItem.icon
-                                        color="#007D2E"
-                                        size={20}
-                                        className="size-5"
-                                      />
                                       {subItem.title}
                                     </Link>
                                   ))}
@@ -121,15 +114,16 @@ export function MobileNav() {
                     href="/contact"
                     className={cn(
                       buttonVariants({ variant: "outline" }),
-                      "inline-flex text-sm font-normal rounded-full w-fit"
+                      "inline-flex text-base font-normal rounded-full"
                     )}
                   >
-                    Contact Sales
+                    <Icons.live />
+                    Live
                   </Link>
 
-                  <div className="w-full">
-                    <Button className="relative rounded-full z-10 h-11 w-fit text-sm shadow-lg transition-shadow duration-300 hover:shadow-xl">
-                      Get Started
+                  <div className="w-auto max-w-80">
+                    <Button className="relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
+                      Sign In
                     </Button>
                   </div>
                 </div>

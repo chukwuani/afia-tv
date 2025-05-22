@@ -35,7 +35,7 @@ const ConatctForm = () => {
 
                       <div className="relative w-full">
                         <Input
-                          className="h-11 shadow-none border-0 border-b border-[#0000001a] rounded-none px-0 py-3 text-imaginative-timing-328979framerappboulder placeholder:text-imaginative-timing-328979framerappboulder"
+                          className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-imaginative-timing-328979framerappboulder placeholder:text-imaginative-timing-328979framerappboulder"
                           placeholder="John Doe"
                         />
                       </div>
@@ -48,7 +48,7 @@ const ConatctForm = () => {
 
                       <div className="relative w-full">
                         <Input
-                          className="h-11 shadow-none border-0 border-b border-[#0000001a] rounded-none px-0 py-3 font-imaginative-timing-328979-framer-app-semantic-input text-imaginative-timing-328979framerappboulder placeholder:text-imaginative-timing-328979framerappboulder"
+                          className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-imaginative-timing-328979-framer-app-semantic-input text-imaginative-timing-328979framerappboulder placeholder:text-imaginative-timing-328979framerappboulder"
                           placeholder="m@example.com"
                         />
                       </div>
@@ -56,14 +56,14 @@ const ConatctForm = () => {
                   </div>
 
                   {/* Subject Row */}
-                  <div className="flex flex-col w-full md:w-[319.67px] items-start gap-[11px]">
+                  <div className="flex flex-col w-full items-start gap-[11px]">
                     <label className="[font-family:'Inter',Helvetica] font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px]">
                       Subject
                     </label>
 
                     <div className="relative w-full">
                       <Input
-                        className="h-11 shadow-none border-0 border-b border-[#0000001a] rounded-none px-0 py-3 font-imaginative-timing-328979-framer-app-semantic-input text-imaginative-timing-328979framerappboulder placeholder:text-imaginative-timing-328979framerappboulder"
+                        className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-imaginative-timing-328979-framer-app-semantic-input text-imaginative-timing-328979framerappboulder placeholder:text-imaginative-timing-328979framerappboulder"
                         placeholder="I would like to..."
                       />
                     </div>
@@ -75,7 +75,7 @@ const ConatctForm = () => {
                       Message
                     </label>
                     <Textarea
-                      className="min-h-[120px] shadow-none border-0 border-b border-[#0000001a] rounded-none px-0 py-3 placeholder:text-imaginative-timing-328979framerappboulder text-imaginative-timing-328979framerappboulder resize-none"
+                      className="min-h-[120px] shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 placeholder:text-imaginative-timing-328979framerappboulder text-imaginative-timing-328979framerappboulder resize-none"
                       placeholder="Please provide a detailed description of your request"
                     />
                   </div>

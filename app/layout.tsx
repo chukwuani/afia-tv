@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { DM_Sans } from "next/font/google";
 
 import "./globals.css";
 import { siteConfig } from "@/config";
-import { Navbar } from "@/components/layout/navbar";
 
 const cormorantGaramond = localFont({
   src: [
@@ -37,6 +37,11 @@ const inter = localFont({
   variable: "--font-inter",
 });
 
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
 export const metadata: Metadata = {
   title: siteConfig.title,
   description: siteConfig.description,
@@ -52,11 +57,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${cormorantGaramond.variable} ${inter.variable} antialiased font-inter`}
+        className={`${cormorantGaramond.variable} ${inter.variable} ${dmSans.variable} antialiased font-inter`}
       >
-        <Navbar />
         {children}
-        {/* <Footer /> */}
       </body>
     </html>
   );
