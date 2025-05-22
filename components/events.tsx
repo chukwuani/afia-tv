@@ -1,9 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { link } from "fs";
 // Define event card data for mapping
 const eventsCard = [
   {

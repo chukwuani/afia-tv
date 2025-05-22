@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config";
 import { Facebook } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const FooterSection = () => {
   return (
@@ -16,7 +17,7 @@ const FooterSection = () => {
                   {item.items.map((link) => (
                     <span key={link.title}>
                       {link.href ? (
-                        <a
+                        <Link
                           href={link.href}
                           target={link?.external ? "_blank" : undefined}
                           rel={link?.external ? "noreferrer" : undefined}
@@ -24,7 +25,7 @@ const FooterSection = () => {
                         >
                           {link.title}
                           <span className="sr-only">{link.title}</span>
-                        </a>
+                        </Link>
                       ) : (
                         <p className="text-sm text-balance text-muted-foreground transition-colors">
                           {link.title}
@@ -39,7 +40,7 @@ const FooterSection = () => {
             <div className="Links_container__D_Yp5">
               <p className="Links_label__XW3o8">Resources</p>
               <div className="Links_content__pYJLB">
-                <a className="Links_item__shUex" href="/" target="_blank">
+                <Link className="Links_item__shUex" href="/" target="_blank">
                   Advertise with us
                   <span className="sr-only">
                     (opens a different website in new window)
@@ -54,9 +55,9 @@ const FooterSection = () => {
                       fill="currentcolor"
                     ></path>
                   </svg>
-                </a>
+                </Link>
 
-                <a className="Links_item__shUex" href="/" target="_blank">
+                <Link className="Links_item__shUex" href="/" target="_blank">
                   Site Feedback
                   <span className="sr-only">
                     (opens a different website in new window)
@@ -71,19 +72,19 @@ const FooterSection = () => {
                       fill="currentcolor"
                     ></path>
                   </svg>
-                </a>
+                </Link>
 
-                <a className="Links_item__shUex" href="/cookies">
+                <Link className="Links_item__shUex" href="/cookies">
                   Cookies
-                </a>
+                </Link>
 
-                <a className="Links_item__shUex" href="/tou">
+                <Link className="Links_item__shUex" href="/tou">
                   Terms of Use
-                </a>
+                </Link>
 
-                <a className="Links_item__shUex" href="/privacy">
+                <Link className="Links_item__shUex" href="/privacy">
                   Privacy
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -92,7 +93,7 @@ const FooterSection = () => {
             <div className="">
               <p className="Follow_heading__8r7JP">Follow us</p>
               <div className="Follow_buttons__wm2FF">
-                <a
+                <Link
                   className="Follow_button__5rd4x"
                   href={siteConfig.links.x}
                   target="_blank"
@@ -110,9 +111,9 @@ const FooterSection = () => {
                       fill="currentcolor"
                     ></path>
                   </svg>
-                </a>
+                </Link>
 
-                <a
+                <Link
                   className="Follow_button__5rd4x"
                   href={siteConfig.links.linkedin}
                   target="_blank"
@@ -132,9 +133,9 @@ const FooterSection = () => {
                       fill="currentcolor"
                     ></path>
                   </svg>
-                </a>
+                </Link>
 
-                <a
+                <Link
                   className="Follow_button__5rd4x"
                   href={siteConfig.links.instagram}
                   target="_blank"
@@ -152,9 +153,9 @@ const FooterSection = () => {
                       fill="currentcolor"
                     ></path>
                   </svg>
-                </a>
+                </Link>
 
-                <a
+                <Link
                   className="Follow_button__5rd4x"
                   href={siteConfig.links.facebook}
                   target="_blank"
@@ -163,9 +164,9 @@ const FooterSection = () => {
                     Follow Origin on Facebook (opens in new window)
                   </span>
                   <Facebook className="Follow_icon__XNozr Follow_reddit__MsnuJ" />
-                </a>
+                </Link>
 
-                <a
+                <Link
                   className="Follow_button__5rd4x"
                   href={siteConfig.links.youtube}
                   target="_blank"
@@ -193,13 +194,13 @@ const FooterSection = () => {
                       stroke="currentcolor"
                     ></path>
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
         </div>
 
-        <a className="Lockup_container__nF3YQ !h-auto" href="/">
+        <Link className="Lockup_container__nF3YQ !h-auto" href="/">
           <Image
             className="w-[100px] max-w-none"
             width={100}
@@ -209,7 +210,7 @@ const FooterSection = () => {
           />
 
           <span className="sr-only">Afia</span>
-        </a>
+        </Link>
 
         <div className="">
           <div className="Legal_copy__W5POK">
