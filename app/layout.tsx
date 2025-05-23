@@ -5,6 +5,9 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/config";
 
+import FooterSection from "@/components/footer-section";
+import { Navbar } from "@/components/layout/navbar";
+
 const cormorantGaramond = localFont({
   src: [
     {
@@ -59,7 +62,9 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${cormorantGaramond.variable} ${inter.variable} ${dmSans.variable} antialiased font-inter`}
       >
+        <Navbar />
         {children}
+        <FooterSection />
       </body>
     </html>
   );

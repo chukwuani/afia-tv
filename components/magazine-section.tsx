@@ -4,7 +4,7 @@ export default function MagazineSection() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-16 px-6 lg:px-12">
       <section className="py-10 pt-0 md:col-span-2">
-        <h1 className="text-3xl font-garamond tracking-tight mb-5 uppercase">
+        <h1 className="text-3xl font-sans tracking-tight mb-5 uppercase">
           RECOMMENDED FOR YOU
         </h1>
         <Separator className="mb-8 h-0.5 bg-[#d0d0d0]" />
@@ -17,7 +17,7 @@ export default function MagazineSection() {
               className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
             />
             <p className="text-gray-500 text-sm mb-2">Jan 16, 2023</p>
-            <h4 className="text-2xl font-garamond mb-3">
+            <h4 className="text-2xl font-sans mb-3">
               How to Get Rid of a Double Chin & Turkey Neck
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
@@ -34,7 +34,7 @@ export default function MagazineSection() {
               className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
             />
             <p className="text-gray-500 text-sm mb-2">Jan 5, 2023</p>
-            <h4 className="text-2xl font-garamond mb-3">
+            <h4 className="text-2xl font-sans mb-3">
               Why Microchaneling Outdoes Microneedling Every Time
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
@@ -51,7 +51,7 @@ export default function MagazineSection() {
               className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
             />
             <p className="text-gray-500 text-sm mb-2">Dec 11, 2022</p>
-            <h4 className="text-2xl font-garamond mb-3">
+            <h4 className="text-2xl font-sans mb-3">
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
@@ -68,7 +68,7 @@ export default function MagazineSection() {
               className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
             />
             <p className="text-gray-500 text-sm mb-2">Dec 11, 2022</p>
-            <h4 className="text-xl font-garamond mb-3">
+            <h4 className="text-xl font-sans mb-3">
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
@@ -80,7 +80,7 @@ export default function MagazineSection() {
       </section>
 
       <section className="py-10 pt-0 md:col-span-1">
-        <h1 className="text-3xl font-garamond tracking-tight mb-5 uppercase">
+        <h1 className="text-3xl font-sans tracking-tight mb-5 uppercase">
           Archive
         </h1>
         <Separator className="mb-8 h-0.5 bg-[#d0d0d0]" />
@@ -88,7 +88,7 @@ export default function MagazineSection() {
           {/* Blog Post 1 */}
           <div>
             <p className="text-gray-500 text-sm mb-2">Jan 16, 2023</p>
-            <h4 className="text-2xl font-garamond mb-3">
+            <h4 className="text-2xl font-sans mb-3">
               How to Get Rid of a Double Chin & Turkey Neck
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
@@ -100,7 +100,7 @@ export default function MagazineSection() {
           {/* Blog Post 2 */}
           <div>
             <p className="text-gray-500 text-sm mb-2">Jan 5, 2023</p>
-            <h4 className="text-2xl font-garamond mb-3">
+            <h4 className="text-2xl font-sans mb-3">
               Why Microchaneling Outdoes Microneedling Every Time
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
@@ -112,7 +112,7 @@ export default function MagazineSection() {
           {/* Blog Post 3 */}
           <div>
             <p className="text-gray-500 text-sm mb-2">Dec 11, 2022</p>
-            <h4 className="text-2xl font-garamond mb-3">
+            <h4 className="text-2xl font-sans mb-3">
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">
@@ -124,7 +124,7 @@ export default function MagazineSection() {
           {/* Blog Post 4 */}
           <div>
             <p className="text-gray-500 text-sm mb-2">Dec 11, 2022</p>
-            <h4 className="text-xl font-garamond mb-3">
+            <h4 className="text-xl font-sans mb-3">
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
             <p className="text-gray-600 mb-4 line-clamp-3">

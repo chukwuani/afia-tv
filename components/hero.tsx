@@ -10,7 +10,7 @@ const Hero = () => {
       <span className="z-2 opacity-40 absolute inset-0 bg-background"></span>;
       <section className="flex flex-col gap-8 relative text-center items-center justify-center z-10">
         <h1
-          className="w-[50%] text-5xl leading-[52px] sm:text-[80px] sm:leading-[4.5rem] font-garamond tracking-[-3.6px]  font-normal mt-3 mb-auto animate-fade-up"
+          className="w-[50%] text-5xl leading-[52px] sm:text-[80px] sm:leading-[4.5rem] font-sans tracking-[-3.6px]  font-normal mt-3 mb-auto animate-fade-up"
           style={{ animationDelay: "0.20s", animationFillMode: "both" }}
         >
           Do your best work, supported by your subscribers

@@ -55,7 +55,7 @@ const Preview = () => {
       <div className="flex flex-col items-center gap-[58px]">
         {/* Section Header */}
         <header className="flex flex-col items-center justify-center gap-[18px] max-w-[650px] w-full mb-18">
-          <h1 className="text-4xl sm:text-5xl text-pretty font-garamond font-normal text-primary text-center">
+          <h1 className="text-4xl sm:text-5xl text-pretty font-sans font-normal text-primary text-center">
             Explore our video editing work and projects
           </h1>
         </header>

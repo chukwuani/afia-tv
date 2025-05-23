@@ -138,7 +138,7 @@
   --secondary: oklch(0.278 0.033 256.848);
   --secondary-foreground: oklch(0.985 0.002 247.839);
   --muted: oklch(0.278 0.033 256.848);
-  --muted-foreground: oklch(0.707 0.022 261.325);
+  --muted-foreground: oklch(49.24% 0.01 296.81);
   --accent: oklch(1 0 0 / 0.04);
   --accent-foreground: oklch(0.985 0.002 247.839);
   --destructive: oklch(0.704 0.191 22.216);
@@ -163,7 +163,7 @@
   --imaginative-timing-328979framerappblack: rgba(0, 0, 0, 1);
   --imaginative-timing-328979framerappblack-10: rgba(0, 0, 0, 0.1);
   --imaginative-timing-328979framerappblaze-orange: rgba(255, 106, 0, 1);
-  --imaginative-timing-328979framerappboulder: rgba(117, 117, 117, 1);
+  --imaginative-timing-328979framerappboulder: lch(49.24% 0.01 296.81);
   --imaginative-timing-328979framerappcaribbean-green: rgba(0, 217, 134, 1);
   --imaginative-timing-328979framerappdusty-gray: rgba(153, 153, 153, 1);
   --imaginative-timing-328979framerappmine-shaft: rgba(34, 34, 34, 1);
@@ -174,12 +174,12 @@
   --imaginative-timing-328979framerappwhite-7: rgba(255, 255, 255, 0.07);
   --imaginative-timing-328979framerappwhite-alabaster: rgba(255, 255, 255, 1);
 
-      --site-gutter-fixed: 10px;
+    --site-gutter-fixed: 10px;
     --site-gutter-fluid: 9.75vw;
     --site-container-inside: calc(var(--site-gutter-fluid) - var(--site-gutter-fixed));
     --site-container-outside: var(--site-gutter-fluid);
-            --site-gutter-fixed: 15px;
-        --site-gutter-fluid: 7.25vw
+    --site-gutter-fixed: 15px;
+    --site-gutter-fluid: 7.25vw
 }
 
 @layer base {

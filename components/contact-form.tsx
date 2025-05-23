@@ -12,7 +12,7 @@ const ConatctForm = () => {
         {/* Header Section */}
         <div className="flex flex-col max-w-[650px] w-full items-center justify-center gap-[18px]">
           <div className="flex flex-col w-full items-center">
-            <h1 className="text-4xl sm:text-5xl text-pretty font-garamond font-normal tracking-tight text-primary text-center">
+            <h1 className="text-4xl sm:text-5xl text-pretty font-sans font-normal tracking-tight text-primary text-center">
               Ready to Collaborate? Contact Us Today
             </h1>
           </div>

@@ -1,11 +1,12 @@
-import Link from "next/link";
-import { buttonVariants } from "./ui/button";
-import { cn } from "@/lib/utils";
-import React from "react";
-import { Card } from "./ui/card";
-import { Badge } from "./ui/badge";
+"use client";
 
-const ObuzoSection = () => {
+import { Heading } from "@/components/heading";
+import ObuzoForm from "@/components/obuzo-form";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import React from "react";
+
+export default function ObuzoPage() {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
 
@@ -20,30 +21,19 @@ const ObuzoSection = () => {
   };
 
   return (
-    <div className="py-32 pb-0 px-6 md:px-10 lg:px-20">
+    <div className="container mx-auto px-6 md:px-12 py-12">
+      {/* Header Section */}
       <div className="mx-auto max-w-2xl sm:text-center mb-16">
-        <h1 className="text-pretty text-primary text-center text-4xl sm:text-5xl font-sans font-normal">
-          Catalyze economic growth in the Southeast
-        </h1>
-        <p className="mt-6 text-base leading-7 font-inter text-imaginative-timing-328979framerappboulder text-center text-pretty">
+        <Heading className="text-center text-5xl leading-[52px] sm:text-[4.5rem] sm:leading-[4.5rem] font-sans tracking-[-3.6px] font-normal">
+          Obuzo is an economic growth initiative
+        </Heading>
+
+        <p className="mt-8 text-lg sm:text-[1.25rem] !leading-7 font-inter font-light text-muted-foreground text-center text-pretty">
           Afia TV and in collaboration with our production partner, MarketStudio
           Ltd have both established the Obuzo advertising subsidy support scheme
           worth 1 Billion Naira to enable MSMEs across the south east region
           grow their market reach.
         </p>
-        <div className="flex items-center justify-center w-full mt-12">
-          <Link
-            href="https://afiatv.net/obuzo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              buttonVariants({ variant: "default" }),
-              "h-11 w-auto bg-imaginative-timing-328979framerappmine-shaft text-white text-sm rounded-[1000px] px-10 py-2"
-            )}
-          >
-            Learn more
-          </Link>
-        </div>
       </div>
 
       <div className="grid grid-cols-1 mb-12">
@@ -93,8 +83,8 @@ const ObuzoSection = () => {
           </div>
         </Card>
       </div>
+
+      <ObuzoForm />
     </div>
   );
-};
-
-export default ObuzoSection;
+}

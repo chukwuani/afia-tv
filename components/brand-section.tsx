@@ -6,14 +6,19 @@ export default function BrandSection() {
   return (
     <div className="py-32 pb-0 px-6 md:px-10 lg:px-20">
       <div className="text-center mb-16 max-w-[650px] mx-auto">
-        <h1 className="text-4xl sm:text-5xl text-pretty font-garamond font-normal text-primary text-center">
+        <h1
+          className="text-4xl sm:text-5xl text-pretty font-sans font-normal text-primary text-center max-w-[450px] tracking-[-2px] mx-auto
+        "
+        >
           Meet Our Family of Brands
         </h1>
       </div>
 
       <section className="grid grid-cols-1 md:grid-cols-2 items-center justify-center gap-8">
         <div className="max-w-xl w-full bg-accent rounded-3xl p-8 pb-0 shadow-sm">
-          <h1 className="text-4xl sm:text-5xl font-garamond mb-6">Afia TV</h1>
+          <h1 className="text-4xl sm:text-5xl font-normal tracking-[-2px] font-sans mb-6">
+            Afia TV
+          </h1>
 
           <p className="text-imaginative-timing-328979framerappboulder mb-8">
             We are Afia TV, Southeastern Nigeria&apos;s first regional
@@ -44,7 +49,9 @@ export default function BrandSection() {
         </div>
 
         <div className="max-w-xl w-full bg-accent rounded-3xl p-8 pb-0 shadow-sm">
-          <h1 className="text-4xl sm:text-5xl font-garamond mb-6">Afia 99.3</h1>
+          <h1 className="text-4xl sm:text-5xl font-normal tracking-[-2px] font-sans mb-6">
+            Afia 99.3
+          </h1>
 
           <p className="text-imaginative-timing-328979framerappboulder mb-8">
             Afia 99.3FM, Enugu. Your Number One Voice Of Enterprise! Discover
@@ -76,7 +83,7 @@ export default function BrandSection() {
 
       <div className="w-full flex max-md:flex-col bg-accent rounded-3xl p-8 pb-0 shadow-sm mt-12 gap-12">
         <section>
-          <h1 className="text-4xl sm:text-5xl font-garamond mb-6">
+          <h1 className="text-4xl sm:text-5xl font-normal tracking-[-2px] font-sans mb-6">
             Afia Cinema
           </h1>
 

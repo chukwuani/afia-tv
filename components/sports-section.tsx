@@ -11,7 +11,7 @@ import { Separator } from "./ui/separator";
 const SportsSection = () => {
   return (
     <section className="flex flex-col px-6 lg:px-12 py-16 pt-0">
-      <h1 className="text-3xl font-garamond tracking-tight mb-5 uppercase">
+      <h1 className="text-3xl font-sans tracking-tight mb-5 uppercase">
         Sports
       </h1>
       <Separator className="mb-8 h-0.5 bg-[#d0d0d0]" />
@@ -25,7 +25,7 @@ const SportsSection = () => {
             className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
           />
           <p className="text-gray-500 text-sm mb-2">Jan 16, 2023</p>
-          <h4 className="text-2xl font-garamond mb-3">
+          <h4 className="text-2xl font-sans mb-3">
             How to Get Rid of a Double Chin & Turkey Neck
           </h4>
           <p className="text-gray-600 mb-4 line-clamp-2">
@@ -42,7 +42,7 @@ const SportsSection = () => {
             className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
           />
           <p className="text-gray-500 text-sm mb-2">Jan 5, 2023</p>
-          <h4 className="text-2xl font-garamond mb-3">
+          <h4 className="text-2xl font-sans mb-3">
             Why Microchaneling Outdoes Microneedling Every Time
           </h4>
           <p className="text-gray-600 mb-4 line-clamp-2">
@@ -59,7 +59,7 @@ const SportsSection = () => {
             className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
           />
           <p className="text-gray-500 text-sm mb-2">Dec 11, 2022</p>
-          <h4 className="text-2xl font-garamond mb-3">
+          <h4 className="text-2xl font-sans mb-3">
             Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
           </h4>
           <p className="text-gray-600 mb-4 line-clamp-2">

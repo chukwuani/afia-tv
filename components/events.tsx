@@ -38,7 +38,7 @@ const Events = () => {
       <div className="flex flex-col items-center w-full">
         {/* Section header */}
         <header className="flex flex-col items-center justify-center gap-[18px] max-w-[650px] w-full mb-18">
-          <h1 className="text-4xl sm:text-5xl sm:leading-12 text-pretty font-garamond font-normal text-primary text-center">
+          <h1 className="text-4xl sm:text-5xl sm:leading-12 text-pretty font-sans font-normal text-primary text-center tracking-[-2px]">
             Afia Homecoming: <br />
             Explore our Events
           </h1>

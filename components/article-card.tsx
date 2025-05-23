@@ -7,7 +7,7 @@ export function ArticleCard() {
         className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
       />
       <p className="text-gray-500 text-sm mb-2">Jan 16, 2023</p>
-      <h4 className="text-2xl font-garamond mb-3">
+      <h4 className="text-2xl font-sans mb-3">
         How to Get Rid of a Double Chin & Turkey Neck
       </h4>
       <p className="text-gray-600 mb-4 line-clamp-2">

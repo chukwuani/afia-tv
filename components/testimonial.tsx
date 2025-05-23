@@ -6,7 +6,7 @@ export default function TestimonialsSection() {
       <div className="max-w-[1200px] mx-auto">
         {/* Header */}
         <div className="text-center mb-16 max-w-[650px] mx-auto">
-          <h1 className="text-4xl sm:text-6xl text-pretty font-garamond font-normal tracking-tight text-zinc-800 text-center">
+          <h1 className="text-4xl sm:text-6xl text-pretty font-sans font-normal tracking-tight text-zinc-800 text-center">
             What our users say about their experience
           </h1>
         </div>

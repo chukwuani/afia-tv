@@ -4,7 +4,7 @@ export default function SocialSection() {
   return (
     <div className="gap-16 px-6 lg:px-12">
       <section className="py-10 pt-0">
-        <h1 className="text-3xl font-garamond tracking-tight mb-5 uppercase">
+        <h1 className="text-3xl font-sans tracking-tight mb-5 uppercase">
           WATCH
         </h1>
         <Separator className="mb-8 h-0.5 bg-[#d0d0d0]" />
@@ -17,7 +17,7 @@ export default function SocialSection() {
               className="w-fit max-w-[150px] aspect-video object-cover mr-4 bg-muted"
             />
 
-            <h4 className="text-lg font-garamond mb-3">
+            <h4 className="text-lg font-sans mb-3">
               How to Get Rid of a Double Chin & Turkey Neck
             </h4>
           </div>
@@ -30,7 +30,7 @@ export default function SocialSection() {
               className="w-fit max-w-[150px] aspect-video object-cover mr-4 bg-muted"
             />
 
-            <h4 className="text-lg font-garamond mb-3">
+            <h4 className="text-lg font-sans mb-3">
               Why Microchaneling Outdoes Microneedling Every Time
             </h4>
           </div>
@@ -43,7 +43,7 @@ export default function SocialSection() {
               className="w-fit max-w-[150px] aspect-video object-cover mr-4 bg-muted"
             />
 
-            <h4 className="text-lg font-garamond mb-3">
+            <h4 className="text-lg font-sans mb-3">
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
           </div>
@@ -56,7 +56,7 @@ export default function SocialSection() {
               className="w-fit max-w-[150px] aspect-video object-cover mr-4 bg-muted"
             />
 
-            <h4 className="text-lg font-garamond mb-3">
+            <h4 className="text-lg font-sans mb-3">
               How to Get Rid of a Double Chin & Turkey Neck
             </h4>
           </div>
@@ -69,7 +69,7 @@ export default function SocialSection() {
               className="w-fit max-w-[150px] aspect-video object-cover mr-4 bg-muted"
             />
 
-            <h4 className="text-lg font-garamond mb-3">
+            <h4 className="text-lg font-sans mb-3">
               Why Microchaneling Outdoes Microneedling Every Time
             </h4>
           </div>
@@ -82,7 +82,7 @@ export default function SocialSection() {
               className="w-fit max-w-[150px] aspect-video object-cover mr-4 bg-muted"
             />
 
-            <h4 className="text-lg font-garamond mb-3">
+            <h4 className="text-lg font-sans mb-3">
               Sunlighten Full Spectrum Infrared Sauna Explained by Inventor
             </h4>
           </div>

@@ -9,7 +9,7 @@ const JoinNewsletterForm = () => {
     <div className="flex flex-col items-center justify-center gap-8 py-[100px] px-12 bg-secondary">
       <Icons.heart className="w-[200px] text-brand-700" />
       <div className="flex flex-col items-center justify-center gap-4">
-        <h3 className="text-center text-3xl font-medium font-garamond">
+        <h3 className="text-center text-3xl font-medium font-sans">
           Subscribe to receive our newsletter!
         </h3>
         <p className="text-center font-inter text-base text-muted-foreground max-w-[400px] font-normal">

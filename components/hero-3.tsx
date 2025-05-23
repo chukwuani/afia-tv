@@ -9,7 +9,7 @@ const Hero3 = () => {
       <section className="flex flex-col md:flex-row overflow-hidden border-none bg-transparent shadow-none px-6 md:px-12 md:items-center gap-[3rem] sm:gap-[4.5rem] w-full py-12">
         <section className="flex flex-col md:w-[44%] gap-8 relative">
           <h1
-            className="font-garamond text-5xl leading-[52px] sm:text-[4.5rem] sm:leading-[4.5rem] font-san tracking-[-3.6px]  font-normal mt-3 mb-auto animate-fade-up"
+            className="font-sans text-5xl leading-[52px] sm:text-[4.5rem] sm:leading-[4.5rem] font-san tracking-[-3.6px]  font-normal mt-3 mb-auto animate-fade-up"
             style={{ animationDelay: "0.20s", animationFillMode: "both" }}
           >
             Cloud That Scale Your Business, Not Your Costs
