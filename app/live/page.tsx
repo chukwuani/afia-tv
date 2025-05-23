@@ -1,7 +1,7 @@
 const LivePage = () => {
   return (
     <iframe
-      src="https://player.twitch.tv/?channel=afiatv&parent=www.afiatv.net"
+      src="https://player.twitch.tv/?channel=afiatv&parent=www.afia-tv.vercel.app"
       frameBorder="0"
       allowFullScreen={true}
       scrolling="no"
