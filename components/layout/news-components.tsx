@@ -19,13 +19,7 @@ export default function NewsComponents() {
 
       <MagazineSection />
 
-<<<<<<< HEAD
       <SocialSection />
-=======
-      
-      <SocialSection />
-     
->>>>>>> 79c79a5 (FEAT: font chnage and improvement)
 
       <Advert />
 
