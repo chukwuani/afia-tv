@@ -25,7 +25,7 @@ const OtherServices = () => {
   return (
     <section className="flex flex-col items-center justify-center py-32 px-6 md:px-10 lg:px-20 pb-0 w-full pt-12">
       {/* Service cards grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
         {serviceCards.map((service) => (
           <Card
             key={service.id}
@@ -41,23 +41,13 @@ const OtherServices = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <h3 className="[font-family:'Inter',Helvetica] font-medium text-white text-[26px] tracking-[-0.98px] leading-[42px]">
+                <h3 className="font-epilogue font-medium text-white text-[26px] -tracking-[.053rem] leading-[42px]">
                   {service.title}
                 </h3>
-                <p className="font-imaginative-timing-328979-framer-app-semantic-button font-[number:var(--imaginative-timing-328979-framer-app-semantic-button-font-weight)] text-imaginative-timing-328979framerappboulder text-[length:var(--imaginative-timing-328979-framer-app-semantic-button-font-size)] tracking-[var(--imaginative-timing-328979-framer-app-semantic-button-letter-spacing)] leading-[var(--imaginative-timing-328979-framer-app-semantic-button-line-height)] [font-style:var(--imaginative-timing-328979-framer-app-semantic-button-font-style)]">
+                <p className="font-epilogue font-medium text-imaginative-timing-328979framerappboulder text-sm leading-[28px] tracking-[.009rem]">
                   {service.description}
                 </p>
               </div>
-
-              {/* <div className="flex items-center justify-center w-full">
-                  <button
-                    className={cn(
-                      "h-11 w-full bg-imaginative-timing-328979framerappmine-shaft text-white rounded-[1000px] px-4 py-2"
-                    )}
-                  >
-                    Discover
-                  </button>
-                </div> */}
             </CardContent>
           </Card>
         ))}

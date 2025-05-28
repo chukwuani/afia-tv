@@ -4,21 +4,23 @@ import * as React from "react";
 import Link from "next/link";
 
 import { siteConfig } from "@/config";
-
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Icons } from "../icons";
+import { Icons } from "@/components/icons";
 
 export function MobileNav() {
   const { isDesktop } = useMediaQuery();
@@ -34,32 +36,21 @@ export function MobileNav() {
           <SheetTrigger asChild>
             <Button
               variant="ghost"
-              className="rounded-full w-fit relative size-[2.5rem] items-center justify-center bg-accent"
+              className="rounded-full w-fit relative size-[2.5rem] items-center justify-center"
             >
               <div className="animated-menu-icon"></div>
             </Button>
           </SheetTrigger>
 
-          <SheetContent side="right" className="pl-6 pr-7 pt-9 overflow-auto">
+          <SheetContent
+            aria-description="Navigation menu"
+            side="right"
+            className="pl-6 pr-7 py-9 overflow-auto"
+          >
+            <SheetTitle className="sr-only">Mobile navigation menu</SheetTitle>
             <section className="w-full flex flex-col h-full">
               <section className="flex flex-col h-full justify-between gap-4">
                 <section className="flex flex-col gap-5">
-                  {/* <Link
-                    href="/"
-                    className="flex items-center gap-2 font-normal font-san"
-                  >
-                    <div className="flex items-center justify-center rounded-full">
-                      <span className="sr-only">Afia</span>
-                      <Image
-                        className="w-[100px] h-10 max-w-none"
-                        width={100}
-                        height={40}
-                        src="/images/afia_logo.svg"
-                        alt="Afia Logo"
-                      />
-                    </div>
-                  </Link> */}
-
                   <section className="-mx-2 flex flex-1 flex-col">
                     {siteConfig.mainNav.map((item, index) => (
                       <section key={item.title + index} className="w-full">
@@ -74,7 +65,7 @@ export function MobileNav() {
                               value={item.title}
                               key={item.title}
                             >
-                              <AccordionTrigger className="text-sm capitalize px-2">
+                              <AccordionTrigger className="font-inter text-[0.75rem] uppercase tracking-[2.4px] px-2">
                                 {item.title}
                               </AccordionTrigger>
 
@@ -84,7 +75,7 @@ export function MobileNav() {
                                     <Link
                                       key={subItem.title}
                                       href={subItem.href}
-                                      className="w-full justify-start group items-center gap-x-2.5 group inline-flex rounded-md bg-background px-2 py-4 text-sm font-normal hover:underline hover:text-accent-foreground focus:underline focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline transition ml-3"
+                                      className="w-full justify-start group items-center gap-x-2.5 group inline-flex rounded-md bg-background px-2 py-4 font-inter text-[0.75rem] uppercase tracking-[2.4px] font-normal hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline transition ml-3"
                                     >
                                       {subItem.title}
                                     </Link>
@@ -98,7 +89,7 @@ export function MobileNav() {
                             key={item.title + index}
                             href={item.href}
                             onClick={() => setOpen(false)}
-                            className="group inline-flex w-full rounded-md bg-background px-2 py-4 text-sm font-normal transition-colors hover:underline hover:text-accent-foreground focus:underline focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline"
+                            className="group inline-flex w-full rounded-md bg-background px-2 py-4 font-inter text-[0.75rem] uppercase tracking-[2.4px] font-normal transition-colors hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline"
                           >
                             {item.title}
                           </Link>
@@ -110,7 +101,7 @@ export function MobileNav() {
 
                 <div className="flex flex-wrap items-center gap-4 w-full">
                   <Link
-                    href="/contact"
+                    href="https://www.afia993.com/live"
                     className={cn(
                       buttonVariants({ variant: "outline" }),
                       "inline-flex text-base font-normal rounded-full"

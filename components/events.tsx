@@ -38,7 +38,10 @@ const Events = () => {
       <div className="flex flex-col items-center w-full">
         {/* Section header */}
         <header className="flex flex-col items-center justify-center gap-[18px] max-w-[650px] w-full mb-18">
-          <h1 className="text-4xl sm:text-5xl sm:leading-12 text-pretty font-sans font-normal text-primary text-center tracking-[-2px]">
+          <h1
+            className="text-pretty text-[2.5rem] leading-[4rem] -tracking-[.053rem] lg:text-[4rem] lg:leading-[5rem] lg:-tracking-[.078rem] text-center font-epilogue font-normal mx-auto
+        "
+          >
             Afia Homecoming: <br />
             Explore our Events
           </h1>
@@ -61,10 +64,10 @@ const Events = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <h3 className="[font-family:'Inter',Helvetica] font-medium text-white text-[24px] tracking-[-0.98px] leading-[42px] line-clamp-1">
+                  <h3 className="font-epilogue font-medium text-white text-[26px] -tracking-[.053rem] leading-[42px] line-clamp-1">
                     {event.title}
                   </h3>
-                  <p className="text-imaginative-timing-328979framerappboulder text-[14px] line-clamp-2">
+                  <p className="font-epilogue font-medium text-imaginative-timing-328979framerappboulder text-sm leading-[28px] tracking-[.009rem] line-clamp-2">
                     {event.description}
                   </p>
                 </div>

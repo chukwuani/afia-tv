@@ -7,13 +7,13 @@ const FooterSection = () => {
   return (
     <section className="bg-brand">
       <footer className="FooterLarge_container__emTx7">
-        <div className="FooterLarge_grid__CbGYH grid-cols-1 md:!grid-cols-6 max-md:gap-2">
-          <div className="FooterLarge_center__I37pj grid-cols-1 md:grid-cols-5 !col-span-1 md:!col-span-5">
+        <div className="FooterLarge_grid__CbGYH grid-cols-1 md:!grid-cols-6 max-md:gap-3">
+          <div className="FooterLarge_center__I37pj grid-cols-1 max-md:gap-2 md:grid-cols-5 !col-span-1 md:!col-span-5">
             {siteConfig.footerNav.map((item) => (
               <div key={item.title} className="Links_container__D_Yp5">
                 <p className="Links_label__XW3o8">{item.title}</p>
 
-                <div className="Links_content__pYJLB">
+                <div className="flex flex-col gap-2">
                   {item.items.map((link) => (
                     <span key={link.title}>
                       {link.href ? (
@@ -39,7 +39,8 @@ const FooterSection = () => {
 
             <div className="Links_container__D_Yp5">
               <p className="Links_label__XW3o8">Resources</p>
-              <div className="Links_content__pYJLB">
+
+              <div className="flex flex-col gap-2">
                 <Link className="Links_item__shUex" href="/" target="_blank">
                   Advertise with us
                   <span className="sr-only">
@@ -200,7 +201,7 @@ const FooterSection = () => {
           </div>
         </div>
 
-        <Link className="Lockup_container__nF3YQ !h-auto" href="/">
+        <Link className="Lockup_container__nF3YQ w-fit !h-auto" href="/">
           <Image
             className="w-[100px] max-w-none"
             width={100}

@@ -4,15 +4,31 @@ import MagazineSection from "@/components/magazine-section";
 import MainArticleSection from "@/components/main-article-section";
 import SocialSection from "@/components/social-section";
 import SportsSection from "@/components/sports-section";
+import Advert from "@/components/layout/advert";
 
-export default function Home() {
+export default function NewsComponents() {
   return (
     <>
       <MainArticleSection />
+
+      <Advert />
+
       <BlogSection />
 
+      <Advert />
+
       <MagazineSection />
+
+<<<<<<< HEAD
       <SocialSection />
+=======
+      
+      <SocialSection />
+     
+>>>>>>> 79c79a5 (FEAT: font chnage and improvement)
+
+      <Advert />
+
       <SportsSection />
 
       <JoinNewsletterForm />

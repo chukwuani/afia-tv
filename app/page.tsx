@@ -6,7 +6,6 @@ import OtherServices from "@/components/other-services";
 import Events from "@/components/events";
 
 import ContactForm from "@/components/contact-form";
-import ObuzoSection from "@/components/obuzo-section";
 
 const HomePage = () => {
   return (
@@ -17,7 +16,7 @@ const HomePage = () => {
 
       <OtherServices />
 
-      <ObuzoSection />
+      {/* <ObuzoSection /> */}
 
       <Events />
 

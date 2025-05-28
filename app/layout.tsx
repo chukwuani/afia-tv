@@ -1,28 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { DM_Sans } from "next/font/google";
 
 import "./globals.css";
 import { siteConfig } from "@/config";
 
 import FooterSection from "@/components/footer-section";
 import { Navbar } from "@/components/layout/navbar";
-
-const cormorantGaramond = localFont({
-  src: [
-    {
-      path: "../public/fonts/recoleta/Recoleta-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/recoleta/Recoleta-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-garamond",
-});
 
 const inter = localFont({
   src: [
@@ -40,9 +23,15 @@ const inter = localFont({
   variable: "--font-inter",
 });
 
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-sans",
+const epilogue = localFont({
+  src: [
+    {
+      path: "../public/fonts/epilogue/Epilogue-VariableFont_wght.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-epilogue",
 });
 
 export const metadata: Metadata = {
@@ -60,7 +49,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${cormorantGaramond.variable} ${inter.variable} ${dmSans.variable} antialiased font-inter`}
+        className={`${inter.variable} ${epilogue.variable} antialiased font-epilogue`}
       >
         <Navbar />
         {children}

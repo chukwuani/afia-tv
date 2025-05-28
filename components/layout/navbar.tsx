@@ -83,10 +83,10 @@ export const Navbar = () => {
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             {/* <Icons.search className="size-[18px]" /> */}
             <Link
-              href="/contact"
+              href="https://www.afia993.com/live"
               className={cn(
                 buttonVariants({ variant: "outline" }),
                 "inline-flex text-base font-normal rounded-full"
