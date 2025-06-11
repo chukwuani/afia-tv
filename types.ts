@@ -28,20 +28,3 @@ export interface FooterItem {
 export type MainNavItem = NavItemWithOptionalChildren
 
 export type SidebarNavItem = NavItemWithChildren
-
-export interface Article {
-  id: string;
-  title: string;
-  excerpt: string;
-  image?: {
-    src: string;
-    credit: string;
-  };
-  author: string;
-  date?: string;
-}
-
-export interface SectionData {
-  title: string;
-  articles: Article[];
-}

@@ -1,31 +1,32 @@
 import BlogSection from "@/components/blog-section";
-import JoinNewsletterForm from "@/components/layout/join-newsletter";
 import MagazineSection from "@/components/magazine-section";
 import MainArticleSection from "@/components/main-article-section";
-import SocialSection from "@/components/social-section";
 import SportsSection from "@/components/sports-section";
-import Advert from "@/components/layout/advert";
+import MarketIndicator from "../market-indicator";
+import MarketNews from "../market-news";
 
 export default function NewsComponents() {
   return (
     <>
+      <MarketIndicator />
+
       <MainArticleSection />
 
-      <Advert />
+      <MarketNews />
+
+      {/* <Advert /> */}
 
       <BlogSection />
 
-      <Advert />
+      {/* <Advert /> */}
 
       <MagazineSection />
 
-      <SocialSection />
-
-      <Advert />
+      {/* <Advert /> */}
 
       <SportsSection />
 
-      <JoinNewsletterForm />
+      {/* <JoinNewsletterForm /> */}
     </>
   );
 }

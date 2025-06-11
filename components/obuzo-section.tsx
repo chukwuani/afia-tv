@@ -20,18 +20,17 @@ const ObuzoSection = () => {
 
   return (
     <div className="py-32 pb-0 px-6 md:px-10 lg:px-20">
-      <div className="mx-auto sm:text-center mb-16">
-        <Heading className="text-[3rem] leading-[4rem] -tracking-[.053rem] md:text-[4rem] md:leading-[5rem] md:-tracking-[.078rem] text-center font-epilogue font-normal max-w-4xl mx-auto">
+      <div className="mx-auto mb-16">
+        <Heading className="text-[3rem] leading-[4rem] -tracking-[.053rem] lg:text-[5rem] lg:leading-[6.4rem] lg:-tracking-[.078rem] text-center font-epilogue font-normal max-w-[62rem] mx-auto">
           Obuzo Advertising Subsidy Support Scheme.
         </Heading>
 
         {/* Subheading text */}
-        <div className="flex flex-col max-w-3xl w-full items-center relative text-center mt-6 mx-auto">
-          <p className="font-epilogue font-medium text-imaginative-timing-328979framerappboulder text-base leading-[28px] tracking-[.009rem]">
-            Afia TV and in collaboration with our production partner,
-            MarketStudio Ltd have both established the Obuzo advertising subsidy
-            support scheme worth 1 Billion Naira to enable MSMEs across the
-            south east region grow their market reach.
+        <div className="flex flex-col max-w-[37rem] w-full items-center relative text-center mt-6 mx-auto">
+          <p className="font-epilogue font-medium text-muted-foreground text-base leading-[28px] tracking-[.009rem]">
+            Afia TV and in collaboration with MarketStudio Ltd, have both
+            established the Obuzo advertising subsidy support scheme worth 1
+            Billion Naira.
           </p>
         </div>
 

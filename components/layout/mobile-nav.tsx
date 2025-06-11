@@ -31,6 +31,17 @@ export function MobileNav() {
 
   return (
     <section className="flex lg:hidden gap-3 items-center justify-between">
+      <Link
+        href="/live"
+        target="_blank"
+        className={cn(
+          buttonVariants({ variant: "outline" }),
+          "inline-flex text-base font-normal rounded-full"
+        )}
+      >
+        <Icons.live />
+        Live
+      </Link>
       <section className="flex items-center">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
@@ -65,7 +76,7 @@ export function MobileNav() {
                               value={item.title}
                               key={item.title}
                             >
-                              <AccordionTrigger className="font-inter text-[0.75rem] uppercase tracking-[2.4px] px-2">
+                              <AccordionTrigger className="font-haffer text-[0.75rem] uppercase tracking-[2.4px] px-2">
                                 {item.title}
                               </AccordionTrigger>
 
@@ -75,7 +86,7 @@ export function MobileNav() {
                                     <Link
                                       key={subItem.title}
                                       href={subItem.href}
-                                      className="w-full justify-start group items-center gap-x-2.5 group inline-flex rounded-md bg-background px-2 py-4 font-inter text-[0.75rem] uppercase tracking-[2.4px] font-normal hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline transition ml-3"
+                                      className="w-full justify-start group items-center gap-x-2.5 group inline-flex rounded-md bg-background px-2 py-4 font-haffer text-[0.75rem] uppercase tracking-[2.4px] font-normal hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline transition ml-3"
                                     >
                                       {subItem.title}
                                     </Link>
@@ -89,7 +100,7 @@ export function MobileNav() {
                             key={item.title + index}
                             href={item.href}
                             onClick={() => setOpen(false)}
-                            className="group inline-flex w-full rounded-md bg-background px-2 py-4 font-inter text-[0.75rem] uppercase tracking-[2.4px] font-normal transition-colors hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline"
+                            className="group inline-flex w-full rounded-md bg-background px-2 py-4 font-haffer text-[0.75rem] uppercase tracking-[2.4px] font-normal transition-colors hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline"
                           >
                             {item.title}
                           </Link>
@@ -100,17 +111,6 @@ export function MobileNav() {
                 </section>
 
                 <div className="flex flex-wrap items-center gap-4 w-full">
-                  <Link
-                    href="https://www.afia993.com/live"
-                    className={cn(
-                      buttonVariants({ variant: "outline" }),
-                      "inline-flex text-base font-normal rounded-full"
-                    )}
-                  >
-                    <Icons.live />
-                    Live
-                  </Link>
-
                   <div className="w-auto max-w-80">
                     <Button className="relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
                       Sign In
@@ -125,37 +125,3 @@ export function MobileNav() {
     </section>
   );
 }
-
-// interface MobileLinkProps
-//   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-//   href: string
-//   disabled?: boolean
-//   pathname: string
-//   setOpen: React.Dispatch<React.SetStateAction<boolean>>
-// }
-
-// function MobileLink({
-//   children,
-//   href,
-//   disabled,
-//   pathname,
-//   setOpen,
-//   className,
-//   ...props
-// }: MobileLinkProps) {
-//   return (
-//     <Link
-//       href={href}
-//       className={cn(
-//         "text-foreground/60 transition-colors hover:text-foreground text-lg leading-tight capitalize py-3",
-//         href === pathname && "text-brand hover:text-brand font-bold",
-//         disabled && "pointer-events-none hover:no-underline opacity-60",
-//         className
-//       )}
-//       onClick={() => setOpen(false)}
-//       {...props}
-//     >
-//       {children}
-//     </Link>
-//   )
-// }

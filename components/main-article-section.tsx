@@ -6,19 +6,19 @@ export default function MainArticleSection() {
           {/* Blog Post 1 */}
           <div className="flex flex-col-reverse lg:flex-col">
             <img
-              src="https://cdn.theatlantic.com/thumbor/3P7Uny9GrpmeZl3NK4DgBb-XS8Q=/155x1:1842x1124/296x197/media/img/mt/2025/04/2025_4_22_Laws_Are_Just_Culture_JA/original.jpg"
+              src="https://cdn.theatlantic.com/thumbor/9A8mRO5xp5PydvYvOceI0XSQFm0=/66x1:1752x1125/624x416/media/img/mt/2025/06/LAPS/original.png"
               alt="Skincare Blog"
               className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
             />
 
             <section className="max-sm:px-6">
-              <p className="text-imaginative-timing-328979framerappboulder font-epilogue text-sm mb-2">
+              <p className="text-muted-foreground font-epilogue text-sm mb-2">
                 Jan 16, 2023
               </p>
-              <h4 className="text-2xl font-inter mb-3">
+              <h4 className="text-2xl font-haffer mb-3">
                 How to Get Rid of a Double Chin & Turkey Neck
               </h4>
-              <p className="text-sm leading-7 tracking-wide font-epilogue text-imaginative-timing-328979framerappboulder mb-4 line-clamp-3">
+              <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
                 With timeless designs and high-quality materials, a wooden bed
                 frame is a solid investment into coziness.
               </p>
@@ -34,13 +34,13 @@ export default function MainArticleSection() {
             />
 
             <section className="max-sm:px-6">
-              <p className="text-imaginative-timing-328979framerappboulder font-epilogue text-sm mb-2">
+              <p className="text-muted-foreground font-epilogue text-sm mb-2">
                 Jan 5, 2023
               </p>
-              <h4 className="text-2xl font-inter mb-3">
+              <h4 className="text-2xl font-haffer mb-3">
                 Why Microchaneling Outdoes Microneedling Every Time
               </h4>
-              <p className="text-sm leading-7 tracking-wide font-epilogue text-imaginative-timing-328979framerappboulder mb-4 line-clamp-3">
+              <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
                 Much more cost-effective than renovating, freshen up your space
                 by swapping out your counter stools.
               </p>
@@ -53,13 +53,13 @@ export default function MainArticleSection() {
         <div className="grid grid-cols-1 gap-8 max-sm:px-6">
           {/* Blog Post 1 */}
           <div>
-            <p className="text-imaginative-timing-328979framerappboulder font-epilogue text-sm mb-2">
+            <p className="text-muted-foreground font-epilogue text-sm mb-2">
               Jan 16, 2023
             </p>
-            <h4 className="text-2xl font-inter mb-3">
+            <h4 className="text-2xl font-haffer mb-3">
               How to Get Rid of a Double Chin & Turkey Neck
             </h4>
-            <p className="text-sm leading-7 tracking-wide font-epilogue text-imaginative-timing-328979framerappboulder mb-4 line-clamp-3">
+            <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
               With timeless designs and high-quality materials, a wooden bed
               frame is a solid investment into coziness.
             </p>
@@ -67,13 +67,13 @@ export default function MainArticleSection() {
 
           {/* Blog Post 2 */}
           <div>
-            <p className="text-imaginative-timing-328979framerappboulder font-epilogue text-sm mb-2">
+            <p className="text-muted-foreground font-epilogue text-sm mb-2">
               Jan 5, 2023
             </p>
-            <h4 className="text-2xl font-inter mb-3">
+            <h4 className="text-2xl font-haffer mb-3">
               Why Microchaneling Outdoes Microneedling Every Time
             </h4>
-            <p className="text-sm leading-7 tracking-wide font-epilogue text-imaginative-timing-328979framerappboulder mb-4 line-clamp-3">
+            <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
               Much more cost-effective than renovating, freshen up your space by
               swapping out your counter stools.
             </p>

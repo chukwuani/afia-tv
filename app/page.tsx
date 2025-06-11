@@ -16,6 +16,8 @@ const HomePage = () => {
 
       <OtherServices />
 
+      {/* <SectionProcess /> */}
+
       {/* <ObuzoSection /> */}
 
       <Events />

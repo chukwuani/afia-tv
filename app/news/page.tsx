@@ -1,6 +1,7 @@
 import NewsComponents from "@/components/layout/news-components";
 
-const LivePage = () => {
+const NewsPage = () => {
   return <NewsComponents />;
 };
-export default LivePage;
+
+export default NewsPage;

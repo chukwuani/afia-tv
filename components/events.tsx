@@ -3,6 +3,7 @@ import { buttonVariants } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import MyImage from "./my-image";
 // Define event card data for mapping
 const eventsCard = [
   {
@@ -56,9 +57,9 @@ const Events = () => {
             >
               <CardContent className="flex flex-col justify-between h-full gap-7 p-6">
                 <div className="w-full h-[250px] mb-3">
-                  <img
+                  <MyImage
                     className="w-full h-[250px] rounded-[12px] object-cover"
-                    alt={`${event.title} icon`}
+                    alt={event.title}
                     src={event.iconSrc}
                   />
                 </div>
@@ -67,7 +68,7 @@ const Events = () => {
                   <h3 className="font-epilogue font-medium text-white text-[26px] -tracking-[.053rem] leading-[42px] line-clamp-1">
                     {event.title}
                   </h3>
-                  <p className="font-epilogue font-medium text-imaginative-timing-328979framerappboulder text-sm leading-[28px] tracking-[.009rem] line-clamp-2">
+                  <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] line-clamp-2">
                     {event.description}
                   </p>
                 </div>

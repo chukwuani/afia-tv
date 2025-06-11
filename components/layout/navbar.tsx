@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -20,6 +21,8 @@ import { cn } from "@/lib/utils";
 import { Icons } from "../icons";
 
 export const Navbar = () => {
+  const pathname = usePathname();
+
   return (
     <>
       <nav className="font-san sticky top-0 z-50 h-16 content-center w-full bg-background backdrop-blur-xl transition-all px-4 md:px-12">
@@ -32,7 +35,7 @@ export const Navbar = () => {
               <div className="flex items-center justify-center rounded-full">
                 <span className="sr-only">Afia</span>
                 <Image
-                  className="w-[100px] h-10 max-w-none"
+                  className="w-[70px] h-10 max-w-none"
                   width={100}
                   height={40}
                   src="/images/afia_logo.svg"
@@ -47,7 +50,7 @@ export const Navbar = () => {
               {siteConfig.mainNav.map((item) =>
                 item?.items ? (
                   <NavigationMenuItem key={item.title}>
-                    <NavigationMenuTrigger className="font-inter text-[0.75rem] tracking-[2.4px] uppercase group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                    <NavigationMenuTrigger className="font-haffer text-[0.75rem] tracking-[2.4px] uppercase group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
                       {item.title}
                     </NavigationMenuTrigger>
 
@@ -72,7 +75,7 @@ export const Navbar = () => {
                       className="text-lg font-normal"
                     >
                       <Link href={item.href} legacyBehavior passHref>
-                        <NavigationMenuLink className="font-inter text-[0.75rem] uppercase tracking-[2.4px] group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                        <NavigationMenuLink className="font-haffer text-[0.75rem] uppercase tracking-[2.4px] group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
                           {item.title}
                         </NavigationMenuLink>
                       </Link>
@@ -84,9 +87,13 @@ export const Navbar = () => {
           </NavigationMenu>
 
           <div className="hidden lg:flex items-center gap-4">
-            {/* <Icons.search className="size-[18px]" /> */}
+            {pathname !== "/" && (
+              <Icons.search className="size-[18px] fill-white" />
+            )}
+
             <Link
-              href="https://www.afia993.com/live"
+              href="/live"
+              target="_blank"
               className={cn(
                 buttonVariants({ variant: "outline" }),
                 "inline-flex text-base font-normal rounded-full"
@@ -127,7 +134,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-imaginative-timing-328979framerappboulder">
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground ">
             {children}
           </p>
         </Link>

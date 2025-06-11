@@ -54,11 +54,11 @@ export default function MagazineSection() {
               />
 
               <section className="max-sm:px-6">
-                <p className="text-imaginative-timing-328979framerappboulder font-epilogue text-sm mb-2">
+                <p className="text-muted-foreground font-epilogue text-sm mb-2">
                   Jan 16, 2023
                 </p>
-                <h4 className="text-2xl font-inter mb-3">{item.title}</h4>
-                <p className="text-sm leading-7 tracking-wide font-epilogue text-imaginative-timing-328979framerappboulder mb-4 line-clamp-3">
+                <h4 className="text-2xl font-haffer mb-3">{item.title}</h4>
+                <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
                   {item.description}
                 </p>
               </section>
@@ -76,11 +76,11 @@ export default function MagazineSection() {
         <div className="grid grid-cols-1 gap-8 max-sm:px-6">
           {newsFeed.map((item) => (
             <div key={item.id}>
-              <p className="text-imaginative-timing-328979framerappboulder font-epilogue text-sm mb-2">
+              <p className="text-muted-foreground font-epilogue text-sm mb-2">
                 Jan 16, 2023
               </p>
-              <h4 className="text-2xl font-inter mb-3">{item.title}</h4>
-              <p className="text-sm leading-7 tracking-wide font-epilogue text-imaginative-timing-328979framerappboulder mb-4 line-clamp-3">
+              <h4 className="text-2xl font-haffer mb-3">{item.title}</h4>
+              <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
                 {item.description}
               </p>
             </div>

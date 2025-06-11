@@ -8,7 +8,7 @@ const serviceCards = [
     title: "Multi- Camera Event Coverage",
     description:
       "We provide full audio and ISO camera recording for sports, e-gaming, music concerts, awards ceremonies, corporate events, and television shows.",
-    iconSrc: "/xo0oezdjfm9kcn4wsgltnqxngu-svg.svg",
+    iconSrc: "/images/multi-media.svg",
     size: "w-[34px] h-[34px]",
   },
   {
@@ -29,9 +29,9 @@ const OtherServices = () => {
         {serviceCards.map((service) => (
           <Card
             key={service.id}
-            className="h-[280px] bg-[#ffffff0b] rounded-[28px] overflow-hidden shadow-none border-none"
+            className="min-h-[280px] bg-[#ffffff0b] rounded-[28px] overflow-hidden shadow-none border-none"
           >
-            <CardContent className="flex flex-col justify-between h-full p-6">
+            <CardContent className="flex flex-col justify-between h-full p-6 gap-10">
               <div className={`${service.size}`}>
                 <img
                   className={`${service.size}`}
@@ -44,7 +44,7 @@ const OtherServices = () => {
                 <h3 className="font-epilogue font-medium text-white text-[26px] -tracking-[.053rem] leading-[42px]">
                   {service.title}
                 </h3>
-                <p className="font-epilogue font-medium text-imaginative-timing-328979framerappboulder text-sm leading-[28px] tracking-[.009rem]">
+                <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem]">
                   {service.description}
                 </p>
               </div>

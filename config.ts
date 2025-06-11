@@ -1,4 +1,4 @@
-import { MainNavItem } from "@/types"
+import { FooterItem, MainNavItem } from "@/types"
 
 export const PRODUCTS = [
   {
@@ -37,7 +37,7 @@ export const siteConfig = {
   description:
     "Celebrating the Heart of the East. Experience our vibrant traditions, stories, and entertainment.",
   url: "https://afiatv.net",
-  ogImage: "https://afiatv.net/opengraph-image.png",
+  ogImage: "https://afiatv.net/opengraph-image.jpg",
   links: SOCIAL_LINKS,
   mainNav: [
 
@@ -70,33 +70,33 @@ export const siteConfig = {
       items: [
         {
           title: "News",
-          href: "/",
+          href: "/news",
           external: false,
         },
         {
           title: "South East",
-          href: "/",
+          href: "/news/south-east",
           external: false,
         },
         {
           title: "Politics",
-          href: "/",
+          href: "/news/politics",
           external: false,
         },
         {
           title: "Entertainment",
-          href: "/",
+          href: "/news/entertainment",
           external: false,
         },
         {
           title: "Sports",
-          href: "/",
+          href: "/news/sports",
           external: false,
         },
         {
           title: "Audio",
-          href: "/",
-          external: false,
+          href: "https://afia993.com",
+          external: true,
         },
       ],
     },
@@ -105,22 +105,17 @@ export const siteConfig = {
       items: [
         {
           title: "Afia Radio",
-          href: "/",
-          external: false,
+          href: "https://afia993.com",
+          external: true,
         },
         {
           title: "Afia Cinema",
-          href: "/",
-          external: false,
+          href: "https://www.youtube.com/@AfiaCinema",
+          external: true,
         },
         {
           title: "Obuzo",
-          href: "/",
-          external: false,
-        },
-        {
-          title: "MSS",
-          href: "/",
+          href: "/obuzo",
           external: false,
         },
       ],
@@ -130,17 +125,12 @@ export const siteConfig = {
       items: [
         {
           title: "Our History",
-          href: "/",
+          href: "/about",
           external: false,
         },
         {
           title: "Careers",
-          href: "/",
-          external: false,
-        },
-        {
-          title: "Team",
-          href: "/",
+          href: "/careers",
           external: false,
         },
       ],
@@ -150,20 +140,15 @@ export const siteConfig = {
       items: [
         {
           title: "Help center",
-          href: "/",
-          external: false,
-        },
-        {
-          title: "Contact us",
-          href: "/",
+          href: "/help-center",
           external: false,
         },
         {
           title: "Advertise with us",
-          href: "/",
+          href: "/advertise",
           external: false,
         },
       ],
     },
-  ],
+  ] satisfies FooterItem[],
 }

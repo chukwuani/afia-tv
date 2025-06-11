@@ -36,7 +36,7 @@ const newsFeed = [
   {
     id: 4,
     imgSrc:
-      "https://cdn.theatlantic.com/thumbor/TVkV10QhRLyrIiYps8z0TlF4fOE=/179x394:4213x3079/296x197/media/img/mt/2025/05/GettyImages_169816088/original.jpg",
+      "https://cdn.theatlantic.com/thumbor/3P7Uny9GrpmeZl3NK4DgBb-XS8Q=/155x1:1842x1124/296x197/media/img/mt/2025/04/2025_4_22_Laws_Are_Just_Culture_JA/original.jpg",
     title: "Sunlighten Full Spectrum Infrared Sauna Explained by Inventor",
     description:
       "A wicker chair outside is a comfortable sight to see, but there's a natural warmth that the look brings inside.",
@@ -77,11 +77,11 @@ const BlogSection = () => {
             />
 
             <section className="max-sm:px-6">
-              <p className="text-imaginative-timing-328979framerappboulder font-epilogue text-sm mb-2">
+              <p className="text-muted-foreground font-epilogue text-sm mb-2">
                 Jan 16, 2023
               </p>
-              <h4 className="text-2xl font-inter mb-3">{item.title}</h4>
-              <p className="text-sm leading-7 tracking-wide font-epilogue text-imaginative-timing-328979framerappboulder mb-4 line-clamp-3">
+              <h4 className="text-2xl font-haffer mb-3">{item.title}</h4>
+              <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
                 {item.description}
               </p>
             </section>

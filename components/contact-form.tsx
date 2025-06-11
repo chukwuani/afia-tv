@@ -11,14 +11,14 @@ const ConatctForm = () => {
       <div className="flex flex-col items-center justify-center gap-[58px]">
         {/* Header Section */}
         <div className="flex flex-col w-full items-center justify-center gap-[18px]">
-          <h1
+          <h2
             className="text-pretty text-[2.5rem] leading-[4rem] -tracking-[.053rem] lg:text-[4rem] lg:leading-[5rem] lg:-tracking-[.078rem] text-center font-epilogue font-normal mx-auto
         "
           >
             Ready to Collaborate?
             <br />
             Contact Us Today
-          </h1>
+          </h2>
         </div>
 
         {/* Contact Card */}
@@ -38,7 +38,7 @@ const ConatctForm = () => {
 
                       <div className="relative w-full">
                         <Input
-                          className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-imaginative-timing-328979framerappboulder placeholder:text-imaginative-timing-328979framerappboulder"
+                          className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-muted-foreground placeholder:text-muted-foreground "
                           placeholder="John Doe"
                         />
                       </div>
@@ -51,7 +51,7 @@ const ConatctForm = () => {
 
                       <div className="relative w-full">
                         <Input
-                          className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-imaginative-timing-328979framerappboulder placeholder:text-imaginative-timing-328979framerappboulder"
+                          className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-muted-foreground placeholder:text-muted-foreground "
                           placeholder="m@example.com"
                         />
                       </div>
@@ -66,7 +66,7 @@ const ConatctForm = () => {
 
                     <div className="relative w-full">
                       <Input
-                        className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-imaginative-timing-328979framerappboulder placeholder:text-imaginative-timing-328979framerappboulder"
+                        className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-muted-foreground placeholder:text-muted-foreground "
                         placeholder="I would like to..."
                       />
                     </div>
@@ -78,7 +78,7 @@ const ConatctForm = () => {
                       Message
                     </label>
                     <Textarea
-                      className="min-h-[120px] shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 placeholder:text-imaginative-timing-328979framerappboulder text-imaginative-timing-328979framerappboulder resize-none"
+                      className="min-h-[120px] shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 placeholder:text-muted-foreground text-muted-foreground resize-none"
                       placeholder="Please provide a detailed description of your request"
                     />
                   </div>
@@ -92,7 +92,7 @@ const ConatctForm = () => {
 
               {/* Contact Info */}
               <div className="flex flex-col w-full items-start gap-[18px]">
-                <p className="w-[300px] text-sm font-epilogue text-imaginative-timing-328979framerappboulder">
+                <p className="w-[300px] text-sm font-haffer text-muted-foreground ">
                   For same-day reservations or special <br />
                   requests, feel free to give us a message!
                 </p>
@@ -102,14 +102,14 @@ const ConatctForm = () => {
                     <MailIcon className="w-[15px] h-[15px] text-white" />
                   </div>
 
-                  <span className="font-epilogue font-medium text-primary text-[17.7px] tracking-[-0.72px] leading-[27px]">
+                  <p className="font-epilogue font-medium text-primary text-[17.7px] tracking-[-0.72px] leading-[27px]">
                     business@afiatv.net
-                  </span>
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Video Preview Section */}
+            {/* Image Preview Section */}
             <div className="relative xl:w-2/6 rounded-[22px] overflow-hidden">
               <div className="relative w-full h-[614px]">
                 <div className="absolute inset-0 bg-[url(/images/hero-img-cover.png)] bg-cover bg-center" />

@@ -31,7 +31,7 @@ const HeroSection = () => {
 
             {/* Subheading text */}
             <div className="flex flex-col max-w-[480px] w-full items-center relative text-center mt-6 mx-auto">
-              <p className="font-epilogue font-medium text-imaginative-timing-328979framerappboulder text-base leading-[28px] tracking-[.009rem]">
+              <p className="font-haffer font-medium text-muted-foreground  text-base leading-[28px] tracking-[.009rem]">
                 Connecting you to the Heart of the Southeast. Discover the
                 Richness and Diversity of Our Region&apos;s Stories.
               </p>
@@ -48,7 +48,7 @@ const HeroSection = () => {
                 href="/news"
                 className={cn(
                   buttonVariants({ variant: "default" }),
-                  "relative rounded-full z-10 h-14 text-base px-5 font-inter text-[0.75rem] tracking-[2.4px] uppercase"
+                  "relative rounded-full z-10 h-14 text-base px-5 font-haffer text-[0.75rem] tracking-[2.4px] uppercase"
                 )}
               >
                 Read our Stories
@@ -69,7 +69,7 @@ const HeroSection = () => {
               muted
               poster="/images/hero_thumbnail.png"
             >
-              <source src="https://8kvl2urisy.ufs.sh/f/BxfEHnSVCZL4vxwHSP8DDBPdWyeYsSAVJ6GiLj4hFrO89xgl" />
+              <source src="https://8kvl2urisy.ufs.sh/f/BxfEHnSVCZL4ENDgMAtEAkupNRIDY2jC6ULsoz1M37VwebW4" />
             </video>
 
             {/* Mute/Unmute button */}

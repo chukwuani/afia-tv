@@ -20,7 +20,7 @@ export default function BrandSection() {
             Afia TV
           </h1>
 
-          <p className="font-epilogue font-medium text-imaginative-timing-328979framerappboulder text-sm leading-[28px] tracking-[.009rem] mb-8">
+          <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
             We are Afia TV, Southeastern Nigeria&apos;s first regional
             television channel on DSTV ch.254 and GOTV ch.17. We are dedicated
             to promoting the business, lifestyle and cultural stories of the
@@ -53,7 +53,7 @@ export default function BrandSection() {
             Afia 99.3
           </h1>
 
-          <p className="font-epilogue font-medium text-imaginative-timing-328979framerappboulder text-sm leading-[28px] tracking-[.009rem] mb-8">
+          <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
             Afia 99.3FM, Enugu. Your Number One Voice Of Enterprise! Discover
             the latest music tracks, explore captivating podcasts, or tune in to
             radio shows.
@@ -87,7 +87,7 @@ export default function BrandSection() {
             Afia Cinema
           </h1>
 
-          <p className="font-epilogue font-medium text-imaginative-timing-328979framerappboulder text-sm leading-[28px] tracking-[.009rem] mb-8">
+          <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
             Afia Cinema is a Film and Television series division, founded under
             AfiaTV to create and project stories of Igbo origin for the global
             Igbo audience.

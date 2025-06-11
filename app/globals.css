@@ -4,8 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-inter: var(--font-inter);
   --font-epilogue: var(--font-epilogue);
+  --font-haffer: var(--font-haffer);
+  --font-erica-one: var(--font-erica-one);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -39,80 +40,52 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  --color-imaginative-timing-328979framerappmine-shaft: var(
+    --imaginative-timing-328979framerappmine-shaft
+  );
+  
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-
-  --color-imaginative-timing-328979framerappalabaster: var(
-    --imaginative-timing-328979framerappalabaster
-  );
-  --color-imaginative-timing-328979framerappblack: var(
-    --imaginative-timing-328979framerappblack
-  );
-  --color-imaginative-timing-328979framerappblack-10: var(
-    --imaginative-timing-328979framerappblack-10
-  );
-  --color-imaginative-timing-328979framerappblaze-orange: var(
-    --imaginative-timing-328979framerappblaze-orange
-  );
-  --color-imaginative-timing-328979framerappboulder: var(
-    --imaginative-timing-328979framerappboulder
-  );
-  --color-imaginative-timing-328979framerappcaribbean-green: var(
-    --imaginative-timing-328979framerappcaribbean-green
-  );
-  --color-imaginative-timing-328979framerappdusty-gray: var(
-    --imaginative-timing-328979framerappdusty-gray
-  );
-  --color-imaginative-timing-328979framerappmine-shaft: var(
-    --imaginative-timing-328979framerappmine-shaft
-  );
-  --color-imaginative-timing-328979framerappoutrageous-orange: var(
-    --imaginative-timing-328979framerappoutrageous-orange
-  );
-  --color-imaginative-timing-328979framerappsunshade: var(
-    --imaginative-timing-328979framerappsunshade
-  );
-  --color-imaginative-timing-328979framerappwhite: var(
-    --imaginative-timing-328979framerappwhite
-  );
-  --color-imaginative-timing-328979framerappwhite-10: var(
-    --imaginative-timing-328979framerappwhite-10
-  );
-  --color-imaginative-timing-328979framerappwhite-7: var(
-    --imaginative-timing-328979framerappwhite-7
-  );
-  --color-imaginative-timing-328979framerappwhite-alabaster: var(
-    --imaginative-timing-328979framerappwhite-alabaster
-  );
 }
 
 :root {
   --brand: oklab(69.7695% 0.149122 0.135014 / 0.9);
+
   --background: oklch(0 0 0);
   --foreground: oklch(0.985 0.002 247.839);
+
   --card: oklch(0.21 0.034 264.665);
   --card-foreground: oklch(0.985 0.002 247.839);
+
   --popover: oklch(0.21 0.034 264.665);
   --popover-foreground: oklch(0.985 0.002 247.839);
+
   --primary: oklch(0.928 0.006 264.531);
   --primary-foreground: oklch(0.21 0.034 264.665);
+
   --secondary: oklch(0.278 0.033 256.848);
   --secondary-foreground: oklch(0.985 0.002 247.839);
+
   --muted: oklch(0.278 0.033 256.848);
   --muted-foreground: oklch(49.24% 0.01 296.81);
+
   --accent: oklch(1 0 0 / 0.06);
   --accent-foreground: oklch(0.985 0.002 247.839);
+
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.551 0.027 264.364);
+
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
+
   --sidebar: oklch(0.21 0.034 264.665);
   --sidebar-foreground: oklch(0.985 0.002 247.839);
   --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -122,20 +95,7 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 
-  --imaginative-timing-328979framerappalabaster: rgba(250, 250, 250, 1);
-  --imaginative-timing-328979framerappblack: rgba(0, 0, 0, 1);
-  --imaginative-timing-328979framerappblack-10: rgba(0, 0, 0, 0.1);
-  --imaginative-timing-328979framerappblaze-orange: rgba(255, 106, 0, 1);
-  --imaginative-timing-328979framerappboulder: lch(49.24% 0.01 296.81);
-  --imaginative-timing-328979framerappcaribbean-green: rgba(0, 217, 134, 1);
-  --imaginative-timing-328979framerappdusty-gray: rgba(153, 153, 153, 1);
-  --imaginative-timing-328979framerappmine-shaft: rgba(34, 34, 34, 1);
-  --imaginative-timing-328979framerappoutrageous-orange: rgba(255, 103, 25, 1);
-  --imaginative-timing-328979framerappsunshade: rgba(255, 147, 38, 1);
-  --imaginative-timing-328979framerappwhite: rgba(255, 255, 255, 1);
-  --imaginative-timing-328979framerappwhite-10: rgba(255, 255, 255, 0.1);
-  --imaginative-timing-328979framerappwhite-7: rgba(255, 255, 255, 0.07);
-  --imaginative-timing-328979framerappwhite-alabaster: rgba(255, 255, 255, 1);
+    --imaginative-timing-328979framerappmine-shaft: rgba(34, 34, 34, 1);
 
   --site-gutter-fixed: 10px;
   --site-gutter-fluid: 9.75vw;
@@ -154,6 +114,21 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.custom-gradient {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    hsl(27,100%,66%) 0%,
+    rgba(171, 171, 171, 0) 100%
+  );
+  flex: 0 0 auto;
+  height: 800px;
+  left: 0px;
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  top: 0px;
 }
 
 .animated-menu-icon,

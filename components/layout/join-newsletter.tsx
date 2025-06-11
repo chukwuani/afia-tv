@@ -12,7 +12,7 @@ const JoinNewsletterForm = () => {
         <h3 className="text-center text-3xl font-medium font-epilogue tracking-[.009rem]">
           Subscribe to receive our newsletter!
         </h3>
-        <p className="text-center text-sm leading-7 tracking-wide font-epilogue text-imaginative-timing-328979framerappboulder max-w-[400px] font-normal">
+        <p className="text-center text-sm leading-7 tracking-wide font-epilogue text-muted-foreground max-w-[400px] font-normal">
           The week&apos;s best stories, handpicked by our editors, in your inbox
           every Tuesday and Friday.
         </p>
