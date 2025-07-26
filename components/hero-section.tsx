@@ -31,7 +31,7 @@ const HeroSection = () => {
 
             {/* Subheading text */}
             <div className="flex flex-col max-w-[480px] w-full items-center relative text-center mt-6 mx-auto">
-              <p className="font-haffer font-medium text-muted-foreground  text-base leading-[28px] tracking-[.009rem]">
+              <p className="font-fjallaOne font-medium text-muted-foreground  text-base leading-[28px] tracking-[.009rem]">
                 Connecting you to the Heart of the Southeast. Discover the
                 Richness and Diversity of Our Region&apos;s Stories.
               </p>

@@ -13,8 +13,8 @@ const NotFound = () => {
         {/* Description*/}
         <div className="text-center max-w-2xl mb-8">
           <p className="text-xl leading-relaxed mb-8 text-white">
-            The page you are looking for doesn't exist or has been moved. Please
-            go back to the homepage.
+            The page you are looking for doesn&apos;t exist or has been moved.
+            Please go back to the homepage.
           </p>
         </div>
       </main>

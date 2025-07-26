@@ -1,19 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Erica_One } from "next/font/google";
 import Script from "next/script";
 
 import "./globals.css";
 import { siteConfig } from "@/config";
 
-import FooterSection from "@/components/footer-section";
-import { Navbar } from "@/components/layout/navbar";
-
-const ericaOne = Erica_One({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-erica-one",
-});
 
 const haffer = localFont({
   src: [
@@ -35,6 +26,17 @@ const epilogue = localFont({
     },
   ],
   variable: "--font-epilogue",
+});
+
+const fjallaOne = localFont({
+  src: [
+    {
+      path: "../public/fonts/GeneralSans-Variable.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-fjallaOne",
 });
 
 export const metadata: Metadata = {
@@ -75,13 +77,24 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${haffer.variable} ${epilogue.variable} ${ericaOne.variable} antialiased font-epilogue`}
+        className={`${haffer.variable} ${epilogue.variable} ${fjallaOne.variable} antialiased font-epilogue`}
       >
-        <Navbar />
         {children}
-        <FooterSection />
 
         {/* Google analytics script */}
+        <Script
+          id="google-analytics"
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-1SS0N68NR8"
+        />
+        <Script id="google-analytics-init">
+          {`window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1SS0N68NR8');`}
+        </Script>
+
+        {/* SalesIQ script */}
         <Script id="show-banner">
           {`window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}`}
         </Script>
