@@ -14,7 +14,7 @@ const MarketIndicator = () => {
   ];
 
   return (
-    <Card className="w-full border-0 rounded-none shadow-none font-haffer bg-transparent overflow-hidden">
+    <Card className="w-full border-0 rounded-none shadow-none font-dm-sans bg-transparent overflow-hidden">
       <CardContent className="p-0 bg-transparent">
         <div className="flex items-center h-[44px] border-y border-[#ffffff2b]">
           <div className="flex flex-1 h-10 ml-[30px]">

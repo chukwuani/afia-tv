@@ -23,7 +23,7 @@ const serviceCards = [
 
 const OtherServices = () => {
   return (
-    <section className="flex flex-col items-center justify-center py-32 px-6 md:px-10 lg:px-20 pb-0 w-full pt-12">
+    <section className="flex flex-col items-center justify-center py-32 px-6 md:px-10 lg:px-12 pb-0 w-full pt-12">
       {/* Service cards grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
         {serviceCards.map((service) => (
@@ -44,7 +44,7 @@ const OtherServices = () => {
                 <h3 className="font-epilogue font-medium text-white text-[26px] -tracking-[.053rem] leading-[42px]">
                   {service.title}
                 </h3>
-                <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem]">
+                <p className="font-dm-sans font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem]">
                   {service.description}
                 </p>
               </div>

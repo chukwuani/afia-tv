@@ -38,7 +38,7 @@ export default function MarketNews() {
             <h2 className="text-white text-base font-normal leading-7 tracking-wide font-epilogue">
               {item.headline}
             </h2>
-            <p className="text-muted-foreground text-xs font-haffer">
+            <p className="text-muted-foreground text-xs font-dm-sans">
               {item.timestamp}
             </p>
           </div>

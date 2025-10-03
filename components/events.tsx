@@ -11,7 +11,7 @@ const eventsCard = [
     title: "Mike Ejeagha Day 2024",
     description:
       "Mike Ejeagha Day is set aside to Honour the Legend. MIKE EJEAGHA. The event features the screening",
-    iconSrc: "https://afiahomecoming.com/admin/flyers/FB_IMG_1733766530842.jpg",
+    iconSrc: "/images/mike.jpg",
     link: "https://afiahomecoming.com/event.php?ka=66",
   },
   {
@@ -20,7 +20,7 @@ const eventsCard = [
     description:
       "Golibe Festival is an annual Festival of Culture and contemporary music, dance and art specially designed to showcase the rich cultural heritage of the people of Enugu State, Nigeria.",
     iconSrc:
-      "https://afiahomecoming.com/admin/flyers/Golibe%20Festival%20(6).jpg",
+      "/images/golibe-festival.jpg",
     link: "https://afiahomecoming.com/event.php?ka=31",
   },
   {
@@ -28,14 +28,14 @@ const eventsCard = [
     title: "25 Days of Christmas Festival in Enugu AfroBeat Lockdown",
     description:
       "Afrobeat Concert also known as ROADBLOCK, is a vibrant celebration of Nigeria's music industry, featuring top artists and a diverse lineup of performers.",
-    iconSrc: "https://afiahomecoming.com/admin/flyers/ABL.jpg",
+    iconSrc: "/images/abl.jpg",
     link: "https://afiahomecoming.com/event.php?ka=62",
   },
 ];
 
 const Events = () => {
   return (
-    <section className="flex flex-col items-center justify-center py-32 px-6 md:px-10 lg:px-20 w-full">
+    <section className="flex flex-col items-center justify-center py-32 px-6 md:px-10 lg:px-12 w-full">
       <div className="flex flex-col items-center w-full">
         {/* Section header */}
         <header className="flex flex-col items-center justify-center gap-[18px] max-w-[650px] w-full mb-18">
@@ -68,7 +68,7 @@ const Events = () => {
                   <h3 className="font-epilogue font-medium text-white text-[26px] -tracking-[.053rem] leading-[42px] line-clamp-1">
                     {event.title}
                   </h3>
-                  <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] line-clamp-2">
+                  <p className="font-dm-sans font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] line-clamp-2">
                     {event.description}
                   </p>
                 </div>

@@ -2,22 +2,22 @@ import { FooterItem, MainNavItem } from "@/types"
 
 export const PRODUCTS = [
   {
-    title: "Cinema",
+    title: "AM Show",
     description:
-      "Get your website online with Sinphox's web hosting services. Our web hosting plans are fast, secure, and reliable.",
-    href: "/products/web-hosting",
+      "Experience the best of cinema with our latest movies, trailers, and reviews.",
+    href: "/news",
   },
   {
-    title: "Radio",
+    title: "Business Morning",
     description:
-      "Sinphox VMs are simple, scalable virtual machines for all your web hosting and VPS hosting needs.",
-    href: "/products/cloud-compute",
+      "Stay tuned to the latest news, music, and entertainment on Afia Radio.",
+    href: "/news",
   },
   {
-    title: "Videos",
+    title: "Afia News",
     description:
-      "Fully-managed dedicated server to get your app to market fast that's super simple to set up and cost-effective.",
-    href: "/products/bare-metal",
+      "Explore our collection of videos covering news, entertainment, and more.",
+    href: "/news",
   },
 ]
 
@@ -40,28 +40,33 @@ export const siteConfig = {
   ogImage: "https://afiatv.net/opengraph-image.jpg",
   links: SOCIAL_LINKS,
   mainNav: [
-
+    {
+      title: "Home",
+      href: "/",
+      external: false,
+      disabled: false,
+    },
     {
       title: "About",
-      href: "/",
+      href: "/about",
       external: false,
       disabled: false,
     },
     {
       title: "News",
-      href: "/",
+      items: PRODUCTS.map((item) => ({ ...item, items: [] })),
+    },
+    {
+      title: "Podcast",
+      href: "/podcast",
       external: false,
       disabled: false,
     },
     {
       title: "Contact",
-      href: "/",
+      href: "/contact",
       external: false,
       disabled: false,
-    },
-        {
-      title: "More",
-      items: PRODUCTS.map((item) => ({ ...item, items: [] })),
     },
   ] satisfies MainNavItem[],
   footerNav: [

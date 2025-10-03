@@ -56,7 +56,7 @@ const SportsSection = () => {
               <p className="text-muted-foreground font-epilogue text-sm mb-2">
                 Jan 16, 2023
               </p>
-              <h4 className="text-2xl font-haffer mb-3">{item.title}</h4>
+              <h4 className="text-2xl font-dm-sans mb-3">{item.title}</h4>
               <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
                 {item.description}
               </p>

@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const ConatctForm = () => {
   return (
-    <section className="px-6 md:px-10 lg:px-20 py-[58px]">
+    <section className="px-6 md:px-10 lg:px-12 py-[58px]">
       <div className="flex flex-col items-center justify-center gap-[58px]">
         {/* Header Section */}
         <div className="flex flex-col w-full items-center justify-center gap-[18px]">
@@ -92,7 +92,7 @@ const ConatctForm = () => {
 
               {/* Contact Info */}
               <div className="flex flex-col w-full items-start gap-[18px]">
-                <p className="w-[300px] text-sm font-haffer text-muted-foreground ">
+                <p className="w-[300px] text-sm font-dm-sans text-muted-foreground ">
                   For same-day reservations or special <br />
                   requests, feel free to give us a message!
                 </p>
@@ -112,7 +112,7 @@ const ConatctForm = () => {
             {/* Image Preview Section */}
             <div className="relative xl:w-2/6 rounded-[22px] overflow-hidden">
               <div className="relative w-full h-[614px]">
-                <div className="absolute inset-0 bg-[url(/images/hero-img-cover.png)] bg-cover bg-center" />
+                <div className="absolute inset-0 bg-[url(/images/contact-img.png)] bg-cover bg-center" />
               </div>
             </div>
           </CardContent>

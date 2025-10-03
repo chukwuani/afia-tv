@@ -4,7 +4,7 @@ import { buttonVariants } from "./ui/button";
 
 export default function BrandSection() {
   return (
-    <div className="py-32 pb-0 px-6 md:px-10 lg:px-20">
+    <div className="py-32 pb-0 px-6 md:px-10 lg:px-12">
       <div className="text-center mb-16 max-w-[650px] mx-auto">
         <h1
           className="text-pretty text-[2.5rem] leading-[4rem] -tracking-[.053rem] lg:text-[4rem] lg:leading-[5rem] lg:-tracking-[.078rem] text-center font-epilogue font-normal mx-auto
@@ -20,7 +20,7 @@ export default function BrandSection() {
             Afia TV
           </h1>
 
-          <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
+          <p className="font-dm-sans font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
             We are Afia TV, Southeastern Nigeria&apos;s first regional
             television channel on DSTV ch.254 and GOTV ch.17. We are dedicated
             to promoting the business, lifestyle and cultural stories of the
@@ -53,7 +53,7 @@ export default function BrandSection() {
             Afia 99.3
           </h1>
 
-          <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
+          <p className="font-dm-sans font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
             Afia 99.3FM, Enugu. Your Number One Voice Of Enterprise! Discover
             the latest music tracks, explore captivating podcasts, or tune in to
             radio shows.
@@ -87,7 +87,7 @@ export default function BrandSection() {
             Afia Cinema
           </h1>
 
-          <p className="font-haffer font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
+          <p className="font-dm-sans font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
             Afia Cinema is a Film and Television series division, founded under
             AfiaTV to create and project stories of Igbo origin for the global
             Igbo audience.

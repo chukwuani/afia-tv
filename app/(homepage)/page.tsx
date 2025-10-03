@@ -6,25 +6,32 @@ import OtherServices from "@/components/other-services";
 import Events from "@/components/events";
 
 import ContactForm from "@/components/contact-form";
+import MainArticleSection from "@/components/main-article-section";
+import RateCard from "@/components/rate-card";
+import Component from "@/components/comp-345";
 
 const HomePage = () => {
-  return (
-    <main className="relative w-full">
-      <HeroSection />
+	return (
+		<main className="relative w-full">
+			<HeroSection />
 
-      <BrandSection />
+			<BrandSection />
 
-      <OtherServices />
+			<OtherServices />
 
-      {/* <SectionProcess /> */}
+			<MainArticleSection />
 
-      {/* <ObuzoSection /> */}
+			{/* <ObuzoSection /> */}
 
-      <Events />
+			<Events />
 
-      <ContactForm />
-    </main>
-  );
+			<RateCard />
+
+			<Component />
+
+			<ContactForm />
+		</main>
+	);
 };
 
 export default HomePage;

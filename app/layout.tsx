@@ -28,15 +28,15 @@ const epilogue = localFont({
   variable: "--font-epilogue",
 });
 
-const fjallaOne = localFont({
+const dmSans = localFont({
   src: [
     {
-      path: "../public/fonts/GeneralSans-Variable.ttf",
+      path: "../public/fonts/dm-sans/DMSans-Regular.ttf",
       weight: "400",
       style: "normal",
     },
   ],
-  variable: "--font-fjallaOne",
+  variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {
@@ -77,7 +77,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${haffer.variable} ${epilogue.variable} ${fjallaOne.variable} antialiased font-epilogue`}
+        className={`${haffer.variable} ${epilogue.variable} ${dmSans.variable} antialiased font-epilogue`}
       >
         {children}
 
