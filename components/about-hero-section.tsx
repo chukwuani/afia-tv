@@ -1,14 +1,11 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Heading } from "@/components/heading";
 
-import { cn } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 
 const HeroSection = () => {
@@ -102,7 +99,7 @@ const HeroSection = () => {
 						from the Southeast of Nigeria. Broadcasting 24/7 on DStv Channel 254 and GOtv Channel
 						17, Afia TV serves as a cultural compass—preserving, celebrating, and projecting the
 						rich traditions, innovations, and voices of the Igbo people. Launched in February 2023
-						and based in Enugu, our name "Afia" (which means "market" in Igbo) reflects our mission
+						and based in Enugu, our name &quot;Afia&quot; (which means &quot;market&quot; in Igbo) reflects our mission
 						to be a meeting point—where stories, ideas, and communities converge.
 					</p>
 					<p

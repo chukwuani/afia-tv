@@ -74,7 +74,7 @@ const ContactForm = () => {
         ],
       }
 
-      const res = await axios.post(
+      await axios.post(
         `https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/mutate/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
         mutations,
         {

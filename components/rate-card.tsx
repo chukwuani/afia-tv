@@ -13,7 +13,7 @@ function RateCard() {
 					</h1>
 
 					<p className="font-dm-sans font-medium tracking-[.009rem] text-white text-base leading-[28px] mb-8">
-						Whether you're launching a product, hosting an event, or building awareness — Afia TV helps you connect through authentic media and targeted campaigns.
+						Whether you&apos;re launching a product, hosting an event, or building awareness — Afia TV helps you connect through authentic media and targeted campaigns.
 					</p>
 
 					<Link

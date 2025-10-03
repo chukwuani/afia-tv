@@ -1,24 +1,15 @@
 "use client";
 
-import { useState } from "react";
-import { Mail, Lock, Eye, EyeOff, Loader2, Palette, Users, Cloud, ShieldCheck } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Image from "next/image";
 
 export default function SignInForm() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [showPassword, setShowPassword] = useState(false);
-	const [loading, setLoading] = useState(false);
+
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		setLoading(true);
-		setTimeout(() => {
-			alert("Login successful! (This is a demo)");
-			setLoading(false);
-		}, 2000);
+
 	};
 
 	return (
