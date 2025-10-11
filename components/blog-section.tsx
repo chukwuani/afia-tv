@@ -2,105 +2,108 @@
 
 import Link from "next/link";
 
-import { buttonVariants } from "./ui/button";
-import { Icons } from "./icons";
-
-import { cn } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 
-const newsFeed = [
-  {
-    id: 1,
-    imgSrc:
-      "https://cdn.theatlantic.com/thumbor/uP2XLI1AOm5lph5qqd95-BVS0-g=/156x1:1842x1125/624x416/media/img/mt/2025/05/reddit_1/original.jpg",
-    title: "How to Get Rid of a Double Chin & Turkey Neck",
-    description:
-      "With timeless designs and high-quality materials, a wooden bed frame is a solid investment into coziness.",
-  },
-  {
-    id: 2,
-    imgSrc:
-      "https://cdn.theatlantic.com/thumbor/NNmQ0LrycaxAYHPn6zQceFiVzKE=/123x1:1158x690/296x197/media/img/mt/2025/04/2025_4_23_The_David_Frum_Show_EP3_V1/original.jpg",
-    title: "Why Microchaneling Outdoes Microneedling Every Time",
-    description:
-      "Much more cost-effective than renovating, freshen up your space by swapping out your counter stools.",
-  },
-  {
-    id: 3,
-    imgSrc:
-      "https://images.unsplash.com/photo-1570554886111-e80fcca6a029?auto=format&fit=crop&q=80&w=500",
-    title: "Sunlighten Full Spectrum Infrared Sauna Explained by Inventor",
-    description:
-      "A wicker chair outside is a comfortable sight to see, but there's a natural warmth that the look brings inside.",
-  },
-  {
-    id: 4,
-    imgSrc:
-      "https://cdn.theatlantic.com/thumbor/3P7Uny9GrpmeZl3NK4DgBb-XS8Q=/155x1:1842x1124/296x197/media/img/mt/2025/04/2025_4_22_Laws_Are_Just_Culture_JA/original.jpg",
-    title: "Sunlighten Full Spectrum Infrared Sauna Explained by Inventor",
-    description:
-      "A wicker chair outside is a comfortable sight to see, but there's a natural warmth that the look brings inside.",
-  },
-  {
-    id: 5,
-    imgSrc:
-      "https://cdn.theatlantic.com/thumbor/ZM6R-a21LKy8QsbboKyZ7mhhse8=/227x2:2657x1619/296x197/media/img/mt/2025/05/maga_press_7_BK/original.jpg",
-    title: "How to Get Rid of a Double Chin & Turkey Neck",
-    description:
-      " With timeless designs and high-quality materials, a wooden bed frame is a solid investment into coziness.",
-  },
-  {
-    id: 6,
-    imgSrc:
-      "https://cdn.theatlantic.com/thumbor/uqzGeNB2lxwBXXe3tOqLrac02SM=/237x2:2769x1687/296x197/media/img/mt/2025/04/HowToBuildALife239/original.jpg",
-    title: "Why Microchaneling Outdoes Microneedling Every Time",
-    description:
-      "Much more cost-effective than renovating, freshen up your space by swapping out your counter stools.",
-  },
-];
+import NewsSkeleton from "@/components/skeletons/news-skeleton";
+import { Button } from "@/components/ui/button";
+
+import { formatDate } from "@/lib/utils";
+import { NewsTypes } from "@/types";
+
+import useInfinteQuery from "@/hooks/use-infinte-query";
+import React from "react";
+import { AspectRatio } from "./ui/aspect-ratio";
+import Image from "next/image";
 
 const BlogSection = () => {
-  return (
-    <section className="flex flex-col sm:px-12 py-16">
-      <h1 className="text-3xl font-epilogue mb-5 max-sm:px-6 uppercase tracking-[.009rem]">
-        More Stories
-      </h1>
-      <Separator className="mb-8 h-0.5 bg-border" />
+	const {
+		data: news,
+		status,
+		hasNextPage,
+		isFetchingNextPage,
+		fetchNextPage,
+	} = useInfinteQuery("/api/news", "infinite_news");
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {newsFeed.map((item) => (
-          <div key={item.id} className="flex flex-col-reverse lg:flex-col">
-            <img
-              src={item.imgSrc}
-              alt="Skincare Blog"
-              className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
-            />
+	return (
+		<section className="flex flex-col sm:px-12 py-16">
+			<h1 className="text-3xl font-epilogue mb-5 max-sm:px-6 uppercase tracking-[.009rem]">
+				Latest Stories
+			</h1>
+			<Separator className="mb-8 h-0.5 bg-border" />
 
-            <section className="max-sm:px-6">
-              <p className="text-muted-foreground font-epilogue text-sm mb-2">
-                Jan 16, 2023
-              </p>
-              <h4 className="text-2xl font-dm-sans mb-3">{item.title}</h4>
-              <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
-                {item.description}
-              </p>
-            </section>
-          </div>
-        ))}
-      </div>
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+				{status === "pending" ? (
+					<React.Fragment>
+						{Array.from({ length: 8 }).map((_, index) => (
+							<NewsSkeleton key={index} />
+						))}
+					</React.Fragment>
+				) : status === "error" ? (
+					<React.Fragment>
+						{Array.from({ length: 8 }).map((_, index) => (
+							<NewsSkeleton key={index} />
+						))}
+					</React.Fragment>
+				) : (
+					<React.Fragment>
+						{news?.pages?.map((group, i) => (
+							<React.Fragment key={i}>
+								{group?.news?.map((item: NewsTypes) => (
+									<Link
+										key={item._id}
+										href={`/news/${item.slug}`}
+										title={item.description}
+										className="group cols-span-1 gap-2 w-full">
+										<section className="flex flex-col items-end gap-4">
+											<AspectRatio ratio={14 / 9}>
+												<Image
+													src={item.mainImage}
+													alt={item.altText}
+													fill
+													className="rounded-md bg-muted object-cover"
+													priority
+												/>
+											</AspectRatio>
 
-      <Link
-        href="/blog"
-        className={cn(
-          buttonVariants({ variant: "outline" }),
-          "inline-flex gap-2 text-sm font-normal rounded-full h-12 !pr-4 !pl-5 w-fit mt-8 mx-auto"
-        )}
-      >
-        See All
-        <Icons.chevron className="size-5 text-white" />
-      </Link>
-    </section>
-  );
+											<section className="flex flex-col gap-2 w-fit">
+												<section className="flex gap-2 items-center text-muted-foreground font-epilogue text-sm mb-2">
+													<p className="text-xs text-muted-foreground font-medium capitalize">
+														By {item.author.name} -{" "}
+													</p>
+													<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+														{formatDate(item._createdAt)}
+													</p>
+												</section>
+
+												<p className="text-2xl font-dm-sans mb-3 line-clamp-2 group-hover:text-brand">{item.title}</p>
+
+												<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
+													{item.description}
+												</p>
+											</section>
+										</section>
+									</Link>
+								))}
+							</React.Fragment>
+						))}
+					</React.Fragment>
+				)}
+			</div>
+
+			<Button
+				variant="outline"
+				size="lg"
+				disabled={!hasNextPage || isFetchingNextPage}
+				onClick={() => fetchNextPage()}
+				className="flex mx-auto rounded-full mt-8">
+				{isFetchingNextPage
+					? "Loading more..."
+					: hasNextPage
+					? "Load More"
+					: "Nothing more to load"}
+			</Button>
+		</section>
+	);
 };
 
 export default BlogSection;

@@ -17,7 +17,7 @@ function RateCard() {
 					</p>
 
 					<Link
-						href="#"
+						href="https://8kvl2urisy.ufs.sh/f/BxfEHnSVCZL4RIK8VizxD8EQMhz3iSJTrCt10AGjfnYVkHZB"
 						target="_blank"
 						rel="noopener noreferrer"
 						className={cn(

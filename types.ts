@@ -28,3 +28,32 @@ export interface FooterItem {
 export type MainNavItem = NavItemWithOptionalChildren
 
 export type SidebarNavItem = NavItemWithChildren
+
+interface TypedObject {
+  [key: string]: unknown
+  _type: string
+}
+
+export interface AuthorTypes {
+	_id: string;
+	_createdAt: string;
+	name: string;
+	slug: string;
+	imageUrl: string;
+	altText: string;
+	bio: TypedObject[];
+}
+
+export interface NewsTypes {
+	_id: string;
+	_createdAt: string;
+	title: string;
+	description: string;
+	slug: string;
+	mainImage: string;
+	altText: string;
+	publishedAt: Date;
+	readingTime: number;
+	body: TypedObject[];
+	author: AuthorTypes;
+}

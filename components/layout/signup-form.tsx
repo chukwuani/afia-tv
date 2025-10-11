@@ -1,12 +1,72 @@
 "use client";
 
+import Image from "next/image";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import Image from "next/image";
+
+import axios from "axios";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { signupSchema } from "@/lib/validation";
+import { supabase } from "@/lib/supabase";
+
+type Inputs = z.infer<typeof signupSchema>;
 
 export default function SignUpForm() {
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
+	const router = useRouter();
+	const [isLoading, startTransition] = useTransition();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<Inputs>({
+		resolver: zodResolver(signupSchema),
+		mode: "onChange",
+		reValidateMode: "onChange",
+		defaultValues: {
+			fullname: "",
+			email: "",
+			password: "",
+			confirmPassword: "",
+		},
+	});
+
+	const handleSignup = (data: Inputs) => {
+		startTransition(async () => {
+			try {
+				const { data:{user, session}, error } = await supabase.auth.signUp({
+					email: data.email,
+					password: data.password,
+					options: {
+						emailRedirectTo: "http://localhost:3001/signin",
+						data: {
+							full_name: data.fullname,
+						}
+					},
+				});
+
+				console.log({ user, session, error });
+
+				toast.success("Check your email", {
+					description: "Check your email. We sent you a 6-digit verification code.",
+				});
+
+				// router.push(`/signup/verify-email?email=${data.email}`);
+			} catch (error: any) {
+				console.log(error);
+
+				toast.error("Signup Failed!", {
+					description: JSON.stringify(error),
+				});
+			}
+		});
 	};
 
 	return (
@@ -39,9 +99,12 @@ export default function SignUpForm() {
 									</p>
 								</div>
 
-								<form onSubmit={handleSubmit} className="space-y-6">
+								<form onSubmit={handleSubmit(handleSignup)} className="space-y-6">
+									{/* Name Row */}
 									<div className="flex flex-col w-full items-start gap-[11px]">
-										<label className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px]">
+										<label
+											className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px]"
+											htmlFor="full-name">
 											Full Name
 										</label>
 
@@ -49,13 +112,19 @@ export default function SignUpForm() {
 											<Input
 												className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-muted-foreground placeholder:text-muted-foreground "
 												placeholder="John Doe"
+												{...register("fullname", { required: true })}
+												type="text"
+												id="full-name"
+												required
 											/>
 										</div>
 									</div>
 
-									{/* Subject Row */}
+									{/* Email Row */}
 									<div className="flex flex-col w-full items-start gap-[11px]">
-										<label className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px]">
+										<label
+											className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px]"
+											htmlFor="email">
 											Email Address
 										</label>
 
@@ -63,12 +132,19 @@ export default function SignUpForm() {
 											<Input
 												className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-muted-foreground placeholder:text-muted-foreground "
 												placeholder="m@example.com"
+												{...register("email", { required: true })}
+												type="email"
+												id="email"
+												required
 											/>
 										</div>
 									</div>
 
+									{/* Password Row */}
 									<div className="flex flex-col w-full items-start gap-[11px]">
-										<label className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px]">
+										<label
+											className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px]"
+											htmlFor="password">
 											Password
 										</label>
 
@@ -76,12 +152,19 @@ export default function SignUpForm() {
 											<Input
 												className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-muted-foreground placeholder:text-muted-foreground "
 												placeholder="!wP3&zM7#kD2$qS"
+												type="password"
+												{...register("password", { required: true })}
+												id="password"
+												required
 											/>
 										</div>
 									</div>
 
+									{/* Confirm Password Row */}
 									<div className="flex flex-col w-full items-start gap-[11px]">
-										<label className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px]">
+										<label
+											className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px]"
+											htmlFor="confirm-password">
 											Confirm Password
 										</label>
 
@@ -89,11 +172,18 @@ export default function SignUpForm() {
 											<Input
 												className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-muted-foreground placeholder:text-muted-foreground "
 												placeholder="!wP3&zM7#kD2$qS"
+												type="password"
+												{...register("confirmPassword", { required: true })}
+												id="confirm-password"
+												required
 											/>
 										</div>
 									</div>
 
-									<Button className="!py-3 h-auto relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
+									<Button
+										disabled={isLoading}
+										type="submit"
+										className="!py-3 h-auto relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
 										Create an Account
 									</Button>
 

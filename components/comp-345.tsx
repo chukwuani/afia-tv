@@ -56,7 +56,7 @@ const items = [
 
 export default function Component() {
 	return (
-		<section className="flex flex-col items-center justify-center py-32 px-6 md:px-10 lg:px-20 w-full">
+		<section className="flex flex-col items-center justify-center py-32 px-6 md:px-10 lg:px-20 w-full pt-0">
 			<div className="flex flex-col items-center w-full">
 				{/* Section header */}
 				<header className="flex flex-col items-center justify-center gap-[18px] max-w-[650px] w-full mb-18">

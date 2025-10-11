@@ -1,4 +1,51 @@
+"use client";
+
+import { formatDate } from "@/lib/utils";
+import { NewsTypes } from "@/types";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import React from "react";
+import NewsSkeleton from "./skeletons/news-skeleton";
+import Link from "next/link";
+
 export default function MainArticleSection() {
+	const { isPending, isError, data } = useQuery<NewsTypes[]>({
+		queryKey: ["news"],
+		queryFn: async () => {
+			const limit = 4;
+			const query = `*[_type == "news"] | order(publishedAt desc) [0...${limit}] {
+        		_id,
+        		_createdAt,
+				publishedAt,
+        		title, 
+        		description, 
+				author->{
+    				name,
+    				"imageUrl": image.asset->url
+  				},
+        		"slug": slug.current, 
+        		"mainImage": mainImage.asset->url, 
+        		"altText": mainImage.alt
+        	}`;
+
+			const res = await axios.post(
+				`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+				{
+					query,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			const data = res.data;
+			return data.result;
+		},
+	});
+
 	return (
 		<section className="flex flex-col items-center justify-center pt-32 px-6 md:px-10 lg:px-12 w-full">
 			{/* Section header */}
@@ -12,75 +59,77 @@ export default function MainArticleSection() {
 
 			{/* Main Section for duplication */}
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+				{isError && (
+					<React.Fragment>
+						{Array.from({ length: 3 }).map((_, index) => (
+							<NewsSkeleton key={index} />
+						))}
+					</React.Fragment>
+				)}
+
+				{isPending && (
+					<React.Fragment>
+						{Array.from({ length: 3 }).map((_, index) => (
+							<NewsSkeleton key={index} />
+						))}
+					</React.Fragment>
+				)}
+
 				<section className="md:col-span-2">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-						{/* Blog Post 1 */}
-						<div className="flex flex-col-reverse lg:flex-col">
-							<img
-								src="https://cdn.theatlantic.com/thumbor/9A8mRO5xp5PydvYvOceI0XSQFm0=/66x1:1752x1125/624x416/media/img/mt/2025/06/LAPS/original.png"
-								alt="Skincare Blog"
-								className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
-							/>
+						{/* Blog Post 1 & 2 */}
+						{data &&
+							data.length > 0 &&
+							data.slice(0, 2).map((post) => (
+								<Link
+									key={post._id}
+									title={post.title}
+									href={`/news/${post.slug}`}
+									className="group flex flex-col-reverse lg:flex-col">
+									<img
+										src={post.mainImage}
+										alt={post.altText}
+										className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
+									/>
 
-							<section className="max-sm:px-3">
-								<p className="text-muted-foreground font-epilogue text-sm mb-2">Jan 16, 2023</p>
-								<h4 className="text-2xl font-dm-sans mb-3">
-									How to Get Rid of a Double Chin & Turkey Neck
-								</h4>
-								<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
-									With timeless designs and high-quality materials, a wooden bed frame is a solid
-									investment into coziness.
-								</p>
-							</section>
-						</div>
-
-						{/* Blog Post 2 */}
-						<div className="flex flex-col-reverse lg:flex-col">
-							<img
-								src="https://cdn.theatlantic.com/thumbor/TN92iVT5C5rXHUVX6-vhcLj1hRw=/155x1:1842x1124/296x197/media/img/mt/2025/05/25_5_2_Jaouad_Love_and_death_final_horizontal/original.jpg"
-								alt="Skincare Blog"
-								className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
-							/>
-
-							<section className="max-sm:px-3">
-								<p className="text-muted-foreground font-epilogue text-sm mb-2">Jan 5, 2023</p>
-								<h4 className="text-2xl font-dm-sans mb-3">
-									Why Microchaneling Outdoes Microneedling Every Time
-								</h4>
-								<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
-									Much more cost-effective than renovating, freshen up your space by swapping out
-									your counter stools.
-								</p>
-							</section>
-						</div>
+									<section className="max-sm:px-3">
+										<p className="text-muted-foreground font-epilogue text-sm mb-2">
+											{formatDate(post.publishedAt)}
+										</p>
+										<h4 className="text-2xl font-dm-sans mb-3 line-clamp-2 transition-colors group-hover:text-brand">
+											{post.title}
+										</h4>
+										<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
+											{post.description}
+										</p>
+									</section>
+								</Link>
+							))}
 					</div>
 				</section>
 
 				<section className="md:col-span-1 max-lg:pt-0">
 					<div className="grid grid-cols-1 gap-8">
-						{/* Blog Post 1 */}
-						<div>
-							<p className="text-muted-foreground font-epilogue text-sm mb-2">Jan 16, 2023</p>
-							<h4 className="text-2xl font-dm-sans mb-3">
-								How to Get Rid of a Double Chin & Turkey Neck
-							</h4>
-							<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
-								With timeless designs and high-quality materials, a wooden bed frame is a solid
-								investment into coziness.
-							</p>
-						</div>
-
-						{/* Blog Post 2 */}
-						<div>
-							<p className="text-muted-foreground font-epilogue text-sm mb-2">Jan 5, 2023</p>
-							<h4 className="text-2xl font-dm-sans mb-3">
-								Why Microchaneling Outdoes Microneedling Every Time
-							</h4>
-							<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
-								Much more cost-effective than renovating, freshen up your space by swapping out your
-								counter stools.
-							</p>
-						</div>
+						{/* Blog Post 3 & 4 */}
+						{data &&
+							data.length > 0 &&
+							data.slice(2).map((post) => (
+								<Link
+									key={post._id}
+									title={post.title}
+									href={`/news/${post.slug}`}
+									className="group flex flex-col">
+									<p className="text-muted-foreground font-epilogue text-sm mb-2">
+										{formatDate(post.publishedAt)}
+									</p>
+									<h4 className="text-2xl font-dm-sans mb-3 line-clamp-2 transition-colors group-hover:text-brand">
+										{post.title}
+									</h4>
+									<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
+										{post.description}
+									</p>
+								</Link>
+							))}
 					</div>
 				</section>
 			</div>
