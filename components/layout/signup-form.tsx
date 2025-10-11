@@ -1,13 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 
-import axios from "axios";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 
@@ -19,13 +17,11 @@ import { supabase } from "@/lib/supabase";
 type Inputs = z.infer<typeof signupSchema>;
 
 export default function SignUpForm() {
-	const router = useRouter();
 	const [isLoading, startTransition] = useTransition();
 
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
 	} = useForm<Inputs>({
 		resolver: zodResolver(signupSchema),
 		mode: "onChange",
@@ -59,7 +55,7 @@ export default function SignUpForm() {
 				});
 
 				// router.push(`/signup/verify-email?email=${data.email}`);
-			} catch (error: any) {
+			} catch (error) {
 				console.log(error);
 
 				toast.error("Signup Failed!", {

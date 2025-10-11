@@ -8,11 +8,9 @@ import { usePathname } from "next/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import {
 	NavigationMenu,
-	NavigationMenuContent,
 	NavigationMenuItem,
 	NavigationMenuLink,
 	NavigationMenuList,
-	NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 
@@ -45,23 +43,7 @@ export const Navbar = () => {
 					<NavigationMenu className="hidden md:flex">
 						<NavigationMenuList>
 							{siteConfig.mainNav.map((item) =>
-								item?.items ? (
-									<NavigationMenuItem key={item.title}>
-										<NavigationMenuTrigger className="font-dm-sans text-[0.75rem] tracking-[2.4px] uppercase group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-											{item.title}
-										</NavigationMenuTrigger>
-
-										<NavigationMenuContent className="!bg-black">
-											<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-accent">
-												{item.items.map((item) => (
-													<ListItem key={item.title} title={item.title} href={item.href}>
-														{item.description}
-													</ListItem>
-												))}
-											</ul>
-										</NavigationMenuContent>
-									</NavigationMenuItem>
-								) : (
+								
 									item.href && (
 										<NavigationMenuItem key={item.title} className="text-lg font-normal">
 											<NavigationMenuLink
@@ -71,7 +53,7 @@ export const Navbar = () => {
 											</NavigationMenuLink>
 										</NavigationMenuItem>
 									)
-								)
+								
 							)}
 						</NavigationMenuList>
 					</NavigationMenu>

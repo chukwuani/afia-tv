@@ -13,14 +13,8 @@ import {
 	TwitterIcon,
 	WhatsappShareButton,
 	WhatsappIcon,
-	LinkedinShareButton,
-	LinkedinIcon,
 	EmailIcon,
 	EmailShareButton,
-	FacebookMessengerShareButton,
-	FacebookMessengerIcon,
-	PinterestShareButton,
-	PinterestIcon,
 } from "next-share";
 import { absoluteUrl } from "@/lib/utils";
 

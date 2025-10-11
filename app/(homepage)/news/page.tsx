@@ -1,7 +1,7 @@
 import NewsComponents from '@/components/layout/news-components'
 import React from 'react'
 
-function NewsPage() {
+const NewsPage = async () => {
   return (
     <NewsComponents />
   )

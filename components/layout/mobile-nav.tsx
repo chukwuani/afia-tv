@@ -9,12 +9,6 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import {
-	Accordion,
-	AccordionContent,
-	AccordionItem,
-	AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Icons } from "@/components/icons";
 
 export function MobileNav() {
@@ -57,31 +51,7 @@ export function MobileNav() {
 									<section className="-mx-2 flex flex-1 flex-col">
 										{siteConfig.mainNav.map((item, index) => (
 											<section key={item.title + index} className="w-full">
-												{item.items ? (
-													<Accordion key={item.title + index} type="multiple" className="w-full">
-														<AccordionItem
-															className="border-b-0"
-															value={item.title}
-															key={item.title}>
-															<AccordionTrigger className="font-dm-sans text-[0.75rem] uppercase tracking-[2.4px] px-2">
-																{item.title}
-															</AccordionTrigger>
-
-															<AccordionContent>
-																<div className="flex flex-col space-y-2">
-																	{item.items?.map((subItem) => (
-																		<Link
-																			key={subItem.title}
-																			href={subItem.href}
-																			className="w-full justify-start group items-center gap-x-2.5 group inline-flex rounded-md bg-background px-2 py-4 font-dm-sans text-[0.75rem] uppercase tracking-[2.4px] font-normal hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline transition ml-3">
-																			{subItem.title}
-																		</Link>
-																	))}
-																</div>
-															</AccordionContent>
-														</AccordionItem>
-													</Accordion>
-												) : (
+												
 													<Link
 														key={item.title + index}
 														href={item.href}
@@ -89,7 +59,7 @@ export function MobileNav() {
 														className="group inline-flex w-full rounded-md bg-background px-2 py-4 font-dm-sans text-[0.75rem] uppercase tracking-[2.4px] font-normal transition-colors hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline">
 														{item.title}
 													</Link>
-												)}
+												
 											</section>
 										))}
 									</section>

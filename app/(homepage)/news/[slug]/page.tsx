@@ -17,13 +17,47 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Share from "@/components/share";
 import axios from "axios";
 
-interface PageProps {
-	params: {
-		slug: string;
-	};
+// Return a list of `params` to populate the [slug] dynamic segment
+export async function generateStaticParams() {
+	const query = `*[_type == "news"] | order(publishedAt desc) [0...10] {
+					_id,
+					_createdAt,
+					publishedAt,
+					title, 
+					description, 
+					author->{
+						name,
+						"imageUrl": image.asset->url
+					},
+					"slug": slug.current, 
+					"mainImage": mainImage.asset->url, 
+					"altText": mainImage.alt
+	}`;
+
+	const res = await axios.post(
+		`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+		{
+			query,
+		},
+		{
+			headers: {
+				Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
+				"Content-Type": "application/json",
+			},
+		}
+	);
+
+	const data = res.data;
+	const posts: NewsTypes[] = data.result;
+
+	return posts.map((post) => ({
+		slug: post.slug,
+	}));
 }
 
-export default async function PostPage({ params }: PageProps) {
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params;
+
 	const query = `*[_type == "news" && slug.current == $slug][0]{
   _id,
   _createdAt,
@@ -45,7 +79,7 @@ export default async function PostPage({ params }: PageProps) {
 		{
 			query,
 			params: {
-				slug: params.slug.replace("/", ""),
+				slug: slug.replace("/", ""),
 			},
 		},
 		{
@@ -66,8 +100,7 @@ export default async function PostPage({ params }: PageProps) {
 	const content = news.body;
 
 	return (
-		<Shell as="article"
-			variant="content">
+		<Shell as="article" variant="content">
 			<Link
 				href="/news"
 				className={cn(

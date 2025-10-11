@@ -45,7 +45,7 @@ export default function SignInForm() {
 									<div className="flex flex-col md:flex-row items-start gap-7 w-full">
 										<div className="flex flex-col w-full items-start gap-[11px]">
 											<label className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px]">
-												Full Name
+												Email
 											</label>
 
 											<div className="relative w-full">
@@ -60,13 +60,14 @@ export default function SignInForm() {
 									{/* Subject Row */}
 									<div className="flex flex-col w-full items-start gap-[11px]">
 										<label className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px]">
-											Subject
+											Password
 										</label>
 
 										<div className="relative w-full">
 											<Input
 												className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-muted-foreground placeholder:text-muted-foreground "
 												placeholder="I would like to..."
+												type="password"
 											/>
 										</div>
 									</div>

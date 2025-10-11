@@ -1,5 +1,3 @@
-import { cn } from "@/lib/utils";
-
 export const components = {
   block: {
     h1: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -60,13 +58,11 @@ export const components = {
   },
   list: {
     bullet: ({
-      className,
       children,
     }: React.HTMLAttributes<HTMLUListElement>) => (
       <ul className={"my-6 ml-6 list-disc"}>{children}</ul>
     ),
     number: ({
-      className,
       children,
     }: React.HTMLAttributes<HTMLOListElement>) => (
       <ol className={"my-6 ml-6 list-decimal"}>{children}</ol>
@@ -90,7 +86,6 @@ export const components = {
     },
   },
   img: ({
-    className,
     alt,
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
@@ -100,15 +95,15 @@ export const components = {
   hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
     <hr className="my-4 md:my-8" {...props} />
   ),
-  table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
+  table: ({ ...props }: React.HTMLAttributes<HTMLTableElement>) => (
     <div className="my-6 w-full overflow-y-auto">
       <table className={"w-full"} {...props} />
     </div>
   ),
-  tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
+  tr: ({ ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
     <tr className={"m-0 border-t p-0 even:bg-muted"} {...props} />
   ),
-  th: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
+  th: ({ ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <th
       className={
         "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right"
@@ -116,7 +111,7 @@ export const components = {
       {...props}
     />
   ),
-  td: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
+  td: ({ ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
     <td
       className={
         "border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right"
@@ -124,7 +119,7 @@ export const components = {
       {...props}
     />
   ),
-  code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+  code: ({ ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={
         "relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm"
