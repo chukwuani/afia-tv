@@ -3,7 +3,6 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -13,13 +12,39 @@ import {
 	NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { Icons } from "../icons";
 
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
-import { Icons } from "../icons";
+import { supabase } from "@/lib/supabase";
+import type { User } from "@supabase/supabase-js";
+import UserBtn from "../user-btn";
 
 export const Navbar = () => {
-	const pathname = usePathname();
+	const [user, setUser] = React.useState<User | null>(null);
+
+	React.useEffect(() => {
+		// Get initial user
+		const getUser = async () => {
+			const {
+				data: { user },
+			} = await supabase.auth.getUser();
+			setUser(user);
+
+			console.log(user);
+		};
+
+		getUser();
+
+		// Listen for auth changes
+		const {
+			data: { subscription },
+		} = supabase.auth.onAuthStateChange((_event, session) => {
+			setUser(session?.user ?? null);
+		});
+
+		return () => subscription.unsubscribe();
+	}, [supabase]);
 
 	return (
 		<>
@@ -42,8 +67,8 @@ export const Navbar = () => {
 
 					<NavigationMenu className="hidden md:flex">
 						<NavigationMenuList>
-							{siteConfig.mainNav.map((item) =>
-								
+							{siteConfig.mainNav.map(
+								(item) =>
 									item.href && (
 										<NavigationMenuItem key={item.title} className="text-lg font-normal">
 											<NavigationMenuLink
@@ -53,14 +78,11 @@ export const Navbar = () => {
 											</NavigationMenuLink>
 										</NavigationMenuItem>
 									)
-								
 							)}
 						</NavigationMenuList>
 					</NavigationMenu>
 
 					<div className="hidden lg:flex items-center gap-4">
-						{pathname !== "/" && <Icons.search className="size-[18px] fill-white" />}
-
 						<Link
 							href="/live"
 							target="_blank"
@@ -72,19 +94,23 @@ export const Navbar = () => {
 							Live
 						</Link>
 
-						<div className="w-auto max-w-80">
-							<Link
-								href="/signin"
-								className={cn(
-									buttonVariants({ variant: "default" }),
-									"relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl"
-								)}>
-								Sign In
-							</Link>
-						</div>
+						{user ? (
+							<UserBtn user={user} />
+						) : (
+							<div className="w-auto max-w-80">
+								<Link
+									href="/signin"
+									className={cn(
+										buttonVariants({ variant: "default" }),
+										"relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl"
+									)}>
+									Sign In
+								</Link>
+							</div>
+						)}
 					</div>
 
-					<MobileNav />
+					<MobileNav user={user} />
 				</header>
 			</nav>
 		</>

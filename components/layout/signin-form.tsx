@@ -1,15 +1,69 @@
 "use client";
 
+import Image from "next/image";
+import { useTransition } from "react";
+
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import Image from "next/image";
+
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { loginSchema } from "@/lib/validation";
+import { supabase } from "@/lib/supabase";
+import { useRouter } from "next/navigation";
+import { unknownError } from "@/lib/utils";
+
+type Inputs = z.infer<typeof loginSchema>;
 
 export default function SignInForm() {
+	const router = useRouter();
+	const [isLoading, startTransition] = useTransition();
 
+	const { register, handleSubmit } = useForm<Inputs>({
+		resolver: zodResolver(loginSchema),
+		mode: "onChange",
+		reValidateMode: "onChange",
+		defaultValues: {
+			email: "",
+			password: "",
+		},
+	});
 
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
+	const handleSignin = (data: Inputs) => {
+		startTransition(async () => {
+			try {
+				const {
+					error,
+				} = await supabase.auth.signInWithPassword({
+					email: data.email,
+					password: data.password,
+				});
 
+				if (error) {
+					toast.error("Sign in Failed!", {
+						description: error.message,
+					});
+
+					return;
+				}
+
+				toast.success("Authenticated", {
+					description: "Sign in successful!",
+				});
+
+				router.push("/");
+			} catch (error) {
+				// TODO
+				// console.log(error);
+
+				toast.error("Sign in Failed!", {
+					description: unknownError,
+				});
+			}
+		});
 	};
 
 	return (
@@ -20,10 +74,10 @@ export default function SignInForm() {
 						{/* Left Side */}
 						<div className="flex flex-col justify-center p-10">
 							<div className="mx-auto w-full">
-								<div className="flex mb-10">
+								<div className="flex mb-5">
 									<span className="sr-only">Afia</span>
 									<Image
-										className="w-[100px] h-15 max-w-none"
+										className="w-[80px] h-15 max-w-none"
 										width={100}
 										height={40}
 										src="/images/afia_logo.svg"
@@ -32,8 +86,10 @@ export default function SignInForm() {
 								</div>
 
 								<div className="space-y-6 mb-6">
-									<h1 className="text-3xl font-normal tracking-tight text-brand">
-										Access your account
+									<h1 className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">
+										Access your
+										<br />
+										account
 									</h1>
 									<p className="mt-6 text-sm font-dm-sans font-light text-muted-foreground max-w-prose text-pretty">
 										Access your personalized experience — continue watching, save favorites, and
@@ -41,55 +97,64 @@ export default function SignInForm() {
 									</p>
 								</div>
 
-								<form onSubmit={handleSubmit} className="space-y-6">
-									<div className="flex flex-col md:flex-row items-start gap-7 w-full">
-										<div className="flex flex-col w-full items-start gap-[11px]">
-											<label className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px]">
-												Email
-											</label>
+								<form onSubmit={handleSubmit(handleSignin)} className="space-y-6">
+									<div className="flex flex-col-reverse w-full items-start gap-[11px]">
+										<Input
+											className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-white !text-base placeholder:text-muted-foreground relative peer"
+											placeholder="m@example.com"
+											{...register("email", { required: true })}
+											type="email"
+											id="email"
+											required
+										/>
 
-											<div className="relative w-full">
-												<Input
-													className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-muted-foreground placeholder:text-muted-foreground "
-													placeholder="John Doe"
-												/>
-											</div>
-										</div>
+										<label
+											className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px] peer-valid:!text-muted-foreground"
+											htmlFor="email">
+											Email Address
+										</label>
 									</div>
 
-									{/* Subject Row */}
-									<div className="flex flex-col w-full items-start gap-[11px]">
-										<label className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px]">
+									{/* Password Row */}
+									<div className="flex flex-col-reverse w-full items-start gap-[11px]">
+										<Input
+											className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-white !text-base placeholder:text-muted-foreground peer relative w-full"
+											placeholder="!wP3&zM7#kD2$qS"
+											type="password"
+											{...register("password", { required: true })}
+											id="password"
+											required
+										/>
+
+										<label
+											className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px] peer-valid:!text-muted-foreground"
+											htmlFor="password">
 											Password
 										</label>
-
-										<div className="relative w-full">
-											<Input
-												className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-muted-foreground placeholder:text-muted-foreground "
-												placeholder="I would like to..."
-												type="password"
-											/>
-										</div>
 									</div>
 
-									<div className="flex items-center justify-between">
-										<label className="text-muted-foreground flex items-center text-sm">
+									<div className="flex items-center justify-end">
+										{/* <label className="text-muted-foreground flex items-center text-sm">
 											<input
 												type="checkbox"
 												className="border-border text-primary h-4 w-4 rounded"
 											/>
 											<span className="ml-2">Remember me</span>
-										</label>
+										</label> */}
+
 										<a href="#" className="text-brand hover:text-brand/80 text-sm">
 											Forgot password?
 										</a>
 									</div>
 
-									<Button className="!py-3 h-auto relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
+									<Button
+										disabled={isLoading}
+										type="submit"
+										className="!py-3 h-auto relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl">
 										Sign In To Your Account
 									</Button>
 
-									<div className="flex items-center justify-center relative text-center text-sm text-stone-500">
+									{/* <div className="flex items-center justify-center relative text-center text-sm text-stone-500">
 										<div className="border-border w-full border-t"></div>
 
 										<span className="relative px-2 w-full z-10">
@@ -110,7 +175,7 @@ export default function SignInForm() {
 											/>
 											<span className="ml-2">Google</span>
 										</button>
-									</div>
+									</div> */}
 								</form>
 
 								<div className="text-muted-foreground mt-8 text-center text-sm">
@@ -123,7 +188,7 @@ export default function SignInForm() {
 						</div>
 
 						{/* Right Side */}
-						<div className="hidden lg:flex brand-side relative m-4 rounded-3xl bg-[url('/images/signin-img.png')] bg-cover p-12 text-white" />
+						<div className="hidden lg:flex brand-side relative m-4 rounded-3xl bg-[url('/images/signin-img.png')] bg-cover bg-center p-12 text-white" />
 					</div>
 				</div>
 			</div>

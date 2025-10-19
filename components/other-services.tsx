@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 const serviceCards = [
   {
     id: 1,
-    title: "Multi- Camera Event Coverage",
+    title: "Multi-Camera Event Coverage",
     description:
       "We provide full audio and ISO camera recording for sports, e-gaming, music concerts, awards ceremonies, corporate events, and television shows.",
     iconSrc: "/images/multi-media.svg",
@@ -40,11 +40,11 @@ const OtherServices = () => {
                 />
               </div>
 
-              <div className="flex flex-col gap-2">
-                <h3 className="font-epilogue font-medium text-white text-[26px] -tracking-[.053rem] leading-[42px]">
+              <div className="flex flex-col gap-6">
+                <h3 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton">
                   {service.title}
                 </h3>
-                <p className="font-dm-sans font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem]">
+                <p className="font-dm-sans text-muted-foreground text-sm leading-[28px] tracking-[.009rem]">
                   {service.description}
                 </p>
               </div>

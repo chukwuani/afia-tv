@@ -64,65 +64,40 @@ export const siteConfig = {
 	] satisfies MainNavItem[],
 	footerNav: [
 		{
-			title: "Browse",
+			title: "Qucik Links",
 			items: [
 				{
-					title: "News",
+					title: "Watch Now",
+					href: "/live",
+					external: true,
+				},
+				{
+					title: "News and Stories",
 					href: "/news",
+					external: true,
+				},
+				{
+					title: "Podcasts",
+					href: "/podcast",
 					external: false,
 				},
 				{
-					title: "South East",
-					href: "/news?category=south-east",
-					external: false,
-				},
-				{
-					title: "Politics",
-					href: "/news?category=politics",
-					external: false,
-				},
-				{
-					title: "Entertainment",
-					href: "/news?category=entertainment",
-					external: false,
-				},
-				{
-					title: "Sports",
-					href: "/news?category=sports",
+					title: "Events",
+					href: "https://afiahomecoming.com",
 					external: false,
 				},
 				{
 					title: "Audio",
 					href: "https://afia993.com",
 					external: true,
-				},
+				}
 			],
 		},
 		{
-			title: "Brands",
+			title: "Company",
 			items: [
 				{
-					title: "Afia Radio",
-					href: "https://afia993.com",
-					external: true,
-				},
-				{
-					title: "Afia Cinema",
-					href: "https://www.youtube.com/@AfiaCinema",
-					external: true,
-				},
-				{
-					title: "My Enugu Story",
-					href: "https://afiahomecoming.com/myenugustory/",
-					external: true,
-				},
-			],
-		},
-		{
-			title: "About",
-			items: [
-				{
-					title: "Our History",
+					title: "About Us",
 					href: "/about",
 					external: false,
 				},
@@ -131,6 +106,16 @@ export const siteConfig = {
 					href: "/careers",
 					external: false,
 				},
+				{
+					title: "Privacy Policy",
+					href: "/privacy-policy",
+					external: false,
+				},
+				{
+					title: "Terms of Service",
+					href: "/terms-of-service",
+					external: false,
+				}
 			],
 		},
 		{
@@ -138,7 +123,7 @@ export const siteConfig = {
 			items: [
 				{
 					title: "Help center",
-					href: "/help-center",
+					href: "/contact-us",
 					external: false,
 				},
 				{

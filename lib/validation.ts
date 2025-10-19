@@ -46,19 +46,6 @@ export const loginSchema = z.object({
 		}),
 });
 
-export const profileSchema = z.object({
-	firstname: z
-		.string({
-			message: "Please enter a firstname",
-		})
-		.min(1),
-	lastname: z
-		.string({
-			message: "Please enter a lastname",
-		})
-		.min(1),
-});
-
 export const deletionSchema = z.object({
 	confirmation: z.string().refine((value) => value === "Delete account", {
 		message: "The input must be exactly 'Delete account'",
@@ -124,3 +111,11 @@ export const resetPasswordSchema = z
 		message: "Passwords do not match",
 		path: ["confirmPassword"],
 	});
+
+export const emailSchema = z.object({
+	email: z.string().email({
+		message: "Please enter a valid email address.",
+	}),
+});
+
+export type EmailSchema = z.infer<typeof emailSchema>;

@@ -6,6 +6,8 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const unknownError = "An unknown error occurred. Please try again later."
+export const networkError = "A network error occurred. Please check your connection and try again."
+export const comingSoonMsg = "We're working hard on this feature. Check back soon!"
 
 export function formatDate(date: Date | string | number, options: Intl.DateTimeFormatOptions = {}) {
 	return new Intl.DateTimeFormat("en-US", {

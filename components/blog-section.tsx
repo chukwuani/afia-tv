@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 
-import { Separator } from "./ui/separator";
-
 import NewsSkeleton from "@/components/skeletons/news-skeleton";
 import { Button } from "@/components/ui/button";
 
@@ -12,8 +10,6 @@ import { NewsTypes } from "@/types";
 
 import useInfinteQuery from "@/hooks/use-infinte-query";
 import React from "react";
-import { AspectRatio } from "./ui/aspect-ratio";
-import Image from "next/image";
 
 const BlogSection = () => {
 	const {
@@ -25,22 +21,17 @@ const BlogSection = () => {
 	} = useInfinteQuery("/api/news", "infinite_news");
 
 	return (
-		<section className="flex flex-col sm:px-12 py-16">
-			<h1 className="text-3xl font-epilogue mb-5 max-sm:px-6 uppercase tracking-[.009rem]">
-				Latest Stories
-			</h1>
-			<Separator className="mb-8 h-0.5 bg-border" />
-
+		<section className="flex flex-col px-6 sm:px-12 py-16">
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 				{status === "pending" ? (
 					<React.Fragment>
-						{Array.from({ length: 8 }).map((_, index) => (
+						{Array.from({ length: 6 }).map((_, index) => (
 							<NewsSkeleton key={index} />
 						))}
 					</React.Fragment>
 				) : status === "error" ? (
 					<React.Fragment>
-						{Array.from({ length: 8 }).map((_, index) => (
+						{Array.from({ length: 6 }).map((_, index) => (
 							<NewsSkeleton key={index} />
 						))}
 					</React.Fragment>
@@ -51,22 +42,21 @@ const BlogSection = () => {
 								{group?.news?.map((item: NewsTypes) => (
 									<Link
 										key={item._id}
+										title={item.title}
 										href={`/news/${item.slug}`}
-										title={item.description}
 										className="group cols-span-1 gap-2 w-full">
 										<section className="flex flex-col items-end gap-4">
-											<AspectRatio ratio={14 / 9}>
-												<Image
+										
+												<img
 													src={item.mainImage}
 													alt={item.altText}
-													fill
-													className="rounded-md bg-muted object-cover"
-													priority
+													sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
+													className="rounded-md bg-muted object-cover aspect-[14/9] w-full"
 												/>
-											</AspectRatio>
+										
 
 											<section className="flex flex-col gap-2 w-fit">
-												<section className="flex gap-2 items-center text-muted-foreground font-epilogue text-sm mb-2">
+												<section className="flex gap-2 items-center">
 													<p className="text-xs text-muted-foreground font-medium capitalize">
 														By {item.author.name} -{" "}
 													</p>
@@ -75,9 +65,11 @@ const BlogSection = () => {
 													</p>
 												</section>
 
-												<p className="text-2xl font-dm-sans mb-3 line-clamp-2 group-hover:text-brand">{item.title}</p>
+												<p className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-2 line-clamp-2 transition-colors group-hover:text-brand">
+													{item.title}
+												</p>
 
-												<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
+												<p className="text-sm font-dm-sans text-muted-foreground line-clamp-2">
 													{item.description}
 												</p>
 											</section>

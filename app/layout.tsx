@@ -3,41 +3,32 @@ import localFont from "next/font/local";
 import Script from "next/script";
 
 import "./globals.css";
-import { siteConfig } from "@/config";
+
 import { Toaster } from "@/components/ui/sonner";
+
+import { siteConfig } from "@/config";
 import QueryProvider from "@/providers/query-provider";
 
-const haffer = localFont({
+const anton = localFont({
 	src: [
 		{
-			path: "../public/fonts/haffer.woff2",
+			path: "../public/fonts/anton/Anton-Regular.ttf",
 			weight: "400",
 			style: "normal",
 		},
 	],
-	variable: "--font-haffer",
+	variable: "--font-anton",
 });
 
-const epilogue = localFont({
-	src: [
-		{
-			path: "../public/fonts/epilogue/Epilogue-VariableFont_wght.ttf",
-			weight: "400",
-			style: "normal",
-		},
-	],
-	variable: "--font-epilogue",
-});
-
-const dmSans = localFont({
-	src: [
-		{
-			path: "../public/fonts/dm-sans/DMSans-Regular.ttf",
-			weight: "400",
-			style: "normal",
-		},
-	],
-	variable: "--font-dm-sans",
+const dmsans = localFont({ 
+  src: [
+    {
+      path: "../public/fonts/dm-sans/DMSans-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {
@@ -78,10 +69,10 @@ export default function RootLayout({
 		<html lang="en">
 			<body
 				suppressHydrationWarning
-				className={`${haffer.variable} ${epilogue.variable} ${dmSans.variable} antialiased font-epilogue`}>
+				className={`${anton.variable} ${dmsans.variable} antialiased font-dm-sans`}>
 				<QueryProvider>{children}</QueryProvider>
 
-				<Toaster richColors position="bottom-right" />
+				<Toaster richColors position="top-center" />
 
 				{/* Google analytics script */}
 				<Script

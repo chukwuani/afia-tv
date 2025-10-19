@@ -1,16 +1,20 @@
+"use client";
+
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import GuestCard from "@/components/guest-card";
-import PodcastCard from "@/components/podcast-card";
+import { toast } from "sonner";
+import { comingSoonMsg } from "@/lib/utils";
+// import PodcastCard from "@/components/podcast-card";
 
 const Hero = () => {
 	return (
 		<>
 			<section className="pb-14">
-				<section className="flex flex-col md:flex-row overflow-hidden border-none bg-transparent shadow-none px-6 md:px-12 md:items-center gap-[3rem] sm:gap-[4.5rem] w-full py-12 md:pt-0">
+				<section className="flex flex-col-reverse md:flex-row overflow-hidden border-none bg-transparent shadow-none px-6 md:px-12 md:items-center gap-[3rem] sm:gap-[4.5rem] w-full py-12 md:pt-0">
 					<section className="flex flex-col md:w-[44%] gap-8 relative">
 						<h1
-							className="text-[4rem] leading-[4rem] -tracking-[.053rem] lg:text-[5.6rem] lg:leading-[6.4rem] lg:-tracking-[.078rem] font-epilogue font-normal mb-auto animate-fade-up"
+							className="text-[55px] leading-[107%] tracking-normal lg:text-[100px] lg:leading-[100%] lg:tracking-[-2px] font-anton font-normal max-w-[800px] uppercase mb-auto animate-fade-up"
 							style={{ animationDelay: "0.20s", animationFillMode: "both" }}>
 							The Eastern Narrative
 						</h1>
@@ -26,12 +30,15 @@ const Hero = () => {
 						<div
 							className="flex items-center gap-4 animate-fade-up font-san"
 							style={{ animationDelay: "0.40s", animationFillMode: "both" }}>
-							
-								<Button className="font-normal w-fit bg-brand hover:bg-brand/90 rounded-full p-7 text-foreground z-10 h-14 text-base px-5 font-dm-sans text-[0.75rem] tracking-[2.4px] uppercase">
-									Listen live
-									
-								</Button>
-							
+							<Button
+								onClick={() => {
+									toast.info("Coming Soon!", {
+										description: comingSoonMsg,
+									});
+								}}
+								className="font-normal w-fit bg-brand hover:bg-brand/90 rounded-full p-7 text-foreground z-10 h-14 text-base px-5 font-dm-sans text-[0.75rem] tracking-[2.4px] uppercase">
+								Listen live
+							</Button>
 						</div>
 
 						<section>
@@ -71,7 +78,7 @@ const Hero = () => {
 				</section>
 			</section>
 
-            <PodcastCard />
+			{/* <PodcastCard /> */}
 
 			<GuestCard />
 		</>

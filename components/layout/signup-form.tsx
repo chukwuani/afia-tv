@@ -13,16 +13,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { signupSchema } from "@/lib/validation";
 import { supabase } from "@/lib/supabase";
+import { unknownError } from "@/lib/utils";
 
 type Inputs = z.infer<typeof signupSchema>;
 
 export default function SignUpForm() {
 	const [isLoading, startTransition] = useTransition();
 
-	const {
-		register,
-		handleSubmit,
-	} = useForm<Inputs>({
+	const { register, handleSubmit } = useForm<Inputs>({
 		resolver: zodResolver(signupSchema),
 		mode: "onChange",
 		reValidateMode: "onChange",
@@ -37,29 +35,36 @@ export default function SignUpForm() {
 	const handleSignup = (data: Inputs) => {
 		startTransition(async () => {
 			try {
-				const { data:{user, session}, error } = await supabase.auth.signUp({
+				const {
+					error,
+				} = await supabase.auth.signUp({
 					email: data.email,
 					password: data.password,
 					options: {
-						emailRedirectTo: "http://localhost:3001/signin",
+						emailRedirectTo: `${window.location.origin}/signin`,
 						data: {
 							full_name: data.fullname,
-						}
+						},
 					},
 				});
 
-				console.log({ user, session, error });
+				if (error) {
+					toast.error("Signup Failed!", {
+						description: error.message,
+					});
+
+					return;
+				}
 
 				toast.success("Check your email", {
-					description: "Check your email. We sent you a 6-digit verification code.",
+					description: "Check your email. We sent you a verification link.",
 				});
-
-				// router.push(`/signup/verify-email?email=${data.email}`);
 			} catch (error) {
-				console.log(error);
+				// TODO
+				// console.log(error);
 
 				toast.error("Signup Failed!", {
-					description: JSON.stringify(error),
+					description: unknownError,
 				});
 			}
 		});
@@ -73,10 +78,10 @@ export default function SignUpForm() {
 						{/* Left Side */}
 						<div className="flex flex-col justify-center p-10">
 							<div className="mx-auto w-full">
-								<div className="flex mb-10">
+								<div className="flex mb-5">
 									<span className="sr-only">Afia</span>
 									<Image
-										className="w-[100px] h-15 max-w-none"
+										className="w-[80px] h-15 max-w-none"
 										width={100}
 										height={40}
 										src="/images/afia_logo.svg"
@@ -85,7 +90,7 @@ export default function SignUpForm() {
 								</div>
 
 								<div className="space-y-6 mb-6">
-									<h1 className="text-3xl md:text-4xl font-normal tracking-tight text-brand">
+									<h1 className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">
 										Join the Afia TV community
 									</h1>
 									<p className="mt-6 text-sm font-dm-sans font-light text-muted-foreground max-w-prose text-pretty">
@@ -97,83 +102,74 @@ export default function SignUpForm() {
 
 								<form onSubmit={handleSubmit(handleSignup)} className="space-y-6">
 									{/* Name Row */}
-									<div className="flex flex-col w-full items-start gap-[11px]">
+									<div className="flex flex-col-reverse w-full items-start gap-[11px]">
+										<Input
+											className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-white !text-base placeholder:text-muted-foreground peer relative w-full"
+											placeholder="John Doe"
+											{...register("fullname", { required: true })}
+											type="text"
+											id="full-name"
+											required
+										/>
 										<label
-											className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px]"
+											className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px] peer-valid:!text-muted-foreground"
 											htmlFor="full-name">
 											Full Name
 										</label>
-
-										<div className="relative w-full">
-											<Input
-												className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-muted-foreground placeholder:text-muted-foreground "
-												placeholder="John Doe"
-												{...register("fullname", { required: true })}
-												type="text"
-												id="full-name"
-												required
-											/>
-										</div>
 									</div>
 
 									{/* Email Row */}
-									<div className="flex flex-col w-full items-start gap-[11px]">
+									<div className="flex flex-col-reverse w-full items-start gap-[11px]">
+										<Input
+											className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-white !text-base placeholder:text-muted-foreground relative peer"
+											placeholder="m@example.com"
+											{...register("email", { required: true })}
+											type="email"
+											id="email"
+											required
+										/>
+
 										<label
-											className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px]"
+											className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px] peer-valid:!text-muted-foreground"
 											htmlFor="email">
 											Email Address
 										</label>
-
-										<div className="relative w-full">
-											<Input
-												className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-muted-foreground placeholder:text-muted-foreground "
-												placeholder="m@example.com"
-												{...register("email", { required: true })}
-												type="email"
-												id="email"
-												required
-											/>
-										</div>
 									</div>
 
 									{/* Password Row */}
-									<div className="flex flex-col w-full items-start gap-[11px]">
+									<div className="flex flex-col-reverse w-full items-start gap-[11px]">
+										<Input
+											className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-white !text-base placeholder:text-muted-foreground peer relative w-full"
+											placeholder="!wP3&zM7#kD2$qS"
+											type="password"
+											{...register("password", { required: true })}
+											id="password"
+											required
+										/>
+
 										<label
-											className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px]"
+											className="font-epilogue font-medium text-primary text-[13.6px] tracking-[-0.14px] leading-[16.8px] peer-valid:!text-muted-foreground"
 											htmlFor="password">
 											Password
 										</label>
-
-										<div className="relative w-full">
-											<Input
-												className="h-11 shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-muted-foreground placeholder:text-muted-foreground "
-												placeholder="!wP3&zM7#kD2$qS"
-												type="password"
-												{...register("password", { required: true })}
-												id="password"
-												required
-											/>
-										</div>
 									</div>
 
 									{/* Confirm Password Row */}
-									<div className="flex flex-col w-full items-start gap-[11px]">
+									<div className="flex flex-col-reverse w-full items-start gap-[11px]">
+										<Input
+											className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 text-white !text-base placeholder:text-muted-foreground relative peer"
+											placeholder="!wP3&zM7#kD2$qS"
+											type="password"
+											{...register("confirmPassword", { required: true })}
+											id="confirm-password"
+											required
+										/>
+
 										<label
-											className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px]"
+											className="font-epilogue font-medium text-primary text-[13.1px] tracking-[-0.14px] leading-[16.8px] peer-valid:!text-muted-foreground"
 											htmlFor="confirm-password">
 											Confirm Password
 										</label>
-
-										<div className="relative w-full">
-											<Input
-												className="h-11 w-full shadow-none border-0 border-b border-[#75757552] focus-visible:ring-0 focus-visible:border-white transition-all rounded-none px-0 py-3 font-epilogue text-muted-foreground placeholder:text-muted-foreground "
-												placeholder="!wP3&zM7#kD2$qS"
-												type="password"
-												{...register("confirmPassword", { required: true })}
-												id="confirm-password"
-												required
-											/>
-										</div>
 									</div>
 
 									<Button
@@ -183,7 +179,7 @@ export default function SignUpForm() {
 										Create an Account
 									</Button>
 
-									<div className="flex items-center justify-center relative text-center text-sm text-stone-500">
+									{/* <div className="flex items-center justify-center relative text-center text-sm text-stone-500">
 										<div className="border-border w-full border-t"></div>
 
 										<span className="relative px-2 w-full z-10">Or continue with</span>
@@ -202,7 +198,7 @@ export default function SignUpForm() {
 											/>
 											<span className="ml-2">Google</span>
 										</button>
-									</div>
+									</div> */}
 								</form>
 
 								<div className="text-muted-foreground mt-8 text-center text-sm">

@@ -11,7 +11,9 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Icons } from "@/components/icons";
 
-export function MobileNav() {
+import type { User } from "@supabase/supabase-js";
+
+export function MobileNav({ user }: { user: User | null }) {
 	const { isDesktop } = useMediaQuery();
 
 	const [open, setOpen] = React.useState(false);
@@ -51,31 +53,51 @@ export function MobileNav() {
 									<section className="-mx-2 flex flex-1 flex-col">
 										{siteConfig.mainNav.map((item, index) => (
 											<section key={item.title + index} className="w-full">
-												
-													<Link
-														key={item.title + index}
-														href={item.href}
-														onClick={() => setOpen(false)}
-														className="group inline-flex w-full rounded-md bg-background px-2 py-4 font-dm-sans text-[0.75rem] uppercase tracking-[2.4px] font-normal transition-colors hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline">
-														{item.title}
-													</Link>
-												
+												<Link
+													key={item.title + index}
+													href={item.href}
+													onClick={() => setOpen(false)}
+													className="group inline-flex w-full rounded-md bg-background px-2 py-4 font-dm-sans text-[0.75rem] uppercase tracking-[2.4px] font-normal transition-colors hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline">
+													{item.title}
+												</Link>
 											</section>
 										))}
 									</section>
 								</section>
 
 								<div className="flex flex-wrap items-center gap-4 w-full">
-									<div className="w-auto max-w-80">
-										<Link
-											href="/signin"
-											className={cn(
-												buttonVariants({ variant: "default" }),
-												"relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl"
-											)}>
-											Sign In
-										</Link>
-									</div>
+									{user ? (
+										<section className="w-auto max-w-80 bg-background">
+											<div className="rounded-md py-0 text-sm transition-colors">
+												<div className="relative flex items-start gap-3 pe-3">
+													<img
+														className="size-9 rounded-md"
+														src="/images/photo_placeholder.png"
+														width={32}
+														height={32}
+														alt="Profile image"
+													/>
+													<div className="flex-1 space-y-1">
+														<span className="font-medium text-foreground">
+															{user.user_metadata.full_name}
+														</span>{" "}
+														<div className="text-xs text-muted-foreground">{user.email}</div>
+													</div>
+												</div>
+											</div>
+										</section>
+									) : (
+										<div className="w-auto max-w-80">
+											<Link
+												href="/signin"
+												className={cn(
+													buttonVariants({ variant: "default" }),
+													"relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl"
+												)}>
+												Sign In
+											</Link>
+										</div>
+									)}
 								</div>
 							</section>
 						</section>

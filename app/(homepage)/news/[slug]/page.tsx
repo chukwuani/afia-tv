@@ -112,16 +112,17 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 			</Link>
 
 			<div className="space-y-2">
-				<h1 className="inline-block text-4xl font-bold leading-tight">{news.title}</h1>
+				<h1 className="inline-block text-[36px] lg:text-[68px] font-normal tracking-[-1px] leading-[110%] font-anton">
+					{news.title}
+				</h1>
 
 				<div className="flex items-center space-x-4 pt-4">
 					<section className="flex items-center space-x-2 text-sm">
-						<Image
+						<img
 							src={author.imageUrl}
 							alt={author.name}
 							width={40}
 							height={40}
-							quality={100}
 							className="rounded-full size-10 object-cover"
 						/>
 						<div className="flex-1 text-left leading-tight">
@@ -139,15 +140,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 				</div>
 			</div>
 
-			<AspectRatio ratio={16 / 11}>
-				<Image
-					src={news.mainImage}
-					alt={news.altText}
-					fill
-					className="rounded-md border bg-muted object-cover"
-					priority
-				/>
-			</AspectRatio>
+			<img
+				src={news.mainImage}
+				alt={news.altText}
+				sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
+				className="rounded-md bg-muted object-cover aspect-[16/11] w-full"
+			/>
 
 			<PortableText value={content} components={components} />
 

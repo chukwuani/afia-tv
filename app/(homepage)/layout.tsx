@@ -1,18 +1,16 @@
-import FooterSection from "@/components/footer-section";
 import { Navbar } from "@/components/layout/navbar";
+import Footer from "@/components/layout/site-footer";
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body suppressHydrationWarning>
-        <Navbar />
-        {children}
-        <FooterSection />
-      </body>
-    </html>
-  );
+	return (
+		<section>
+				<Navbar />
+				{children}
+				<Footer />
+			</section>
+	);
 }

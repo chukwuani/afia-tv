@@ -24,14 +24,14 @@ const HeroSection = () => {
 		<section className="flex flex-col items-center pt-28 relative w-full">
 			<div className="flex flex-col max-w-[1200px] items-center gap-[50px]  py-0 relative w-full">
 				<div className="flex flex-col w-full max-w-[1150px] items-center justify-center gap-8 px-[32px]">
-					<div className="mx-auto sm:text-center">
-						<Heading className="text-[3rem] leading-[4rem] -tracking-[.053rem] lg:text-[5.6rem] lg:leading-[6.4rem] lg:-tracking-[.078rem] text-center font-epilogue font-normal">
+					<div className="mx-auto text-center">
+						<Heading className="text-[55px] leading-[107%] tracking-normal lg:text-[100px] lg:leading-[100%] lg:tracking-[-2px] font-anton font-normal max-w-[800px] uppercase">
 							Telling the stories, Shaping the Culture.
 						</Heading>
 
 						{/* Subheading text */}
 						<div className="flex flex-col max-w-[480px] w-full items-center relative text-center mt-6 mx-auto">
-							<p className="font-dm-sans font-medium text-muted-foreground  text-base leading-[28px] tracking-[.009rem]">
+							<p className="font-dm-sans font-medium text-muted-foreground text-base leading-[28px] tracking-[.009rem]">
 								Connecting you to the Heart of the Southeast. Discover the Richness and Diversity of
 								Our Region&apos;s Stories.
 							</p>
@@ -87,13 +87,13 @@ const HeroSection = () => {
         {/*Our Mission Section */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-12 my-24 max-w-[1200px]">
 				<h2
-					className="text-[40px] leading-[52px] font-san tracking-[-3.6px] font-normal animate-fade-up max-w-[500px]"
+					className="font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase max-w-[500px]"
 					style={{ animationDelay: "0.20s", animationFillMode: "both" }}>
 					Our Mission
 				</h2>
 				<div className="space-y-6 col-span-2">
 					<p
-						className="text-lg font-dm-sans font-normal text-muted-foreground animate-fade-up"
+						className="text-lg font-dm-sans font-normal leading-[170%] tracking-normal text-muted-foreground animate-fade-up"
 						style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
 						Afia TV is the first regional television channel dedicated to telling authentic stories
 						from the Southeast of Nigeria. Broadcasting 24/7 on DStv Channel 254 and GOtv Channel
@@ -103,7 +103,7 @@ const HeroSection = () => {
 						to be a meeting point—where stories, ideas, and communities converge.
 					</p>
 					<p
-						className="text-lg font-dm-sans font-normal text-muted-foreground animate-fade-up"
+						className="text-lg font-dm-sans font-normal leading-[170%] tracking-normal text-muted-foreground animate-fade-up"
 						style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
 						We aim to be the most trusted and impactful regional media brand in Nigeria—dedicated to
 						reclaiming our narrative, celebrating local excellence, and preserving cultural identity
@@ -116,13 +116,13 @@ const HeroSection = () => {
 			{/*Our Vision Section */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-12 my-24 mb-24 max-w-[1200px]">
 				<h2
-					className="text-[40px] leading-[52px] font-san tracking-[-3.6px]  font-normal animate-fade-up max-w-[500px]"
+					className="font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase max-w-[500px]"
 					style={{ animationDelay: "0.20s", animationFillMode: "both" }}>
 					Our Vision
 				</h2>
 				<div className="space-y-6 col-span-2">
 					<p
-						className="text-lg font-dm-sans font-normal text-muted-foreground animate-fade-up"
+						className="text-lg font-dm-sans font-normal leading-[170%] tracking-normal text-muted-foreground animate-fade-up"
 						style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
 						A Southeast Nigeria where every voice is celebrated, every tradition preserved, and
 						every dream given a stage — uniting communities through culture, music, and heritage
@@ -135,13 +135,13 @@ const HeroSection = () => {
 			{/*Strategic Partnerships Section */}
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-12 my-24 mb-24 max-w-[1200px]">
 				<h2
-					className="text-[40px] leading-[52px] font-san tracking-[-3.6px]  font-normal animate-fade-up max-w-[500px]"
+					className="font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase max-w-[500px]"
 					style={{ animationDelay: "0.20s", animationFillMode: "both" }}>
 					Strategic Partnerships
 				</h2>
 				<div className="space-y-6 col-span-2">
 					<p
-						className="text-lg font-dm-sans font-normal text-muted-foreground animate-fade-up"
+						className="text-lg font-dm-sans font-normal leading-[170%] tracking-normal text-muted-foreground animate-fade-up"
 						style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
 						In our commitment to expand and enrich local storytelling, Afia TV has partnered with media platforms like Anaedo TV and other regional creators. These collaborations help us reach more communities and amplify more authentic voices across Ala Igbo.
 					</p>

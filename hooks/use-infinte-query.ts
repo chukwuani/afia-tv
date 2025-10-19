@@ -8,7 +8,7 @@ const useInfinteQuery = (url: string, key: string) => {
 	const fetchData = async ({ pageParam }: { pageParam: string }) => {
 		const cursor = pageParam.replace("lastPublishedAt=", ",").split(",")[0];
 		const lastPublishedAt = pageParam.replace("lastPublishedAt=", ",").split(",")[1];
-		const limit = 8;
+		const limit = 6;
 
 		let news: NewsTypes[] = [];
 
