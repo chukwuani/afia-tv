@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeftIcon } from "lucide-react";
 
@@ -13,9 +12,10 @@ import { components } from "@/components/portable-component";
 
 import { PortableText } from "@portabletext/react";
 import { NewsTypes } from "@/types";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Share from "@/components/share";
 import axios from "axios";
+
+export const dynamicParams = true;
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {

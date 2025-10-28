@@ -12,6 +12,7 @@ import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/s
 import { Icons } from "@/components/icons";
 
 import type { User } from "@supabase/supabase-js";
+import LogoutBtn from "../logout-btn";
 
 export function MobileNav({ user }: { user: User | null }) {
 	const { isDesktop } = useMediaQuery();
@@ -67,22 +68,17 @@ export function MobileNav({ user }: { user: User | null }) {
 
 								<div className="flex flex-wrap items-center gap-4 w-full">
 									{user ? (
-										<section className="w-auto max-w-80 bg-background">
+										<section className="w-full bg-background">
 											<div className="rounded-md py-0 text-sm transition-colors">
-												<div className="relative flex items-start gap-3 pe-3">
-													<img
-														className="size-9 rounded-md"
-														src="/images/photo_placeholder.png"
-														width={32}
-														height={32}
-														alt="Profile image"
-													/>
+												<div className="relative flex items-start gap-3">
 													<div className="flex-1 space-y-1">
 														<span className="font-medium text-foreground">
 															{user.user_metadata.full_name}
 														</span>{" "}
 														<div className="text-xs text-muted-foreground">{user.email}</div>
 													</div>
+
+													<LogoutBtn />
 												</div>
 											</div>
 										</section>

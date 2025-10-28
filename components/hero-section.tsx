@@ -5,8 +5,6 @@ import { buttonVariants } from "@/components/ui/button";
 import { Heading } from "@/components/heading";
 
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-// bg-[url('/images/hero-bg.png')] bg-cover bg-center bg-no-repeat min-h-screen
 
 const HeroSection = () => {
 	return (
@@ -18,7 +16,7 @@ const HeroSection = () => {
 					opacity: 1,
 					mask: "linear-gradient(90deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 1) 100%) add",
 				}}>
-				<Image src="/images/hero-bg.png" alt="" width={1400} height={600} />
+				<img src="/images/hero-bg.png" alt="" width={1400} height={600} />
 			</section>
 
 			<section
@@ -27,7 +25,7 @@ const HeroSection = () => {
 					opacity: 1,
 					mask: "linear-gradient(0deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 1) 100%) add",
 				}}>
-				<Image src="/images/hero-bg-mobile.png" alt="" width={1000} height={600} />
+				<img src="/images/hero-bg-mobile.png" alt="" width={1000} height={600} />
 			</section>
 
 			<div className="flex flex-col items-center text-center md:text-start md:items-start w-full justify-center px-6 md:px-10 lg:px-12 gap-[35px] md:gap-[50px] py-0 relative">

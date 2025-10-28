@@ -142,7 +142,7 @@ export default function SignInForm() {
 											<span className="ml-2">Remember me</span>
 										</label> */}
 
-										<a href="#" className="text-brand hover:text-brand/80 text-sm">
+										<a href="/forgot-password" className="text-brand hover:text-brand/80 text-sm">
 											Forgot password?
 										</a>
 									</div>
