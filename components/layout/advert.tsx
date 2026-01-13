@@ -1,9 +1,9 @@
 const Advert = () => {
   return (
-    <section className="">
+    <section className="border-t border-b">
       <img
         className="mx-auto my-4 px-6"
-        src="/images/advert_banner.jpg"
+        src="/images/ad-banner.png"
         width={1200}
         height={250}
         alt="Advert"

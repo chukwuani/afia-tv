@@ -29,7 +29,7 @@ export type MainNavItem = NavItemWithOptionalChildren
 
 export type SidebarNavItem = NavItemWithChildren
 
-interface TypedObject {
+export interface TypedObject {
   [key: string]: unknown
   _type: string
 }

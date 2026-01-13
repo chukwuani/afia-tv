@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
@@ -16,7 +17,7 @@ const HeroSection = () => {
 					opacity: 1,
 					mask: "linear-gradient(90deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 1) 100%) add",
 				}}>
-				<img src="/images/hero-bg.png" alt="" width={1400} height={600} />
+				<img src="/images/hero-bg.png" alt="Afia TV" width={1400} height={600} />
 			</section>
 
 			<section
@@ -25,7 +26,7 @@ const HeroSection = () => {
 					opacity: 1,
 					mask: "linear-gradient(0deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 1) 100%) add",
 				}}>
-				<img src="/images/hero-bg-mobile.png" alt="" width={1000} height={600} />
+				<img src="/images/hero-bg-mobile.png" alt="Afia TV" width={1000} height={600} />
 			</section>
 
 			<div className="flex flex-col items-center text-center md:text-start md:items-start w-full justify-center px-6 md:px-10 lg:px-12 gap-[35px] md:gap-[50px] py-0 relative">
@@ -38,7 +39,7 @@ const HeroSection = () => {
 
 					{/* Subheading text */}
 					<div className="flex flex-col max-w-[480px] w-full items-center relative mt-6">
-						<p className="font-dm-sans font-medium text-muted-foreground text-sm md:text-base">
+						<p className="font-dm-sans font-normal text-muted-foreground text-sm md:text-base">
 							Streaming 24/7 on DStv 254 & GOtv 17 — Dive into Igbo stories, culture, and power like
 							never before.
 						</p>

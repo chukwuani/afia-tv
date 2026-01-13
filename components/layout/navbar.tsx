@@ -30,8 +30,6 @@ export const Navbar = () => {
 				data: { user },
 			} = await supabase.auth.getUser();
 			setUser(user);
-
-			console.log(user);
 		};
 
 		getUser();

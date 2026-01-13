@@ -1,9 +1,12 @@
+"use client";
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import MyImage from "./my-image";
+
 // Define event card data for mapping
 const eventsCard = [
 	{
@@ -66,8 +69,8 @@ const Events = () => {
 					{eventsCard.map((event) => (
 						<Card
 							key={event.id}
-							className="bg-[#ffffff0b] rounded-[28px] overflow-hidden shadow-none border-none">
-							<CardContent className="flex flex-col justify-between h-full p-6">
+							className="bg-[#ffffff0b] rounded-[26px] overflow-hidden shadow-none border-none">
+							<CardContent className="flex flex-col justify-between h-full p-4">
 								<div className="w-full h-[250px] mb-4">
 									<MyImage
 										className="w-full h-[250px] rounded-[12px] object-cover object-top"

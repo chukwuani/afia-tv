@@ -4,19 +4,20 @@ import { NewsTypes } from "@/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const useInfinteQuery = (url: string, key: string) => {
+const useInfinteQuery = (url: string, key: string, skip: number = 0) => {
+	const limit = 6;
+
 	const fetchData = async ({ pageParam }: { pageParam: string }) => {
 		const cursor = pageParam.replace("lastPublishedAt=", ",").split(",")[0];
 		const lastPublishedAt = pageParam.replace("lastPublishedAt=", ",").split(",")[1];
-		const limit = 6;
 
 		let news: NewsTypes[] = [];
 
 		if (cursor && lastPublishedAt) {
-			const query = `*[_type == "news"  && (
+			const query = `*[_type == "news" && category != "sports" && (
       			publishedAt < $lastPublishedAt
       			|| (publishedAt == $lastPublishedAt && _id > $cursor)
-    			)] | order(publishedAt desc) [0...${limit}] {
+    			) && featured != true && recommended != true] | order(publishedAt desc) [0...${limit}] {
         		_id,
         		_createdAt,
 				publishedAt,
@@ -51,7 +52,9 @@ const useInfinteQuery = (url: string, key: string) => {
 			const data = res.data;
 			news = data.result;
 		} else {
-			const query = `*[_type == "news"] | order(publishedAt desc) [0...${limit}] {
+			// Initial load - fetch more items to account for skip
+			const initialLimit = limit + skip;
+			const query = `*[_type == "news" && featured != true && recommended != true && category != "sports"] | order(publishedAt desc) [0...${initialLimit}] {
         		_id,
         		_createdAt,
 				publishedAt,
@@ -80,7 +83,8 @@ const useInfinteQuery = (url: string, key: string) => {
 			);
 
 			const data = res.data;
-			news = data.result;
+			// Skip the first 'skip' items on initial load only
+			news = data.result.slice(skip);
 		}
 
 		let nextCursor = null;

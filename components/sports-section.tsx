@@ -2,81 +2,124 @@
 
 import Link from "next/link";
 
-import { buttonVariants } from "./ui/button";
-import { Icons } from "./icons";
+import { cn, formatDate } from "@/lib/utils";
+import { NewsTypes } from "@/types";
 
-import { cn } from "@/lib/utils";
-import { Separator } from "./ui/separator";
+import axios from "axios";
+import React from "react";
+import { RefreshCw } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 
-const newsFeed = [
-  {
-    id: 1,
-    imgSrc:
-      "https://www.reuters.com/resizer/v2/26NN3MU6AFM6VACJH5QAIXDLQQ.jpg?auth=caf3b5a2a5792763183d5f0a00ccd1dc1a673d5eaee660e36872a23e1221b7cd&width=480&quality=80",
-    title: "How to Get Rid of a Double Chin & Turkey Neck",
-    description:
-      "With timeless designs and high-quality materials, a wooden bed frame is a solid investment into coziness.",
-  },
-  {
-    id: 2,
-    imgSrc:
-      "https://ichef.bbci.co.uk/ace/standard/1536/cpsprodpb/244f/live/a124c0b0-28fe-11f0-b26b-ab62c890638b.jpg.webp",
-    title: "Why Microchaneling Outdoes Microneedling Every Time",
-    description:
-      "Much more cost-effective than renovating, freshen up your space by swapping out your counter stools.",
-  },
-  {
-    id: 3,
-    imgSrc:
-      "https://www.reuters.com/resizer/v2/QLXWV2KRLRMDJFFPCM7STZ26ZU.jpg?auth=72b44f15cf3cf2e3a0e3930c93edb812d18919dacf354bfeea5c2c7688411c2f&width=960&quality=80",
-    title: "Sunlighten Full Spectrum Infrared Sauna Explained by Inventor",
-    description:
-      "A wicker chair outside is a comfortable sight to see, but there's a natural warmth that the look brings inside.",
-  },
-];
+import { Button, buttonVariants } from "@/components/ui/button";
+import NewsSkeleton from "@/components/skeletons/news-skeleton";
 
 const SportsSection = () => {
-  return (
-    <section className="flex flex-col sm:px-12 py-16">
-      <h1 className="text-3xl font-epilogue mb-5 max-sm:px-6 uppercase tracking-[.009rem]">
-        Sports
-      </h1>
-      <Separator className="mb-8 h-0.5 bg-border" />
+	const { isPending, isError, data, refetch } = useQuery<NewsTypes[]>({
+		queryKey: ["sports-section"],
+		queryFn: async () => {
+			const limit = 3;
+			const query = `*[_type == "news" && featured != true && recommended != true && category == "sports"] | order(publishedAt desc) [0...${limit}] {
+                      _id,
+                      _createdAt,
+                      publishedAt,
+                      title, 
+                      description, 
+                      author->{
+                          name,
+                          "imageUrl": image.asset->url
+                      },
+                      "slug": slug.current, 
+                      "mainImage": mainImage.asset->url, 
+                      "altText": mainImage.alt
+                  }`;
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {newsFeed.map((item) => (
-          <div key={item.id} className="flex flex-col-reverse lg:flex-col">
-            <img
-              src={item.imgSrc}
-              alt="Skincare Blog"
-              className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
-            />
+			const res = await axios.post(
+				`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+				{
+					query,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
+						"Content-Type": "application/json",
+					},
+				}
+			);
 
-            <section className="max-sm:px-6">
-              <p className="text-muted-foreground font-epilogue text-sm mb-2">
-                Jan 16, 2023
-              </p>
-              <h4 className="text-2xl font-dm-sans mb-3">{item.title}</h4>
-              <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
-                {item.description}
-              </p>
-            </section>
-          </div>
-        ))}
-      </div>
+			const data = res.data;
+			return data.result;
+		},
+	});
 
-      <Link
-        href="/blog"
-        className={cn(
-          buttonVariants({ variant: "outline" }),
-          "inline-flex gap-2 text-sm font-normal rounded-full h-12 !pr-4 !pl-5 w-fit mt-8 mx-auto"
-        )}
-      >
-        See All
-        <Icons.chevron className="size-5 text-white" />
-      </Link>
-    </section>
-  );
+	return (
+		<section className="flex flex-col sm:px-12 py-16">
+			<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
+				Sports
+			</h2>
+
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+				{isPending && (
+					<React.Fragment>
+						{Array.from({ length: 3 }).map((_, index) => (
+							<NewsSkeleton key={index} />
+						))}
+					</React.Fragment>
+				)}
+
+				{data?.map((item) => (
+					<Link
+						key={item._id}
+						title={item.title}
+						href={`/news/${item.title}`}
+						className="group flex flex-col">
+						<img
+							src={item.mainImage}
+							alt={item.altText || "News Image"}
+							sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
+							className="rounded-md bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-6 mb-4"
+						/>
+
+						<section className="max-sm:px-6">
+							<section className="flex gap-2 items-center mb-2">
+								<p className="text-xs text-muted-foreground font-medium capitalize">
+									By {item.author?.name} -{" "}
+								</p>
+								<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+									{formatDate(item.publishedAt)}
+								</p>
+							</section>
+
+							<h3 className="font-anton uppercase text-[24px] sm:text-[28px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
+								{item.title}
+							</h3>
+							<p className="text-sm font-dm-sans text-muted-foreground mb-4 line-clamp-2">
+								{item.description}
+							</p>
+						</section>
+					</Link>
+				))}
+			</div>
+
+			{isError ? (
+				<Button
+					onClick={() => refetch()}
+					variant={"outline"}
+					size={"lg"}
+					className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
+					Refresh Feed <RefreshCw className="size-5" />
+				</Button>
+			) : (
+				<Link
+					href="/news/sports"
+					className={cn(
+						buttonVariants({ variant: "outline", size: "lg" }),
+						"flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans w-fit mt-5"
+					)}>
+					View All Sports
+				</Link>
+			)}
+		</section>
+	);
 };
 
 export default SportsSection;

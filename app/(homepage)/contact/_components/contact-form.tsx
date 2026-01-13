@@ -62,7 +62,7 @@ const ContactForm = () => {
         mutations: [
           {
             create: {
-              _type: "contactSales",
+              _type: "contactMessage",
               status: "new",
               firstName: data.firstName,
               lastName: data.lastName,
@@ -92,6 +92,8 @@ const ContactForm = () => {
 
       reset()
     } catch (err) {
+      console.log(err);
+      
       if (err instanceof AxiosError) {
         switch (err.status) {
           case 400:
@@ -176,7 +178,7 @@ const ContactForm = () => {
           {loading ? "Submitting..." : "Submit"}
         </Button>
         <p className="text-sm text-muted-foreground font-light">
-          By pressing submit you agree to the Sinphox{" "}
+          By pressing submit you agree to the{" "}
           <Link href="/terms" className="underline">
             Terms of Service
           </Link>{" "}

@@ -1,10 +1,12 @@
-import NewsComponents from '@/components/layout/news-components'
-import React from 'react'
+import NewsComp from "@/components/layout/news-comp";
 
-const NewsPage = async () => {
-  return (
-    <NewsComponents />
-  )
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
+	title: "The Latest News",
+};
+
+export default async function NewsPage() {
+	return <NewsComp />;
 }
-
-export default NewsPage

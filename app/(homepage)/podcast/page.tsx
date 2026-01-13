@@ -1,11 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import GuestCard from "@/components/guest-card";
-import { toast } from "sonner";
-import { comingSoonMsg } from "@/lib/utils";
+// import GuestCard from "@/components/guest-card";
 // import PodcastCard from "@/components/podcast-card";
+
+import { comingSoonMsg } from "@/lib/utils";
+
+import { toast } from "sonner";
 
 const Hero = () => {
 	return (
@@ -49,16 +50,11 @@ const Hero = () => {
 							</p>
 
 							<section className="flex gap-4">
-								<Image
-									src="/images/google-podcast.png"
-									alt="Google podcast"
-									width={33}
-									height={33}
-								/>
-								<Image src="/images/spotify.png" alt="Spotify" width={33} height={33} />
-								<Image src="/images/apple-podcast.png" alt="Apple podcast" width={33} height={33} />
-								<Image src="/images/overcast.png" alt="Overcast" width={33} height={33} />
-								<Image src="/images/rss.png" alt="RSS" width={33} height={33} />
+								<img src="/images/google-podcast.png" alt="Google podcast" width={33} height={33} />
+								<img src="/images/spotify.png" alt="Spotify" width={33} height={33} />
+								<img src="/images/apple-podcast.png" alt="Apple podcast" width={33} height={33} />
+								<img src="/images/overcast.png" alt="Overcast" width={33} height={33} />
+								<img src="/images/rss.png" alt="RSS" width={33} height={33} />
 							</section>
 						</section>
 					</section>
@@ -66,12 +62,11 @@ const Hero = () => {
 					<div
 						className="flex justify-end animate-fade-up m-auto md:w-[50%]"
 						style={{ animationDelay: "0.10s", animationFillMode: "both" }}>
-						<Image
-							alt="Hero Image"
+						<img
+							alt="Afia TV Podcast Hero Image"
 							className="object-cover w-full"
 							height={858}
 							width={673}
-							quality={100}
 							src="/images/podcast-hero-img.png"
 						/>
 					</div>
@@ -79,8 +74,7 @@ const Hero = () => {
 			</section>
 
 			{/* <PodcastCard /> */}
-
-			<GuestCard />
+			{/* <GuestCard /> */}
 		</>
 	);
 };

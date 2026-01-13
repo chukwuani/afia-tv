@@ -10,11 +10,11 @@ import axios from "axios";
 import React from "react";
 import { RefreshCw } from "lucide-react";
 
-import NewsSkeleton from "./skeletons/news-skeleton";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Button, buttonVariants } from "./ui/button";
+import NewsSkeleton from "@/components/skeletons/news-skeleton";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button, buttonVariants } from "@/components/ui/button";
 
-export default function MainArticleSection() {
+export default function TopStories() {
 	const { isPending, isError, data, refetch } = useQuery<NewsTypes[]>({
 		queryKey: ["news"],
 		queryFn: async () => {
@@ -58,11 +58,10 @@ export default function MainArticleSection() {
 			<section className="flex justify-between items-center gap-10">
 				<CardHeader className="px-0">
 					<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">
-						Latest News
+						Top Stories
 					</CardTitle>
 					<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[480px]">
-						Discover the hottest trends, breaking news, and exclusive stories from the world of
-						entertainment.
+						Discover the hottest trends, breaking news, and exclusive stories from Nigeria and across the globe.
 					</CardDescription>
 				</CardHeader>
 

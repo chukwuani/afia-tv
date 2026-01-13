@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 
 import { siteConfig } from "@/config";
 import QueryProvider from "@/providers/query-provider";
+import Adsense from "@/components/layout/adsense";
 
 const anton = localFont({
 	src: [
@@ -32,7 +33,10 @@ const dmsans = localFont({
 });
 
 export const metadata: Metadata = {
-	title: siteConfig.title,
+	title:{
+		template: `%s - ${siteConfig.title}`,
+		default: siteConfig.title,
+	},
 	description: siteConfig.description,
 	icons: ["/images/afia-logo-small.png"],
 	authors: [
@@ -67,6 +71,11 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				{/* Adsense Component */}
+				<Adsense pId={process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID!} />
+			</head>
+
 			<body
 				suppressHydrationWarning
 				className={`${anton.variable} ${dmsans.variable} antialiased font-dm-sans`}>

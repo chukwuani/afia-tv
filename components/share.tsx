@@ -15,6 +15,8 @@ import {
 	WhatsappIcon,
 	EmailIcon,
 	EmailShareButton,
+	LinkedinIcon,
+	LinkedinShareButton,
 } from "next-share";
 import { absoluteUrl } from "@/lib/utils";
 
@@ -62,6 +64,15 @@ const Share = ({ title }: { title: string }) => {
 						round
 					/>
 				</TwitterShareButton>
+
+				<LinkedinShareButton
+					url={url}
+					title={title}>
+					<LinkedinIcon
+						size={32}
+						round
+					/>
+				</LinkedinShareButton>
 
 				<WhatsappShareButton
 					url={url}

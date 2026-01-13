@@ -78,8 +78,8 @@ export default function Footer() {
 				<section
 					id="footer-bottom"
 					aria-labelledby="footer-bottom-heading"
-					className="flex items-center space-x-4">
-					<div className="flex-1 text-left text-xs leading-loose text-muted-foreground">
+					className="flex items-center space-x-4 max-sm:mt-1 flex-wrap-reverse">
+					<div className="flex-1 text-left text-xs leading-loose text-muted-foreground min-w-[100px]">
 						© 2025 Afia Network. All Rights Reserved.
 					</div>
 

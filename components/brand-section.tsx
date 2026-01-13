@@ -1,7 +1,11 @@
-import { cn } from "@/lib/utils";
+"use client";
+
 import Link from "next/link";
-import { buttonVariants } from "./ui/button";
-import { CardDescription, CardHeader, CardTitle } from "./ui/card";
+
+import { cn } from "@/lib/utils";
+
+import { buttonVariants } from "@/components/ui/button";
+import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function BrandSection() {
 	return (
@@ -11,34 +15,38 @@ export default function BrandSection() {
 					Our Brands
 				</CardTitle>
 				<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[480px] mb-5">
-					We are committed to shaping culture and informing our audience with insightful content and engaging storytelling.
+					We are committed to shaping culture and informing our audience with insightful content and
+					engaging storytelling.
 				</CardDescription>
 			</CardHeader>
 
+			{/* Afia TV & Afia Radio cards */}
 			<section className="grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-8">
-				<div className="w-full bg-accent rounded-3xl p-8 pb-0 shadow-sm">
-					<h1 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
-						Afia TV
-					</h1>
+				<div className="w-full bg-accent rounded-3xl shadow-sm">
+					<section className="p-8 pb-0">
+						<h1 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
+							Afia TV
+						</h1>
 
-					<p className="font-dm-sans text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
-						We are Afia TV, Southeastern Nigeria&apos;s first regional television channel on DSTV
-						ch.254 and GOTV ch.17. We are dedicated to promoting the business, lifestyle and
-						cultural stories of the region across the world.
-					</p>
+						<p className="font-dm-sans text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
+							We are Afia TV, Southeastern Nigeria&apos;s first regional television channel on DSTV
+							ch.254 and GOTV ch.17. We are dedicated to promoting the business, lifestyle and
+							cultural stories of the region across the world.
+						</p>
 
-					<Link
-						href="https://afiatv.net/about"
-						target="_blank"
-						rel="noopener noreferrer"
-						className={cn(
-							buttonVariants({ variant: "default" }),
-							"inline-block bg-black text-white px-8 !py-3 rounded-full font-medium uppercase tracking-wide !text-sm h-auto"
-						)}>
-						Learn more
-					</Link>
+						<Link
+							href="https://afiatv.net/about"
+							target="_blank"
+							rel="noopener noreferrer"
+							className={cn(
+								buttonVariants({ variant: "default" }),
+								"inline-block bg-black text-white px-8 !py-3 rounded-full font-medium uppercase tracking-wide !text-sm h-auto"
+							)}>
+							Learn more
+						</Link>
+					</section>
 
-					<div className="mt-12 h-[300px] w-full rounded-2xl rounded-b-none overflow-hidden relative">
+					<div className="mt-12 h-[300px] w-full rounded-2xl rounded-b-none overflow-hidden relative px-4 md:px-8">
 						<img
 							className="size-full rounded-[12px] rounded-b-none object-cover"
 							alt=""
@@ -47,28 +55,30 @@ export default function BrandSection() {
 					</div>
 				</div>
 
-				<div className="w-full bg-accent rounded-3xl p-8 pb-0 shadow-sm">
-					<h1 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
-						Afia 99.3
-					</h1>
+				<div className="w-full bg-accent rounded-3xl shadow-sm h-full flex flex-col items-center justify-between">
+					<section className="p-8 pb-0">
+						<h1 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
+							Afia 99.3
+						</h1>
 
-					<p className="font-dm-sans text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
-						Afia 99.3FM, Enugu. Your Number One Voice Of Enterprise! Discover the latest music
-						tracks, explore captivating podcasts, or tune in to radio shows.
-					</p>
+						<p className="font-dm-sans text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
+							Afia 99.3FM, Enugu. Your Number One Voice Of Enterprise! Discover the latest music
+							tracks, explore captivating podcasts, or tune in to radio shows.
+						</p>
 
-					<Link
-						href="https://afia993.com"
-						target="_blank"
-						rel="noopener noreferrer"
-						className={cn(
-							buttonVariants({ variant: "default" }),
-							"inline-block bg-black text-white px-8 !py-3 rounded-full font-medium uppercase tracking-wide !text-sm h-auto"
-						)}>
-						Learn more
-					</Link>
+						<Link
+							href="https://afia993.com"
+							target="_blank"
+							rel="noopener noreferrer"
+							className={cn(
+								buttonVariants({ variant: "default" }),
+								"inline-block bg-black text-white px-8 !py-3 rounded-full font-medium uppercase tracking-wide !text-sm h-auto"
+							)}>
+							Learn more
+						</Link>
+					</section>
 
-					<div className="mt-12 h-[300px] w-full rounded-2xl rounded-b-none overflow-hidden relative">
+					<div className="mt-12 h-[300px] w-full rounded-2xl rounded-b-none overflow-hidden relative px-4 md:px-8">
 						<img
 							className="size-full rounded-[12px] rounded-b-none object-cover"
 							alt=""
@@ -78,8 +88,9 @@ export default function BrandSection() {
 				</div>
 			</section>
 
-			<div className="w-full flex max-lg:flex-col bg-accent rounded-3xl p-8 pb-0 shadow-sm mt-12 gap-12">
-				<section>
+			{/* Afia Cinema card */}
+			<div className="w-full flex max-lg:flex-col bg-accent rounded-3xl p-4 pt-8 lg:p-8 !pb-0 shadow-sm mt-12 lg:gap-12">
+				<section className="max-lg:px-4">
 					<h1 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
 						Afia Cinema
 					</h1>

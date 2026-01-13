@@ -1,10 +1,12 @@
+"use client";
+
 import { PlusIcon } from "lucide-react";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 
 import { Accordion, AccordionContent, AccordionItem } from "@/components/ui/accordion";
-import { CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-const items = [
+const questions = [
 	{
 		id: "1",
 		title: "What is Afia TV?",
@@ -43,7 +45,7 @@ const items = [
 	},
 ];
 
-export default function Component() {
+export default function Faq() {
 	return (
 		<section className="flex flex-col items-center justify-center py-20 px-6 md:px-10 lg:px-12 w-full">
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
@@ -61,7 +63,7 @@ export default function Component() {
 				</CardHeader>
 
 				<Accordion type="single" collapsible className="w-full space-y-3" defaultValue="1">
-					{items.map((item) => (
+					{questions.map((item) => (
 						<AccordionItem
 							value={item.id}
 							key={item.id}

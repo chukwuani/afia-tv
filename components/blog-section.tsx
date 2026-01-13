@@ -18,7 +18,7 @@ const BlogSection = () => {
 		hasNextPage,
 		isFetchingNextPage,
 		fetchNextPage,
-	} = useInfinteQuery("/api/news", "infinite_news");
+	} = useInfinteQuery("/api/news", "infinite_news", 4);
 
 	return (
 		<section className="flex flex-col px-6 sm:px-12 py-16">
@@ -65,9 +65,9 @@ const BlogSection = () => {
 													</p>
 												</section>
 
-												<p className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-2 line-clamp-2 transition-colors group-hover:text-brand">
+												<h3 className="font-anton uppercase text-[24px] sm:text-[28px] leading-[140%] tracking-normal mt-1 mb-2 line-clamp-2 transition-colors group-hover:text-brand">
 													{item.title}
-												</p>
+												</h3>
 
 												<p className="text-sm font-dm-sans text-muted-foreground line-clamp-2">
 													{item.description}

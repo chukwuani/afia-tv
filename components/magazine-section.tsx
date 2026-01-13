@@ -1,92 +1,224 @@
-import { Separator } from "@/components/ui/separator";
+"use client";
+
+import React from "react";
+import Link from "next/link";
+
+import { cn, formatDate } from "@/lib/utils";
+import { NewsTypes } from "@/types";
+
+import axios from "axios";
+import { RefreshCw } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+
+import { Button, buttonVariants } from "@/components/ui/button";
+import NewsSkeleton from "@/components/skeletons/news-skeleton";
 
 export default function MagazineSection() {
-  const newsFeed = [
-    {
-      id: 1,
-      imgSrc:
-        "https://cdn.theatlantic.com/thumbor/ljZBSAzNGpC9ygADanxG_VASHWs=/431x3:5047x3075/296x197/media/img/mt/2025/05/2025_05_01_Thunderbolts_Review/original.jpg",
-      title: "How to Get Rid of a Double Chin & Turkey Neck",
-      description:
-        "With timeless designs and high-quality materials, a wooden bed frame is a solid investment into coziness.",
-    },
-    {
-      id: 2,
-      imgSrc:
-        "https://cdn.theatlantic.com/thumbor/tMpoxoxRobo8cPpUqoyjr31KdKw=/155x1:1842x1124/296x197/media/img/mt/2025/05/tattoos3/original.jpg",
-      title: "Why Microchaneling Outdoes Microneedling Every Time",
-      description:
-        "Much more cost-effective than renovating, freshen up your space by swapping out your counter stools.",
-    },
-    {
-      id: 3,
-      imgSrc:
-        "https://cdn.theatlantic.com/thumbor/J9OIm97vOY48IMeymeWob7hlQRY=/396x3:4631x2822/296x197/media/img/mt/2025/05/2025_04_25_Books_Briefing_Books_that_make_you_want_to_leave_the_house/original.jpg",
-      title: "Sunlighten Full Spectrum Infrared Sauna Explained by Inventor",
-      description:
-        "A wicker chair outside is a comfortable sight to see, but there's a natural warmth that the look brings inside.",
-    },
-    {
-      id: 4,
-      imgSrc:
-        "https://cdn.theatlantic.com/thumbor/s66-hICZi-Pk7ZYeGSNSUNhGP9w=/71x2:3928x2569/296x197/media/img/mt/2025/04/14_B_General-1/original.jpg",
-      title: "Sunlighten Full Spectrum Infrared Sauna Explained by Inventor",
-      description:
-        "A wicker chair outside is a comfortable sight to see, but there's a natural warmth that the look brings inside.",
-    },
-  ];
+	const { isPending, isError, data, refetch } = useQuery<NewsTypes[]>({
+		queryKey: ["recommended-section"],
+		queryFn: async () => {
+			const limit = 4;
+			const query = `*[_type == "news" && recommended == true] | order(publishedAt desc) [0...${limit}] {
+						_id,
+						_createdAt,
+						publishedAt,
+						title, 
+						description, 
+						author->{
+							name,
+							"imageUrl": image.asset->url
+						},
+						"slug": slug.current, 
+						"mainImage": mainImage.asset->url, 
+						"altText": mainImage.alt
+					}`;
 
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-16 sm:px-12">
-      <section className="py-10 md:col-span-2">
-        <h1 className="text-3xl font-epilogue mb-5 max-sm:px-6 uppercase tracking-[.009rem]">
-          RECOMMENDED FOR YOU
-        </h1>
-        <Separator className="mb-8 h-0.5 bg-border" />
+			const res = await axios.post(
+				`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+				{
+					query,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
+						"Content-Type": "application/json",
+					},
+				}
+			);
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {newsFeed.map((item) => (
-            <div key={item.id} className="flex flex-col-reverse lg:flex-col">
-              <img
-                src={item.imgSrc}
-                alt="Skincare Blog"
-                className="w-full aspect-video object-cover rounded-lg mb-4 bg-muted"
-              />
+			const data = res.data;
+			return data.result;
+		},
+	});
 
-              <section className="max-sm:px-6">
-                <p className="text-muted-foreground font-epilogue text-sm mb-2">
-                  Jan 16, 2023
-                </p>
-                <h4 className="text-2xl font-dm-sans mb-3">{item.title}</h4>
-                <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
-                  {item.description}
-                </p>
-              </section>
-            </div>
-          ))}
-        </div>
-      </section>
+	const {
+		isPending: featuresPending,
+		isError: featuresError,
+		data: features,
+		refetch: refetchFeatures,
+	} = useQuery<NewsTypes[]>({
+		queryKey: ["featured-section"],
+		queryFn: async () => {
+			const limit = 4;
+			const query = `*[_type == "news" && featured == true] | order(publishedAt desc) [0...${limit}] {
+							_id,
+							_createdAt,
+							publishedAt,
+							title, 
+							description, 
+							author->{
+								name,
+								"imageUrl": image.asset->url
+							},
+							"slug": slug.current, 
+							"mainImage": mainImage.asset->url, 
+							"altText": mainImage.alt
+						}`;
 
-      <section className="py-10 md:col-span-1">
-        <h1 className="text-3xl font-epilogue mb-5 max-sm:px-6 uppercase tracking-[.009rem]">
-          Archive
-        </h1>
-        <Separator className="mb-8 h-0.5 bg-border" />
+			const res = await axios.post(
+				`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+				{
+					query,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
+						"Content-Type": "application/json",
+					},
+				}
+			);
 
-        <div className="grid grid-cols-1 gap-8 max-sm:px-6">
-          {newsFeed.map((item) => (
-            <div key={item.id}>
-              <p className="text-muted-foreground font-epilogue text-sm mb-2">
-                Jan 16, 2023
-              </p>
-              <h4 className="text-2xl font-dm-sans mb-3">{item.title}</h4>
-              <p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-3">
-                {item.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
+			const data = res.data;
+			return data.result;
+		},
+	});
+
+	return (
+		<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-16 sm:px-12">
+			<section className="py-10 lg:col-span-2">
+				<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
+					Recommended
+				</h2>
+
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+					{isPending && (
+						<React.Fragment>
+							{Array.from({ length: 4 }).map((_, index) => (
+								<NewsSkeleton key={index} />
+							))}
+						</React.Fragment>
+					)}
+
+					{data?.map((item) => (
+						<Link
+							key={item._id}
+							title={item.title}
+							href={`/news/${item.slug}`}
+							className="group flex flex-col">
+							<img
+								src={item.mainImage}
+								alt={item.altText || "News Image"}
+								sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
+								className="rounded-md bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-6 mb-4"
+							/>
+
+							<section className="max-sm:px-6">
+								<section className="flex gap-2 items-center mb-2">
+									<p className="text-xs text-muted-foreground font-medium capitalize">
+										By {item.author?.name} -{" "}
+									</p>
+									<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+										{formatDate(item.publishedAt)}
+									</p>
+								</section>
+
+								<h3 className="font-anton uppercase text-[24px] sm:text-[28px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
+									{item.title}
+								</h3>
+								<p className="text-sm font-dm-sans text-muted-foreground mb-4 line-clamp-2">
+									{item.description}
+								</p>
+							</section>
+						</Link>
+					))}
+				</div>
+
+				{isError ? (
+					<Button
+						onClick={() => refetch()}
+						variant={"outline"}
+						size={"lg"}
+						className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
+						Refresh Feed <RefreshCw className="size-5" />
+					</Button>
+				) : (
+					<Link
+						href="/news/recommended"
+						className={cn(
+							buttonVariants({ variant: "outline", size: "lg" }),
+							"flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans w-fit mt-5"
+						)}>
+						View All Recommended
+					</Link>
+				)}
+			</section>
+
+			<section className="py-10 lg:col-span-1">
+				<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
+					Features
+				</h2>
+
+				<div className="grid grid-cols-1 gap-8 max-sm:px-6">
+					{featuresPending && (
+						<React.Fragment>
+							{Array.from({ length: 2 }).map((_, index) => (
+								<NewsSkeleton key={index} />
+							))}
+						</React.Fragment>
+					)}
+
+					{features?.map((item) => (
+						<Link key={item._id} title={item.title} href={`/news/${item.slug}`} className="group">
+							<section className="flex gap-2 items-center mb-2">
+								<p className="text-xs text-muted-foreground font-medium capitalize">
+									By {item.author?.name} -{" "}
+								</p>
+								<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+									{formatDate(item.publishedAt)}
+								</p>
+							</section>
+
+							<h3 className="font-anton uppercase text-[24px] sm:text-[28px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
+								{item.title}
+							</h3>
+							<p className="text-sm font-epilogue text-muted-foreground mb-4 line-clamp-3">
+								{item.description}
+							</p>
+
+							
+						</Link>
+					))}
+				</div>
+
+				{featuresError ? (
+					<Button
+						onClick={() => refetchFeatures()}
+						variant={"outline"}
+						size={"lg"}
+						className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
+						Refresh Feed <RefreshCw className="size-5" />
+					</Button>
+				) : (
+					<Link
+						href="/news/featured"
+						className={cn(
+							buttonVariants({ variant: "outline", size: "lg" }),
+							"flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans w-fit mt-5"
+						)}>
+						View All Features
+					</Link>
+				)}
+			</section>
+		</div>
+	);
 }

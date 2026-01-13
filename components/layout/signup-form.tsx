@@ -41,7 +41,7 @@ export default function SignUpForm() {
 					email: data.email,
 					password: data.password,
 					options: {
-						emailRedirectTo: `${window.location.origin}/signin`,
+						emailRedirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/signin`,
 						data: {
 							full_name: data.fullname,
 						},

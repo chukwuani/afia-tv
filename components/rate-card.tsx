@@ -1,20 +1,27 @@
+"use client";
+
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button";
+
 import { cn } from "@/lib/utils";
 
 function RateCard() {
 	return (
-		<div className="py-10 px-6 md:px-10 lg:px-20">
-			<div className="w-full flex max-lg:flex-col bg-brand bg-[url('/images/rate-card-bg.png')] bg-cover bg-center bg-no-repeat rounded-3xl shadow-sm">
-				<section className="py-10 px-10 pt-[100px]">
-					<h1 className="font-anton text-[36px] md:text-[60px] leading-[1.1em] font-normal tracking-[.5px] mb-6 uppercase max-w-[450px]">
+		<section className="px-[30px] pt-[85px] pb-[0px]">
+			<section className="bg-brand mx-auto rounded-[40px] flex flex-col items-center justify-center gap-[30px] lg:gap-20 max-w-[1140px] pt-10 lg:pt-[100px] px-5 lg:px-10 pb-5 lg:pb-10 relative overflow-hidden bg-[url('/images/rate-card-bg.png')] bg-cover bg-center bg-no-repeat">
+				<section className="max-w-[500px]">
+					<h3 className="font-anton text-center text-[36px] tracking-[1px] lg:text-[80px] lg:tracking-[-1.5px] leading-[100%] uppercase">
 						Reach the heart of Ala Igbo.
-					</h1>
+					</h3>
+				</section>
 
-					<p className="font-dm-sans text-white text-sm leading-[140%] tracking-[.009rem] mb-8">
-						Whether you&apos;re launching a product, hosting an event, or building awareness, Afia TV helps you connect through authentic media and targeted campaigns.
-					</p>
+				<section className="flex items-center justify-between w-full gap-5 flex-col lg:flex-row">
+					<section className="w-full max-w-[450px] h-auto relative">
+						<p className="font-dm-sans text-[14px] text-center lg:text-start lg:text-[16px] font-normal tracking-normal leading-[170%]">
+							Whether you&apos;re launching a product, hosting an event, or building awareness, Afia TV helps you connect through authentic media and targeted campaigns.
+						</p>
+					</section>
 
 					<Link
 						href="https://8kvl2urisy.ufs.sh/f/BxfEHnSVCZL4RIK8VizxD8EQMhz3iSJTrCt10AGjfnYVkHZB"
@@ -27,16 +34,8 @@ function RateCard() {
 						View Rate Card
 					</Link>
 				</section>
-
-				<div className="h-auto max-w-[600px] w-full rounded-2xl rounded-b-none overflow-hidden relative">
-					<img
-						className="size-full rounded-[12px] rounded-b-none object-cover"
-						alt=""
-						src={"/images/tv-bg.png"}
-					/>
-				</div>
-			</div>
-		</div>
+			</section>
+		</section>
 	);
 }
 

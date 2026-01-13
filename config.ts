@@ -102,18 +102,13 @@ export const siteConfig = {
 					external: false,
 				},
 				{
-					title: "Careers",
-					href: "/careers",
-					external: false,
-				},
-				{
 					title: "Privacy Policy",
-					href: "/privacy-policy",
+					href: "/privacy",
 					external: false,
 				},
 				{
 					title: "Terms of Service",
-					href: "/terms-of-service",
+					href: "/terms",
 					external: false,
 				}
 			],
@@ -122,13 +117,8 @@ export const siteConfig = {
 			title: "Contact",
 			items: [
 				{
-					title: "Help center",
-					href: "/contact-us",
-					external: false,
-				},
-				{
-					title: "Advertise with us",
-					href: "/advertise",
+					title: "Reach Us",
+					href: "/contact",
 					external: false,
 				},
 			],
