@@ -19,7 +19,7 @@ function AdBanner({ dataAdSlot, dataAdFormat, dataFullWidthResponsive }: AdBanne
 
 	return (
 		<ins
-			className="adsbygoogle"
+			className="adsbygoogle bg-muted"
 			style={{
 				display: "block",
 			}}

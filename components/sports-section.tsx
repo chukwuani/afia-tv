@@ -57,14 +57,18 @@ const SportsSection = () => {
 				Sports
 			</h2>
 
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-				{isPending && (
-					<React.Fragment>
+
+{isPending && (
+					<section className="grid grid-cols-1 md:grid-cols-3 gap-8 max-sm:px-6">
 						{Array.from({ length: 3 }).map((_, index) => (
 							<NewsSkeleton key={index} />
 						))}
-					</React.Fragment>
+					</section>
 				)}
+
+
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+				
 
 				{data?.map((item) => (
 					<Link

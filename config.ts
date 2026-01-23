@@ -22,8 +22,9 @@ const SOCIAL_LINKS = {
 	instagram: "https://instagram.com/afiatvofficial",
 	x: "https://x.com/afiatvofficial",
 	facebook: "https://facebook.com/afiatvofficial",
-	youtube: "https://youtube.com/@afiatvofficial",
+	youtube: "https://youtube.com/@afianews",
 	linkedin: "https://linkedin.com/company/afiaofficial",
+	whatsapp: "https://www.whatsapp.com/channel/0029VaCz1ew9mrGWhgeYWi1R",
 };
 
 export type SiteConfig = typeof siteConfig;
@@ -44,6 +45,12 @@ export const siteConfig = {
 			disabled: false,
 		},
 		{
+			title: "Programs",
+			href: "/programs",
+			external: false,
+			disabled: true,
+		},
+		{
 			title: "About",
 			href: "/about",
 			external: false,
@@ -59,7 +66,7 @@ export const siteConfig = {
 			title: "Podcast",
 			href: "/podcast",
 			external: false,
-			disabled: false,
+			disabled: true,
 		},
 	] satisfies MainNavItem[],
 	footerNav: [
@@ -70,27 +77,32 @@ export const siteConfig = {
 					title: "Watch Now",
 					href: "/live",
 					external: true,
+					disabled: false,
 				},
 				{
 					title: "News and Stories",
 					href: "/news",
 					external: true,
+					disabled: false,
 				},
 				{
 					title: "Podcasts",
 					href: "/podcast",
 					external: false,
+					disabled: true,
 				},
 				{
 					title: "Events",
 					href: "https://afiahomecoming.com",
 					external: false,
+					disabled: false,
 				},
 				{
 					title: "Audio",
 					href: "https://afia993.com",
 					external: true,
-				}
+					disabled: false,
+				},
 			],
 		},
 		{
@@ -100,17 +112,20 @@ export const siteConfig = {
 					title: "About Us",
 					href: "/about",
 					external: false,
+					disabled: false,
 				},
 				{
 					title: "Privacy Policy",
 					href: "/privacy",
 					external: false,
+					disabled: false,
 				},
 				{
 					title: "Terms of Service",
 					href: "/terms",
 					external: false,
-				}
+					disabled: false,
+				},
 			],
 		},
 		{
@@ -120,6 +135,7 @@ export const siteConfig = {
 					title: "Reach Us",
 					href: "/contact",
 					external: false,
+					disabled: false,
 				},
 			],
 		},

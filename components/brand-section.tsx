@@ -22,13 +22,13 @@ export default function BrandSection() {
 
 			{/* Afia TV & Afia Radio cards */}
 			<section className="grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-8">
-				<div className="w-full bg-accent rounded-3xl shadow-sm">
-					<section className="p-8 pb-0">
-						<h1 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
+				<div className="w-full bg-accent flex flex-col-reverse rounded-3xl shadow-sm">
+					<section className="p-8">
+						<h1 className="text-white text-[30px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
 							Afia TV
 						</h1>
 
-						<p className="font-dm-sans text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
+						<p className="font-dm-sans text-muted-foreground text-sm leading-[24px] tracking-[.009rem] mb-8">
 							We are Afia TV, Southeastern Nigeria&apos;s first regional television channel on DSTV
 							ch.254 and GOTV ch.17. We are dedicated to promoting the business, lifestyle and
 							cultural stories of the region across the world.
@@ -40,28 +40,28 @@ export default function BrandSection() {
 							rel="noopener noreferrer"
 							className={cn(
 								buttonVariants({ variant: "default" }),
-								"inline-block bg-black text-white px-8 !py-3 rounded-full font-medium uppercase tracking-wide !text-sm h-auto"
+								"relative bg-black text-white rounded-full font-medium font-dm-sans text-[0.75rem] tracking-[2.4px] uppercase"
 							)}>
 							Learn more
 						</Link>
 					</section>
 
-					<div className="mt-12 h-[300px] w-full rounded-2xl rounded-b-none overflow-hidden relative px-4 md:px-8">
+					<div className="mt-0 h-[300px] w-full rounded-2xl overflow-hidden relative px-4 pt-4">
 						<img
-							className="size-full rounded-[12px] rounded-b-none object-cover"
+							className="size-full rounded-[12px] object-cover"
 							alt=""
-							src={"/images/afia-tv.jpg"}
+							src={"/images/AFIA_LOGO_BLACK_ORANGE.jpg"}
 						/>
 					</div>
 				</div>
 
-				<div className="w-full bg-accent rounded-3xl shadow-sm h-full flex flex-col items-center justify-between">
-					<section className="p-8 pb-0">
-						<h1 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
+				<div className="w-full bg-accent flex flex-col-reverse rounded-3xl shadow-sm h-full items-center justify-between">
+					<section className="p-8">
+						<h1 className="text-white text-[30px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
 							Afia 99.3
 						</h1>
 
-						<p className="font-dm-sans text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
+						<p className="font-dm-sans text-muted-foreground text-sm leading-[24px] tracking-[.009rem] mb-8">
 							Afia 99.3FM, Enugu. Your Number One Voice Of Enterprise! Discover the latest music
 							tracks, explore captivating podcasts, or tune in to radio shows.
 						</p>
@@ -72,15 +72,15 @@ export default function BrandSection() {
 							rel="noopener noreferrer"
 							className={cn(
 								buttonVariants({ variant: "default" }),
-								"inline-block bg-black text-white px-8 !py-3 rounded-full font-medium uppercase tracking-wide !text-sm h-auto"
+								"relative bg-black text-white rounded-full font-medium font-dm-sans text-[0.75rem] tracking-[2.4px] uppercase"
 							)}>
 							Learn more
 						</Link>
 					</section>
 
-					<div className="mt-12 h-[300px] w-full rounded-2xl rounded-b-none overflow-hidden relative px-4 md:px-8">
+					<div className="mt-0 h-[300px] w-full rounded-2xl overflow-hidden relative px-4 pt-4">
 						<img
-							className="size-full rounded-[12px] rounded-b-none object-cover"
+							className="size-full rounded-[12px] object-cover"
 							alt=""
 							src={"/images/afia993.webp"}
 						/>
@@ -89,13 +89,13 @@ export default function BrandSection() {
 			</section>
 
 			{/* Afia Cinema card */}
-			<div className="w-full flex max-lg:flex-col bg-accent rounded-3xl p-4 pt-8 lg:p-8 !pb-0 shadow-sm mt-12 lg:gap-12">
-				<section className="max-lg:px-4">
-					<h1 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
+			<div className="w-full flex max-lg:flex-col-reverse bg-accent rounded-3xl p-4 pt-4 lg:p-8 lg:!pb-0 shadow-sm mt-12 lg:gap-12">
+				<section className="max-lg:p-4 max-lg:pt-8">
+					<h1 className="text-white text-[30px] leading-[140%] tracking-normal font-normal font-anton mb-6 uppercase">
 						Afia Cinema
 					</h1>
 
-					<p className="font-dm-sans text-muted-foreground text-sm leading-[28px] tracking-[.009rem] mb-8">
+					<p className="font-dm-sans text-muted-foreground text-sm leading-[24px] tracking-[.009rem] mb-8">
 						Afia Cinema is a Film and Television series division, founded under AfiaTV to create and
 						project stories of Igbo origin for the global Igbo audience.
 					</p>
@@ -106,13 +106,13 @@ export default function BrandSection() {
 						rel="noopener noreferrer"
 						className={cn(
 							buttonVariants({ variant: "default" }),
-							"inline-block bg-black text-white px-8 !py-3 rounded-full font-medium uppercase tracking-wide !text-sm h-auto"
+							"relative bg-black text-white rounded-full font-medium font-dm-sans text-[0.75rem] tracking-[2.4px] uppercase"
 						)}>
 						Learn more
 					</Link>
 				</section>
 
-				<div className="mt-12 h-[300px] w-full rounded-2xl rounded-b-none overflow-hidden relative">
+				<div className="mt-0 h-[300px] w-full rounded-2xl lg:rounded-b-none overflow-hidden relative">
 					<img
 						className="size-full rounded-[12px] rounded-b-none object-cover"
 						alt=""

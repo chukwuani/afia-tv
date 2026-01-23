@@ -21,19 +21,19 @@ const anton = localFont({
 	variable: "--font-anton",
 });
 
-const dmsans = localFont({ 
-  src: [
-    {
-      path: "../public/fonts/dm-sans/DMSans-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-  ],
-  variable: "--font-dm-sans",
+const dmsans = localFont({
+	src: [
+		{
+			path: "../public/fonts/dm-sans/DMSans-Regular.ttf",
+			weight: "400",
+			style: "normal",
+		},
+	],
+	variable: "--font-dm-sans",
 });
 
 export const metadata: Metadata = {
-	title:{
+	title: {
 		template: `%s - ${siteConfig.title}`,
 		default: siteConfig.title,
 	},
@@ -62,6 +62,36 @@ export const metadata: Metadata = {
 		images: [siteConfig.ogImage],
 		creator: "@stphn_chukwu",
 	},
+	keywords: [
+		"Afia TV",
+		"Nigeria",
+		"Igbo",
+		"News",
+		"Entertainment",
+		"Culture",
+		"Music",
+		"Movies",
+		"TV Shows",
+		"Sports",
+		"Business",
+		"Technology",
+		"Lifestyle",
+		"Health",
+		"Education",
+		"South East Nigeria",
+		"Southeast Nigeria",
+		"Africa",
+		"African Media",
+		"Igbo",
+		"Southeast Nigeria",
+		"Enugu State",
+		"IMO state",
+		"Abia state",
+		"Ebonyi state",
+		"Anambra state",
+		"PH",
+		"Igbo culture",
+	],
 };
 
 export default function RootLayout({
@@ -78,7 +108,7 @@ export default function RootLayout({
 
 			<body
 				suppressHydrationWarning
-				className={`${anton.variable} ${dmsans.variable} antialiased font-dm-sans`}>
+				className={`${anton.variable} ${dmsans.variable} antialiased font-dm-sans overflow-x-hidden max-w-[1500px] mx-auto`}>
 				<QueryProvider>{children}</QueryProvider>
 
 				<Toaster richColors position="top-center" />

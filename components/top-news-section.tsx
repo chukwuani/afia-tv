@@ -18,7 +18,7 @@ function TopNewsSection() {
 		queryKey: ["top-news-section"],
 		queryFn: async () => {
 			const limit = 4;
-			const query = `*[_type == "news" && featured != true && recommended != true] | order(publishedAt desc) [0...${limit}] {
+			const query = `*[_type == "news" && !(_id in path("drafts.**"))] | order(publishedAt desc) [0...${limit}] {
                     _id,
                     _createdAt,
                     publishedAt,
@@ -53,15 +53,15 @@ function TopNewsSection() {
 
 	return (
 		<section>
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:px-12 py-10">
+			<>
 				{isPending ? (
-					<>
+					<section className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-6 sm:px-12 py-10">
 						{Array.from({ length: 3 }).map((_, index) => (
 							<NewsSkeleton key={index} />
 						))}
-					</>
+					</section>
 				) : (
-					<>
+					<div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:px-12 py-10">
 						<section className="md:col-span-2">
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 								{data?.slice(0, 2).map((item) => (
@@ -132,9 +132,9 @@ function TopNewsSection() {
 								))}
 							</div>
 						</section>
-					</>
+					</div>
 				)}
-			</div>
+			</>
 
 			{isError && (
 				<Button

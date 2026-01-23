@@ -1,5 +1,4 @@
-import { Navbar } from "@/components/layout/navbar";
-import Footer from "@/components/layout/site-footer";
+import AdSticker from "@/components/layout/ad-sticker";
 
 export default function RootLayout({
 	children,
@@ -8,9 +7,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<section>
-			<Navbar />
+			<AdSticker />
 			{children}
-			<Footer />
 		</section>
 	);
 }

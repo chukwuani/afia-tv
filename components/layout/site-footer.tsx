@@ -10,7 +10,6 @@ import { buttonVariants } from "../ui/button";
 import JoinNewsletterForm from "../join-newsletter-form";
 import { Icons } from "../icons";
 import { cn } from "@/lib/utils";
-import { Linkedin } from "lucide-react";
 
 export default function Footer() {
 	return (
@@ -61,7 +60,10 @@ export default function Footer() {
 												href={link.href}
 												target={link?.external ? "_blank" : undefined}
 												rel={link?.external ? "noreferrer" : undefined}
-												className="text-[12px] leading-[16px] text-muted-foreground transition-colors hover:text-foreground font-epilogue">
+												className={cn(
+													"text-[12px] leading-[16px] text-muted-foreground transition-colors hover:text-foreground font-epilogue",
+													link.disabled && "pointer-events-none opacity-60",
+												)}>
 												{link.title}
 												<span className="sr-only">{link.title}</span>
 											</Link>
@@ -78,7 +80,7 @@ export default function Footer() {
 				<section
 					id="footer-bottom"
 					aria-labelledby="footer-bottom-heading"
-					className="flex items-center space-x-4 max-sm:mt-1 flex-wrap-reverse">
+					className="flex flex-col items-start space-x-4 max-sm:mt-1">
 					<div className="flex-1 text-left text-xs leading-loose text-muted-foreground min-w-[100px]">
 						© 2025 Afia Network. All Rights Reserved.
 					</div>
@@ -92,7 +94,7 @@ export default function Footer() {
 								buttonVariants({
 									size: "icon",
 									variant: "ghost",
-								})
+								}),
 							)}>
 							<Icons.youtube className="size-5" aria-hidden="true" />
 							<span className="sr-only">Youtube</span>
@@ -105,7 +107,7 @@ export default function Footer() {
 								buttonVariants({
 									size: "icon",
 									variant: "ghost",
-								})
+								}),
 							)}>
 							<Icons.x className="size-4" aria-hidden="true" />
 							<span className="sr-only">Twitter</span>
@@ -119,7 +121,7 @@ export default function Footer() {
 								buttonVariants({
 									size: "icon",
 									variant: "ghost",
-								})
+								}),
 							)}>
 							<Icons.facebook className="size-4" aria-hidden="true" />
 							<span className="sr-only">Facebook</span>
@@ -133,7 +135,7 @@ export default function Footer() {
 								buttonVariants({
 									size: "icon",
 									variant: "ghost",
-								})
+								}),
 							)}>
 							<Icons.instagram className="size-5" aria-hidden="true" />
 							<span className="sr-only">Instagram</span>
@@ -147,10 +149,24 @@ export default function Footer() {
 								buttonVariants({
 									size: "icon",
 									variant: "ghost",
-								})
+								}),
 							)}>
 							<Icons.linkedin className="size-5" aria-hidden="true" />
 							<span className="sr-only">LinkedIn</span>
+						</Link>
+
+						<Link
+							href={siteConfig.links.whatsapp}
+							target="_blank"
+							rel="noreferrer"
+							className={cn(
+								buttonVariants({
+									size: "icon",
+									variant: "ghost",
+								}),
+							)}>
+							<Icons.whatsapp className="size-5" aria-hidden="true" />
+							<span className="sr-only">WhatsApp</span>
 						</Link>
 					</div>
 				</section>

@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 
 function RateCard() {
 	return (
-		<section className="px-[30px] pt-[85px] pb-[0px]">
-			<section className="bg-brand mx-auto rounded-[40px] flex flex-col items-center justify-center gap-[30px] lg:gap-20 max-w-[1140px] pt-10 lg:pt-[100px] px-5 lg:px-10 pb-5 lg:pb-10 relative overflow-hidden bg-[url('/images/rate-card-bg.png')] bg-cover bg-center bg-no-repeat">
+		<section className="px-[30px] pb-20">
+			<section className="bg-brand mx-auto rounded-[40px] flex flex-col items-center justify-center gap-[30px] lg:gap-20 max-w-[1140px] pt-10 lg:pt-[100px] px-5 lg:px-10 pb-5 lg:pb-10 relative overflow-hidden  bg-cover bg-center bg-no-repeat">
 				<section className="max-w-[500px]">
 					<h3 className="font-anton text-center text-[36px] tracking-[1px] lg:text-[80px] lg:tracking-[-1.5px] leading-[100%] uppercase">
 						Reach the heart of Ala Igbo.

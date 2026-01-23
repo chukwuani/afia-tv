@@ -128,7 +128,9 @@ function PostSlug() {
 					className="rounded-md bg-muted object-cover aspect-[16/11] w-full"
 				/>
 
-				<AdBanner dataAdSlot="7195289616" dataAdFormat="auto" dataFullWidthResponsive={true} />
+				<section className="overflow-hidden">
+					<AdBanner dataAdSlot="7195289616" dataAdFormat="auto" dataFullWidthResponsive={true} />
+				</section>
 
 				<PortableText value={content} components={components} />
 
@@ -136,7 +138,9 @@ function PostSlug() {
 
 				<Separator className="my-4" />
 
-				<AdBanner dataAdSlot="7195289616" dataAdFormat="auto" dataFullWidthResponsive={true} />
+				<section className="overflow-hidden">
+					<AdBanner dataAdSlot="7195289616" dataAdFormat="auto" dataFullWidthResponsive={true} />
+				</section>
 
 				<Separator className="my-4" />
 

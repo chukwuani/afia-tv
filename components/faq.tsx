@@ -69,7 +69,7 @@ export default function Faq() {
 							key={item.id}
 							className="bg-transparent border-0 has-focus-visible:border-ring has-focus-visible:ring-ring/50 rounded-md py-5 outline-none has-focus-visible:ring-[3px]">
 							<AccordionPrimitive.Header className="flex">
-								<AccordionPrimitive.Trigger className="focus-visible:ring-0 flex flex-1 items-center justify-between rounded-md py-2 text-left font-anton text-[24px] leading-[140%] tracking-normal transition-all outline-none [&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&[data-state=open]>svg]:rotate-180 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0 uppercase">
+								<AccordionPrimitive.Trigger className="focus-visible:ring-0 flex flex-1 items-center justify-between rounded-md py-2 text-left font-anton text-[24px] leading-[140%] tracking-normal transition-all outline-none [&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&[data-state=open]>span>svg]:rotate-180 [&[data-state=open]>span>svg>path:last-child]:rotate-180 [&[data-state=open]>span>svg>path:last-child]:opacity-0 uppercase">
 									{item.title}
 
 									<span className="bg-brand cursor-pointer rounded-full p-1.5 flex items-center justify-center ml-2">

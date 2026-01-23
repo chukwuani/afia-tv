@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
@@ -14,7 +15,9 @@ import { Icons } from "@/components/icons";
 import type { User } from "@supabase/supabase-js";
 import LogoutBtn from "../logout-btn";
 
+
 export function MobileNav({ user }: { user: User | null }) {
+	const pathname = usePathname();
 	const { isDesktop } = useMediaQuery();
 
 	const [open, setOpen] = React.useState(false);
@@ -33,6 +36,7 @@ export function MobileNav({ user }: { user: User | null }) {
 				<Icons.live />
 				Live
 			</Link>
+
 			<section className="flex items-center">
 				<Sheet open={open} onOpenChange={setOpen}>
 					<SheetTrigger asChild>
@@ -58,9 +62,17 @@ export function MobileNav({ user }: { user: User | null }) {
 													key={item.title + index}
 													href={item.href}
 													onClick={() => setOpen(false)}
-													className="group inline-flex w-full rounded-md bg-background px-2 py-4 font-dm-sans text-[0.75rem] uppercase tracking-[2.4px] font-normal transition-colors hover:text-brand focus:text-brand focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:underline data-[state=open]:underline">
+													className={cn(
+																	"group w-full rounded-md bg-background px-2 font-dm-sans focus:text-brand focus:outline-none text-foreground/60 transition-colors hover:text-foreground text-[0.775rem] font-medium capitalize py-4 flex items-center gap-2",
+																	item.href === pathname && "text-brand hover:text-brand font-medium",
+																	item.disabled && "pointer-events-none opacity-60",
+																	
+																)}
+													>
 													{item.title}
 												</Link>
+
+												
 											</section>
 										))}
 									</section>

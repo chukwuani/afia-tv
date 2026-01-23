@@ -22,6 +22,7 @@ export interface FooterItem {
     title: string
     href: string
     external?: boolean
+	disabled?: boolean
   }[]
 }
 

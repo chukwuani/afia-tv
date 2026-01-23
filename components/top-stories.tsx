@@ -19,7 +19,7 @@ export default function TopStories() {
 		queryKey: ["news"],
 		queryFn: async () => {
 			const limit = 3;
-			const query = `*[_type == "news"] | order(publishedAt desc) [0...${limit}] {
+			const query = `*[_type == "news"  && !(_id in path("drafts.**"))] | order(publishedAt desc) [0...${limit}] {
         		_id,
         		_createdAt,
 				publishedAt,
@@ -88,13 +88,13 @@ export default function TopStories() {
 				{data?.map((item, index) => (
 					<Link
 						key={index}
-						title={item.title}
-						href={`/news/${item.slug}`}
+						title={item?.title}
+						href={`/news/${item?.slug}`}
 						className="group cols-span-1 gap-2 w-full">
 						<section className="flex flex-col items-end gap-4">
 							<img
-								src={item.mainImage}
-								alt={item.altText}
+								src={item?.mainImage}
+								alt={item?.altText || "News Image"}
 								sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
 								className="rounded-md bg-muted object-cover aspect-[14/9] w-full"
 							/>
@@ -102,19 +102,19 @@ export default function TopStories() {
 							<section className="flex flex-col gap-2 w-fit">
 								<section className="flex gap-2 items-center">
 									<p className="text-xs text-muted-foreground font-medium capitalize">
-										By {item.author.name} -{" "}
+										By {item?.author?.name} -{" "}
 									</p>
 									<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
-										{formatDate(item._createdAt)}
+										{formatDate(item?._createdAt)}
 									</p>
 								</section>
 
 								<p className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-2 line-clamp-2 transition-colors group-hover:text-brand">
-									{item.title}
+									{item?.title}
 								</p>
 
 								<p className="text-sm font-dm-sans text-muted-foreground line-clamp-2">
-									{item.description}
+									{item?.description}
 								</p>
 							</section>
 						</section>

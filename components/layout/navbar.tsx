@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -21,6 +22,7 @@ import type { User } from "@supabase/supabase-js";
 import UserBtn from "../user-btn";
 
 export const Navbar = () => {
+		const pathname = usePathname();
 	const [user, setUser] = React.useState<User | null>(null);
 
 	React.useEffect(() => {
@@ -66,15 +68,16 @@ export const Navbar = () => {
 					<NavigationMenu className="hidden md:flex">
 						<NavigationMenuList>
 							{siteConfig.mainNav.map(
-								(item) =>
-									item.href && (
-										<NavigationMenuItem key={item.title} className="text-lg font-normal">
-											<NavigationMenuLink
-												href={item.href}
-												className="font-dm-sans text-[0.75rem] uppercase tracking-[2.4px] group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 font-normal transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-												{item.title}
-											</NavigationMenuLink>
-										</NavigationMenuItem>
+								(navItems, index) =>
+									navItems.href && (
+										<NavLink
+							key={index}
+							href={navItems.href}
+							pathname={pathname}
+							disabled={navItems.disabled}
+							className="inline-flex h-10 w-max items-center justify-center px-4 py-2 transition-colors focus:text-brand focus:outline-none">
+							{navItems.title}
+						</NavLink>
 									)
 							)}
 						</NavigationMenuList>
@@ -115,25 +118,24 @@ export const Navbar = () => {
 	);
 };
 
-const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
-	({ className, title, children, href, ...props }, ref) => {
-		return (
-			<li>
-				<NavigationMenuLink asChild>
-					<Link
-						ref={ref}
-						href={String(href)}
-						className={cn(
-							"block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-							className
-						)}
-						{...props}>
-						<div className="text-sm font-medium leading-none">{title}</div>
-						<p className="line-clamp-2 text-sm leading-snug text-muted-foreground ">{children}</p>
-					</Link>
-				</NavigationMenuLink>
-			</li>
-		);
-	}
-);
-ListItem.displayName = "ListItem";
+interface NavLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+	href: string;
+	disabled?: boolean;
+	pathname: string;
+}
+
+function NavLink({ children, href, disabled, pathname, className, ...props }: NavLinkProps) {
+	return (
+		<a
+			href={href}
+			className={cn(
+				"text-foreground/60 transition-colors hover:text-foreground text-[0.775rem] font-medium capitalize py-4 flex items-center gap-2",
+				href === pathname && "text-brand hover:text-brand font-medium",
+				disabled && "pointer-events-none opacity-60",
+				className
+			)}
+			{...props}>
+			{children}
+		</a>
+	);
+}
