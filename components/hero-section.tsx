@@ -150,9 +150,9 @@ const HeroSection = () => {
 	const row3Images = images.slice(0, 6);
 
 	return (
-		<section className="flex flex-col items-center pt-38 md:pt-[180px] pb-6 lg:pb-12 relative w-full overflow-hidden">
+		<section className="flex flex-col items-center pt-[180px] pb-6 lg:pb-12 relative w-full overflow-hidden">
 			<section
-				className="absolute top-[-320px] right-[-240px] left-[-80px]"
+				className="absolute top-[-280px] sm:top-[-320px] right-[-240px] left-[-80px]"
 				style={{
 					willChange: "transform",
 					opacity: 1,
