@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hiseb/confetti": "^2.1.0",
     "@hookform/resolvers": "^5.0.1",
     "@portabletext/react": "^5.0.0",
     "@radix-ui/react-accordion": "^1.2.7",
@@ -31,6 +32,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "dayjs": "^1.11.19",
     "embla-carousel-react": "^8.6.0",
     "lucide-react": "^0.501.0",
     "media-chrome": "^4.16.0",
@@ -41,6 +43,7 @@
     "query-string": "^9.3.1",
     "radix-ui": "^1.4.3",
     "react": "^19.0.0",
+    "react-countdown": "^2.3.6",
     "react-day-picker": "^9.7.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.56.4",
