@@ -31,7 +31,7 @@ function TopNewsSection() {
                     "slug": slug.current, 
                     "mainImage": mainImage.asset->url, 
                     "altText": mainImage.alt
-                }`;
+            }`;
 
 			const res = await axios.post(
 				`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,

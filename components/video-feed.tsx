@@ -1,105 +1,169 @@
-import { Button } from "./ui/button";
+"use client";
+
+import Link from "next/link";
+
+import { formatDate } from "@/lib/utils";
+
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { RefreshCw } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+
+import { Button } from "@/components/ui/button";
+import NewsSkeleton from "@/components/skeletons/news-skeleton";
+
+interface VideoTypes {
+	_id: string;
+	_createdAt: string;
+	publishedAt: string;
+	title: string;
+	description: string;
+	slug: string;
+	thumbnail: string;
+	altText: string;
+	duration: string;
+	embedUrl: string;
+}
 
 export default function VideoFeed() {
-	const newsFeedOne = [
-		{
-			id: 1,
-			imgSrc:
-				"https://cdn.theatlantic.com/thumbor/zk0bFQKmWgZQj06EIAnsuC4UuCg=/0x0:2000x1125/976x549/media/img/mt/2025/11/2025_11_21_Powell_Trump_Mamdani_meeting_final/original.png",
-			title: "Why Donald Trump Seems Taken With Zohran Mamdani",
-			description:
-				"The success of obesity drug Mounjaro turned Eli Lilly into the first $1 trillion drugmaker on Friday, while Danish rival Novo Nordisk is languishing at the bottom of the Stoxx 600 after a key trial for an Alzheimer's drug failed. Investor Peter Andersen told",
-		},
-	];
+	const { isPending, isError, data, refetch } = useQuery<VideoTypes[]>({
+		queryKey: ["videos-section"],
+		queryFn: async () => {
+			const limit = 5;
+			const query = `*[_type == "videos" && !(_id in path("drafts.**"))] | order(publishedAt desc) [0...${limit}] {
+						_id,
+						_createdAt,
+						publishedAt,
+						title, 
+						description, 
+						"slug": slug.current, 
+						"thumbnail": thumbnail.asset->url, 
+						"altText": thumbnail.alt,
+						duration,
+						embedUrl
+					}`;
 
-	const newsFeed = [
-		{
-			id: 2,
-			imgSrc:
-				"https://cdn.theatlantic.com/thumbor/tMpoxoxRobo8cPpUqoyjr31KdKw=/155x1:1842x1124/296x197/media/img/mt/2025/05/tattoos3/original.jpg",
-			title: "Why Microchaneling Outdoes Microneedling Every Time",
-			description:
-				"Much more cost-effective than renovating, freshen up your space by swapping out your counter stools.",
+			const res = await axios.post(
+				`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
+				{
+					query,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
+						"Content-Type": "application/json",
+					},
+				},
+			);
+
+			const data = res.data;
+			return data.result;
 		},
-		{
-			id: 3,
-			imgSrc:
-				"https://cdn.theatlantic.com/thumbor/J9OIm97vOY48IMeymeWob7hlQRY=/396x3:4631x2822/296x197/media/img/mt/2025/05/2025_04_25_Books_Briefing_Books_that_make_you_want_to_leave_the_house/original.jpg",
-			title: "Sunlighten Full Spectrum Infrared Sauna Explained by Inventor",
-			description:
-				"A wicker chair outside is a comfortable sight to see, but there's a natural warmth that the look brings inside.",
-		},
-		{
-			id: 4,
-			imgSrc:
-				"https://cdn.theatlantic.com/thumbor/s66-hICZi-Pk7ZYeGSNSUNhGP9w=/71x2:3928x2569/296x197/media/img/mt/2025/04/14_B_General-1/original.jpg",
-			title: "Sunlighten Full Spectrum Infrared Sauna Explained by Inventor",
-			description:
-				"A wicker chair outside is a comfortable sight to see, but there's a natural warmth that the look brings inside.",
-		},
-		{
-			id: 5,
-			imgSrc:
-				"https://cdn.theatlantic.com/thumbor/it2Ol7Wzi76aT2g8NB9IZo5UOWQ=/155x1:1842x1124/296x197/media/img/mt/2025/11/2025_11_20_Florko_Gas_station_weed_final/original.png",
-			title: "Sunlighten Full Spectrum Infrared Sauna Explained by Inventor",
-			description:
-				"A wicker chair outside is a comfortable sight to see, but there's a natural warmth that the look brings inside.",
-		},
-	];
+	});
+
+	const [mainVideo, setMainVideo] = useState<VideoTypes | null>(null);
+	const [additionalVideos, setAdditionalVideos] = useState<VideoTypes[]>([]);
+
+	useEffect(() => {
+		if (data && data.length > 0) {
+			setMainVideo(data[0]);
+			setAdditionalVideos(data.slice(1));
+		}
+	}, [data]);
+
+	// Format embed URL for YouTube videos eg: https://youtu.be/QbYKRcY9bBc?si=yyMEaBbOaDbkgHfI
+	const formatEmbedUrl = (url: string) => {
+		const urlObj = new URL(url);
+		const videoId = urlObj.pathname.split("/").pop();
+		return `https://www.youtube.com/embed/${videoId}`;
+	};
+
+	const handleVideoClick = (videoId: string) => {
+		// on click replace main video with clicked video from the additional videos list
+		const selectedVideo = data?.find((video) => video._id === videoId) || null;
+		setMainVideo(selectedVideo);
+
+		// Set additional videos excluding the selected video
+		const updatedAdditionalVideos = data?.filter((video) => video._id !== videoId) || [];
+		setAdditionalVideos(updatedAdditionalVideos);
+
+		// Scroll to top of video feed section by id not top of page
+		const videoFeedSection = document.getElementById("videos");
+		if (videoFeedSection) {
+			videoFeedSection.scrollIntoView({ behavior: "smooth" });
+		}
+	
+	};
 
 	return (
-		<section className="flex flex-col pb-10 bg-accent">
+		<section id="videos" className="flex flex-col pb-10 bg-accent">
 			<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 sm:px-12">
 				<section className="py-10 pb-0 lg:col-span-2">
 					<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
 						Top Video News
 					</h2>
 
+					{isPending && (
+						<section className="grid grid-cols-1 gap-8">
+							{Array.from({ length: 1 }).map((_, index) => (
+								<NewsSkeleton key={index} />
+							))}
+						</section>
+					)}
+
 					<div className="grid grid-cols-1 gap-8">
-						{newsFeedOne.map((item) => (
-							<div key={item.id} className="flex flex-col">
+						{mainVideo && (
+							<div key={mainVideo._id} className="flex flex-col">
 								<section className="w-full aspect-video object-cover mb-4 bg-muted">
-									<iframe width="100%" height="100%" src="https://www.youtube.com/embed/_U4Y71eKDys?si=rP2gQrIEhcmtBW6E" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+									<iframe
+										width="100%"
+										height="100%"
+										src={formatEmbedUrl(mainVideo.embedUrl)}
+										title="YouTube video player"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+										referrerPolicy="strict-origin-when-cross-origin"
+										allowFullScreen></iframe>
 								</section>
 
 								<section className="max-sm:px-6">
-									<section className="flex gap-2 items-center mb-2">
-										<p className="text-xs text-muted-foreground font-medium capitalize">
-											November 24, 2025 ·{" "}
-										</p>
-										<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
-											12:56 PM
-										</p>
-									</section>
-
 									<h3 className="font-anton uppercase text-[24px] sm:text-[28px] md:text-[32px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
-										{item.title}
+										{mainVideo.title}
 									</h3>
 									<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-2">
-										{item.description}
+										{mainVideo.description}
 									</p>
 								</section>
 							</div>
-						))}
+						)}
 					</div>
 				</section>
 
 				<section className="py-10 pb-0 lg:col-span-1">
 					<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
-						Up Next
+						More Videos
 					</h2>
 
 					<div className="grid grid-cols-1 gap-6 max-sm:px-6">
-						{newsFeed.map((item) => (
-							<div className="flex items-start justify-center gap-4" key={item.id}>
-								<section className="relative w-full max-w-[120px] aspect-square">
+						{isPending && (
+							<React.Fragment>
+								{Array.from({ length: 2 }).map((_, index) => (
+									<NewsSkeleton key={index} />
+								))}
+							</React.Fragment>
+						)}
+
+						{additionalVideos.map((item) => (
+							<div className="flex items-start justify-center gap-4" key={item._id}>
+								<section
+									onClick={() => handleVideoClick(item._id)}
+									className="relative max-w-[120px] aspect-square">
 									<img
-										src={item.imgSrc}
-										alt="Skincare Blog"
-										className="w-full max-w-[120px] aspect-square object-cover bg-muted"
+										src={item.thumbnail}
+										alt={item.altText || "Video Thumbnail"}
+										className="max-w-[120px] aspect-square object-cover bg-muted"
 									/>
 
-									<section className="size-11 bg-black p-2 flex items-center justify-center rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10">
+									<section className="size-11 bg-black p-2 flex items-center justify-center rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 cursor-pointer">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											width="128"
@@ -130,9 +194,19 @@ export default function VideoFeed() {
 				</section>
 			</div>
 
-			<Button variant="outline" size="lg" className="flex mx-auto rounded-full mt-8">
-				View All Videos
-			</Button>
+			{isError ? (
+				<Button
+					onClick={() => refetch()}
+					variant={"outline"}
+					size={"lg"}
+					className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
+					Refresh Feed <RefreshCw className="size-5" />
+				</Button>
+			) : (
+				<Button variant="outline" size="lg" disabled className="flex mx-auto rounded-full mt-8">
+					View All Videos
+				</Button>
+			)}
 		</section>
 	);
 }

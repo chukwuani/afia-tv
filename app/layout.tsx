@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Outfit } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 
@@ -21,16 +22,7 @@ const anton = localFont({
 	variable: "--font-anton",
 });
 
-const dmsans = localFont({
-	src: [
-		{
-			path: "../public/fonts/dm-sans/DMSans-Regular.ttf",
-			weight: "400",
-			style: "normal",
-		},
-	],
-	variable: "--font-dm-sans",
-});
+const outfit = Outfit({subsets:['latin'],variable:'--font-dm-sans'});
 
 export const metadata: Metadata = {
 	title: {
@@ -100,7 +92,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className={outfit.variable}>
 			<head>
 				{/* Adsense Component */}
 				<Adsense pId={process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID!} />
@@ -108,7 +100,7 @@ export default function RootLayout({
 
 			<body
 				suppressHydrationWarning
-				className={`${anton.variable} ${dmsans.variable} antialiased font-dm-sans overflow-x-hidden max-w-[1500px] mx-auto`}>
+				className={`${anton.variable} antialiased font-dm-sans overflow-x-hidden max-w-[1500px] mx-auto`}>
 				<QueryProvider>{children}</QueryProvider>
 
 				<Toaster richColors position="top-center" />

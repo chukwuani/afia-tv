@@ -57,4 +57,5 @@ export interface NewsTypes {
 	readingTime: number;
 	body: TypedObject[];
 	author: AuthorTypes;
+	tags: string;
 }

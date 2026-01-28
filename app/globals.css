@@ -52,16 +52,16 @@
 
 :root {
 	--radius: 0.625rem;
-	--brand: #F9700B;
+	--brand: #f9700b;
 
-	--background: #0C0C0C;
-	--foreground: oklch(0.985 0.002 247.839);
+	--background: oklch(0.147 0.004 49.25);
+	--foreground: oklch(0.985 0.001 106.423);
 
-	--card: oklch(0.21 0.034 264.665);
-	--card-foreground: oklch(0.985 0.002 247.839);
+	--card: oklch(0.216 0.006 56.043);
+	--card-foreground: oklch(0.985 0.001 106.423);
 
-	--popover: oklch(0.21 0.034 264.665);
-	--popover-foreground: oklch(0.985 0.002 247.839);
+	--popover: oklch(0.216 0.006 56.043);
+	--popover-foreground: oklch(0.985 0.001 106.423);
 
 	--primary: oklch(0.928 0.006 264.531);
 	--primary-foreground: oklch(0.21 0.034 264.665);

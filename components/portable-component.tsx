@@ -25,26 +25,26 @@ export const components = {
 			</h2>
 		),
 		h3: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
-			<h3 className={"mt-8 scroll-m-20 font-epilogue text-xl font-semibold tracking-tight"}>
+			<h3 className={"mt-5 mb-3 scroll-m-20 font-epilogue text-xl font-semibold tracking-tight"}>
 				{children}
 			</h3>
 		),
 		h4: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
-			<h4 className={"mt-8 scroll-m-20 font-epilogue text-lg font-semibold tracking-tight"}>
+			<h4 className={"mt-5 mb-3 scroll-m-20 font-epilogue text-lg font-semibold tracking-tight"}>
 				{children}
 			</h4>
 		),
 		h5: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
-			<h5 className={"mt-8 scroll-m-20 text-lg font-semibold tracking-tight"}>{children}</h5>
+			<h5 className={"mt-5 mb-3 scroll-m-20 text-lg font-semibold tracking-tight"}>{children}</h5>
 		),
 		h6: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
-			<h6 className={"mt-8 scroll-m-20 text-base font-semibold tracking-tight"}>{children}</h6>
+			<h6 className={"mt-5 mb-3 scroll-m-20 text-base font-semibold tracking-tight"}>{children}</h6>
 		),
 		normal: ({ children }: React.HTMLAttributes<HTMLParagraphElement>) => (
-			<p className={"leading-7"}>{children}</p>
+			<p className={"leading-7 pt-2 pb-3"}>{children}</p>
 		),
 		blockquote: ({ children }: React.HTMLAttributes<HTMLElement>) => (
-			<blockquote className={"mt-6 border-l-2 pl-6 italic"}>{children}</blockquote>
+			<blockquote className={"my-6 border-l-2 pl-6 italic"}>{children}</blockquote>
 		),
 	},
 	listItem: {

@@ -54,6 +54,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 	  _id,
 	  _createdAt,
 	  title,  
+	  tags,
 	  "slug": slug.current, 
 	  "mainImage": mainImage.asset->url, 
 	  "altText": mainImage.alt,
@@ -90,6 +91,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 	}
 
 	const url = process.env.NEXT_PUBLIC_APP_URL!;
+	const tags = news.tags ? news.tags.split(",").map((tag) => tag.trim()) : [];
 
 	return {
 		metadataBase: new URL(url),
@@ -108,6 +110,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 			description: news.description,
 			images: [news.mainImage],
 		},
+		keywords: ["news", "articles", "latest news", "breaking news", news.title, ...tags],
 	};
 }
 

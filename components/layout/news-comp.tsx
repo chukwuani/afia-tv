@@ -6,9 +6,9 @@ import SportsSection from "@/components/sports-section";
 // import MarketIndicator from "../market-indicator";
 // import MarketNews from "../market-news";
 import Advert from "@/components/layout/advert";
-// import VideoFeed from "@/components/video-feed";
 import TopNewsSection from "@/components/top-news-section";
 import AdBanner from "@/components/layout/adBanner";
+import VideoFeed from "../video-feed";
 
 export default function NewsComp() {
 	return (
@@ -24,6 +24,8 @@ export default function NewsComp() {
 			<MagazineSection />
 
 			<Advert />
+
+			<VideoFeed />
 			
 			<SportsSection />
 

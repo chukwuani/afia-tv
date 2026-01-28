@@ -58,7 +58,7 @@ function PostSlug() {
 						Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
 						"Content-Type": "application/json",
 					},
-				}
+				},
 			);
 
 			const data = res.data;
@@ -86,7 +86,7 @@ function PostSlug() {
 					href="/news"
 					className={cn(
 						buttonVariants({ variant: "ghost" }),
-						"absolute left-[-200px] top-14 hidden xl:inline-flex"
+						"absolute left-[-200px] top-14 hidden xl:inline-flex",
 					)}>
 					<ChevronLeftIcon className="mr-2 size-4" aria-hidden="true" />
 					See all news
@@ -132,7 +132,9 @@ function PostSlug() {
 					<AdBanner dataAdSlot="7195289616" dataAdFormat="auto" dataFullWidthResponsive={true} />
 				</section>
 
-				<PortableText value={content} components={components} />
+				<section>
+					<PortableText value={content} components={components} />
+				</section>
 
 				<Share title={news.title} />
 

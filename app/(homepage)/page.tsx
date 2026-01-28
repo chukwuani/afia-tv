@@ -12,11 +12,11 @@ export default function HomePage() {
 		<main className="relative w-full">
 			<HeroSection />
 
-			<BrandSection />
-
 			<AboutSection />
 
 			<TopStories />
+
+			<BrandSection />
 
 			<Faq />
 
