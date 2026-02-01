@@ -6,6 +6,7 @@ import TopStories from "@/components/top-stories";
 import Faq from "@/components/faq";
 import RateCard from "@/components/rate-card";
 import AboutSection from "@/components/about";
+import VideoFeed from "@/components/video-feed";
 
 export default function HomePage() {
 	return (
@@ -16,11 +17,13 @@ export default function HomePage() {
 
 			<TopStories />
 
+			<VideoFeed />
+
 			<BrandSection />
 
 			<Faq />
 
-			<RateCard />
+			{/* <RateCard /> */}
 
 			{/* <Events /> */}
 		</main>

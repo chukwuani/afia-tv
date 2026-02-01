@@ -7,7 +7,7 @@ import SportsSection from "@/components/sports-section";
 // import MarketNews from "../market-news";
 import Advert from "@/components/layout/advert";
 import TopNewsSection from "@/components/top-news-section";
-import AdBanner from "@/components/layout/adBanner";
+// import AdBanner from "@/components/layout/adBanner";
 import VideoFeed from "../video-feed";
 
 export default function NewsComp() {
@@ -15,21 +15,21 @@ export default function NewsComp() {
 		<React.Fragment>
 			<TopNewsSection />
 
-			<AdBanner dataAdSlot="8484320553" dataAdFormat="auto" dataFullWidthResponsive={true} />
-			
+			{/* <AdBanner dataAdSlot="8484320553" dataAdFormat="auto" dataFullWidthResponsive={true} /> */}
+
 			<BlogSection />
 
-			<AdBanner dataAdSlot="8484320553" dataAdFormat="auto" dataFullWidthResponsive={true} />
-
-			<MagazineSection />
+			{/* <AdBanner dataAdSlot="8484320553" dataAdFormat="auto" dataFullWidthResponsive={true} /> */}
 
 			<Advert />
 
 			<VideoFeed />
-			
+
+			<MagazineSection />
+
 			<SportsSection />
 
-			<AdBanner dataAdSlot="8484320553" dataAdFormat="auto" dataFullWidthResponsive={true} />
+			{/* <AdBanner dataAdSlot="8484320553" dataAdFormat="auto" dataFullWidthResponsive={true} /> */}
 		</React.Fragment>
 	);
 }

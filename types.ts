@@ -59,3 +59,16 @@ export interface NewsTypes {
 	author: AuthorTypes;
 	tags: string;
 }
+
+export interface VideoTypes {
+	_id: string;
+	_createdAt: string;
+	publishedAt: string;
+	title: string;
+	description: string;
+	slug: string;
+	thumbnail: string;
+	altText: string;
+	duration: string;
+	embedUrl: string;
+}

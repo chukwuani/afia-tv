@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
+import { MoveUpRightIcon } from "lucide-react";
 
 import { buttonVariants } from "@/components/ui/button";
 import { Heading } from "@/components/heading";
 
 import { cn } from "@/lib/utils";
+
 
 const HeroSection = () => {
 	const images = [
@@ -166,7 +168,7 @@ const HeroSection = () => {
 				</div>
 			</section>
 
-			<div className="flex flex-col text-start items-start w-full justify-center px-6 md:px-14 gap-[50px] py-0 relative">
+			<div className="flex flex-col text-start items-start w-full justify-center px-6 md:px-14 gap-[30px] py-0 relative">
 				<div className="flex flex-col">
 					<Heading className="text-[44px] leading-[4rem] -tracking-[.053rem] lg:text-[70px] lg:leading-[1.2em] lg:-tracking-[1.5px] font-anton font-normal max-w-[600px] uppercase">
 						Stories That
@@ -176,7 +178,7 @@ const HeroSection = () => {
 
 					{/* Subheading text */}
 					<div className="flex flex-col max-w-[480px] w-full items-center relative mt-6">
-						<p className="font-dm-sans font-medium text-muted-foreground text-sm md:text-base leading-[28px]">
+						<p className="font-dm-sans font-normal text-muted-foreground text-sm md:text-base leading-[28px]">
 							Streaming 24/7 on DStv 254 & GOtv 17 — Dive into Igbo stories, culture, and power like
 							never before.
 						</p>
@@ -191,9 +193,10 @@ const HeroSection = () => {
 						href="/news"
 						className={cn(
 							buttonVariants({ variant: "default" }),
-							"relative rounded-full z-10 h-14 text-base px-5 font-dm-sans text-[0.75rem] tracking-[2.4px] uppercase",
+							"relative rounded-full z-10 text-base !px-4 py-3 h-auto font-dm-sans text-[0.75rem] tracking-[2.4px] uppercase",
 						)}>
 						Read our Stories
+						<MoveUpRightIcon data-icon="inline-rnd" />
 					</Link>
 				</div>
 			</div>

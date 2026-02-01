@@ -94,7 +94,7 @@ export default function MagazineSection() {
 	});
 
 	return (
-		<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-16 sm:px-12">
+		<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 sm:px-12">
 			<section className="py-10 lg:col-span-2">
 				<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
 					Recommended

@@ -53,7 +53,7 @@ export default function TopStories() {
 	});
 
 	return (
-		<Card className="flex flex-col gap-5 overflow-hidden border-none bg-background rounded-none shadow-none pt-20 px-6 md:px-10 lg:px-12">
+		<Card className="flex flex-col gap-5 overflow-hidden border-none bg-background rounded-none shadow-none pt-20 px-6 md:px-10 lg:px-12 pb-10">
 			{/* Section header */}
 			<section className="flex justify-between items-center gap-10">
 				<CardHeader className="px-0">

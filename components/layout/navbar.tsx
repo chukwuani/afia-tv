@@ -22,7 +22,7 @@ import type { User } from "@supabase/supabase-js";
 import UserBtn from "../user-btn";
 
 export const Navbar = () => {
-		const pathname = usePathname();
+	const pathname = usePathname();
 	const [user, setUser] = React.useState<User | null>(null);
 
 	React.useEffect(() => {
@@ -71,14 +71,14 @@ export const Navbar = () => {
 								(navItems, index) =>
 									navItems.href && (
 										<NavLink
-							key={index}
-							href={navItems.href}
-							pathname={pathname}
-							disabled={navItems.disabled}
-							className="inline-flex h-10 w-max items-center justify-center px-4 py-2 transition-colors focus:text-brand focus:outline-none">
-							{navItems.title}
-						</NavLink>
-									)
+											key={index}
+											href={navItems.href}
+											pathname={pathname}
+											disabled={navItems.disabled}
+											className="inline-flex h-10 w-max items-center justify-center px-4 py-2 transition-colors focus:text-brand focus:outline-none">
+											{navItems.title}
+										</NavLink>
+									),
 							)}
 						</NavigationMenuList>
 					</NavigationMenu>
@@ -89,7 +89,7 @@ export const Navbar = () => {
 							target="_blank"
 							className={cn(
 								buttonVariants({ variant: "outline" }),
-								"inline-flex text-base font-normal rounded-full"
+								"inline-flex text-base font-normal rounded-full",
 							)}>
 							<Icons.live />
 							Live
@@ -103,7 +103,7 @@ export const Navbar = () => {
 									href="/signin"
 									className={cn(
 										buttonVariants({ variant: "default" }),
-										"relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl"
+										"relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl",
 									)}>
 									Sign In
 								</Link>
@@ -132,7 +132,7 @@ function NavLink({ children, href, disabled, pathname, className, ...props }: Na
 				"text-foreground/60 transition-colors hover:text-foreground text-[0.775rem] font-medium capitalize py-4 flex items-center gap-2",
 				href === pathname && "text-brand hover:text-brand font-medium",
 				disabled && "pointer-events-none opacity-60",
-				className
+				className,
 			)}
 			{...props}>
 			{children}

@@ -1,75 +1,50 @@
 "use client";
 
-import Link from "next/link";
-
 import { formatDate } from "@/lib/utils";
 
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { RefreshCw } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useEffect, useRef, useState } from "react";
+import { ChevronLeftIcon, ChevronRightIcon, RefreshCw } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import NewsSkeleton from "@/components/skeletons/news-skeleton";
+import usePaginationQuery from "@/hooks/use-pagination-query";
+import { VideoTypes } from "@/types";
 
-interface VideoTypes {
-	_id: string;
-	_createdAt: string;
-	publishedAt: string;
-	title: string;
-	description: string;
-	slug: string;
-	thumbnail: string;
-	altText: string;
-	duration: string;
-	embedUrl: string;
-}
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function VideoFeed() {
-	const { isPending, isError, data, refetch } = useQuery<VideoTypes[]>({
-		queryKey: ["videos-section"],
-		queryFn: async () => {
-			const limit = 5;
-			const query = `*[_type == "videos" && !(_id in path("drafts.**"))] | order(publishedAt desc) [0...${limit}] {
-						_id,
-						_createdAt,
-						publishedAt,
-						title, 
-						description, 
-						"slug": slug.current, 
-						"thumbnail": thumbnail.asset->url, 
-						"altText": thumbnail.alt,
-						duration,
-						embedUrl
-					}`;
-
-			const res = await axios.post(
-				`https://${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}.api.sanity.io/v2021-06-07/data/query/${process.env.NEXT_PUBLIC_SANITY_DATASET}`,
-				{
-					query,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
-						"Content-Type": "application/json",
-					},
-				},
-			);
-
-			const data = res.data;
-			return data.result;
-		},
-	});
+	const {
+		videos,
+		currentPage,
+		hasNextPage,
+		hasPrevPage,
+		isFetching,
+		goToNextPage,
+		goToPrevPage,
+		status,
+		refetch,
+	} = usePaginationQuery("/api/videos", "videos-pagination", 0);
 
 	const [mainVideo, setMainVideo] = useState<VideoTypes | null>(null);
 	const [additionalVideos, setAdditionalVideos] = useState<VideoTypes[]>([]);
+	const previousPage = useRef(currentPage);
 
 	useEffect(() => {
-		if (data && data.length > 0) {
-			setMainVideo(data[0]);
-			setAdditionalVideos(data.slice(1));
+		if (videos && videos.length > 0) {
+			setMainVideo(videos[0]);
+			setAdditionalVideos(videos.slice(1));
 		}
-	}, [data]);
+	}, [videos]);
+
+	useEffect(() => {
+		// Only scroll if page actually changed
+		if (previousPage.current !== currentPage) {
+			const videoFeedSection = document.getElementById("videos");
+			if (videoFeedSection) {
+				videoFeedSection.scrollIntoView({ behavior: "smooth" });
+			}
+			previousPage.current = currentPage;
+		}
+	}, [currentPage]);
 
 	// Format embed URL for YouTube videos eg: https://youtu.be/QbYKRcY9bBc?si=yyMEaBbOaDbkgHfI
 	const formatEmbedUrl = (url: string) => {
@@ -80,11 +55,11 @@ export default function VideoFeed() {
 
 	const handleVideoClick = (videoId: string) => {
 		// on click replace main video with clicked video from the additional videos list
-		const selectedVideo = data?.find((video) => video._id === videoId) || null;
+		const selectedVideo = videos?.find((video) => video._id === videoId) || null;
 		setMainVideo(selectedVideo);
 
 		// Set additional videos excluding the selected video
-		const updatedAdditionalVideos = data?.filter((video) => video._id !== videoId) || [];
+		const updatedAdditionalVideos = videos?.filter((video) => video._id !== videoId) || [];
 		setAdditionalVideos(updatedAdditionalVideos);
 
 		// Scroll to top of video feed section by id not top of page
@@ -92,21 +67,20 @@ export default function VideoFeed() {
 		if (videoFeedSection) {
 			videoFeedSection.scrollIntoView({ behavior: "smooth" });
 		}
-	
 	};
 
 	return (
-		<section id="videos" className="flex flex-col pb-10 bg-accent">
+		<section id="videos" className="flex flex-col pb-10 bg-muted/50">
 			<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 sm:px-12">
 				<section className="py-10 pb-0 lg:col-span-2">
 					<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
 						Top Video News
 					</h2>
 
-					{isPending && (
+					{status === "pending" && (
 						<section className="grid grid-cols-1 gap-8">
 							{Array.from({ length: 1 }).map((_, index) => (
-								<NewsSkeleton key={index} />
+								<MainVideoSkeleton key={index} />
 							))}
 						</section>
 					)}
@@ -114,7 +88,7 @@ export default function VideoFeed() {
 					<div className="grid grid-cols-1 gap-8">
 						{mainVideo && (
 							<div key={mainVideo._id} className="flex flex-col">
-								<section className="w-full aspect-video object-cover mb-4 bg-muted">
+								<section className="w-full aspect-video object-cover mb-6 bg-muted">
 									<iframe
 										width="100%"
 										height="100%"
@@ -125,11 +99,20 @@ export default function VideoFeed() {
 										allowFullScreen></iframe>
 								</section>
 
-								<section className="max-sm:px-6">
+								<section className="max-sm:px-6 px-7 pl-0">
+									<section className="flex gap-1 items-center mb-2">
+										<p className="text-xs text-muted-foreground font-medium capitalize">
+											Afia News -
+										</p>
+										<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+											{formatDate(mainVideo.publishedAt)}
+										</p>
+									</section>
+
 									<h3 className="font-anton uppercase text-[24px] sm:text-[28px] md:text-[32px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
 										{mainVideo.title}
 									</h3>
-									<p className="text-sm leading-7 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-2">
+									<p className="text-sm font-epilogue text-muted-foreground mb-4 line-clamp-3">
 										{mainVideo.description}
 									</p>
 								</section>
@@ -144,10 +127,10 @@ export default function VideoFeed() {
 					</h2>
 
 					<div className="grid grid-cols-1 gap-6 max-sm:px-6">
-						{isPending && (
+						{status === "pending" && (
 							<React.Fragment>
-								{Array.from({ length: 2 }).map((_, index) => (
-									<NewsSkeleton key={index} />
+								{Array.from({ length: 4 }).map((_, index) => (
+									<VideoSkeleton key={index} />
 								))}
 							</React.Fragment>
 						)}
@@ -181,20 +164,50 @@ export default function VideoFeed() {
 								</section>
 
 								<section>
+									<section className="flex gap-1 items-center mb-2">
+										<p className="text-xs text-muted-foreground font-medium capitalize">
+											Afia News -
+										</p>
+										<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+											{formatDate(item.publishedAt)}
+										</p>
+									</section>
 									<h3 className="font-anton uppercase text-[20px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
 										{item.title}
 									</h3>
-									<p className="text-[12px] leading-6 tracking-wide font-epilogue text-muted-foreground mb-4 line-clamp-2">
+									<p className="text-xs font-epilogue text-muted-foreground mb-4 line-clamp-2">
 										{item.description}
 									</p>
 								</section>
 							</div>
 						))}
 					</div>
+
+					<section className="flex items-center justify-center gap-3 mx-auto w-full mt-4">
+						<Button
+							onClick={goToPrevPage}
+							disabled={!hasPrevPage || isFetching}
+							variant="outline"
+							size="lg"
+							className="flex rounded-full">
+							<ChevronLeftIcon data-icon="inline-rnd" />
+							Prev
+						</Button>
+
+						<Button
+							onClick={goToNextPage}
+							disabled={!hasNextPage || isFetching}
+							variant="outline"
+							size="lg"
+							className="flex rounded-full">
+							Next
+							<ChevronRightIcon data-icon="inline-rnd" />
+						</Button>
+					</section>
 				</section>
 			</div>
 
-			{isError ? (
+			{status === "error" ? (
 				<Button
 					onClick={() => refetch()}
 					variant={"outline"}
@@ -202,11 +215,47 @@ export default function VideoFeed() {
 					className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
 					Refresh Feed <RefreshCw className="size-5" />
 				</Button>
-			) : (
-				<Button variant="outline" size="lg" disabled className="flex mx-auto rounded-full mt-8">
-					View All Videos
-				</Button>
-			)}
+			) : null}
 		</section>
 	);
 }
+
+const VideoSkeleton = () => {
+	return (
+		<section className="group cols-span-1 gap-2 w-full">
+			<section className="flex items-start justify-center gap-4">
+				<Skeleton className="w-full max-w-[120px] aspect-square rounded-none object-cover" />
+
+				<section className="gap-3 flex flex-col py-2 w-full">
+					<Skeleton className="h-[10px] w-3/4 rounded-none mt-3 mb-2" />
+
+					<Skeleton className="h-[10px] w-full rounded-none" />
+
+					<Skeleton className="h-[10px] w-full rounded-none mb-2" />
+
+					<Skeleton className="h-[10px] w-20 rounded-none" />
+				</section>
+			</section>
+		</section>
+	);
+};
+
+const MainVideoSkeleton = () => {
+	return (
+		<section className="group cols-span-1 gap-2 w-full">
+			<section className="flex flex-col items-end gap-4">
+				<Skeleton className="w-full aspect-video rounded-md object-cover" />
+
+				<section className="gap-3 flex flex-col py-2 w-full">
+					<Skeleton className="h-[10px] w-3/4 rounded-none mt-3 mb-2" />
+
+					<Skeleton className="h-[10px] w-full rounded-none" />
+
+					<Skeleton className="h-[10px] w-full rounded-none mb-2" />
+
+					<Skeleton className="h-[10px] w-20 rounded-none" />
+				</section>
+			</section>
+		</section>
+	);
+};

@@ -22,9 +22,10 @@ const anton = localFont({
 	variable: "--font-anton",
 });
 
-const outfit = Outfit({subsets:['latin'],variable:'--font-dm-sans'});
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-dm-sans" });
 
 export const metadata: Metadata = {
+	metadataBase: new URL('https://afiatv.net'),
 	title: {
 		template: `%s - ${siteConfig.title}`,
 		default: siteConfig.title,
@@ -53,6 +54,17 @@ export const metadata: Metadata = {
 		description: siteConfig.description,
 		images: [siteConfig.ogImage],
 		creator: "@stphn_chukwu",
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-video-preview": -1,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
 	},
 	keywords: [
 		"Afia TV",
