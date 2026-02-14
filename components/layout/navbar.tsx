@@ -8,8 +8,6 @@ import Image from "next/image";
 import { buttonVariants } from "@/components/ui/button";
 import {
 	NavigationMenu,
-	NavigationMenuItem,
-	NavigationMenuLink,
 	NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -17,34 +15,9 @@ import { Icons } from "../icons";
 
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
-import { supabase } from "@/lib/supabase";
-import type { User } from "@supabase/supabase-js";
-import UserBtn from "../user-btn";
 
 export const Navbar = () => {
 	const pathname = usePathname();
-	const [user, setUser] = React.useState<User | null>(null);
-
-	React.useEffect(() => {
-		// Get initial user
-		const getUser = async () => {
-			const {
-				data: { user },
-			} = await supabase.auth.getUser();
-			setUser(user);
-		};
-
-		getUser();
-
-		// Listen for auth changes
-		const {
-			data: { subscription },
-		} = supabase.auth.onAuthStateChange((_event, session) => {
-			setUser(session?.user ?? null);
-		});
-
-		return () => subscription.unsubscribe();
-	}, [supabase]);
 
 	return (
 		<>
@@ -94,24 +67,9 @@ export const Navbar = () => {
 							<Icons.live />
 							Live
 						</Link>
-
-						{user ? (
-							<UserBtn user={user} />
-						) : (
-							<div className="w-auto max-w-80">
-								<Link
-									href="/signin"
-									className={cn(
-										buttonVariants({ variant: "default" }),
-										"relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl",
-									)}>
-									Sign In
-								</Link>
-							</div>
-						)}
 					</div>
 
-					<MobileNav user={user} />
+					<MobileNav />
 				</header>
 			</nav>
 		</>

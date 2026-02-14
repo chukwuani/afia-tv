@@ -3,10 +3,17 @@
 import React from "react";
 
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Heading } from "@/components/heading";
 
 import { Separator } from "./ui/separator";
+import {
+	EarthIcon,
+	HeartHandshakeIcon,
+	LightbulbIcon,
+	ShieldCheckIcon,
+	ShieldIcon,
+} from "lucide-react";
 
 const HeroSection = () => {
 	const videoRef = React.useRef<HTMLVideoElement>(null);
@@ -22,16 +29,16 @@ const HeroSection = () => {
 
 	return (
 		<section className="flex flex-col items-center pt-28 relative w-full">
-			<div className="flex flex-col max-w-[1200px] items-center gap-[50px]  py-0 relative w-full">
+			<div className="flex flex-col md:px-10 lg:px-12 items-center gap-[50px]  py-0 relative w-full">
 				<div className="flex flex-col w-full max-w-[1150px] items-center justify-center gap-8 px-[32px]">
 					<div className="mx-auto text-center">
-						<Heading className="text-[55px] leading-[107%] tracking-normal lg:text-[100px] lg:leading-[100%] lg:tracking-[-2px] font-anton font-normal max-w-[800px] uppercase">
-							Telling the stories, Shaping the Culture.
+						<Heading className="text-[55px] leading-[107%] tracking-normal lg:text-[100px] lg:leading-[100%] lg:tracking-[-2px] font-anton font-normal max-w-[500px] uppercase">
+							Where they see us...
 						</Heading>
 
 						{/* Subheading text */}
 						<div className="flex flex-col max-w-[480px] w-full items-center relative text-center mt-6 mx-auto">
-							<p className="font-dm-sans font-medium text-muted-foreground text-base leading-[28px] tracking-[.009rem]">
+							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
 								Connecting you to the Heart of the Southeast. Discover the Richness and Diversity of
 								Our Region&apos;s Stories.
 							</p>
@@ -83,73 +90,90 @@ const HeroSection = () => {
 				</Card>
 			</div>
 
-      <div className="container mx-auto px-6 md:px-12 py-12">
-        {/*Our Mission Section */}
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-12 my-24 max-w-[1200px]">
-				<h2
-					className="font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase max-w-[500px]"
-					style={{ animationDelay: "0.20s", animationFillMode: "both" }}>
-					Our Mission
-				</h2>
-				<div className="space-y-6 col-span-2">
-					<p
-						className="text-lg font-dm-sans font-normal leading-[170%] tracking-normal text-muted-foreground animate-fade-up"
-						style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
-						Afia TV is the first regional television channel dedicated to telling authentic stories
-						from the Southeast of Nigeria. Broadcasting 24/7 on DStv Channel 254 and GOtv Channel
-						17, Afia TV serves as a cultural compass—preserving, celebrating, and projecting the
-						rich traditions, innovations, and voices of the Igbo people. Launched in February 2023
-						and based in Enugu, our name &quot;Afia&quot; (which means &quot;market&quot; in Igbo) reflects our mission
-						to be a meeting point—where stories, ideas, and communities converge.
-					</p>
-					<p
-						className="text-lg font-dm-sans font-normal leading-[170%] tracking-normal text-muted-foreground animate-fade-up"
-						style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
-						We aim to be the most trusted and impactful regional media brand in Nigeria—dedicated to
-						reclaiming our narrative, celebrating local excellence, and preserving cultural identity
-						through engaging, inclusive, and high-quality content.
-					</p>
+			<section className="mx-auto flex flex-col items-center justify-center gap-[30px] lg:gap-20 py-20 pt-[140px] pb-0 px-6 md:px-10 lg:px-12 relative overflow-hidden">
+				<section className="max-w-[1000px] mb-20">
+					<h3 className="font-anton text-center text-[35px] tracking-[1px] lg:text-[68px] lg:tracking-[-1.5px] leading-[100%] uppercase text-balance">
+						Broadcasting Eastern Nigeria's news, business, lifestyle and culture.
+					</h3>
+				</section>
+			</section>
+
+			{/* Mission and Vision  */}
+			<div className="px-6 md:px-10 lg:px-17 w-full">
+				<CardHeader className="px-0">
+					<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-4 uppercase">
+						Our Mission and Vision
+					</CardTitle>
+					<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[520px] mb-5">
+						To be the Chief Marketing platform South East Nigeria to the world. Delivering
+						compelling content rooted in culture, community, and commerce, whilst unlocking
+						opportunities for our audiences and partners.
+					</CardDescription>
+				</CardHeader>
+
+				<div className="w-full rounded-2xl overflow-hidden relative pt-4">
+					<img
+						className="size-full rounded-[12px] object-cover"
+						alt=""
+						src={"https://8kvl2urisy.ufs.sh/f/BxfEHnSVCZL45SvQuDiwayn8tM2jkJqHVSIRrW9oYbhNs43x"}
+					/>
 				</div>
 			</div>
 
-			<Separator />
-			{/*Our Vision Section */}
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-12 my-24 mb-24 max-w-[1200px]">
-				<h2
-					className="font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase max-w-[500px]"
-					style={{ animationDelay: "0.20s", animationFillMode: "both" }}>
-					Our Vision
-				</h2>
-				<div className="space-y-6 col-span-2">
-					<p
-						className="text-lg font-dm-sans font-normal leading-[170%] tracking-normal text-muted-foreground animate-fade-up"
-						style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
-						A Southeast Nigeria where every voice is celebrated, every tradition preserved, and
-						every dream given a stage — uniting communities through culture, music, and heritage
-						that inspire connection, pride, and belonging.
-					</p>
-				</div>
-			</div>
+			{/* Core Values */}
+			<div className="px-6 md:px-10 lg:px-17 w-full py-20">
+				<CardHeader className="px-0">
+					<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-4 uppercase">
+						Core Values
+					</CardTitle>
+					<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[480px] mb-5">
+						Experience growth through innovative digital marketing designed to reach, inspire, and
+						deliver results.
+					</CardDescription>
+				</CardHeader>
 
-      <Separator />
-			{/*Strategic Partnerships Section */}
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-12 my-24 mb-24 max-w-[1200px]">
-				<h2
-					className="font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase max-w-[500px]"
-					style={{ animationDelay: "0.20s", animationFillMode: "both" }}>
-					Strategic Partnerships
-				</h2>
-				<div className="space-y-6 col-span-2">
-					<p
-						className="text-lg font-dm-sans font-normal leading-[170%] tracking-normal text-muted-foreground animate-fade-up"
-						style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
-						In our commitment to expand and enrich local storytelling, Afia TV has partnered with media platforms like Anaedo TV and other regional creators. These collaborations help us reach more communities and amplify more authentic voices across Ala Igbo.
-					</p>
-				</div>
-			</div>
-      </div>
+				<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-auto gap-[80px] items-center">
+					<li className="flex flex-col gap-8">
+						<LightbulbIcon className="size-[60px]" color="#f9700b" />
+						<section className="flex flex-col gap-5 font-san max-w-[300px] md:max-w-[500px]">
+							<h3 className="text-2xl font-normal">Innovation</h3>
+							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
+								Delivering news through modern storytelling and digital-first reporting.
+							</p>
+						</section>
+					</li>
 
-			
+					<li className="flex flex-col gap-8">
+						<HeartHandshakeIcon className="size-[60px]" color="#f9700b" />
+						<section className="flex flex-col gap-5 font-san max-w-[300px] md:max-w-[500px]">
+							<h3 className="text-2xl font-normal">Excellence & Inclusivity</h3>
+							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
+								Accurate reporting that represents every voice and community.
+							</p>
+						</section>
+					</li>
+
+					<li className="flex flex-col gap-8">
+						<ShieldCheckIcon className="size-[60px]" color="#f9700b" />
+						<section className="flex flex-col gap-5 font-san max-w-[300px] md:max-w-[500px]">
+							<h3 className="text-2xl font-normal">Authenticity</h3>
+							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
+								Transparent journalism rooted in facts and integrity.
+							</p>
+						</section>
+					</li>
+
+					<li className="flex flex-col gap-8">
+						<EarthIcon className="size-[60px]" color="#f9700b" />
+						<section className="flex flex-col gap-5 font-san max-w-[300px] md:max-w-[500px]">
+							<h3 className="text-2xl font-normal">Community</h3>
+							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
+								Connecting people through stories that matter locally and globally.
+							</p>
+						</section>
+					</li>
+				</ul>
+			</div>
 		</section>
 	);
 };

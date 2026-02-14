@@ -11,7 +11,7 @@ export default function Component() {
 			<div className="w-full max-w-6xl grid lg:grid-cols-2 gap-12 items-start">
 				<div className="space-y-12">
 					<div className="space-y-6">
-						<h1 className="text-5xl font-normal tracking-tight">How can we help you?</h1>
+						<h1 className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">How can we help you?</h1>
 						<p className="mt-6 text-lg font-san font-light text-muted-foreground max-w-prose text-pretty">
 							Whether you have a question, feedback, or just want to say hello, feel free to reach
 							out. Our team is here to help and will get back to you as soon as possible.
@@ -27,16 +27,16 @@ export default function Component() {
 						</div>
 
 						<div className="space-y-1">
-							<h3 className="text-xl">Support</h3>
-							<a href="mailto:support@afiatv.net" className="text-muted-foreground font-light">
-								info@afiatv.net
+							<h3 className="text-xl">Business Development</h3>
+							<a href="mailto:verachidimma@afiatv.net" className="text-muted-foreground font-light">
+								verachidimma@afiatv.net
 							</a>
 						</div>
 
 						<div className="space-y-1">
 							<h3 className="text-xl">Sales</h3>
-							<a href="mailto:sales@afiatv.net" className="text-muted-foreground font-light">
-								sales@afiatv.net
+							<a href="mailto:vidiong@afiatv.net" className="text-muted-foreground font-light">
+								vidiong@afiatv.net
 							</a>
 						</div>
 					</div>

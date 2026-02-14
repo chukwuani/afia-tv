@@ -31,12 +31,12 @@ const questions = [
 		content:
 			"If you're an entrepreneur, artist, or community leader with a story to share, reach out to us via our contact page. We love showcasing local talent and initiatives.",
 	},
-	{
-		id: "5",
-		title: "How do I advertise on Afia TV?",
-		content:
-			"We offer custom advertising solutions for brands and businesses. Please visit our Advertise page or reach out to our sales team via email or phone.",
-	},
+	// {
+	// 	id: "5",
+	// 	title: "How do I advertise on Afia TV?",
+	// 	content:
+	// 		"We offer custom advertising solutions for brands and businesses. Please visit our Advertise page or reach out to our sales team via email or phone.",
+	// },
 	// {
 	// 	id: "6",
 	// 	title: "Can I volunteer or intern with Afia TV?",
@@ -58,7 +58,7 @@ export default function Faq() {
 						<br />
 						to know
 					</CardTitle>
-					<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[480px]">
+					<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[412px]">
 						Everything you need to know about Afia. Learn more about our platform, content, and how
 						to engage with us.
 					</CardDescription>

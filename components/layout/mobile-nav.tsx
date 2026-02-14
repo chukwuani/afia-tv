@@ -12,11 +12,10 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Icons } from "@/components/icons";
 
-import type { User } from "@supabase/supabase-js";
 import LogoutBtn from "../logout-btn";
 
 
-export function MobileNav({ user }: { user: User | null }) {
+export function MobileNav() {
 	const pathname = usePathname();
 	const { isDesktop } = useMediaQuery();
 
@@ -77,36 +76,6 @@ export function MobileNav({ user }: { user: User | null }) {
 										))}
 									</section>
 								</section>
-
-								<div className="flex flex-wrap items-center gap-4 w-full">
-									{user ? (
-										<section className="w-full bg-background">
-											<div className="rounded-md py-0 text-sm transition-colors">
-												<div className="relative flex items-start gap-3">
-													<div className="flex-1 space-y-1">
-														<span className="font-medium text-foreground">
-															{user.user_metadata.full_name}
-														</span>{" "}
-														<div className="text-xs text-muted-foreground">{user.email}</div>
-													</div>
-
-													<LogoutBtn />
-												</div>
-											</div>
-										</section>
-									) : (
-										<div className="w-auto max-w-80">
-											<Link
-												href="/signin"
-												className={cn(
-													buttonVariants({ variant: "default" }),
-													"relative rounded-full z-10 w-full text-base shadow-lg transition-shadow duration-300 hover:shadow-xl"
-												)}>
-												Sign In
-											</Link>
-										</div>
-									)}
-								</div>
 							</section>
 						</section>
 					</SheetContent>
