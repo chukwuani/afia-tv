@@ -1,12 +1,7 @@
 "use client";
 
-import AdSticker from "@/components/layout/ad-sticker";
-
 const LivePage = () => {
 	return (
-	
-		<section className="mx-auto w-full flex flex-col items-center justify-center py-8">
-			<AdSticker />
 
 			<section className="mx-auto w-full flex flex-col items-center justify-center py-8">
 				<iframe
@@ -17,7 +12,6 @@ const LivePage = () => {
 					height="480"
 					width="853"></iframe>
 			</section>
-		</section>
 	);
 };
 
