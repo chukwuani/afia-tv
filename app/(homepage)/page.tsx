@@ -16,9 +16,6 @@ import VideoFeed from "@/components/video-feed";
 
 export default function HomePage() {
 	return (
-		<>
-			<AnniversaryConfetti />
-			<AnniversaryBanner />
 			<main className="relative w-full">
 				<HeroSection />
 
@@ -36,6 +33,5 @@ export default function HomePage() {
 
 				{/* <Events /> */}
 			</main>
-		</>
 	);
 }
