@@ -1,37 +1,33 @@
 "use client";
-import AnniversaryConfetti from "@/components/anniversary-confetti";
-// import AnniversaryModal from '@/components/anniversary-modal'
-import AnniversaryBanner from "@/components/anniversary-banner";
-// import AnniversaryBadge from '@/components/anniversary-badge'
-// import AnniversaryStars from "@/components/anniversary-stars";
-import HeroSection from "@/components/hero-section";
-import BrandSection from "@/components/brand-section";
-// import Events from "@/components/events";
 
-import TopStories from "@/components/top-stories";
+import Events from "@/components/events";
 import Faq from "@/components/faq";
 import RateCard from "@/components/rate-card";
+
+import HeroSection from "@/components/hero-section";
+import BrandSection from "@/components/brand-section";
+import TopStories from "@/components/top-stories";
 import AboutSection from "@/components/about";
-import VideoFeed from "@/components/video-feed";
+import VideoFeedSection from "@/components/layout/video-feed-section";
 
 export default function HomePage() {
 	return (
-			<main className="relative w-full">
-				<HeroSection />
+		<main className="relative w-full">
+			<HeroSection />
 
-				<AboutSection />
+			<AboutSection />
 
-				<TopStories />
+			<TopStories />
 
-				<VideoFeed />
+			<VideoFeedSection />
 
-				<BrandSection />
+			<BrandSection />
 
-				<Faq />
+			{/* <Faq /> */}
 
-				{/* <RateCard /> */}
+			{/* <RateCard /> */}
 
-				{/* <Events /> */}
-			</main>
+			{/* <Events /> */}
+		</main>
 	);
 }

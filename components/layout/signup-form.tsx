@@ -93,7 +93,7 @@ export default function SignUpForm() {
 									<h1 className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">
 										Join the Afia TV community
 									</h1>
-									<p className="mt-6 text-sm font-dm-sans font-light text-muted-foreground max-w-prose text-pretty">
+									<p className="mt-6 text-sm font-outfit font-light text-muted-foreground max-w-prose text-pretty">
 										Create your free account and start exploring the culture, stories, and spirit of
 										Southeast Nigeria — from original documentaries to exclusive podcasts and
 										events.

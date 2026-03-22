@@ -29,7 +29,7 @@ const OtherServices = () => {
         {serviceCards.map((service) => (
           <Card
             key={service.id}
-            className="min-h-[280px] bg-[#ffffff0b] rounded-[28px] overflow-hidden shadow-none border-none"
+            className="min-h-[280px] bg-accent rounded-none overflow-hidden shadow-none border-none"
           >
             <CardContent className="flex flex-col justify-between h-full p-6 gap-10">
               <div className={`${service.size}`}>
@@ -41,10 +41,10 @@ const OtherServices = () => {
               </div>
 
               <div className="flex flex-col gap-6">
-                <h3 className="text-white text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton">
+                <h3 className="text-4xl sm:text-[32px] leading-[140%] tracking-normal font-normal font-anton">
                   {service.title}
                 </h3>
-                <p className="font-dm-sans text-muted-foreground text-sm leading-[28px] tracking-[.009rem]">
+                <p className="font-outfit text-muted-foreground text-sm leading-[28px] tracking-[.009rem]">
                   {service.description}
                 </p>
               </div>

@@ -75,15 +75,15 @@ function TopNewsSection() {
 												src={item.mainImage}
 												alt={item.altText || "News Image"}
 												sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-												className="rounded-md bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-6 mb-4"
+												className="rounded-none bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-6 mb-4"
 											/>
 
 											<section className="max-sm:px-6">
 												<section className="flex gap-2 items-center mb-2">
-													<p className="text-xs text-muted-foreground font-medium capitalize">
+													<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
 														By {item.author?.name} -{" "}
 													</p>
-													<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+													<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
 														{formatDate(item.publishedAt)}
 													</p>
 												</section>
@@ -92,7 +92,7 @@ function TopNewsSection() {
 													{item.title}
 												</h3>
 
-												<p className="text-sm font-dm-sans text-muted-foreground mb-4 line-clamp-2">
+												<p className="text-sm font-outfit text-muted-foreground mb-4 line-clamp-2">
 													{item.description}
 												</p>
 											</section>
@@ -115,15 +115,15 @@ function TopNewsSection() {
 												{item.title}
 											</h3>
 
-											<p className="text-sm font-dm-sans text-muted-foreground mb-4 line-clamp-3">
+											<p className="text-sm font-outfit text-muted-foreground mb-4 line-clamp-3">
 												{item.description}
 											</p>
 
 											<section className="flex gap-2 items-center">
-												<p className="text-xs text-muted-foreground font-medium capitalize">
+												<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
 													By {item.author?.name} -{" "}
 												</p>
-												<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+												<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
 													{formatDate(item.publishedAt)}
 												</p>
 											</section>
@@ -141,7 +141,7 @@ function TopNewsSection() {
 					onClick={() => refetch()}
 					variant={"outline"}
 					size={"lg"}
-					className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
+					className="flex mx-auto rounded text-[0.75rem] tracking-[2.4px] uppercase font-outfit">
 					Refresh Feed <RefreshCw className="size-5" />
 				</Button>
 			)}

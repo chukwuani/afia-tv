@@ -82,7 +82,7 @@ export const components = {
 
 			return (
 				<img
-					className="rounded-md"
+					className="rounded-none"
 					src={urlFor(value).width(800).url()}
 					alt={value.alt || "Article image"}
 					loading="lazy"

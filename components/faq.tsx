@@ -48,17 +48,13 @@ const questions = [
 export default function Faq() {
 	return (
 		<section className="flex flex-col items-center justify-center py-20 px-6 md:px-10 lg:px-12 w-full">
-			<div className="grid grid-cols-1 items-center md:grid-cols-2 gap-4 w-full">
+			<div className="grid grid-cols-1 items-start md:grid-cols-2 gap-4 w-full">
 				{/* Section header */}
 				<CardHeader className="px-0 pt-0">
-					<CardTitle className="text-brand font-anton text-[36px] md:text-[80px] leading-[1.1em] font-normal tracking-[.5px] mb-3 uppercase">
-						Everything
-						<br />
-						you need
-						<br />
-						to know
+					<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase max-w-[400px]">
+						FAQs
 					</CardTitle>
-					<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[412px]">
+					<CardDescription className="font-outfit text-muted-foreground text-sm md:text-base max-w-[480px] mb-5">
 						Everything you need to know about Afia. Learn more about our platform, content, and how
 						to engage with us.
 					</CardDescription>
@@ -84,7 +80,7 @@ export default function Faq() {
 								</AccordionPrimitive.Trigger>
 							</AccordionPrimitive.Header>
 
-							<AccordionContent className="text-muted-foreground pb-2 font-dm-sans text-sm tracking-normal pt-2">
+							<AccordionContent className="text-muted-foreground pb-2 font-outfit text-sm tracking-normal pt-2">
 								{item.content}
 							</AccordionContent>
 						</AccordionItem>

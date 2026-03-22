@@ -30,7 +30,7 @@ export function MobileNav() {
 				target="_blank"
 				className={cn(
 					buttonVariants({ variant: "outline" }),
-					"inline-flex text-base font-normal rounded-full"
+					"inline-flex text-base font-normal rounded"
 				)}>
 				<Icons.live />
 				Live
@@ -62,7 +62,7 @@ export function MobileNav() {
 													href={item.href}
 													onClick={() => setOpen(false)}
 													className={cn(
-																	"group w-full rounded-md bg-background px-2 font-dm-sans focus:text-brand focus:outline-none text-foreground/60 transition-colors hover:text-foreground text-[0.775rem] font-medium capitalize py-4 flex items-center gap-2",
+																	"group w-full rounded-md bg-background px-2 font-outfit focus:text-brand focus:outline-none text-foreground/60 transition-colors hover:text-foreground text-[0.775rem] font-medium capitalize py-4 flex items-center gap-2",
 																	item.href === pathname && "text-brand hover:text-brand font-medium",
 																	item.disabled && "pointer-events-none opacity-60",
 																	

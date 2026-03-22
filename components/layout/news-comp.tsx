@@ -8,7 +8,8 @@ import SportsSection from "@/components/sports-section";
 import Advert from "@/components/layout/advert";
 import TopNewsSection from "@/components/top-news-section";
 // import AdBanner from "@/components/layout/adBanner";
-import VideoFeed from "../video-feed";
+// import VideoFeed from "../video-feed";
+import VideoFeedSection from "./video-feed-section";
 
 export default function NewsComp() {
 	return (
@@ -23,7 +24,7 @@ export default function NewsComp() {
 
 			<Advert />
 
-			<VideoFeed />
+			<VideoFeedSection layout="secondary" />
 
 			<MagazineSection />
 

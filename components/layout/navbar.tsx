@@ -62,7 +62,7 @@ export const Navbar = () => {
 							target="_blank"
 							className={cn(
 								buttonVariants({ variant: "outline" }),
-								"inline-flex text-base font-normal rounded-full",
+								"inline-flex text-base font-normal",
 							)}>
 							<Icons.live />
 							Live

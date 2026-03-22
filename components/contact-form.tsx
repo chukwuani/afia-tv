@@ -92,7 +92,7 @@ const ConatctForm = () => {
 
               {/* Contact Info */}
               <div className="flex flex-col w-full items-start gap-[18px]">
-                <p className="w-[300px] text-sm font-dm-sans text-muted-foreground ">
+                <p className="w-[300px] text-sm font-outfit text-muted-foreground ">
                   For same-day reservations or special <br />
                   requests, feel free to give us a message!
                 </p>

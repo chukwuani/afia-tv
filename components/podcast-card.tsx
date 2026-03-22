@@ -66,7 +66,7 @@ const PodcastCard = () => {
                   <h3 className="font-epilogue font-medium text-white text-[26px] -tracking-[.053rem] leading-[42px] line-clamp-1">
                     {event.title}
                   </h3>
-                  <p className="font-dm-sans font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] line-clamp-2">
+                  <p className="font-outfit font-medium text-muted-foreground text-sm leading-[28px] tracking-[.009rem] line-clamp-2">
                     {event.description}
                   </p>
                 </div>

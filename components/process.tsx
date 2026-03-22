@@ -61,7 +61,7 @@ const SectionProcess = () => {
                         <h3 className="w-[230px] font-epilogue font-medium text-white text-[20.6px] tracking-[-0.66px] leading-[30.8px]">
                           {step.title}
                         </h3>
-                        <p className="flex-1 font-dm-sans font-medium text-muted-foreground text-base tracking-[-0.48px] leading-6">
+                        <p className="flex-1 font-outfit font-medium text-muted-foreground text-base tracking-[-0.48px] leading-6">
                           {step.description}
                         </p>
                       </div>

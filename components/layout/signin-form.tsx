@@ -91,7 +91,7 @@ export default function SignInForm() {
 										<br />
 										account
 									</h1>
-									<p className="mt-6 text-sm font-dm-sans font-light text-muted-foreground max-w-prose text-pretty">
+									<p className="mt-6 text-sm font-outfit font-light text-muted-foreground max-w-prose text-pretty">
 										Access your personalized experience — continue watching, save favorites, and
 										stay updated with the latest stories from Southeast Nigeria.
 									</p>

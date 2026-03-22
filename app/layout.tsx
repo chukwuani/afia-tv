@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 
@@ -22,10 +21,20 @@ const anton = localFont({
 	variable: "--font-anton",
 });
 
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-dm-sans" });
+const outfit = localFont({
+	src: "../public/fonts/outfit/Outfit-VariableFont_wght.ttf",
+	variable: "--font-outfit",
+	display: "swap",
+});
+
+const jetBrainsMono = localFont({
+	src: "../public/fonts/jetbrains-mono/JetBrainsMono-VariableFont_wght.ttf",
+	variable: "--font-jetbrains-mono",
+	display: "swap",
+});
 
 export const metadata: Metadata = {
-	metadataBase: new URL('https://afiatv.net'),
+	metadataBase: new URL("https://afiatv.net"),
 	title: {
 		template: `%s - ${siteConfig.title}`,
 		default: siteConfig.title,
@@ -112,7 +121,7 @@ export default function RootLayout({
 
 			<body
 				suppressHydrationWarning
-				className={`${anton.variable} antialiased font-dm-sans overflow-x-hidden max-w-[1500px] mx-auto`}>
+				className={`${anton.variable} ${jetBrainsMono.variable} antialiased font-outfit overflow-x-hidden max-w-[1500px] mx-auto`}>
 				<QueryProvider>{children}</QueryProvider>
 
 				<Toaster richColors position="top-center" />

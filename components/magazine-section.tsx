@@ -94,7 +94,7 @@ export default function MagazineSection() {
 	});
 
 	return (
-		<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 sm:px-12">
+		<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 sm:px-12 border-t">
 			<section className="py-10 lg:col-span-2">
 				<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
 					Recommended
@@ -106,7 +106,7 @@ export default function MagazineSection() {
 								<NewsSkeleton key={index} />
 							))}
 						</section>
-					)}
+				)}
 				
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 					{data?.map((item) => (
@@ -119,15 +119,15 @@ export default function MagazineSection() {
 								src={item.mainImage}
 								alt={item.altText || "News Image"}
 								sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-								className="rounded-md bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-6 mb-4"
+								className="rounded-none bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-6 mb-4"
 							/>
 
 							<section className="max-sm:px-6">
 								<section className="flex gap-2 items-center mb-2">
-									<p className="text-xs text-muted-foreground font-medium capitalize">
+									<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
 										By {item.author?.name} -{" "}
 									</p>
-									<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+									<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
 										{formatDate(item.publishedAt)}
 									</p>
 								</section>
@@ -135,7 +135,7 @@ export default function MagazineSection() {
 								<h3 className="font-anton uppercase text-[24px] sm:text-[28px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
 									{item.title}
 								</h3>
-								<p className="text-sm font-dm-sans text-muted-foreground mb-4 line-clamp-2">
+								<p className="text-sm font-outfit text-muted-foreground mb-4 line-clamp-2">
 									{item.description}
 								</p>
 							</section>
@@ -148,7 +148,7 @@ export default function MagazineSection() {
 						onClick={() => refetch()}
 						variant={"outline"}
 						size={"lg"}
-						className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
+						className="flex mx-auto rounded text-[0.75rem] tracking-[2.4px] uppercase">
 						Refresh Feed <RefreshCw className="size-5" />
 					</Button>
 				) : (
@@ -156,7 +156,7 @@ export default function MagazineSection() {
 						href="/news/recommended"
 						className={cn(
 							buttonVariants({ variant: "outline", size: "lg" }),
-							"flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans w-fit mt-5"
+							"flex mx-auto rounded text-[0.75rem] tracking-[2.4px] uppercase w-fit mt-5"
 						)}>
 						View All Recommended
 					</Link>
@@ -180,10 +180,10 @@ export default function MagazineSection() {
 					{features?.map((item) => (
 						<Link key={item._id} title={item.title} href={`/news/${item.slug}`} className="group">
 							<section className="flex gap-2 items-center mb-2">
-								<p className="text-xs text-muted-foreground font-medium capitalize">
+								<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
 									By {item.author?.name} -{" "}
 								</p>
-								<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+								<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
 									{formatDate(item.publishedAt)}
 								</p>
 							</section>
@@ -205,7 +205,7 @@ export default function MagazineSection() {
 						onClick={() => refetchFeatures()}
 						variant={"outline"}
 						size={"lg"}
-						className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
+						className="flex mx-auto rounded text-[0.75rem] tracking-[2.4px] uppercase">
 						Refresh Feed <RefreshCw className="size-5" />
 					</Button>
 				) : (
@@ -213,7 +213,7 @@ export default function MagazineSection() {
 						href="/news/featured"
 						className={cn(
 							buttonVariants({ variant: "outline", size: "lg" }),
-							"flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans w-fit mt-5"
+							"flex mx-auto rounded text-[0.75rem] tracking-[2.4px] uppercase w-fit mt-5"
 						)}>
 						View All Features
 					</Link>

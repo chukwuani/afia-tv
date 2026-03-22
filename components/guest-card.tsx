@@ -12,7 +12,7 @@ function GuestCard() {
 						Be a Guest
 					</h1>
 
-					<p className="font-dm-sans font-medium tracking-[.009rem] text-white text-base leading-[28px] mb-8">
+					<p className="font-outfit font-medium tracking-[.009rem] text-white text-base leading-[28px] mb-8">
 						Do you have a voice, story, or expertise worth sharing? We&apos;re always looking for
 						new guests, community voices, and collaborators.
 					</p>

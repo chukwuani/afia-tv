@@ -107,9 +107,9 @@ function PostSlug() {
 								className="rounded-full size-10 object-cover"
 							/>
 							<div className="flex-1 text-left leading-tight">
-								<p className="font-medium">{author.name}</p>
+								<p className="font-medium uppercase font-jetbrains-mono">{author.name}</p>
 
-								<div className="flex items-center space-x-2 text-xs text-muted-foreground">
+								<div className="flex items-center space-x-2 text-xs text-muted-foreground uppercase font-jetbrains-mono">
 									<time dateTime={""}>{formatDate(news.publishedAt)}</time>
 
 									<div>•</div>
@@ -125,7 +125,7 @@ function PostSlug() {
 					src={news.mainImage}
 					alt={news.altText}
 					sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-					className="rounded-md bg-muted object-cover aspect-[16/11] w-full"
+					className="rounded-none bg-muted object-cover aspect-[16/11] w-full"
 				/>
 
 				<section className="overflow-hidden">

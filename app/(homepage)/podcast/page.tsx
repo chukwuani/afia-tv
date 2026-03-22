@@ -21,7 +21,7 @@ const Hero = () => {
 						</h1>
 
 						<p
-							className="font-dm-sans font-medium text-muted-foreground  text-base leading-[28px] tracking-[.009rem] animate-fade-up"
+							className="font-outfit font-medium text-muted-foreground  text-base leading-[28px] tracking-[.009rem] animate-fade-up"
 							style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
 							From politics to pop culture, tradition to tech, our podcasts spotlight the real
 							stories, bold opinions, and local legends that define Ala Igbo—wherever you are in the
@@ -37,14 +37,14 @@ const Hero = () => {
 										description: comingSoonMsg,
 									});
 								}}
-								className="font-normal w-fit bg-brand hover:bg-brand/90 rounded-full p-7 text-foreground z-10 h-14 text-base px-5 font-dm-sans text-[0.75rem] tracking-[2.4px] uppercase">
+								className="font-normal w-fit bg-brand hover:bg-brand/90 rounded-full p-7 text-foreground z-10 h-14 text-base px-5 font-outfit text-[0.75rem] tracking-[2.4px] uppercase">
 								Listen live
 							</Button>
 						</div>
 
 						<section>
 							<p
-								className="font-dm-sans font-medium text-base leading-[28px] tracking-[.009rem] text-primary animate-fade-up h-11 mt-8"
+								className="font-outfit font-medium text-base leading-[28px] tracking-[.009rem] text-primary animate-fade-up h-11 mt-8"
 								style={{ animationDelay: "0.30s", animationFillMode: "both" }}>
 								Listen to us on:
 							</p>

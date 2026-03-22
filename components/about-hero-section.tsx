@@ -28,26 +28,20 @@ const HeroSection = () => {
 	};
 
 	return (
-		<section className="flex flex-col items-center pt-28 relative w-full">
-			<div className="flex flex-col md:px-10 lg:px-12 items-center gap-[50px]  py-0 relative w-full">
-				<div className="flex flex-col w-full max-w-[1150px] items-center justify-center gap-8 px-[32px]">
-					<div className="mx-auto text-center">
-						<Heading className="text-[55px] leading-[107%] tracking-normal lg:text-[100px] lg:leading-[100%] lg:tracking-[-2px] font-anton font-normal max-w-[500px] uppercase">
-							Where they see us...
-						</Heading>
-
-						{/* Subheading text */}
-						<div className="flex flex-col max-w-[480px] w-full items-center relative text-center mt-6 mx-auto">
-							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
-								Connecting you to the Heart of the Southeast. Discover the Richness and Diversity of
+		<section className="flex flex-col items-center relative w-full">
+			<div className="px-6 md:px-10 lg:px-12 w-full py-20">
+				<CardHeader className="px-0 pt-0">
+					<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-4 uppercase">
+						Where they see us...
+					</CardTitle>
+					<CardDescription className="font-outfit text-muted-foreground text-sm md:text-base max-w-[520px] mb-5">
+						Connecting you to the Heart of the Southeast. Discover the Richness and Diversity of
 								Our Region&apos;s Stories.
-							</p>
-						</div>
-					</div>
-				</div>
+					</CardDescription>
+				</CardHeader>
 
 				{/* Video/image preview card */}
-				<Card className="w-full max-w-[1150px] max-h-[650px] rounded-[28px] max-lg:rounded-none overflow-hidden border-0 p-0 z-10 aspect-[4/3]">
+				<Card className="w-full max-h-[650px] rounded-none overflow-hidden border-0 p-0 z-10 aspect-[4/3]">
 					<div className="relative w-full h-full">
 						<video
 							ref={videoRef}
@@ -90,43 +84,43 @@ const HeroSection = () => {
 				</Card>
 			</div>
 
-			<section className="mx-auto flex flex-col items-center justify-center gap-[30px] lg:gap-20 py-20 pt-[140px] pb-0 px-6 md:px-10 lg:px-12 relative overflow-hidden">
-				<section className="max-w-[1000px] mb-20">
-					<h3 className="font-anton text-center text-[35px] tracking-[1px] lg:text-[68px] lg:tracking-[-1.5px] leading-[100%] uppercase text-balance">
-						Broadcasting Eastern Nigeria's news, business, lifestyle and culture.
-					</h3>
-				</section>
-			</section>
-
 			{/* Mission and Vision  */}
-			<div className="px-6 md:px-10 lg:px-17 w-full">
+			<div className="px-6 md:px-10 lg:px-12 w-full">
 				<CardHeader className="px-0">
 					<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-4 uppercase">
 						Our Mission and Vision
 					</CardTitle>
-					<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[520px] mb-5">
+					<CardDescription className="font-outfit text-muted-foreground text-sm md:text-base max-w-[520px] mb-5">
 						To be the Chief Marketing platform South East Nigeria to the world. Delivering
 						compelling content rooted in culture, community, and commerce, whilst unlocking
 						opportunities for our audiences and partners.
 					</CardDescription>
 				</CardHeader>
 
-				<div className="w-full rounded-2xl overflow-hidden relative pt-4">
+				<div className="w-full overflow-hidden relative pt-4">
 					<img
-						className="size-full rounded-[12px] object-cover"
+						className="size-full rounded-none object-cover"
 						alt=""
 						src={"https://8kvl2urisy.ufs.sh/f/BxfEHnSVCZL45SvQuDiwayn8tM2jkJqHVSIRrW9oYbhNs43x"}
 					/>
 				</div>
 			</div>
 
+			<section className="mx-auto flex flex-col items-center justify-center gap-[30px] lg:gap-20 py-20 pb-0 px-6 md:px-10 lg:px-12 relative overflow-hidden">
+				<section className="max-w-[1000px]">
+					<h3 className="font-anton text-center text-[35px] tracking-[1px] lg:text-[68px] lg:tracking-[-1.5px] leading-[100%] uppercase text-balance">
+						Broadcasting Eastern Nigeria's news, business, lifestyle and culture.
+					</h3>
+				</section>
+			</section>
+
 			{/* Core Values */}
-			<div className="px-6 md:px-10 lg:px-17 w-full py-20">
+			<div className="px-6 md:px-10 lg:px-12 w-full py-20">
 				<CardHeader className="px-0">
 					<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-4 uppercase">
 						Core Values
 					</CardTitle>
-					<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[480px] mb-5">
+					<CardDescription className="font-outfit text-muted-foreground text-sm md:text-base max-w-[480px] mb-5">
 						Experience growth through innovative digital marketing designed to reach, inspire, and
 						deliver results.
 					</CardDescription>
@@ -137,7 +131,7 @@ const HeroSection = () => {
 						<LightbulbIcon className="size-[60px]" color="#f9700b" />
 						<section className="flex flex-col gap-5 font-san max-w-[300px] md:max-w-[500px]">
 							<h3 className="text-2xl font-normal">Innovation</h3>
-							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
+							<p className="font-outfit text-muted-foreground text-sm md:text-base">
 								Delivering news through modern storytelling and digital-first reporting.
 							</p>
 						</section>
@@ -147,7 +141,7 @@ const HeroSection = () => {
 						<HeartHandshakeIcon className="size-[60px]" color="#f9700b" />
 						<section className="flex flex-col gap-5 font-san max-w-[300px] md:max-w-[500px]">
 							<h3 className="text-2xl font-normal">Excellence & Inclusivity</h3>
-							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
+							<p className="font-outfit text-muted-foreground text-sm md:text-base">
 								Accurate reporting that represents every voice and community.
 							</p>
 						</section>
@@ -157,7 +151,7 @@ const HeroSection = () => {
 						<ShieldCheckIcon className="size-[60px]" color="#f9700b" />
 						<section className="flex flex-col gap-5 font-san max-w-[300px] md:max-w-[500px]">
 							<h3 className="text-2xl font-normal">Authenticity</h3>
-							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
+							<p className="font-outfit text-muted-foreground text-sm md:text-base">
 								Transparent journalism rooted in facts and integrity.
 							</p>
 						</section>
@@ -167,7 +161,7 @@ const HeroSection = () => {
 						<EarthIcon className="size-[60px]" color="#f9700b" />
 						<section className="flex flex-col gap-5 font-san max-w-[300px] md:max-w-[500px]">
 							<h3 className="text-2xl font-normal">Community</h3>
-							<p className="font-dm-sans text-muted-foreground text-sm md:text-base">
+							<p className="font-outfit text-muted-foreground text-sm md:text-base">
 								Connecting people through stories that matter locally and globally.
 							</p>
 						</section>

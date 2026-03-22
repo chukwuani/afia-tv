@@ -69,10 +69,21 @@ const JoinNewsletterForm = () => {
 
 	return (
 		<section id="newsletter" aria-labelledby="newsletter-heading" className="space-y-3">
-			<h4 className="text-[14px] leading-[16px] font-normal">Subscribe to our newsletter</h4>
+			<h4 className="text-[12px] leading-[14px] font-normal text-white uppercase font-jetbrains-mono">
+				Subscribe to our newsletter
+			</h4>
+			<p
+				className={cn(
+					"text-[10px] leading-[12px] max-w-[400px] text-muted-foreground transition-colors uppercase font-jetbrains-mono",
+				)}>
+				Join our newsletter to stay in the loop with our latest news, updates, and exclusive offers.
+			</p>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="flex gap-2 rounded-full overflow-hidden border border-input bg-background px-1 py-1 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 ring-offset-background focus-visible:outline-none">
+				style={{
+					backgroundImage: "linear-gradient(0deg, #131313, #222)",
+				}}
+				className="flex gap-2 rounded overflow-hidden px-1 py-1 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 ring-offset-foreground focus-visible:outline-none">
 				<Input
 					{...register("email")}
 					onChange={() => clearErrors("email")}
@@ -80,14 +91,14 @@ const JoinNewsletterForm = () => {
 					type="email"
 					placeholder="m@example.com"
 					className={cn(
-						"flex-1 focus-visible:ring-0 focus-visible:ring-offset-0 border-0 rounded-l-full",
-						errors.email && "ring-2 !ring-destructive ring-offset-2"
+						"flex-1 focus-visible:ring-0 focus-visible:ring-offset-0 border-0 rounded text-white",
+						errors.email && "ring-2 !ring-destructive ring-offset-2",
 					)}
 					required
 				/>
 				<Button
 					disabled={loading}
-					className="bg-brand hover:bg-brand/90 text-white font-medium relative rounded-full"
+					className="bg-brand hover:bg-brand/90 text-white font-medium relative rounded"
 					type="submit">
 					{loading && (
 						<Icons.spinner className="absolute mx-auto size-5 animate-spin" aria-hidden="true" />

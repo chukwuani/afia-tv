@@ -12,7 +12,7 @@ function RateCard() {
 						Reach the heart of Ala Igbo.
 					</h1>
 
-					<p className="font-dm-sans text-white text-sm leading-[140%] tracking-[.009rem] mb-8">
+					<p className="font-outfit text-white text-sm leading-[140%] tracking-[.009rem] mb-8">
 						Whether you&apos;re launching a product, hosting an event, or building awareness, Afia TV helps you connect through authentic media and targeted campaigns.
 					</p>
 

@@ -111,7 +111,7 @@ const ContactForm = () => {
   }
 
   return (
-    <div className="bg-background border border-border rounded-3xl p-8">
+    <div className="bg-background border border-border rounded p-8">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <Input
@@ -174,7 +174,7 @@ const ContactForm = () => {
           )}
           placeholder="Message"
         />
-        <Button className="w-32 rounded-full" type="submit" disabled={loading}>
+        <Button className="w-32 rounded" type="submit" disabled={loading}>
           {loading ? "Submitting..." : "Submit"}
         </Button>
         <p className="text-sm text-muted-foreground font-light">

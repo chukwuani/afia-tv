@@ -141,15 +141,15 @@ const SportsPage = () => {
 										src={item.mainImage}
 										alt={item.altText}
 										sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-										className="rounded-md bg-muted object-cover aspect-[14/9] w-full"
+										className="rounded-none bg-muted object-cover aspect-[14/9] w-full"
 									/>
 
 									<section className="flex flex-col gap-2 w-fit">
 										<section className="flex gap-2 items-center">
-											<p className="text-xs text-muted-foreground font-medium capitalize">
+											<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
 												By {item.author.name} -{" "}
 											</p>
-											<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+											<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
 												{formatDate(item._createdAt)}
 											</p>
 										</section>
@@ -158,7 +158,7 @@ const SportsPage = () => {
 											{item.title}
 										</h3>
 
-										<p className="text-sm font-dm-sans text-muted-foreground line-clamp-2">
+										<p className="text-sm font-outfit text-muted-foreground line-clamp-2">
 											{item.description}
 										</p>
 									</section>
@@ -174,7 +174,7 @@ const SportsPage = () => {
 					onClick={() => refetch()}
 					variant={"outline"}
 					size={"lg"}
-					className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
+					className="flex mx-auto rounded text-[0.75rem] tracking-[2.4px] uppercase">
 					Refresh Feed <RefreshCw className="size-5" />
 				</Button>
 			) : (
@@ -183,7 +183,7 @@ const SportsPage = () => {
 					size="lg"
 					disabled={!hasNextPage || isFetchingNextPage}
 					onClick={() => fetchNextPage()}
-					className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans w-fit mt-5">
+					className="flex mx-auto rounded text-[0.75rem] tracking-[2.4px] uppercase w-fit mt-5">
 					{isFetchingNextPage
 						? "Loading more..."
 						: hasNextPage

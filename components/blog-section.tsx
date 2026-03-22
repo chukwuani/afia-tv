@@ -21,7 +21,7 @@ const BlogSection = () => {
 	} = useInfinteQuery("/api/news", "infinite_news", 4);
 
 	return (
-		<section className="flex flex-col px-6 sm:px-12 py-16">
+		<section className="flex flex-col px-6 sm:px-12 py-16 border-t">
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 				{status === "pending" ? (
 					<React.Fragment>
@@ -51,16 +51,16 @@ const BlogSection = () => {
 													src={item.mainImage}
 													alt={item.altText}
 													sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-													className="rounded-md bg-muted object-cover aspect-[14/9] w-full"
+													className="rounded-none bg-muted object-cover aspect-[14/9] w-full"
 												/>
 										
 
 											<section className="flex flex-col gap-2 w-fit">
 												<section className="flex gap-2 items-center">
-													<p className="text-xs text-muted-foreground font-medium capitalize">
+													<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
 														By {item.author.name} -{" "}
 													</p>
-													<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+													<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
 														{formatDate(item._createdAt)}
 													</p>
 												</section>
@@ -69,7 +69,7 @@ const BlogSection = () => {
 													{item.title}
 												</h3>
 
-												<p className="text-sm font-dm-sans text-muted-foreground line-clamp-2">
+												<p className="text-sm font-outfit text-muted-foreground line-clamp-2">
 													{item.description}
 												</p>
 											</section>
@@ -87,7 +87,7 @@ const BlogSection = () => {
 				size="lg"
 				disabled={!hasNextPage || isFetchingNextPage}
 				onClick={() => fetchNextPage()}
-				className="flex mx-auto rounded-full mt-8">
+				className="flex mx-auto rounded mt-8">
 				{isFetchingNextPage
 					? "Loading more..."
 					: hasNextPage

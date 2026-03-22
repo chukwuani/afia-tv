@@ -46,7 +46,7 @@ const Events = () => {
 						<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">
 							Afia Homecoming
 						</CardTitle>
-						<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[480px] mb-5">
+						<CardDescription className="font-outfit text-muted-foreground text-sm md:text-base max-w-[480px] mb-5">
 							Experience the Pulse of the East. See our past and upcoming events, festivals, and
 							community showcases
 						</CardDescription>
@@ -83,7 +83,7 @@ const Events = () => {
 									<h3 className="font-anton text-[24px] leading-[140%] tracking-normal mt-1 mb-2 line-clamp-2 uppercase">
 										{event.title}
 									</h3>
-									<p className="text-sm font-dm-sans text-muted-foreground line-clamp-2">
+									<p className="text-sm font-outfit text-muted-foreground line-clamp-2">
 										{event.description}
 									</p>
 								</div>

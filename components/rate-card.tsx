@@ -18,7 +18,7 @@ function RateCard() {
 
 				<section className="flex items-center justify-between w-full gap-5 flex-col lg:flex-row">
 					<section className="w-full max-w-[450px] h-auto relative">
-						<p className="font-dm-sans text-[14px] text-center lg:text-start lg:text-[16px] font-normal tracking-normal leading-[170%]">
+						<p className="font-outfit text-[14px] text-center lg:text-start lg:text-[16px] font-normal tracking-normal leading-[170%]">
 							Whether you&apos;re launching a product, hosting an event, or building awareness, Afia TV helps you connect through authentic media and targeted campaigns.
 						</p>
 					</section>

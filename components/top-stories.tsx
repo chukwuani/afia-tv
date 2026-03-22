@@ -53,14 +53,14 @@ export default function TopStories() {
 	});
 
 	return (
-		<Card className="flex flex-col gap-5 overflow-hidden border-none bg-background rounded-none shadow-none pt-20 px-6 md:px-10 lg:px-12 pb-10">
+		<Card className="flex flex-col overflow-hidden border-none bg-background rounded-none shadow-none pt-20 px-6 md:px-10 lg:px-12 pb-10">
 			{/* Section header */}
 			<section className="flex justify-between items-center gap-10">
 				<CardHeader className="px-0">
 					<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">
 						Top Stories
 					</CardTitle>
-					<CardDescription className="font-dm-sans text-muted-foreground text-sm md:text-base max-w-[480px]">
+					<CardDescription className="font-outfit text-muted-foreground text-sm md:text-base max-w-[480px]">
 						Discover the hottest trends, breaking news, and exclusive stories from Nigeria and across the globe.
 					</CardDescription>
 				</CardHeader>
@@ -69,7 +69,7 @@ export default function TopStories() {
 					href="/news"
 					className={cn(
 						buttonVariants({ variant: "outline" }),
-						"hidden md:flex rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans"
+						"hidden md:flex text-[0.75rem] tracking-[2.4px] uppercase"
 					)}>
 					View All
 				</Link>
@@ -96,15 +96,15 @@ export default function TopStories() {
 								src={item?.mainImage}
 								alt={item?.altText || "News Image"}
 								sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-								className="rounded-md bg-muted object-cover aspect-[14/9] w-full"
+								className="rounded-none bg-muted object-cover aspect-[14/9] w-full"
 							/>
 
 							<section className="flex flex-col gap-2 w-fit">
 								<section className="flex gap-2 items-center">
-									<p className="text-xs text-muted-foreground font-medium capitalize">
+									<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
 										By {item?.author?.name} -{" "}
 									</p>
-									<p className="text-xs text-muted-foreground font-medium inline-flex capitalize">
+									<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
 										{formatDate(item?._createdAt)}
 									</p>
 								</section>
@@ -113,7 +113,7 @@ export default function TopStories() {
 									{item?.title}
 								</p>
 
-								<p className="text-sm font-dm-sans text-muted-foreground line-clamp-2">
+								<p className="text-sm font-outfit text-muted-foreground line-clamp-2">
 									{item?.description}
 								</p>
 							</section>
@@ -127,7 +127,7 @@ export default function TopStories() {
 					onClick={() => refetch()}
 					variant={"outline"}
 					size={"lg"}
-					className="flex mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans">
+					className="flex mx-auto text-[0.75rem] tracking-[2.4px] uppercase">
 					Refresh Feed <RefreshCw className="size-5" />
 				</Button>
 			) : (
@@ -135,7 +135,7 @@ export default function TopStories() {
 					href="/news"
 					className={cn(
 						buttonVariants({ variant: "outline", size: "lg" }),
-						"flex md:hidden mx-auto rounded-full text-[0.75rem] tracking-[2.4px] uppercase font-dm-sans"
+						"flex md:hidden mx-auto text-[0.75rem] tracking-[2.4px] uppercase"
 					)}>
 					View All
 				</Link>
