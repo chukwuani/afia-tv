@@ -9,6 +9,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { siteConfig } from "@/config";
 import QueryProvider from "@/providers/query-provider";
 import Adsense from "@/components/layout/adsense";
+import ZohoChat from "@/components/layout/zoho-chat-widget";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 const anton = localFont({
 	src: [
@@ -122,7 +124,13 @@ export default function RootLayout({
 			<body
 				suppressHydrationWarning
 				className={`${anton.variable} ${jetBrainsMono.variable} antialiased font-outfit overflow-x-hidden max-w-[1500px] mx-auto`}>
-				<QueryProvider>{children}</QueryProvider>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="light"
+					enableSystem
+					disableTransitionOnChange>
+					<QueryProvider>{children}</QueryProvider>
+				</ThemeProvider>
 
 				<Toaster richColors position="top-center" />
 
@@ -134,20 +142,13 @@ export default function RootLayout({
 				/>
 				<Script id="google-analytics-init">
 					{`window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-1SS0N68NR8');`}
+            		function gtag(){dataLayer.push(arguments);}
+            		gtag('js', new Date());
+            		gtag('config', 'G-1SS0N68NR8');`}
 				</Script>
 
 				{/* SalesIQ script */}
-				<Script id="show-banner">
-					{`window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}`}
-				</Script>
-
-				<Script
-					id="zsiqscript"
-					src="https://salesiq.zohopublic.com/widget?wc=siqcd36da8148373c734866fcaf31bcdd96"
-				/>
+				<ZohoChat />
 			</body>
 		</html>
 	);

@@ -192,7 +192,7 @@ export default function VideoFeed() {
 									/>
 									<Button
 										variant="default"
-										className="!px-4 py-3 h-auto font-jetbrains-mono text-[0.75rem] tracking-[2.4px] uppercase absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 bg-foreground cursor-pointer">
+										className="!px-4 py-3 h-auto font-jetbrains-mono text-[0.75rem] tracking-[2.4px] uppercase absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 bg-black cursor-pointer">
 										Watch
 									</Button>
 								</section>

@@ -13,7 +13,7 @@ import { Facebook } from "lucide-react";
 
 export default function Footer() {
 	return (
-		<footer className="w-full bg-foreground relative overflow-hidden">
+		<footer className="w-full bg-black relative overflow-hidden">
 			{/* <img
 				src="/images/pattern.png"
 				className="absolute top-0 left-0 opacity-15 w-full h-full object-cover"

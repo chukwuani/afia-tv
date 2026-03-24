@@ -11,9 +11,8 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Icons } from "@/components/icons";
-
-import LogoutBtn from "../logout-btn";
-
+import { ThemeSwitcher } from "@/components/theme-switcher";
+import DonateDialog from "@/components/donate-dialog";
 
 export function MobileNav() {
 	const pathname = usePathname();
@@ -25,12 +24,16 @@ export function MobileNav() {
 
 	return (
 		<section className="flex lg:hidden gap-3 items-center justify-between">
+			{/* <DonateDialog /> */}
+
+			<ThemeSwitcher />
+
 			<Link
 				href="/live"
 				target="_blank"
 				className={cn(
 					buttonVariants({ variant: "outline" }),
-					"inline-flex text-base font-normal rounded"
+					"inline-flex text-base font-normal rounded",
 				)}>
 				<Icons.live />
 				Live
@@ -62,16 +65,12 @@ export function MobileNav() {
 													href={item.href}
 													onClick={() => setOpen(false)}
 													className={cn(
-																	"group w-full rounded-md bg-background px-2 font-outfit focus:text-brand focus:outline-none text-foreground/60 transition-colors hover:text-foreground text-[0.775rem] font-medium capitalize py-4 flex items-center gap-2",
-																	item.href === pathname && "text-brand hover:text-brand font-medium",
-																	item.disabled && "pointer-events-none opacity-60",
-																	
-																)}
-													>
+														"group w-full rounded-md bg-background px-2 font-outfit focus:text-brand focus:outline-none text-foreground/60 transition-colors hover:text-foreground text-[0.775rem] font-medium capitalize py-4 flex items-center gap-2",
+														item.href === pathname && "text-brand hover:text-brand font-medium",
+														item.disabled && "pointer-events-none opacity-60",
+													)}>
 													{item.title}
 												</Link>
-
-												
 											</section>
 										))}
 									</section>

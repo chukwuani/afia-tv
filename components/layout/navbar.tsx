@@ -6,12 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { buttonVariants } from "@/components/ui/button";
-import {
-	NavigationMenu,
-	NavigationMenuList,
-} from "@/components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
-import { Icons } from "../icons";
+import { Icons } from "@/components/icons";
+import { ThemeSwitcher } from "@/components/theme-switcher";
+import DonateDialog from "@/components/donate-dialog";
 
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
@@ -28,10 +27,18 @@ export const Navbar = () => {
 							<div className="flex items-center justify-center rounded-full">
 								<span className="sr-only">Afia</span>
 								<Image
-									className="w-[70px] h-10 max-w-none"
+									className="w-[70px] h-10 max-w-none block dark:hidden"
 									width={100}
 									height={40}
 									src="/images/afia_logo.svg"
+									alt="Afia Logo"
+								/>
+
+								<Image
+									className="w-[70px] h-10 max-w-none hidden dark:block"
+									width={100}
+									height={40}
+									src="/images/afia_logo_white.svg"
 									alt="Afia Logo"
 								/>
 							</div>
@@ -56,18 +63,26 @@ export const Navbar = () => {
 						</NavigationMenuList>
 					</NavigationMenu>
 
-					<div className="hidden lg:flex items-center gap-4">
-						<Link
-							href="/live"
-							target="_blank"
-							className={cn(
-								buttonVariants({ variant: "outline" }),
-								"inline-flex text-base font-normal",
-							)}>
-							<Icons.live />
-							Live
-						</Link>
-					</div>
+					<section className="hidden lg:flex items-center justify-center gap-2">
+						<ThemeSwitcher />
+
+						{/* <div className="flex items-center gap-4">
+							<DonateDialog />
+						</div> */}
+
+						<div className="flex items-center gap-4">
+							<Link
+								href="/live"
+								target="_blank"
+								className={cn(
+									buttonVariants({ variant: "outline" }),
+									"inline-flex text-base font-normal",
+								)}>
+								<Icons.live />
+								Live
+							</Link>
+						</div>
+					</section>
 
 					<MobileNav />
 				</header>
