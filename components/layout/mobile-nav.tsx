@@ -12,6 +12,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Icons } from "@/components/icons";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+
 import DonateDialog from "@/components/donate-dialog";
 
 export function MobileNav() {
@@ -19,13 +20,12 @@ export function MobileNav() {
 	const { isDesktop } = useMediaQuery();
 
 	const [open, setOpen] = React.useState(false);
+	const [dialogOpen, setDialogOpen] = React.useState(false);
 
 	if (isDesktop) return null;
 
 	return (
 		<section className="flex lg:hidden gap-3 items-center justify-between">
-			{/* <DonateDialog /> */}
-
 			<ThemeSwitcher />
 
 			<Link
@@ -75,10 +75,19 @@ export function MobileNav() {
 										))}
 									</section>
 								</section>
+
+								<Button
+									onClick={() => setDialogOpen(true)}
+									variant={"default"}
+									className={"inline-flex text-base font-normal"}>
+									Donate
+								</Button>
 							</section>
 						</section>
 					</SheetContent>
 				</Sheet>
+
+				<DonateDialog open={dialogOpen} onOpenChange={setDialogOpen} />
 			</section>
 		</section>
 	);

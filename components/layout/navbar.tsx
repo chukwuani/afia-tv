@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Icons } from "@/components/icons";
@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 
 export const Navbar = () => {
 	const pathname = usePathname();
+	const [dialogOpen, setDialogOpen] = React.useState(false);
 
 	return (
 		<>
@@ -66,9 +67,16 @@ export const Navbar = () => {
 					<section className="hidden lg:flex items-center justify-center gap-2">
 						<ThemeSwitcher />
 
-						{/* <div className="flex items-center gap-4">
-							<DonateDialog />
-						</div> */}
+						<div className="flex items-center gap-4">
+							<Button
+								onClick={() => setDialogOpen(true)}
+								variant={"default"}
+								className={"inline-flex text-base font-normal"}>
+								Donate
+							</Button>
+
+							<DonateDialog open={dialogOpen} onOpenChange={setDialogOpen} />
+						</div>
 
 						<div className="flex items-center gap-4">
 							<Link

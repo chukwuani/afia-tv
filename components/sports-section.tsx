@@ -70,7 +70,7 @@ const SportsSection = () => {
 					<Link
 						key={item._id}
 						title={item.title}
-						href={`/news/${item.title}`}
+						href={`/news/${item.slug}`}
 						className="group flex flex-col">
 						<img
 							src={item.mainImage}
