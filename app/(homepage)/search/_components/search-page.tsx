@@ -13,7 +13,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import NewsSkeleton from "@/components/skeletons/news-skeleton";
 import {
 	Select,
 	SelectContent,
