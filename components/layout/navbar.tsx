@@ -10,10 +10,12 @@ import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-m
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Icons } from "@/components/icons";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import SearchButton from "@/components/layout/search-btn";
 import DonateDialog from "@/components/donate-dialog";
 
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
+
 
 export const Navbar = () => {
 	const pathname = usePathname();
@@ -64,6 +66,8 @@ export const Navbar = () => {
 					</NavigationMenu>
 
 					<section className="hidden lg:flex items-center justify-center gap-2">
+						<SearchButton />
+
 						<ThemeSwitcher />
 
 						{/* <div className="flex items-center gap-4">

@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 import { Button, buttonVariants } from "@/components/ui/button";
+import SearchButton from "@/components/layout/search-btn";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Icons } from "@/components/icons";
 import { ThemeSwitcher } from "@/components/theme-switcher";
@@ -25,6 +26,8 @@ export function MobileNav() {
 	return (
 		<section className="flex lg:hidden gap-3 items-center justify-between">
 			{/* <DonateDialog /> */}
+
+			<SearchButton />
 
 			<ThemeSwitcher />
 
