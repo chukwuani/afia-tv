@@ -370,7 +370,7 @@ export const Icons = {
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			viewBox="0 0 16 16"
-			className="w-4 h-4 fill-black"
+			className="w-4 h-4 fill-foreground"
 			{...props}
 			width="20">
 			<path d="M15.85 15.15l-5.27-5.28a6 6 0 10-.71.71l5.28 5.27a.48.48 0 00.7 0 .48.48 0 000-.7zM1 6a5 5 0 115 5 5 5 0 01-5-5z"></path>
