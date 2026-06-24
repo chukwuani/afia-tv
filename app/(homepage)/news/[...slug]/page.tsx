@@ -11,7 +11,7 @@ interface PageProps {
 
 // Return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams() {
-	const query = `*[_type == "news"] | order(publishedAt desc) [0...150] {
+	const query = `*[_type == "news" && !(_id in path("drafts.**"))] | order(publishedAt desc) [0...150] {
 					_id,
 					_createdAt,
 					publishedAt,
@@ -50,7 +50,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
 	const { slug } = await params;
 
-	const query = `*[_type == "news" && slug.current == $slug][0]{
+	const query = `*[_type == "news" && !(_id in path("drafts.**")) && slug.current == $slug][0]{
 	  _id,
 	  _createdAt,
 	  title,  
