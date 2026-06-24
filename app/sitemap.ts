@@ -31,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 }
 
 const fetchAllArticles = async () => {
-	const query = `*[_type == "news"] | order(publishedAt desc) [0...150] {
+	const query = `*[_type == "news" && !(_id in path("drafts.**"))] | order(publishedAt desc) [0...150] {
 					_id,
 					_createdAt,
 					publishedAt,
