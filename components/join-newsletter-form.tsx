@@ -69,12 +69,12 @@ const JoinNewsletterForm = () => {
 
 	return (
 		<section id="newsletter" aria-labelledby="newsletter-heading" className="space-y-3">
-			<h4 className="text-[12px] leading-[14px] font-normal text-white uppercase font-jetbrains-mono">
+			<h4 className="text-[12px] leading-[16px] font-medium text-white uppercase font-jetbrains-mono">
 				Subscribe to our newsletter
 			</h4>
 			<p
 				className={cn(
-					"text-[10px] leading-[12px] max-w-[400px] text-muted-foreground transition-colors uppercase font-jetbrains-mono",
+					"text-xs font-medium max-w-[400px] text-muted-foreground transition-colors",
 				)}>
 				Join our newsletter to stay in the loop with our latest news, updates, and exclusive offers.
 			</p>

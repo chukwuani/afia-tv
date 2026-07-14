@@ -11,6 +11,13 @@ function urlFor(source: SanityImageSource) {
 	return builder.image(source);
 }
 
+function getYouTubeId(url: string): string | null {
+	const match = url.match(
+		/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/,
+	);
+	return match ? match[1] : null;
+}
+
 export const components = {
 	block: {
 		h1: ({ children }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -87,6 +94,23 @@ export const components = {
 					alt={value.alt || "Article image"}
 					loading="lazy"
 				/>
+			);
+		},
+		youtube: ({ value }: any) => {
+			const id = getYouTubeId(value?.url || "");
+			if (!id) return null;
+
+			return (
+				<div className="relative my-6 aspect-video w-full overflow-hidden rounded-lg">
+					<iframe
+						className="absolute inset-0 h-full w-full"
+						src={`https://www.youtube.com/embed/${id}`}
+						title="YouTube video player"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+						allowFullScreen
+						loading="lazy"
+					/>
+				</div>
 			);
 		},
 	},

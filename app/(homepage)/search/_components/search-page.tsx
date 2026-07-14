@@ -238,8 +238,8 @@ export default function SearchPage() {
 					<React.Fragment>
 						{Array.from({ length: LIMIT }).map((_, index) => (
 							<section key={index} className="group cols-span-1 gap-2 w-full my-4">
-								<section className="flex flex-row-reverse items-end gap-4">
-									<Skeleton className="aspect-[14/9] rounded-none object-cover max-w-[205px] w-full" />
+								<section className="flex flex-col md:flex-row-reverse items-end gap-4">
+									<Skeleton className="aspect-[14/9] rounded-none object-cover md:w-[205px] w-full" />
 
 									<section className="gap-3 flex flex-col py-2 w-full">
 										<Skeleton className="h-[10px] w-3/4 rounded-none mt-3 mb-2" />
@@ -270,12 +270,12 @@ export default function SearchPage() {
 								title={item?.title}
 								href={`/news/${item?.slug}`}
 								className="group cols-span-1 gap-2 w-full border-b py-8">
-								<section className="flex flex-row-reverse items-end gap-4">
+								<section className="flex flex-col md:flex-row-reverse items-end gap-4">
 									<img
 										src={item?.mainImage}
 										alt={item?.altText || "News Image"}
 										sizes="(max-width: 600px) 120px, (max-width: 1024px) 165px, 205px"
-										className="rounded-none bg-muted object-cover aspect-[16/9] w-[205px]"
+										className="rounded-none bg-muted object-cover aspect-[14/9] md:w-[205px]"
 									/>
 
 									<section className="flex flex-col gap-2 w-fit">

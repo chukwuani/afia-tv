@@ -6,7 +6,6 @@ import Link from "next/link";
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
 
-import { Shell } from "@/components/shell";
 import JoinNewsletterForm from "@/components/join-newsletter-form";
 import { Icons } from "@/components/icons";
 import { Facebook } from "lucide-react";
@@ -14,10 +13,7 @@ import { Facebook } from "lucide-react";
 export default function Footer() {
 	return (
 		<footer className="w-full bg-black relative overflow-hidden">
-			{/* <img
-				src="/images/pattern.png"
-				className="absolute top-0 left-0 opacity-15 w-full h-full object-cover"
-			/> */}
+			<div className="relative w-full min-h-[150px] bg-cover bg-center bg-no-repeat bg-[url('/images/pattern.png')]" />
 			<section className="px-6 sm:px-12 md:pt-[60px] z-10 relative mx-0 grid items-center gap-8 pb-8 pt-6">
 				<section
 					id="footer-content"
@@ -34,10 +30,10 @@ export default function Footer() {
 						className="grid flex-1 grid-cols-1 gap-10 xxs:grid-cols-2 sm:grid-cols-3">
 						{siteConfig.footerNav.map((item) => (
 							<div key={item.title} className="space-y-3">
-								<h4 className="text-[12px] leading-[14px] uppercase font-jetbrains-mono mb-4 text-white">
+								<h4 className="text-xs font-medium uppercase font-jetbrains-mono mb-4 text-white">
 									{item.title}
 								</h4>
-								<ul className="space-y-1">
+								<ul className="space-y-2">
 									{item.items.map((link) => (
 										<li key={link.title}>
 											<Link
@@ -45,7 +41,7 @@ export default function Footer() {
 												target={link?.external ? "_blank" : undefined}
 												rel={link?.external ? "noreferrer" : undefined}
 												className={cn(
-													"text-[10px] leading-[12px] text-muted-foreground transition-colors hover:text-background uppercase font-jetbrains-mono",
+													"text-xs font-medium text-muted-foreground transition-colors hover:text-background",
 													link.disabled && "pointer-events-none opacity-60",
 												)}>
 												{link.title}
@@ -173,7 +169,7 @@ export default function Footer() {
 							<span className="sr-only">Home</span>
 						</Link>
 
-						<div className="flex-1 text-left text-[10px] leading-[12px] text-muted-foreground min-w-[100px] uppercase font-jetbrains-mono">
+						<div className="flex-1 text-left text-[12px] leading-[16px] font-medium text-muted-foreground min-w-[100px] uppercase font-jetbrains-mono">
 							© 2026 Afia Network. All Rights Reserved.
 						</div>
 					</section>
