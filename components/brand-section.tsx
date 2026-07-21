@@ -40,7 +40,7 @@ export default function BrandSection() {
 							rel="noopener noreferrer"
 							className={cn(
 								buttonVariants({ variant: "link" }),
-								"relative font-jetbrains-mono text-[0.75rem] tracking-[2.4px] uppercase px-0 underline text-foreground"
+								"relative font-azeret-mono text-[0.75rem] tracking-[2.4px] uppercase px-0 underline text-foreground"
 							)}>
 							Learn more
 						</Link>
@@ -72,7 +72,7 @@ export default function BrandSection() {
 							rel="noopener noreferrer"
 							className={cn(
 								buttonVariants({ variant: "link" }),
-								"relative font-jetbrains-mono text-[0.75rem] tracking-[2.4px] uppercase px-0 underline text-foreground"
+								"relative font-azeret-mono text-[0.75rem] tracking-[2.4px] uppercase px-0 underline text-foreground"
 							)}>
 							Learn more
 						</Link>
@@ -106,7 +106,7 @@ export default function BrandSection() {
 						rel="noopener noreferrer"
 						className={cn(
 								buttonVariants({ variant: "link" }),
-								"relative font-jetbrains-mono text-[0.75rem] tracking-[2.4px] uppercase px-0 underline text-foreground"
+								"relative font-azeret-mono text-[0.75rem] tracking-[2.4px] uppercase px-0 underline text-foreground"
 							)}>
 						Learn more
 					</Link>

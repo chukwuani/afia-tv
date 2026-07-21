@@ -57,6 +57,12 @@ export const siteConfig = {
 			disabled: false,
 		},
 		{
+			title: "Enugu Story",
+			href: "/enugustory",
+			external: false,
+			disabled: false,
+		},
+		{
 			title: "News",
 			href: "/news",
 			external: false,

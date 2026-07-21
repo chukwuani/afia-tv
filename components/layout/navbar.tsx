@@ -6,30 +6,75 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { buttonVariants } from "@/components/ui/button";
-import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-menu";
+import {
+	NavigationMenu,
+	NavigationMenuLink,
+	NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Icons } from "@/components/icons";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import SearchButton from "@/components/layout/search-btn";
-import DonateDialog from "@/components/donate-dialog";
 
 import { siteConfig } from "@/config";
 import { cn } from "@/lib/utils";
 
-
 export const Navbar = () => {
 	const pathname = usePathname();
+	const today = new Date();
+
+	function getIgboMarketDay() {
+		const days = ["Orie", "Afo", "Nkwo", "Eke"];
+
+		const parts = new Intl.DateTimeFormat("en-CA", {
+			timeZone: "Africa/Lagos",
+			year: "numeric",
+			month: "2-digit",
+			day: "2-digit",
+		}).formatToParts(new Date());
+
+		const y = +(parts.find((p) => p.type === "year")?.value ?? 0);
+		const m = +(parts.find((p) => p.type === "month")?.value ?? 0);
+		const d = +(parts.find((p) => p.type === "day")?.value ?? 0);
+
+		const current = Date.UTC(y, m - 1, d);
+		const start = Date.UTC(y, 0, 1);
+		const n = Math.round((current - start) / 86400000) + 1;
+
+		return days[(n - 1) % 4];
+	}
 
 	return (
-		<>
-			<nav className="font-san sticky top-0 z-50 h-16 content-center w-full bg-background backdrop-blur-xl transition-all px-4 md:px-12">
+		<header className="sticky top-0 z-50">
+			<nav className="font-san h-16 content-center w-full bg-background backdrop-blur-xl transition-all px-4 md:px-12 border-b border-border">
 				<header className="sticky top-0 flex h-16 items-center justify-between">
+					{/* Today's Date */}
+					<div className="text-left hidden lg:block">
+						<div className="css-e2a84x e1pjtsj60">
+							<span className="text-xs font-medium uppercase font-azeret-mono">
+								{today.toLocaleDateString("en-US", {
+									weekday: "long",
+									month: "long",
+									day: "numeric",
+									year: "numeric",
+								})}
+							</span>
+						</div>
+						<div className="css-bfvq22 e1pjtsj61">
+							<a
+								className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono"
+								href="https://www.nytimes.com/section/todayspaper">
+								{getIgboMarketDay()} Market Day
+							</a>
+						</div>
+					</div>
+
+					{/* Logo */}
 					<section className="flex items-center">
 						<Link href="/" className="flex items-center gap-2 font-normal font-san">
 							<div className="flex items-center justify-center rounded-full">
 								<span className="sr-only">Afia</span>
 								<Image
-									className="w-[70px] h-10 max-w-none block dark:hidden"
+									className="w-[70px] h-15 max-w-none block dark:hidden"
 									width={100}
 									height={40}
 									src="/images/afia_logo.svg"
@@ -43,32 +88,25 @@ export const Navbar = () => {
 									src="/images/afia_logo_white.svg"
 									alt="Afia Logo"
 								/>
+
+								{pathname === "/enugustory" && (
+									<Image
+										className="w-auto h-12 max-w-none ml-2"
+										width={100}
+										height={40}
+										src="/images/my-enugu-story-logo.png"
+										alt="My Enugu Story Logo"
+									/>
+								)}
 							</div>
 						</Link>
 					</section>
 
-					<NavigationMenu className="hidden md:flex">
-						<NavigationMenuList>
-							{siteConfig.mainNav.map(
-								(navItems, index) =>
-									navItems.href && (
-										<NavLink
-											key={index}
-											href={navItems.href}
-											pathname={pathname}
-											disabled={navItems.disabled}
-											className="inline-flex h-10 w-max items-center justify-center px-4 py-2 transition-colors focus:text-brand focus:outline-none">
-											{navItems.title}
-										</NavLink>
-									),
-							)}
-						</NavigationMenuList>
-					</NavigationMenu>
-
+					{/* Secondary Navigation Links */}
 					<section className="hidden lg:flex items-center justify-center gap-2">
 						<SearchButton />
 
-						<ThemeSwitcher />
+						{/* <ThemeSwitcher /> */}
 
 						{/* <div className="flex items-center gap-4">
 							<DonateDialog />
@@ -91,7 +129,63 @@ export const Navbar = () => {
 					<MobileNav />
 				</header>
 			</nav>
-		</>
+
+			{/* Main Navigation */}
+			<section className="hidden md:flex items-center justify-center w-full px-4 md:px-12 bg-background">
+				<NavigationMenu className="hidden md:flex">
+					<NavigationMenuList>
+						{siteConfig.mainNav.map(
+							(navItems, index) =>
+								navItems.href && (
+									<NavLink
+										key={index}
+										href={navItems.href}
+										pathname={pathname}
+										disabled={navItems.disabled}
+										className="inline-flex h-10 w-max items-center justify-center px-4 py-2 transition-colors focus:text-brand focus:outline-none">
+										{navItems.title}
+									</NavLink>
+								),
+						)}
+					</NavigationMenuList>
+				</NavigationMenu>
+
+				{/* <NavigationMenu>
+					<NavigationMenuList>
+						{siteConfig.mainNav
+							?.filter((item) => item.title !== siteConfig.mainNav[0]?.title)
+							.map((item) =>
+								item?.items ? (
+									<NavigationMenuItem key={item.title}>
+										<NavigationMenuTrigger className="h-auto capitalize">
+											{item.title}
+										</NavigationMenuTrigger>
+										<NavigationMenuContent>
+											<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+												{item.items.map((item) => (
+													<ListItem key={item.title} title={item.title} href={item.href}>
+														{item.description}
+													</ListItem>
+												))}
+											</ul>
+										</NavigationMenuContent>
+									</NavigationMenuItem>
+								) : (
+									item.href && (
+										<NavigationMenuItem key={item.title}>
+											<Link href={item.href} legacyBehavior passHref>
+												<NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "h-auto")}>
+													{item.title}
+												</NavigationMenuLink>
+											</Link>
+										</NavigationMenuItem>
+									)
+								),
+							)}
+					</NavigationMenuList>
+				</NavigationMenu> */}
+			</section>
+		</header>
 	);
 };
 
@@ -106,8 +200,8 @@ function NavLink({ children, href, disabled, pathname, className, ...props }: Na
 		<a
 			href={href}
 			className={cn(
-				"text-foreground/60 transition-colors hover:text-foreground text-[0.775rem] font-medium capitalize py-4 flex items-center gap-2",
-				href === pathname && "text-brand hover:text-brand font-medium",
+				"text-foreground/60 transition-colors hover:text-foreground text-[12px] font-medium uppercase font-azeret-mono py-4 flex items-center gap-2",
+				href === pathname && "text-brand hover:text-brand font-normal",
 				disabled && "pointer-events-none opacity-60",
 				className,
 			)}
@@ -116,3 +210,26 @@ function NavLink({ children, href, disabled, pathname, className, ...props }: Na
 		</a>
 	);
 }
+
+const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
+	({ className, title, children, href, ...props }, ref) => {
+		return (
+			<li>
+				<NavigationMenuLink asChild>
+					<Link
+						ref={ref}
+						href={String(href)}
+						className={cn(
+							"block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+							className,
+						)}
+						{...props}>
+						<div className="text-sm font-medium leading-none">{title}</div>
+						<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
+					</Link>
+				</NavigationMenuLink>
+			</li>
+		);
+	},
+);
+ListItem.displayName = "ListItem";

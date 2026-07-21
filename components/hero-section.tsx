@@ -152,7 +152,7 @@ const HeroSection = () => {
 	const row3Images = images.slice(0, 6);
 
 	return (
-		<section className="flex flex-col items-center pt-[180px] pb-6 lg:pb-12 relative w-full overflow-hidden">
+		<section className="flex flex-col items-center pt-[200px] pb-6 lg:pb-12 relative w-full overflow-hidden">
 			<section
 				className="absolute top-[-280px] sm:top-[-320px] right-[-240px] left-[-80px]"
 				style={{
@@ -169,8 +169,9 @@ const HeroSection = () => {
 			</section>
 
 			<div className="flex flex-col text-start items-start w-full justify-center px-6 md:px-14 gap-[30px] py-0 relative">
+
 				<div className="flex flex-col">
-					<Heading className="text-[44px] leading-[4rem] -tracking-[.053rem] lg:text-[80px] lg:leading-[104%] lg:-tracking-[1.5px] font-anton font-normal max-w-[600px] uppercase">
+					<Heading className="text-[50px] leading-[104%] -tracking-[1.5px] lg:text-[80px] lg:leading-[104%] lg:-tracking-[1.5px] font-anton font-normal max-w-[600px] uppercase">
 						Stories That
 						<br />
 						Shape Ala Igbo
@@ -178,7 +179,7 @@ const HeroSection = () => {
 
 					{/* Subheading text */}
 					<div className="flex flex-col max-w-[480px] w-full items-center relative mt-6">
-						<p className="font-outfit font-normal text-muted-foreground text-sm md:text-base leading-[28px]">
+						<p className="font-azeret-mono uppercase font-normal text-muted-foreground text-sm">
 							Streaming 24/7 on DStv 254 & GOtv 17 — Dive into Igbo stories, culture, and power like
 							never before.
 						</p>

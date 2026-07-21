@@ -30,7 +30,7 @@ export default function Footer() {
 						className="grid flex-1 grid-cols-1 gap-10 xxs:grid-cols-2 sm:grid-cols-3">
 						{siteConfig.footerNav.map((item) => (
 							<div key={item.title} className="space-y-3">
-								<h4 className="text-xs font-medium uppercase font-jetbrains-mono mb-4 text-white">
+								<h4 className="text-xs font-medium uppercase font-azeret-mono mb-4 text-white">
 									{item.title}
 								</h4>
 								<ul className="space-y-2">
@@ -56,7 +56,7 @@ export default function Footer() {
 
 					<div className="FooterLarge_right__Tsov5 md:!col-span-1">
 						<div className="">
-							<p className="text-[12px] leading-[14px] uppercase font-jetbrains-mono mb-4 text-white">
+							<p className="text-[12px] leading-[14px] uppercase font-azeret-mono mb-4 text-white">
 								Follow us
 							</p>
 							<div className="Follow_buttons__wm2FF text-white">
@@ -169,7 +169,7 @@ export default function Footer() {
 							<span className="sr-only">Home</span>
 						</Link>
 
-						<div className="flex-1 text-left text-[12px] leading-[16px] font-medium text-muted-foreground min-w-[100px] uppercase font-jetbrains-mono">
+						<div className="flex-1 text-left text-[12px] leading-[16px] font-medium text-muted-foreground min-w-[100px] uppercase font-azeret-mono">
 							© 2026 Afia Network. All Rights Reserved.
 						</div>
 					</section>

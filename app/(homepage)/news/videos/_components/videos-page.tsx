@@ -146,17 +146,17 @@ const VideosPage = () => {
 
 										<Button
 											variant={"default"}
-											className="text-base !px-4 py-3 h-auto font-jetbrains-mono text-[0.75rem] tracking-[2.4px] uppercase absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 bg-black cursor-pointer">
+											className="text-base !px-4 py-3 h-auto font-azeret-mono text-[0.75rem] tracking-[2.4px] uppercase absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 bg-black cursor-pointer">
 											Watch
 										</Button>
 									</section>
 
 									<section className="flex flex-col gap-2 w-fit">
 										<section className="flex gap-2 items-center">
-											<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
+											<p className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono">
 												Afia News -
 											</p>
-											<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
+											<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-azeret-mono">
 												{formatDate(item?._createdAt)}
 											</p>
 										</section>

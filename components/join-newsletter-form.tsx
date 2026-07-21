@@ -69,7 +69,7 @@ const JoinNewsletterForm = () => {
 
 	return (
 		<section id="newsletter" aria-labelledby="newsletter-heading" className="space-y-3">
-			<h4 className="text-[12px] leading-[16px] font-medium text-white uppercase font-jetbrains-mono">
+			<h4 className="text-[12px] leading-[16px] font-medium text-white uppercase font-azeret-mono">
 				Subscribe to our newsletter
 			</h4>
 			<p

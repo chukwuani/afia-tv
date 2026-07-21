@@ -146,10 +146,10 @@ const SportsPage = () => {
 
 									<section className="flex flex-col gap-2 w-fit">
 										<section className="flex gap-2 items-center">
-											<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
+											<p className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono">
 												By {item.author.name} -{" "}
 											</p>
-											<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
+											<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-azeret-mono">
 												{formatDate(item._createdAt)}
 											</p>
 										</section>

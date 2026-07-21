@@ -20,7 +20,7 @@ import axios from "axios";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import PostLoading from "@/components/skeletons/post-loading";
-import AdBanner from "./layout/adBanner";
+import ArticleFollow from "@/components/article-follow";
 
 function PostSlug() {
 	const params = useParams();
@@ -39,7 +39,8 @@ function PostSlug() {
   body, 
   author->{
     name,
-    "imageUrl": image.asset->url
+    "imageUrl": image.asset->url,
+	"slug": slug.current
   },
   readingTime,
   publishedAt
@@ -107,9 +108,12 @@ function PostSlug() {
 								className="rounded-full size-10 object-cover"
 							/>
 							<div className="flex-1 text-left leading-tight">
-								<p className="font-medium uppercase font-jetbrains-mono">{author.name}</p>
+								<p
+									className="font-medium uppercase font-azeret-mono">
+									{author.name}
+								</p>
 
-								<div className="flex items-center space-x-2 text-xs text-muted-foreground uppercase font-jetbrains-mono">
+								<div className="flex items-center space-x-2 text-xs text-muted-foreground uppercase font-azeret-mono">
 									<time dateTime={""}>{formatDate(news.publishedAt)}</time>
 
 									<div>•</div>
@@ -121,28 +125,26 @@ function PostSlug() {
 					</div>
 				</div>
 
+				<Share title={news.title} />
+			</Shell>
+
+			<section className="w-auto h-auto lg:h-[540px] lg:w-[976px] mx-auto">
 				<img
 					src={news.mainImage}
 					alt={news.altText}
-					sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-					className="rounded-none bg-muted object-cover aspect-[16/11] w-full"
+					sizes="(min-width: 976px) 976px, 100vw"
+					className="rounded-none bg-muted object-cover w-full h-full aspect-[16/11] lg:aspect-auto"
+					width="960"
+					height="540"
 				/>
+			</section>
 
-				<section className="overflow-hidden">
-					<AdBanner dataAdSlot="7195289616" dataAdFormat="auto" dataFullWidthResponsive={true} />
-				</section>
-
+			<Shell as="article" variant="content">
 				<section>
 					<PortableText value={content} components={components} />
 				</section>
 
-				<Share title={news.title} />
-
-				<Separator className="my-4" />
-
-				<section className="overflow-hidden">
-					<AdBanner dataAdSlot="7195289616" dataAdFormat="auto" dataFullWidthResponsive={true} />
-				</section>
+				<ArticleFollow />
 
 				<Separator className="my-4" />
 

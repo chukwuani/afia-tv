@@ -125,10 +125,10 @@ export default function VideoFeed() {
 
 							<section className="max-sm:px-6 px-7 pl-0">
 								<section className="flex gap-1 items-center mb-2">
-									<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
+									<p className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono">
 										Afia News -
 									</p>
-									<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
+									<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-azeret-mono">
 										{formatDate(mainVideo.publishedAt)}
 									</p>
 								</section>
@@ -192,17 +192,17 @@ export default function VideoFeed() {
 									/>
 									<Button
 										variant="default"
-										className="!px-4 py-3 h-auto font-jetbrains-mono text-[0.75rem] tracking-[2.4px] uppercase absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 bg-black cursor-pointer">
+										className="!px-4 py-3 h-auto font-azeret-mono text-[0.75rem] tracking-[2.4px] uppercase absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 bg-black cursor-pointer">
 										Watch
 									</Button>
 								</section>
 
 								<section>
 									<section className="flex gap-1 items-center mb-2">
-										<p className="text-xs text-muted-foreground font-medium uppercase font-jetbrains-mono">
+										<p className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono">
 											Afia News -
 										</p>
-										<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-jetbrains-mono">
+										<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-azeret-mono">
 											{formatDate(item.publishedAt)}
 										</p>
 									</section>

@@ -29,7 +29,7 @@ export function MobileNav() {
 
 			<SearchButton />
 
-			<ThemeSwitcher />
+			{/* <ThemeSwitcher /> */}
 
 			<Link
 				href="/live"
@@ -68,8 +68,8 @@ export function MobileNav() {
 													href={item.href}
 													onClick={() => setOpen(false)}
 													className={cn(
-														"group w-full rounded-md bg-background px-2 font-outfit focus:text-brand focus:outline-none text-foreground/60 transition-colors hover:text-foreground text-[0.775rem] font-medium capitalize py-4 flex items-center gap-2",
-														item.href === pathname && "text-brand hover:text-brand font-medium",
+														"group w-full rounded-md bg-background px-2 focus:text-brand focus:outline-none text-foreground/60 transition-colors hover:text-foreground text-[12px] font-medium uppercase font-azeret-mono py-4 flex items-center gap-2",
+														item.href === pathname && "text-brand hover:text-brand font-normal",
 														item.disabled && "pointer-events-none opacity-60",
 													)}>
 													{item.title}

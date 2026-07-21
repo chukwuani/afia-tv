@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
 
+// @ts-ignore: CSS module declarations are handled by Next.js
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -32,6 +33,12 @@ const outfit = localFont({
 const jetBrainsMono = localFont({
 	src: "../public/fonts/jetbrains-mono/JetBrainsMono-VariableFont_wght.ttf",
 	variable: "--font-jetbrains-mono",
+	display: "swap",
+});
+
+const azeretMono = localFont({
+	src: "../public/fonts/azeret-mono/AzeretMono-VariableFont_wght.ttf",
+	variable: "--font-azeret-mono",
 	display: "swap",
 });
 
@@ -123,7 +130,7 @@ export default function RootLayout({
 
 			<body
 				suppressHydrationWarning
-				className={`${anton.variable} ${jetBrainsMono.variable} antialiased font-outfit overflow-x-hidden max-w-[1500px] mx-auto`}>
+				className={`${anton.variable} ${jetBrainsMono.variable} ${azeretMono.variable} antialiased font-outfit overflow-x-hidden max-w-[1500px] mx-auto`}>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="light"

@@ -73,7 +73,7 @@ export default function SearchButton() {
 				</form>
 
 				{/* Keyboard hints */}
-				<p className="text-xs text-muted-foreground font-jetbrains-mono mt-3">
+				<p className="text-xs text-muted-foreground font-azeret-mono mt-3">
 					Press{" "}
 					<kbd className="px-1.5 py-0.5 border rounded text-[10px] bg-muted">
 						Enter
