@@ -2,12 +2,8 @@
 
 import { notFound } from "next/navigation";
 
-import Link from "next/link";
-import { ChevronLeftIcon } from "lucide-react";
+import { formatDate } from "@/lib/utils";
 
-import { cn, formatDate } from "@/lib/utils";
-
-import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Shell } from "@/components/shell";
 import { components } from "@/components/portable-component";
@@ -21,6 +17,7 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import PostLoading from "@/components/skeletons/post-loading";
 import ArticleFollow from "@/components/article-follow";
+import RelatedArticles from "@/components/related-articles";
 
 function PostSlug() {
 	const params = useParams();
@@ -80,19 +77,11 @@ function PostSlug() {
 	const author = news.author;
 	const content = news.body;
 
+	console.log(slug);
+
 	return (
 		<>
 			<Shell as="article" variant="content">
-				<Link
-					href="/news"
-					className={cn(
-						buttonVariants({ variant: "ghost" }),
-						"absolute left-[-200px] top-14 hidden xl:inline-flex",
-					)}>
-					<ChevronLeftIcon className="mr-2 size-4" aria-hidden="true" />
-					See all news
-				</Link>
-
 				<div className="space-y-2">
 					<h1 className="inline-block text-[36px] lg:text-[68px] font-normal tracking-[-1px] leading-[110%] font-anton">
 						{news.title}
@@ -108,10 +97,7 @@ function PostSlug() {
 								className="rounded-full size-10 object-cover"
 							/>
 							<div className="flex-1 text-left leading-tight">
-								<p
-									className="font-medium uppercase font-azeret-mono">
-									{author.name}
-								</p>
+								<p className="font-medium uppercase font-azeret-mono">{author.name}</p>
 
 								<div className="flex items-center space-x-2 text-xs text-muted-foreground uppercase font-azeret-mono">
 									<time dateTime={""}>{formatDate(news.publishedAt)}</time>
@@ -146,16 +132,10 @@ function PostSlug() {
 
 				<ArticleFollow />
 
-				<Separator className="my-4" />
-
-				<Link
-					href="/news"
-					className={cn(buttonVariants({ variant: "ghost", className: "mx-auto mt-4 w-fit" }))}>
-					<ChevronLeftIcon className="mr-2 size-4" aria-hidden="true" />
-					See all posts
-					<span className="sr-only">See all posts</span>
-				</Link>
+				<Separator className="my-2" />
 			</Shell>
+
+			<RelatedArticles currentSlug={slug.length > 1 ? `${slug[0]}/${slug[1]}` : slug[0]} />
 		</>
 	);
 }

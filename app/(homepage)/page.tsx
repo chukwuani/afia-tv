@@ -1,33 +1,12 @@
-"use client";
+import NewsComp from "@/components/layout/news-comp";
 
-import Events from "@/components/events";
-import Faq from "@/components/faq";
-import RateCard from "@/components/rate-card";
+import { Metadata } from "next";
 
-import HeroSection from "@/components/hero-section";
-import BrandSection from "@/components/brand-section";
-import TopStories from "@/components/top-stories";
-import AboutSection from "@/components/about";
-import VideoFeedSection from "@/components/layout/video-feed-section";
+export const metadata: Metadata = {
+	metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
+	title: "The Latest News",
+};
 
-export default function HomePage() {
-	return (
-		<main className="relative w-full">
-			<HeroSection />
-
-			<AboutSection />
-
-			<TopStories />
-
-			<VideoFeedSection />
-
-			<BrandSection />
-
-			{/* <Faq /> */}
-
-			{/* <RateCard /> */}
-
-			{/* <Events /> */}
-		</main>
-	);
+export default async function HomePage() {
+	return <NewsComp />;
 }

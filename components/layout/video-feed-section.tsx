@@ -14,7 +14,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import NewsSkeleton from "@/components/skeletons/news-skeleton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-const VideoFeedSection = ({layout = "default"}: {layout?: "default" | "secondary"}) => {
+const VideoFeedSection = ({ layout = "default" }: { layout?: "default" | "secondary" }) => {
 	const { isPending, isError, data, refetch } = useQuery<VideoTypes[]>({
 		queryKey: ["video-feed-section"],
 		queryFn: async () => {
@@ -51,35 +51,35 @@ const VideoFeedSection = ({layout = "default"}: {layout?: "default" | "secondary
 	});
 
 	return (
-		<Card className="flex flex-col overflow-hidden border-none bg-background rounded-none shadow-none pt-20 px-6 md:px-10 lg:px-12 pb-10">
+		<Card className="flex flex-col overflow-hidden border-none bg-background rounded-none shadow-none pt-8 px-4 md:px-10 lg:px-12 pb-8">
 			{/* Section header */}
 			<section className="flex justify-between items-center gap-10">
-                {layout === "default" ? 
-                  <CardHeader className="px-0">
-					<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">
+				{layout === "default" ? (
+					<CardHeader className="px-0">
+						<CardTitle className="text-brand font-anton text-[36px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">
+							Video Feed
+						</CardTitle>
+						<CardDescription className="font-outfit text-muted-foreground text-sm md:text-base max-w-[480px]">
+							Watch the latest videos from our newsroom, covering breaking news and in-depth
+							interviews.
+						</CardDescription>
+					</CardHeader>
+				) : (
+					<h2 className="text-3xl mb-10 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
 						Video Feed
-					</CardTitle>
-					<CardDescription className="font-outfit text-muted-foreground text-sm md:text-base max-w-[480px]">
-						Watch the latest videos from our newsroom, covering breaking news and in-depth
-						interviews.
-					</CardDescription>
-				</CardHeader>  :
-                <h2 className="text-3xl mb-10 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
-					Video Feed
-				</h2>
-                }
-				
-                {layout === "default" && 
-                  <Link
-					href="/news/videos"
-					className={cn(
-						buttonVariants({ variant: "outline" }),
-						"hidden md:flex text-[0.75rem] tracking-[2.4px] uppercase",
-					)}>
-					View All
-				</Link>  
-                }
-				
+					</h2>
+				)}
+
+				{layout === "default" && (
+					<Link
+						href="/news/videos"
+						className={cn(
+							buttonVariants({ variant: "outline" }),
+							"hidden md:flex text-[0.75rem] tracking-[2.4px] uppercase",
+						)}>
+						View All
+					</Link>
+				)}
 			</section>
 
 			{/* Main Section for duplication */}
@@ -107,14 +107,11 @@ const VideoFeedSection = ({layout = "default"}: {layout?: "default" | "secondary
 									className="rounded-none bg-muted object-cover aspect-[16/9] w-full"
 								/>
 
-								
-
-                                <Button
-						variant={"default"}
-						className=
-							"text-base !px-4 py-3 h-auto font-azeret-mono text-[0.75rem] tracking-[2.4px] uppercase absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 bg-black cursor-pointer">
-						Watch
-					</Button>
+								<Button
+									variant={"default"}
+									className="text-base !px-4 py-3 h-auto font-azeret-mono text-[0.75rem] tracking-[2.4px] uppercase absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10 bg-black cursor-pointer">
+									Watch
+								</Button>
 							</section>
 
 							<section className="flex flex-col gap-2 w-fit">
@@ -154,7 +151,7 @@ const VideoFeedSection = ({layout = "default"}: {layout?: "default" | "secondary
 					className={cn(
 						buttonVariants({ variant: "outline", size: "lg" }),
 						"flex md:hidden mx-auto text-[0.75rem] tracking-[2.4px] uppercase",
-                        layout === "secondary" && "mt-5 md:flex"
+						layout === "secondary" && "mt-5 md:flex",
 					)}>
 					View All
 				</Link>

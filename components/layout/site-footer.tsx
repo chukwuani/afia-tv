@@ -169,7 +169,7 @@ export default function Footer() {
 							<span className="sr-only">Home</span>
 						</Link>
 
-						<div className="flex-1 text-left text-[12px] leading-[16px] font-medium text-muted-foreground min-w-[100px] uppercase font-azeret-mono">
+						<div className="flex-1 text-left text-[10px] leading-[14px] font-medium text-muted-foreground min-w-[100px] uppercase font-azeret-mono">
 							© 2026 Afia Network. All Rights Reserved.
 						</div>
 					</section>

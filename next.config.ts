@@ -1,18 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-	// output: "export",
-	// trailingSlash: true,
-	// skipTrailingSlashRedirect: true,
-	// distDir: "dist",
+	async redirects() {
+		return [
+			{
+				source: "/news",
+				destination: "/",
+				permanent: true, // 308, good for SEO if this is a permanent change
+			},
+		];
+	},
 	images: {
 		remotePatterns: [
-			{
-				protocol: "https",
-				hostname: "cdn.theatlantic.com",
-				port: "",
-				pathname: "/**",
-			},
 			{
 				protocol: "https",
 				hostname: "images.unsplash.com",

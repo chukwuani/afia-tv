@@ -180,7 +180,7 @@ const HeroSection = () => {
 					willChange: "transform",
 					opacity: 1,
 					transform: "rotate(20deg) skewX(-20deg) skewY(-10deg)",
-					mask: "linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%) add",
+					mask: "linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 60%) add",
 				}}>
 				<div className="space-y-1">
 					<CarouselRow imageSet={row1Images} direction={-100} />
@@ -204,7 +204,7 @@ const HeroSection = () => {
 
 					{/* Subheading text */}
 					<div className="flex flex-col max-w-[480px] w-full items-center relative mt-6">
-						<p className="font-azeret-mono uppercase font-normal text-muted-foreground text-sm">
+						<p className="font-normal text-muted-foreground text-sm">
 							Preserving the history, symbolism, and legacy of Ndi Igbo. One authentic story at a
 							time.
 						</p>
@@ -223,7 +223,7 @@ const HeroSection = () => {
 							});
 						}}
 						className={
-							"relative z-10 text-base !px-4 py-3 h-auto text-[0.75rem] tracking-[2.4px] uppercase"
+							"relative z-10 text-xs !text-[10px] p-2 lg:!px-4 lg:py-3 h-auto lg:!text-[0.75rem] tracking-[2.4px] uppercase"
 						}>
 						Submit your Story
 					</Button>

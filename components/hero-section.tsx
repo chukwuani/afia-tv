@@ -179,7 +179,7 @@ const HeroSection = () => {
 
 					{/* Subheading text */}
 					<div className="flex flex-col max-w-[480px] w-full items-center relative mt-6">
-						<p className="font-azeret-mono uppercase font-normal text-muted-foreground text-sm">
+						<p className="font-normal text-muted-foreground text-sm">
 							Streaming 24/7 on DStv 254 & GOtv 17 — Dive into Igbo stories, culture, and power like
 							never before.
 						</p>

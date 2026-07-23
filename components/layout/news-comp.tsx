@@ -16,11 +16,7 @@ export default function NewsComp() {
 		<React.Fragment>
 			<TopNewsSection />
 
-			{/* <AdBanner dataAdSlot="8484320553" dataAdFormat="auto" dataFullWidthResponsive={true} /> */}
-
 			<BlogSection />
-
-			{/* <AdBanner dataAdSlot="8484320553" dataAdFormat="auto" dataFullWidthResponsive={true} /> */}
 
 			<Advert />
 
@@ -30,7 +26,6 @@ export default function NewsComp() {
 
 			<SportsSection />
 
-			{/* <AdBanner dataAdSlot="8484320553" dataAdFormat="auto" dataFullWidthResponsive={true} /> */}
 		</React.Fragment>
 	);
 }

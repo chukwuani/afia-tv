@@ -43,7 +43,7 @@ function TopNewsSection() {
 						Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
 						"Content-Type": "application/json",
 					},
-				}
+				},
 			);
 
 			const data = res.data;
@@ -75,10 +75,10 @@ function TopNewsSection() {
 												src={item.mainImage}
 												alt={item.altText || "News Image"}
 												sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-												className="rounded-none bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-6 mb-4"
+												className="rounded-none bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-4 mb-4"
 											/>
 
-											<section className="max-sm:px-6">
+											<section className="max-sm:px-4">
 												<section className="flex gap-2 items-center mb-2">
 													<p className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono">
 														By {item.author?.name} -{" "}
@@ -103,7 +103,7 @@ function TopNewsSection() {
 						</section>
 
 						<section className="md:col-span-1">
-							<div className="grid grid-cols-1 gap-8 max-sm:px-6">
+							<div className="grid grid-cols-1 gap-8 max-sm:px-4">
 								{data?.slice(2, 4).map((item) => (
 									<Link
 										key={item._id}

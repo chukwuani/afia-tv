@@ -21,7 +21,7 @@ const BlogSection = () => {
 	} = useInfinteQuery("/api/news", "infinite_news", 4);
 
 	return (
-		<section className="flex flex-col px-6 sm:px-12 py-16 border-t">
+		<section className="flex flex-col px-4 sm:px-12 py-8 border-t">
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
 				{status === "pending" ? (
 					<React.Fragment>

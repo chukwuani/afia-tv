@@ -373,11 +373,13 @@ export const Icons = {
 			className="w-4 h-4"
 			{...props}
 			width="20">
-			<path className="fill-foreground" d="M15.85 15.15l-5.27-5.28a6 6 0 10-.71.71l5.28 5.27a.48.48 0 00.7 0 .48.48 0 000-.7zM1 6a5 5 0 115 5 5 5 0 01-5-5z"></path>
+			<path
+				className="fill-foreground"
+				d="M15.85 15.15l-5.27-5.28a6 6 0 10-.71.71l5.28 5.27a.48.48 0 00.7 0 .48.48 0 000-.7zM1 6a5 5 0 115 5 5 5 0 01-5-5z"></path>
 		</svg>
 	),
 	live: (props: IconProps) => (
-		<svg {...props} className="size-4" viewBox="0 0 16 16" version="1.1" aria-hidden="true">
+		<svg {...props} viewBox="0 0 16 16" version="1.1" aria-hidden="true">
 			<title>blinking-dot</title>
 			<g>
 				<circle

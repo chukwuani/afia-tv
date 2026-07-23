@@ -13,7 +13,6 @@ import SearchButton from "@/components/layout/search-btn";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Icons } from "@/components/icons";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import DonateDialog from "@/components/donate-dialog";
 
 export function MobileNav() {
 	const pathname = usePathname();
@@ -24,9 +23,7 @@ export function MobileNav() {
 	if (isDesktop) return null;
 
 	return (
-		<section className="flex lg:hidden gap-3 items-center justify-between">
-			{/* <DonateDialog /> */}
-
+		<section className="flex lg:hidden gap-2 items-center justify-between">
 			<SearchButton />
 
 			{/* <ThemeSwitcher /> */}
@@ -36,9 +33,9 @@ export function MobileNav() {
 				target="_blank"
 				className={cn(
 					buttonVariants({ variant: "outline" }),
-					"inline-flex text-base font-normal rounded",
+					"inline-flex text-xs !text-[10px] font-normal has-[>svg]:!px-2 h-7",
 				)}>
-				<Icons.live />
+				<Icons.live className="!size-3 lg:!size-4" />
 				Live
 			</Link>
 

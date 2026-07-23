@@ -49,7 +49,7 @@ export const Navbar = () => {
 				<header className="sticky top-0 flex h-16 items-center justify-between">
 					{/* Today's Date */}
 					<div className="text-left hidden lg:block">
-						<div className="css-e2a84x e1pjtsj60">
+						<div>
 							<span className="text-xs font-medium uppercase font-azeret-mono">
 								{today.toLocaleDateString("en-US", {
 									weekday: "long",
@@ -59,7 +59,8 @@ export const Navbar = () => {
 								})}
 							</span>
 						</div>
-						<div className="css-bfvq22 e1pjtsj61">
+
+						<div>
 							<a
 								className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono"
 								href="https://www.nytimes.com/section/todayspaper">
@@ -74,7 +75,7 @@ export const Navbar = () => {
 							<div className="flex items-center justify-center rounded-full">
 								<span className="sr-only">Afia</span>
 								<Image
-									className="w-[70px] h-15 max-w-none block dark:hidden"
+									className="w-[60px] lg:w-[70px] max-w-none block dark:hidden"
 									width={100}
 									height={40}
 									src="/images/afia_logo.svg"
@@ -82,7 +83,7 @@ export const Navbar = () => {
 								/>
 
 								<Image
-									className="w-[70px] h-10 max-w-none hidden dark:block"
+									className="w-[60px] lg:w-[70px] max-w-none hidden dark:block"
 									width={100}
 									height={40}
 									src="/images/afia_logo_white.svg"
@@ -91,7 +92,7 @@ export const Navbar = () => {
 
 								{pathname === "/enugustory" && (
 									<Image
-										className="w-auto h-12 max-w-none ml-2"
+										className="w-[60px] lg:w-[70px] max-w-none ml-2"
 										width={100}
 										height={40}
 										src="/images/my-enugu-story-logo.png"
@@ -108,19 +109,15 @@ export const Navbar = () => {
 
 						{/* <ThemeSwitcher /> */}
 
-						{/* <div className="flex items-center gap-4">
-							<DonateDialog />
-						</div> */}
-
 						<div className="flex items-center gap-4">
 							<Link
 								href="/live"
 								target="_blank"
 								className={cn(
 									buttonVariants({ variant: "outline" }),
-									"inline-flex text-base font-normal",
+									"inline-flex text-xs font-normal has-[>svg]:!px-2",
 								)}>
-								<Icons.live />
+								<Icons.live className="!size-3 lg:!size-4" />
 								Live
 							</Link>
 						</div>
@@ -131,7 +128,7 @@ export const Navbar = () => {
 			</nav>
 
 			{/* Main Navigation */}
-			<section className="hidden md:flex items-center justify-center w-full px-4 md:px-12 bg-background">
+			<section className="hidden lg:flex items-center justify-center w-full px-4 md:px-12 bg-background">
 				<NavigationMenu className="hidden md:flex">
 					<NavigationMenuList>
 						{siteConfig.mainNav.map(
@@ -185,6 +182,23 @@ export const Navbar = () => {
 					</NavigationMenuList>
 				</NavigationMenu> */}
 			</section>
+
+			<div className="flex flex-col gap-1 text-left bg-accent px-4 md:px-12 py-2 lg:hidden">
+				<span className="text-xs text-[10px] font-medium uppercase font-azeret-mono">
+					{today.toLocaleDateString("en-US", {
+						weekday: "long",
+						month: "long",
+						day: "numeric",
+						year: "numeric",
+					})}
+				</span>
+
+				<a
+					className="text-xs text-[10px] text-muted-foreground font-medium uppercase font-azeret-mono"
+					href="https://www.nytimes.com/section/todayspaper">
+					{getIgboMarketDay()} Market Day
+				</a>
+			</div>
 		</header>
 	);
 };

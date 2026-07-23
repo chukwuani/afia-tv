@@ -530,15 +530,10 @@
 	outline-offset: 2px;
 }
 
-.Lockup_vector__qleKW {
-	width: 88px;
-	height: 24px;
-}
-
 .container {
 	width: 100%;
 	margin-right: auto;
 	margin-left: auto;
-	padding-right: 2rem;
-	padding-left: 2rem;
+	padding-right: 1rem;
+	padding-left: 1rem;
 }

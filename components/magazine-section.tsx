@@ -95,8 +95,8 @@ export default function MagazineSection() {
 
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 sm:px-12 border-t">
-			<section className="py-10 lg:col-span-2">
-				<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
+			<section className="py-8 lg:col-span-2">
+				<h2 className="text-3xl mb-8 max-sm:px-4 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
 					Recommended
 				</h2>
 
@@ -119,10 +119,10 @@ export default function MagazineSection() {
 								src={item.mainImage}
 								alt={item.altText || "News Image"}
 								sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-								className="rounded-none bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-6 mb-4"
+								className="rounded-none bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-4 mb-4"
 							/>
 
-							<section className="max-sm:px-6">
+							<section className="max-sm:px-4">
 								<section className="flex gap-2 items-center mb-2">
 									<p className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono">
 										By {item.author?.name} -{" "}
@@ -163,12 +163,12 @@ export default function MagazineSection() {
 				)}
 			</section>
 
-			<section className="py-10 lg:col-span-1">
-				<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
+			<section className="py-8 lg:col-span-1">
+				<h2 className="text-3xl mb-8 max-sm:px-4 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
 					Features
 				</h2>
 
-				<div className="grid grid-cols-1 gap-8 max-sm:px-6">
+				<div className="grid grid-cols-1 gap-8 max-sm:px-4">
 					{featuresPending && (
 						<React.Fragment>
 							{Array.from({ length: 2 }).map((_, index) => (
