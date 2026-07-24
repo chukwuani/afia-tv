@@ -136,7 +136,7 @@ const LifestylePage = () => {
 								title={item.title}
 								href={`/news/${item.slug}`}
 								className="group cols-span-1 gap-2 w-full">
-								<section className="flex flex-col items-end gap-4">
+								<section className="flex flex-col gap-4">
 									<img
 										src={item.mainImage}
 										alt={item.altText}
