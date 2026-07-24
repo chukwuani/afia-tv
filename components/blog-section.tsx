@@ -22,7 +22,7 @@ const BlogSection = () => {
 
 	return (
 		<section className="flex flex-col px-4 sm:px-12 py-8 border-t">
-			<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{status === "pending" ? (
 					<React.Fragment>
 						{Array.from({ length: 6 }).map((_, index) => (
@@ -65,7 +65,7 @@ const BlogSection = () => {
 													</p>
 												</section>
 
-												<h3 className="font-anton uppercase text-[24px] sm:text-[28px] leading-[140%] tracking-normal mt-1 mb-2 line-clamp-2 transition-colors group-hover:text-brand">
+												<h3 className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-2 line-clamp-2 transition-colors group-hover:text-brand">
 													{item.title}
 												</h3>
 

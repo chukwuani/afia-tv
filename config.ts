@@ -27,6 +27,51 @@ const SOCIAL_LINKS = {
 	whatsapp: "https://www.whatsapp.com/channel/0029VaCz1ew9mrGWhgeYWi1R",
 };
 
+const MAIN_CATEGORIES = [
+	{
+		title: "All News",
+		href: "/news",
+		description: "Stay updated with the latest news and stories from around the world.",
+		items: [],
+		disabled: false,
+	},
+	{
+		title: "Business",
+		href: "/news/business",
+		description: "Explore the latest business news, insights, and trends.",
+		items: [],
+		disabled: false,
+	},
+	{
+		title: "Lifestyle & Entertainment",
+		href: "/news/lifestyle",
+		description: "Discover the latest lifestyle and entertainment content.",
+		items: [],
+		disabled: false,
+	},
+	{
+		title: "Culture",
+		href: "/news/culture",
+		description: "Explore the rich culture and traditions of the region.",
+		items: [],
+		disabled: false,
+	},
+	{
+		title: "Videos",
+		href: "/news/videos",
+		description: "Explore our collection of videos covering news, entertainment, and more.",
+		items: [],
+		disabled: false,
+	},
+	{
+		title: "Sports",
+		href: "/news/sports",
+		description: "Stay updated with the latest sports news and events.",
+		items: [],
+		disabled: false,
+	},
+];
+
 export type SiteConfig = typeof siteConfig;
 export type MainNav = typeof siteConfig.mainNav;
 
@@ -64,7 +109,7 @@ export const siteConfig = {
 		},
 		{
 			title: "News",
-			href: "/news",
+			items: MAIN_CATEGORIES,
 			external: false,
 			disabled: false,
 		},

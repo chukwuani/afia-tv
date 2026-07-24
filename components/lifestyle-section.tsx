@@ -13,12 +13,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Button, buttonVariants } from "@/components/ui/button";
 import NewsSkeleton from "@/components/skeletons/news-skeleton";
 
-const SportsSection = () => {
+const LifestyleSection = () => {
 	const { isPending, isError, data, refetch } = useQuery<NewsTypes[]>({
-		queryKey: ["sports-section"],
+		queryKey: ["lifestyle-section"],
 		queryFn: async () => {
 			const limit = 3;
-			const query = `*[_type == "news" && !(_id in path("drafts.**")) && category == "sports"] | order(publishedAt desc) [0...${limit}] {
+			const query = `*[_type == "news" && !(_id in path("drafts.**")) && category == "entertainment"] | order(publishedAt desc) [0...${limit}] {
                       _id,
                       _createdAt,
                       publishedAt,
@@ -54,7 +54,7 @@ const SportsSection = () => {
 	return (
 		<section className="flex flex-col sm:px-12 py-8 border-t">
 			<h2 className="text-3xl mb-8 max-sm:px-4 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
-				Sports
+				Lifestyle & Entertainment
 			</h2>
 
 			{isPending && (
@@ -110,16 +110,16 @@ const SportsSection = () => {
 				</Button>
 			) : (
 				<Link
-					href="/news/sports"
+					href="/news/lifestyle"
 					className={cn(
 						buttonVariants({ variant: "outline", size: "lg" }),
 						"flex mx-auto rounded text-[0.75rem] tracking-[2.4px] uppercase w-fit mt-5",
 					)}>
-					View All Sports
+					View All Lifestyle
 				</Link>
 			)}
 		</section>
 	);
 };
 
-export default SportsSection;
+export default LifestyleSection;

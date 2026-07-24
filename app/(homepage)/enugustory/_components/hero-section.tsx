@@ -198,12 +198,12 @@ const HeroSection = () => {
 				</div> */}
 
 				<div className="flex flex-col">
-					<Heading className="text-[50px] leading-[104%] -tracking-[1.5px] lg:text-[80px] lg:leading-[104%] lg:-tracking-[1.5px] font-anton font-normal max-w-[500px] uppercase">
+					<Heading className="text-[48px] leading-[104%] -tracking-[1.5px] lg:text-[80px] lg:leading-[104%] lg:-tracking-[1.5px] font-anton font-normal max-w-[500px] uppercase">
 						Celebration of Igbo Culture
 					</Heading>
 
 					{/* Subheading text */}
-					<div className="flex flex-col max-w-[480px] w-full items-center relative mt-6">
+					<div className="flex flex-col max-w-[400px] w-full items-center relative mt-6">
 						<p className="font-normal text-muted-foreground text-sm">
 							Preserving the history, symbolism, and legacy of Ndi Igbo. One authentic story at a
 							time.

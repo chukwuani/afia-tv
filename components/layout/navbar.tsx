@@ -8,8 +8,11 @@ import Image from "next/image";
 import { buttonVariants } from "@/components/ui/button";
 import {
 	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
 	NavigationMenuLink,
 	NavigationMenuList,
+	NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Icons } from "@/components/icons";
@@ -129,36 +132,23 @@ export const Navbar = () => {
 
 			{/* Main Navigation */}
 			<section className="hidden lg:flex items-center justify-center w-full px-4 md:px-12 bg-background">
-				<NavigationMenu className="hidden md:flex">
-					<NavigationMenuList>
-						{siteConfig.mainNav.map(
-							(navItems, index) =>
-								navItems.href && (
-									<NavLink
-										key={index}
-										href={navItems.href}
-										pathname={pathname}
-										disabled={navItems.disabled}
-										className="inline-flex h-10 w-max items-center justify-center px-4 py-2 transition-colors focus:text-brand focus:outline-none">
-										{navItems.title}
-									</NavLink>
-								),
-						)}
-					</NavigationMenuList>
-				</NavigationMenu>
-
-				{/* <NavigationMenu>
+				<NavigationMenu>
 					<NavigationMenuList>
 						{siteConfig.mainNav
 							?.filter((item) => item.title !== siteConfig.mainNav[0]?.title)
 							.map((item) =>
 								item?.items ? (
 									<NavigationMenuItem key={item.title}>
-										<NavigationMenuTrigger className="h-auto capitalize">
+										<NavigationMenuTrigger
+											className={cn(
+												"text-foreground hover:underline underline-offset-2 text-[12px] font-normal uppercase font-azeret-mono py-4 flex items-center gap-2 !bg-background",
+												item.disabled && "pointer-events-none opacity-50",
+											)}>
 											{item.title}
 										</NavigationMenuTrigger>
-										<NavigationMenuContent>
-											<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+
+										<NavigationMenuContent className="bg-accent">
+											<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-background">
 												{item.items.map((item) => (
 													<ListItem key={item.title} title={item.title} href={item.href}>
 														{item.description}
@@ -169,18 +159,19 @@ export const Navbar = () => {
 									</NavigationMenuItem>
 								) : (
 									item.href && (
-										<NavigationMenuItem key={item.title}>
-											<Link href={item.href} legacyBehavior passHref>
-												<NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "h-auto")}>
-													{item.title}
-												</NavigationMenuLink>
-											</Link>
-										</NavigationMenuItem>
+										<NavLink
+											key={item.href}
+											href={item.href}
+											pathname={pathname}
+											disabled={item.disabled}
+											className="inline-flex h-10 w-max items-center justify-center px-4 py-2">
+											{item.title}
+										</NavLink>
 									)
 								),
 							)}
 					</NavigationMenuList>
-				</NavigationMenu> */}
+				</NavigationMenu>
 			</section>
 
 			<div className="flex flex-col gap-1 text-left bg-accent px-4 md:px-12 py-2 lg:hidden">
@@ -214,9 +205,9 @@ function NavLink({ children, href, disabled, pathname, className, ...props }: Na
 		<a
 			href={href}
 			className={cn(
-				"text-foreground/60 transition-colors hover:text-foreground text-[12px] font-medium uppercase font-azeret-mono py-4 flex items-center gap-2",
-				href === pathname && "text-brand hover:text-brand font-normal",
-				disabled && "pointer-events-none opacity-60",
+				"text-foreground hover:underline underline-offset-2 text-[12px] font-medium uppercase font-azeret-mono py-4 flex items-center gap-2",
+				href === pathname && "hover:underline underline-offset-2 font-normal",
+				disabled && "pointer-events-none opacity-50",
 				className,
 			)}
 			{...props}>

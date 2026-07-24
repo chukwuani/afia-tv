@@ -9,23 +9,33 @@ import Advert from "@/components/layout/advert";
 import TopNewsSection from "@/components/top-news-section";
 // import AdBanner from "@/components/layout/adBanner";
 // import VideoFeed from "../video-feed";
-import VideoFeedSection from "./video-feed-section";
+import VideoFeedSection from "@/components/layout/video-feed-section";
+import BusinessSection from "@/components/business-section";
+import LifestyleSection from "@/components/lifestyle-section";
+import CultureSection from "@/components/culture-section";
 
 export default function NewsComp() {
 	return (
 		<React.Fragment>
 			<TopNewsSection />
 
-			<BlogSection />
+			<VideoFeedSection layout="secondary" />
 
 			<Advert />
 
-			<VideoFeedSection layout="secondary" />
+			<BlogSection />
 
 			<MagazineSection />
 
 			<SportsSection />
 
+			<Advert />
+
+			<BusinessSection />
+
+			<CultureSection />
+
+			<LifestyleSection />
 		</React.Fragment>
 	);
 }

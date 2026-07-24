@@ -97,7 +97,7 @@ function PostSlug() {
 								className="rounded-full size-10 object-cover"
 							/>
 							<div className="flex-1 text-left leading-tight">
-								<p className="font-medium uppercase font-azeret-mono">{author.name}</p>
+								<p className="font-medium uppercase font-azeret-mono text-xs">{author.name}</p>
 
 								<div className="flex items-center space-x-2 text-xs text-muted-foreground uppercase font-azeret-mono">
 									<time dateTime={""}>{formatDate(news.publishedAt)}</time>

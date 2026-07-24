@@ -18,7 +18,7 @@ export default function MagazineSection() {
 		queryKey: ["recommended-section"],
 		queryFn: async () => {
 			const limit = 4;
-			const query = `*[_type == "news" && recommended == true] | order(publishedAt desc) [0...${limit}] {
+			const query = `*[_type == "news" && !(_id in path("drafts.**")) && recommended == true] | order(publishedAt desc) [0...${limit}] {
 						_id,
 						_createdAt,
 						publishedAt,
@@ -60,7 +60,7 @@ export default function MagazineSection() {
 		queryKey: ["featured-section"],
 		queryFn: async () => {
 			const limit = 4;
-			const query = `*[_type == "news" && featured == true] | order(publishedAt desc) [0...${limit}] {
+			const query = `*[_type == "news" && !(_id in path("drafts.**")) && featured == true] | order(publishedAt desc) [0...${limit}] {
 							_id,
 							_createdAt,
 							publishedAt,
@@ -132,7 +132,7 @@ export default function MagazineSection() {
 									</p>
 								</section>
 
-								<h3 className="font-anton uppercase text-[24px] sm:text-[28px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
+								<h3 className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
 									{item.title}
 								</h3>
 								<p className="text-sm font-outfit text-muted-foreground mb-4 line-clamp-2">
@@ -188,7 +188,7 @@ export default function MagazineSection() {
 								</p>
 							</section>
 
-							<h3 className="font-anton uppercase text-[24px] sm:text-[28px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
+							<h3 className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
 								{item.title}
 							</h3>
 							<p className="text-sm font-epilogue text-muted-foreground mb-4 line-clamp-3">
