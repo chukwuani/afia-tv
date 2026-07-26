@@ -190,13 +190,6 @@ const HeroSection = () => {
 			</section>
 
 			<div className="flex flex-col text-start items-start w-full justify-center px-6 md:px-14 gap-[30px] py-0 relative">
-				{/* <div className="flex mx-auto h-[80px] lg:h-[100px] w-auto">
-					<img
-						src="/images/my-enugu-story-logo.png"
-						alt="Enugu"
-					/>
-				</div> */}
-
 				<div className="flex flex-col">
 					<Heading className="text-[48px] leading-[104%] -tracking-[1.5px] lg:text-[80px] lg:leading-[104%] lg:-tracking-[1.5px] font-anton font-normal max-w-[500px] uppercase">
 						Celebration of Igbo Culture
@@ -213,7 +206,7 @@ const HeroSection = () => {
 
 				{/* Call to action buttons */}
 				<div
-					className="flex items-center gap-4 animate-fade-up mt-3 w-auto justify-center"
+					className="flex items-center gap-4 animate-fade-up w-auto justify-center"
 					style={{ animationDelay: "0.40s", animationFillMode: "both" }}>
 					<Button
 						variant={"default"}

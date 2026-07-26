@@ -110,8 +110,8 @@ const VideosPage = () => {
 		});
 
 	return (
-		<section className="flex flex-col sm:px-12 py-16">
-			<h2 className="text-3xl mb-10 max-sm:px-6 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
+		<section className="flex flex-col px-4 sm:px-12 py-16">
+			<h2 className="text-3xl mb-10 tracking-[.009rem] text-brand font-anton text-[36px] leading-[1.1em] font-normal uppercase">
 				Videos
 			</h2>
 

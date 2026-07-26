@@ -81,7 +81,7 @@ export function MobileNav() {
 																				href={item.href}
 																				onClick={() => setOpen(false)}
 																				className={cn(
-																					"group w-full bg-background hover:underline underline-offset-2 focus:outline-none text-foreground text-[12px] font-medium uppercase font-azeret-mono py-4 flex items-center gap-2 border-t",
+																					"group w-full bg-background hover:underline underline-offset-2 focus:outline-none text-foreground text-[12px] font-normal uppercase font-azeret-mono py-4 flex items-center gap-2 border-t",
 																					item.href === pathname &&
 																						"hover:underline underline-offset-2 font-normal",
 																					item.disabled && "pointer-events-none opacity-50",
@@ -102,7 +102,7 @@ export function MobileNav() {
 																href={item.href}
 																onClick={() => setOpen(false)}
 																className={cn(
-																	"group w-full bg-background hover:underline underline-offset-2 focus:outline-none text-foreground text-[12px] font-medium uppercase font-azeret-mono py-4 flex items-center gap-2",
+																	"group w-full bg-background hover:underline underline-offset-2 focus:outline-none text-foreground text-[12px] font-normal uppercase font-azeret-mono py-4 flex items-center gap-2",
 																	item.href === pathname &&
 																		"hover:underline underline-offset-2 font-normal",
 																	item.disabled && "pointer-events-none opacity-50",

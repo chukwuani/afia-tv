@@ -53,22 +53,20 @@ export const Navbar = () => {
 					{/* Today's Date */}
 					<div className="text-left hidden lg:block">
 						<div>
-							<span className="text-xs font-medium uppercase font-azeret-mono">
+							<p className="text-xs font-medium uppercase font-azeret-mono">
 								{today.toLocaleDateString("en-US", {
 									weekday: "long",
 									month: "long",
 									day: "numeric",
 									year: "numeric",
 								})}
-							</span>
+							</p>
 						</div>
 
 						<div>
-							<a
-								className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono"
-								href="https://www.nytimes.com/section/todayspaper">
+							<p className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono">
 								{getIgboMarketDay()} Market Day
-							</a>
+							</p>
 						</div>
 					</div>
 
@@ -175,20 +173,18 @@ export const Navbar = () => {
 			</section>
 
 			<div className="flex flex-col gap-1 text-left bg-accent px-4 md:px-12 py-2 lg:hidden">
-				<span className="text-xs text-[10px] font-medium uppercase font-azeret-mono">
+				<p className="text-xs text-[11px] font-medium uppercase font-azeret-mono">
 					{today.toLocaleDateString("en-US", {
 						weekday: "long",
 						month: "long",
 						day: "numeric",
 						year: "numeric",
 					})}
-				</span>
+				</p>
 
-				<a
-					className="text-xs text-[10px] text-muted-foreground font-medium uppercase font-azeret-mono"
-					href="https://www.nytimes.com/section/todayspaper">
+				<p className="text-xs text-[11px] text-muted-foreground font-medium uppercase font-azeret-mono">
 					{getIgboMarketDay()} Market Day
-				</a>
+				</p>
 			</div>
 		</header>
 	);
