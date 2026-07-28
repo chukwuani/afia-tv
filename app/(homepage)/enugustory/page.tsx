@@ -6,6 +6,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
 	metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
 	title: "My Enugu Story",
+	description: "Preserving the history, symbolism, and legacy of Ndi Igbo. One authentic story at a time.",
 };
 
 export default function HomePage() {

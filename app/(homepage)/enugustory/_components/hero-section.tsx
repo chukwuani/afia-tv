@@ -1,10 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/heading";
 import { motion } from "motion/react";
 
-import { toast } from "sonner";
+import SubmissionDialog from "./submission-dialog";
 
 const PARTNERS = [
 	{
@@ -173,7 +172,7 @@ const row3Images = images.slice(0, 6);
 
 const HeroSection = () => {
 	return (
-		<section className="flex flex-col items-center pt-[200px] pb-12 relative w-full overflow-hidden">
+		<section className="flex flex-col items-center pt-50 pb-12 relative w-full overflow-hidden">
 			<section
 				className="absolute top-[-280px] sm:top-[-320px] right-[-240px] left-[-80px]"
 				style={{
@@ -208,18 +207,7 @@ const HeroSection = () => {
 				<div
 					className="flex items-center gap-4 animate-fade-up w-auto justify-center"
 					style={{ animationDelay: "0.40s", animationFillMode: "both" }}>
-					<Button
-						variant={"default"}
-						onClick={() => {
-							toast.info("Submissions would open soon!", {
-								description: "Submissions are currently closed. Please check back later.",
-							});
-						}}
-						className={
-							"relative z-10 text-xs !text-[10px] p-2 lg:!px-4 lg:py-3 h-auto lg:!text-[0.75rem] tracking-[2.4px] uppercase"
-						}>
-						Submit your Story
-					</Button>
+					<SubmissionDialog />
 				</div>
 			</div>
 
