@@ -4,6 +4,8 @@ import { Heading } from "@/components/heading";
 import { motion } from "motion/react";
 
 import SubmissionDialog from "./submission-dialog";
+import { Suspense } from "react";
+import { Button } from "@/components/ui/button";
 
 const PARTNERS = [
 	{
@@ -203,12 +205,23 @@ const HeroSection = () => {
 					</div>
 				</div>
 
-				{/* Call to action buttons */}
-				<div
-					className="flex items-center gap-4 animate-fade-up w-auto justify-center"
-					style={{ animationDelay: "0.40s", animationFillMode: "both" }}>
-					<SubmissionDialog />
-				</div>
+				<Suspense
+					fallback={
+						<Button
+							variant={"default"}
+							className={
+								"relative z-10 text-xs text-[10px]! p-2 lg:px-4! lg:py-3 h-auto lg:text-[0.75rem]! tracking-[2.4px] uppercase"
+							}>
+							Submit your Story
+						</Button>
+					}>
+					{/* Call to action buttons */}
+					<div
+						className="flex items-center gap-4 animate-fade-up w-auto justify-center"
+						style={{ animationDelay: "0.40s", animationFillMode: "both" }}>
+						<SubmissionDialog />
+					</div>
+				</Suspense>
 			</div>
 
 			{/* Partner logos */}
