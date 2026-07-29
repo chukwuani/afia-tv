@@ -49,8 +49,6 @@ const CATEGORY_FILE_CONFIG = {
 	essay: {
 		accept: {
 			"application/pdf": [".pdf"],
-			"application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
-			"application/msword": [".doc"],
 		},
 		accepts: ".pdf",
 		maxSize: FILE_SIZE_LIMITS.document,
@@ -156,7 +154,8 @@ function SubmissionForm({ setOpen }: { setOpen: (open: boolean) => void }) {
 			}
 
 			toast.success("Upload Successful", {
-				description: "Thank you for your submission! We will review your work and get back to you soon.",
+				description:
+					"Thank you for your submission! We will review your work and get back to you soon.",
 				duration: 8000,
 			});
 
@@ -164,7 +163,8 @@ function SubmissionForm({ setOpen }: { setOpen: (open: boolean) => void }) {
 		} catch (error) {
 			console.error(error);
 			toast.error("Submission Failed", {
-				description: error instanceof Error ? error.message : "An error occurred. Please try again.",
+				description:
+					error instanceof Error ? error.message : "An error occurred. Please try again.",
 			});
 		} finally {
 			setIsSubmitting(false);
@@ -196,7 +196,10 @@ function SubmissionForm({ setOpen }: { setOpen: (open: boolean) => void }) {
 									setValue("category", newValue);
 									clearErrors("category");
 								}}>
-								<SelectTrigger className="w-full" disabled={isSubmitting || files.length > 0} id={`${id}-category`}>
+								<SelectTrigger
+									className="w-full"
+									disabled={isSubmitting || files.length > 0}
+									id={`${id}-category`}>
 									<SelectValue placeholder="Select category" />
 								</SelectTrigger>
 								<SelectContent>
