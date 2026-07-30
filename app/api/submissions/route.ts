@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
+import { and, eq } from "drizzle-orm";
 import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { db } from "@/src/index";
-import { submissions } from "@/src/db/schema";
+
 import { submissionSchema } from "@/lib/validations/submission";
 import { getMp4DurationFromS3 } from "@/lib/mp4Duration";
 import { getOrCreateContestant } from "@/lib/contestant";
+import { checkSubmissionEligibility } from "@/lib/eligibility";
+import { sendSubmissionReceivedEmail } from "@/lib/notifications";
+import { db } from "@/src";
+import { submissions } from "@/src/db/schema";
 
 const s3 = new S3Client({
 	region: process.env.R2_REGION || "auto",
@@ -29,6 +33,13 @@ async function deleteUploadedFile(key: string) {
 	}
 }
 
+function getClientIp(req: NextRequest): string | null {
+	// Best-effort only — used purely as a soft review-flag signal, never to block.
+	const forwardedFor = req.headers.get("x-forwarded-for");
+	if (forwardedFor) return forwardedFor.split(",")[0]?.trim() || null;
+	return req.headers.get("x-real-ip");
+}
+
 export async function POST(req: NextRequest) {
 	const body = await req.json().catch(() => null);
 	const parsed = submissionSchema.safeParse(body);
@@ -38,6 +49,17 @@ export async function POST(req: NextRequest) {
 	}
 
 	const data = parsed.data;
+
+	// Checked before anything else — disqualification (email OR phone) and the
+	// one-resubmission rule both live here. No point verifying video duration
+	// for a submission that can't be accepted anyway.
+	const eligibility = await checkSubmissionEligibility(data.email, data.phone, data.category);
+
+	if (!eligibility.allowed) {
+		await deleteUploadedFile(data.fileKey);
+		await deleteUploadedFile(data.photoKey);
+		return NextResponse.json({ error: eligibility.reason }, { status: 403 });
+	}
 
 	// Never trust the client's own duration check — re-verify server-side against
 	// the actual uploaded object before the submission is accepted.
@@ -71,6 +93,26 @@ export async function POST(req: NextRequest) {
 		}
 	}
 
+	// Soft signal only — an IP match against a past disqualified submission gets
+	// flagged for a human to look at, never auto-blocked (shared IPs are common
+	// and would otherwise catch innocent people on the same network/campus/café).
+	const ip = getClientIp(req);
+	let flaggedForReview = false;
+	let flagReason: string | null = null;
+
+	if (ip) {
+		const [disqualifiedMatch] = await db
+			.select({ id: submissions.id })
+			.from(submissions)
+			.where(and(eq(submissions.ipAddress, ip), eq(submissions.status, "disqualified")))
+			.limit(1);
+
+		if (disqualifiedMatch) {
+			flaggedForReview = true;
+			flagReason = "IP address matches a previously disqualified submission — verify manually.";
+		}
+	}
+
 	try {
 		const contestant = await getOrCreateContestant(data.email, data.fullName);
 
@@ -79,9 +121,11 @@ export async function POST(req: NextRequest) {
 			.values({
 				contestantId: contestant.contestantId,
 				fullName: data.fullName,
-				age: data.age,
+				dateOfBirth: data.dateOfBirth,
+				gender: data.gender,
 				stateOfOrigin: data.stateOfOrigin,
-				community: data.community,
+				stateOfResidence: data.stateOfResidence,
+				address: data.address,
 				entryTitle: data.entryTitle,
 				category: data.category,
 				phone: data.phone,
@@ -92,8 +136,15 @@ export async function POST(req: NextRequest) {
 				fileUrl: data.fileUrl,
 				photoKey: data.photoKey,
 				photoUrl: data.photoUrl,
+				attemptNumber: eligibility.attemptNumber,
+				ipAddress: ip,
+				flaggedForReview,
+				flagReason,
 			})
 			.returning();
+
+		// Never allowed to fail the submission itself — sendZeptoMail swallows its own errors.
+		await sendSubmissionReceivedEmail(data.email, data.fullName, data.category, submission.contestantId);
 
 		return NextResponse.json(
 			{ success: true, id: submission.id, contestantId: submission.contestantId },
@@ -101,7 +152,7 @@ export async function POST(req: NextRequest) {
 		);
 	} catch (err) {
 		// Postgres raises error code 23505 (unique_violation) against the
-		// [email, category] index when someone submits a second entry in the same category.
+		// [email, category, attempt_number] index in a rare race condition.
 		const code = (err as { code?: string })?.code;
 		const message = err instanceof Error ? err.message : "";
 

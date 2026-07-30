@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "sonner";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,19 +26,22 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-
 import { FileUploader } from "@/components/file-uploader";
 import { PhotoUploader } from "@/components/photo-uploader";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 import {
 	submissionFormSchema,
 	wordCount,
+	NIGERIAN_STATE_LABELS,
+	STATE_OF_RESIDENCE_LABELS,
 	type SubmissionFormValues,
 } from "@/lib/validations/submission";
 import { uploadSubmissionFile, validateVideoDuration } from "@/lib/uploadSubmissionFile";
+import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 const FILE_SIZE_LIMITS = {
 	image: 15 * 1024 * 1024, // 15 MB
@@ -68,10 +72,15 @@ const CATEGORY_FILE_CONFIG = {
 	},
 } as const;
 
-function SubmissionForm({ setOpen }: { setOpen: (open: boolean) => void }) {
+function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => void }) {
+	const router = useRouter();
 	const id = useId();
 
 	const [openAlert, setOpenAlert] = useState(false);
+	const [openCalendar, setOpenCalendar] = useState(false);
+
+	const [date, setDate] = useState<Date | undefined>(undefined);
+
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submitStatus, setSubmitStatus] = useState<string>("");
 
@@ -88,7 +97,7 @@ function SubmissionForm({ setOpen }: { setOpen: (open: boolean) => void }) {
 		reValidateMode: "onChange",
 		defaultValues: {
 			category: "essay",
-			stateOfOrigin: "enugu",
+			stateOfResidence: "enugu",
 		},
 	});
 
@@ -159,7 +168,8 @@ function SubmissionForm({ setOpen }: { setOpen: (open: boolean) => void }) {
 				duration: 8000,
 			});
 
-			setOpen(false);
+			onSuccess(result.contestantId);
+			router.push("/enugustory");
 		} catch (error) {
 			console.error(error);
 			toast.error("Submission Failed", {
@@ -173,282 +183,334 @@ function SubmissionForm({ setOpen }: { setOpen: (open: boolean) => void }) {
 	};
 
 	return (
-		<div className="overflow-y-auto">
-			<form className="space-y-4">
-				<div className="px-6 pt-4 pb-6 space-y-4">
-					<PhotoUploader
-						accept={{
-							"image/jpeg": [".jpeg", ".jpg"],
-							"image/png": [".png"],
-						}}
-						maxSize={FILE_SIZE_LIMITS.image}
-						multiple={false}
-						onValueChange={setPhotos}
-						disabled={isSubmitting}
-					/>
+		<form className="mx-auto max-w-2xl space-y-4 py-8">
+			<PhotoUploader
+				accept={{
+					"image/jpeg": [".jpeg", ".jpg"],
+					"image/png": [".png"],
+				}}
+				maxSize={FILE_SIZE_LIMITS.image}
+				multiple={false}
+				onValueChange={setPhotos}
+				disabled={isSubmitting}
+			/>
 
-					<div className="flex flex-col gap-4 sm:flex-row">
-						<div className="flex-1 space-y-2">
-							<Label htmlFor={`${id}-category`}>Category</Label>
-							<Select
-								defaultValue="essay"
-								onValueChange={(newValue: SubmissionFormValues["category"]) => {
-									setValue("category", newValue);
-									clearErrors("category");
-								}}>
-								<SelectTrigger
-									className="w-full"
-									disabled={isSubmitting || files.length > 0}
-									id={`${id}-category`}>
-									<SelectValue placeholder="Select category" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectItem value="essay">Essay</SelectItem>
-									<SelectItem value="photography">Photography</SelectItem>
-									<SelectItem value="videography">Videography</SelectItem>
-								</SelectContent>
-							</Select>
-
-							{errors.category && (
-								<p className="text-red-500 text-sm mt-1">{errors.category.message}</p>
-							)}
-						</div>
-
-						<div className="flex-1 space-y-2">
-							<Label htmlFor={`${id}-state`}>State of Origin</Label>
-							<Select
-								defaultValue="enugu"
-								onValueChange={(newValue: SubmissionFormValues["stateOfOrigin"]) => {
-									setValue("stateOfOrigin", newValue);
-									clearErrors("stateOfOrigin");
-								}}>
-								<SelectTrigger className="w-full" disabled={isSubmitting} id={`${id}-state`}>
-									<SelectValue placeholder="Select state" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectItem value="abia">Abia</SelectItem>
-									<SelectItem value="anambra">Anambra</SelectItem>
-									<SelectItem value="ebonyi">Ebonyi</SelectItem>
-									<SelectItem value="enugu">Enugu</SelectItem>
-									<SelectItem value="imo">Imo</SelectItem>
-								</SelectContent>
-							</Select>
-
-							{errors.stateOfOrigin && (
-								<p className="text-red-500 text-sm mt-1">{errors.stateOfOrigin.message}</p>
-							)}
-						</div>
-					</div>
-
-					<div className="flex flex-col gap-4 sm:flex-row">
-						<div className="flex-[2] space-y-2">
-							<Label htmlFor={`${id}-full-name`}>Full name</Label>
-							<Input
-								id={`${id}-full-name`}
-								placeholder="John Doe"
-								type="text"
-								{...register("fullName")}
-								onChange={(e) => {
-									setValue("fullName", e.target.value);
-									clearErrors("fullName");
-								}}
-								disabled={isSubmitting}
-							/>
-							{errors.fullName && (
-								<p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
-							)}
-						</div>
-
-						<div className="flex-1 space-y-2">
-							<Label htmlFor={`${id}-age`}>Age</Label>
-							<Input
-								id={`${id}-age`}
-								placeholder="24"
-								type="number"
-								min={1}
-								max={100}
-								{...register("age")}
-								onChange={(e) => {
-									setValue("age", e.target.value as unknown as number);
-									clearErrors("age");
-								}}
-								disabled={isSubmitting}
-							/>
-							{errors.age && <p className="text-red-500 text-sm mt-1">{errors.age.message}</p>}
-						</div>
-					</div>
-
-					<div className="*:not-first:mt-2">
-						<Label htmlFor={`${id}-community`}>Community</Label>
-						<Input
-							id={`${id}-community`}
-							placeholder="e.g. Nsukka"
-							type="text"
-							{...register("community")}
-							onChange={(e) => {
-								setValue("community", e.target.value);
-								clearErrors("community");
-							}}
-							disabled={isSubmitting}
-						/>
-						{errors.community && (
-							<p className="text-red-500 text-sm mt-1">{errors.community.message}</p>
-						)}
-					</div>
-
-					<div className="*:not-first:mt-2">
-						<Label htmlFor={`${id}-entry-title`}>Title of your entry</Label>
-						<Input
-							id={`${id}-entry-title`}
-							placeholder="Give your entry a title"
-							type="text"
-							{...register("entryTitle")}
-							onChange={(e) => {
-								setValue("entryTitle", e.target.value);
-								clearErrors("entryTitle");
-							}}
-							disabled={isSubmitting}
-						/>
-						{errors.entryTitle && (
-							<p className="text-red-500 text-sm mt-1">{errors.entryTitle.message}</p>
-						)}
-					</div>
-
-					<div className="flex flex-col gap-4 sm:flex-row">
-						<div className="flex-1 space-y-2">
-							<Label htmlFor={`${id}-phone`}>Phone number</Label>
-							<Input
-								id={`${id}-phone`}
-								placeholder="080..."
-								type="tel"
-								{...register("phone")}
-								onChange={(e) => {
-									setValue("phone", e.target.value);
-									clearErrors("phone");
-								}}
-								disabled={isSubmitting}
-							/>
-							{errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
-						</div>
-
-						<div className="flex-1 space-y-2">
-							<Label htmlFor={`${id}-email`}>Email</Label>
-							<Input
-								id={`${id}-email`}
-								placeholder="m@example.com"
-								type="email"
-								{...register("email")}
-								onChange={(e) => {
-									setValue("email", e.target.value);
-									clearErrors("email");
-								}}
-								disabled={isSubmitting}
-							/>
-							{errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
-						</div>
-					</div>
-
-					<div className="*:not-first:mt-2">
-						<Label htmlFor={`${id}-socials`}>Your Instagram link</Label>
-						<Input
-							id={`${id}-socials`}
-							placeholder="https://instagram.com/username"
-							type="text"
-							{...register("instagramLink")}
-							onChange={(e) => {
-								setValue("instagramLink", e.target.value);
-								clearErrors("instagramLink");
-							}}
-							disabled={isSubmitting}
-						/>
-						{errors.instagramLink && (
-							<p className="text-red-500 text-sm mt-1">{errors.instagramLink.message}</p>
-						)}
-					</div>
-
-					{selectedCategory === "photography" && (
-						<div className="*:not-first:mt-2">
-							<Label htmlFor={`${id}-caption`}>Photo caption / story</Label>
-							<Textarea
-								id={`${id}-caption`}
-								placeholder="Tell the story behind your photo (100-200 words)..."
-								className="max-h-25"
-								{...register("caption")}
-								onChange={(e) => {
-									setValue("caption", e.target.value);
-									clearErrors("caption");
-								}}
-								disabled={isSubmitting}
-								rows={6}
-								aria-describedby={`${id}-caption-count`}
-							/>
-							<p
-								id={`${id}-caption-count`}
-								className={`mt-2 text-right text-xs ${
-									captionWords < 100 || captionWords > 200
-										? "text-red-500"
-										: "text-muted-foreground"
-								}`}
-								role="status"
-								aria-live="polite">
-								<span className="tabular-nums">{captionWords}</span> / 100-200 words required
-							</p>
-							{errors.caption && (
-								<p className="text-red-500 text-sm mt-1">{errors.caption.message}</p>
-							)}
-						</div>
+			<div className="flex flex-col gap-4 sm:flex-row">
+				<div className="flex-1 space-y-2">
+					<Label htmlFor={`${id}-category`}>Category</Label>
+					<Select
+						defaultValue="essay"
+						onValueChange={(newValue: SubmissionFormValues["category"]) => {
+							setValue("category", newValue);
+							clearErrors("category");
+						}}>
+						<SelectTrigger
+							className="w-full"
+							disabled={isSubmitting || files.length > 0}
+							id={`${id}-category`}>
+							<SelectValue placeholder="Select category" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="essay">Essay</SelectItem>
+							<SelectItem value="photography">Photography/Artwork</SelectItem>
+							<SelectItem value="videography">Videography</SelectItem>
+						</SelectContent>
+					</Select>
+					{errors.category && (
+						<p className="text-red-500 text-sm mt-1">{errors.category.message}</p>
 					)}
-
-					<div className="*:not-first:mt-2">
-						<Label>{fileConfig.label}</Label>
-						<FileUploader
-							accept={fileConfig.accept}
-							accepts={fileConfig.accepts}
-							maxSize={fileConfig.maxSize}
-							multiple={false}
-							onValueChange={setFiles}
-							disabled={isSubmitting}
-						/>
-						{selectedCategory === "videography" && (
-							<p className="text-muted-foreground text-xs">
-								Must be 3-7 minutes long. We check this again automatically after upload.
-							</p>
-						)}
-					</div>
 				</div>
 
-				<DialogFooter className="border-t px-6 py-4">
-					<DialogClose asChild>
-						<Button type="button" variant="outline" disabled={isSubmitting}>
-							Cancel
-						</Button>
-					</DialogClose>
+				<div className="flex-1 space-y-2">
+					<Label htmlFor={`${id}-gender`}>Gender</Label>
+					<Select
+						onValueChange={(newValue: SubmissionFormValues["gender"]) => {
+							setValue("gender", newValue);
+							clearErrors("gender");
+						}}>
+						<SelectTrigger className="w-full" disabled={isSubmitting} id={`${id}-gender`}>
+							<SelectValue placeholder="Select gender" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="male">Male</SelectItem>
+							<SelectItem value="female">Female</SelectItem>
+						</SelectContent>
+					</Select>
+					{errors.gender && <p className="text-red-500 text-sm mt-1">{errors.gender.message}</p>}
+				</div>
+			</div>
 
-					<AlertDialog open={openAlert} onOpenChange={setOpenAlert}>
-						<AlertDialogTrigger asChild>
-							<Button type="button" disabled={isSubmitting}>
-								{isSubmitting ? submitStatus || "Submitting..." : "Submit Entry"}
-							</Button>
-						</AlertDialogTrigger>
-						<AlertDialogContent>
-							<AlertDialogHeader>
-								<AlertDialogTitle>Are you sure?</AlertDialogTitle>
-								<AlertDialogDescription>
-									Please ensure all your information is correct before submitting. You won't be able
-									to make changes after submission, and you can only submit once per category.
-								</AlertDialogDescription>
-							</AlertDialogHeader>
-							<AlertDialogFooter>
-								<AlertDialogCancel disabled={isSubmitting}>Go Back</AlertDialogCancel>
-								<AlertDialogAction onClick={handleSubmit(onSubmit)} disabled={isSubmitting}>
-									Yes, Submit
-								</AlertDialogAction>
-							</AlertDialogFooter>
-						</AlertDialogContent>
-					</AlertDialog>
-				</DialogFooter>
-			</form>
-		</div>
+			<div className="flex flex-col gap-4 sm:flex-row">
+				<div className="flex-2 space-y-2">
+					<Label htmlFor={`${id}-full-name`}>Full name</Label>
+					<Input
+						id={`${id}-full-name`}
+						placeholder="John Doe"
+						type="text"
+						{...register("fullName")}
+						onChange={(e) => {
+							setValue("fullName", e.target.value);
+							clearErrors("fullName");
+						}}
+						disabled={isSubmitting}
+					/>
+					{errors.fullName && (
+						<p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
+					)}
+				</div>
+
+				<div className="flex-1 space-y-2">
+					<Label htmlFor={`${id}-date-of-birth`}>Date of Birth</Label>
+
+					<Popover open={openCalendar} onOpenChange={setOpenCalendar}>
+						<PopoverTrigger asChild>
+							<button
+								type="button"
+								id="date"
+								className={cn(
+									"flex items-center h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-brand disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+									!date && "text-muted-foreground!",
+								)}
+								disabled={isSubmitting}>
+								{date ? date.toLocaleDateString() : "Select date"}
+							</button>
+						</PopoverTrigger>
+						<PopoverContent className="w-auto overflow-hidden p-0" align="start">
+							<Calendar
+								mode="single"
+								selected={date}
+								defaultMonth={date}
+								captionLayout="dropdown"
+								onSelect={(date) => {
+									if (!date) return; // ignore deselection, keep last valid date
+									setDate(date);
+									setValue("dateOfBirth", date.toLocaleDateString(), {
+										shouldValidate: true,
+										shouldDirty: true,
+									});
+									clearErrors("dateOfBirth");
+									setOpenCalendar(false);
+								}}
+							/>
+						</PopoverContent>
+					</Popover>
+
+					{errors.dateOfBirth && (
+						<p className="text-red-500 text-sm mt-1">{errors.dateOfBirth.message}</p>
+					)}
+				</div>
+			</div>
+
+			<div className="flex flex-col gap-4 sm:flex-row">
+				<div className="flex-1 space-y-2">
+					<Label htmlFor={`${id}-state-of-origin`}>State of origin</Label>
+					<Select
+						onValueChange={(newValue: SubmissionFormValues["stateOfOrigin"]) => {
+							setValue("stateOfOrigin", newValue);
+							clearErrors("stateOfOrigin");
+						}}>
+						<SelectTrigger className="w-full" disabled={isSubmitting} id={`${id}-state-of-origin`}>
+							<SelectValue placeholder="Select state" />
+						</SelectTrigger>
+						<SelectContent>
+							{Object.entries(NIGERIAN_STATE_LABELS).map(([value, label]) => (
+								<SelectItem key={value} value={value}>
+									{label}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+					{errors.stateOfOrigin && (
+						<p className="text-red-500 text-sm mt-1">{errors.stateOfOrigin.message}</p>
+					)}
+				</div>
+
+				<div className="flex-1 space-y-2">
+					<Label htmlFor={`${id}-state-of-residence`}>State of residence</Label>
+					<Select
+						defaultValue="enugu"
+						onValueChange={(newValue: SubmissionFormValues["stateOfResidence"]) => {
+							setValue("stateOfResidence", newValue);
+							clearErrors("stateOfResidence");
+						}}>
+						<SelectTrigger
+							className="w-full"
+							disabled={isSubmitting}
+							id={`${id}-state-of-residence`}>
+							<SelectValue placeholder="Select state" />
+						</SelectTrigger>
+						<SelectContent>
+							{Object.entries(STATE_OF_RESIDENCE_LABELS).map(([value, label]) => (
+								<SelectItem key={value} value={value}>
+									{label}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+					<p className="text-muted-foreground text-xs">Open to South East residents only.</p>
+					{errors.stateOfResidence && (
+						<p className="text-red-500 text-sm mt-1">{errors.stateOfResidence.message}</p>
+					)}
+				</div>
+			</div>
+
+			<div className="*:not-first:mt-2">
+				<Label htmlFor={`${id}-address`}>Address</Label>
+				<Input
+					id={`${id}-address`}
+					placeholder="Street address"
+					type="text"
+					{...register("address")}
+					onChange={(e) => {
+						setValue("address", e.target.value);
+						clearErrors("address");
+					}}
+					disabled={isSubmitting}
+				/>
+				{errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
+			</div>
+
+			<div className="*:not-first:mt-2">
+				<Label htmlFor={`${id}-entry-title`}>Title of entry</Label>
+				<Input
+					id={`${id}-entry-title`}
+					placeholder="Give your entry a title"
+					type="text"
+					{...register("entryTitle")}
+					onChange={(e) => {
+						setValue("entryTitle", e.target.value);
+						clearErrors("entryTitle");
+					}}
+					disabled={isSubmitting}
+				/>
+				{errors.entryTitle && (
+					<p className="text-red-500 text-sm mt-1">{errors.entryTitle.message}</p>
+				)}
+			</div>
+
+			<div className="flex flex-col gap-4 sm:flex-row">
+				<div className="flex-1 space-y-2">
+					<Label htmlFor={`${id}-phone`}>Phone number</Label>
+					<Input
+						id={`${id}-phone`}
+						placeholder="080..."
+						type="tel"
+						{...register("phone")}
+						onChange={(e) => {
+							setValue("phone", e.target.value);
+							clearErrors("phone");
+						}}
+						disabled={isSubmitting}
+					/>
+					{errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
+				</div>
+
+				<div className="flex-1 space-y-2">
+					<Label htmlFor={`${id}-email`}>Email</Label>
+					<Input
+						id={`${id}-email`}
+						placeholder="m@example.com"
+						type="email"
+						{...register("email")}
+						onChange={(e) => {
+							setValue("email", e.target.value);
+							clearErrors("email");
+						}}
+						disabled={isSubmitting}
+					/>
+					{errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+				</div>
+			</div>
+
+			<div className="*:not-first:mt-2">
+				<Label htmlFor={`${id}-socials`}>Your Instagram link</Label>
+				<Input
+					id={`${id}-socials`}
+					placeholder="https://instagram.com/username"
+					type="text"
+					{...register("instagramLink")}
+					onChange={(e) => {
+						setValue("instagramLink", e.target.value);
+						clearErrors("instagramLink");
+					}}
+					disabled={isSubmitting}
+				/>
+				{errors.instagramLink && (
+					<p className="text-red-500 text-sm mt-1">{errors.instagramLink.message}</p>
+				)}
+			</div>
+
+			{selectedCategory === "photography" && (
+				<div className="*:not-first:mt-2">
+					<Label htmlFor={`${id}-caption`}>Photo caption / story</Label>
+					<Textarea
+						id={`${id}-caption`}
+						placeholder="Tell the story behind your photo (100-200 words)..."
+						{...register("caption")}
+						onChange={(e) => {
+							setValue("caption", e.target.value);
+							clearErrors("caption");
+						}}
+						disabled={isSubmitting}
+						rows={6}
+						aria-describedby={`${id}-caption-count`}
+					/>
+					<p
+						id={`${id}-caption-count`}
+						className={`mt-2 text-right text-xs ${
+							captionWords < 100 || captionWords > 200 ? "text-red-500" : "text-muted-foreground"
+						}`}
+						role="status"
+						aria-live="polite">
+						<span className="tabular-nums">{captionWords}</span> / 100-200 words required
+					</p>
+					{errors.caption && <p className="text-red-500 text-sm mt-1">{errors.caption.message}</p>}
+				</div>
+			)}
+
+			<div className="*:not-first:mt-2">
+				<Label>{fileConfig.label}</Label>
+				<FileUploader
+					accept={fileConfig.accept}
+					accepts={fileConfig.accepts}
+					maxSize={fileConfig.maxSize}
+					multiple={false}
+					onValueChange={setFiles}
+					disabled={isSubmitting}
+				/>
+				{selectedCategory === "videography" && (
+					<p className="text-muted-foreground text-xs">
+						Must be 3-7 minutes long. We check this again automatically after upload.
+					</p>
+				)}
+			</div>
+
+			<div className="flex justify-end border-t pt-4">
+				<AlertDialog open={openAlert} onOpenChange={setOpenAlert}>
+					<AlertDialogTrigger asChild>
+						<Button type="button" disabled={isSubmitting}>
+							{isSubmitting ? submitStatus || "Submitting..." : "Review & Submit"}
+						</Button>
+					</AlertDialogTrigger>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							<AlertDialogTitle>Are you sure?</AlertDialogTitle>
+							<AlertDialogDescription>
+								Please ensure all your information is correct before submitting. If your entry is
+								rejected, you get exactly one resubmission in this category — after that, this
+								category is closed to you, so double-check everything now.
+							</AlertDialogDescription>
+						</AlertDialogHeader>
+						<AlertDialogFooter>
+							<AlertDialogCancel disabled={isSubmitting}>Go Back</AlertDialogCancel>
+							<AlertDialogAction onClick={handleSubmit(onSubmit)} disabled={isSubmitting}>
+								Yes, Submit
+							</AlertDialogAction>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialog>
+			</div>
+		</form>
 	);
 }
 

@@ -3,7 +3,7 @@
 import { Heading } from "@/components/heading";
 import { motion } from "motion/react";
 
-import SubmissionDialog from "./submission-dialog";
+import SubmissionCTA from "./submission-cta";
 import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -219,7 +219,7 @@ const HeroSection = () => {
 					<div
 						className="flex items-center gap-4 animate-fade-up w-auto justify-center"
 						style={{ animationDelay: "0.40s", animationFillMode: "both" }}>
-						<SubmissionDialog />
+						<SubmissionCTA />
 					</div>
 				</Suspense>
 			</div>

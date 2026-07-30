@@ -1,8 +1,8 @@
 import { desc } from "drizzle-orm";
-import { db } from "@/src/index";
-import { submissions, exportLogs } from "@/src/db/schema";
 import { getAdminByKey } from "@/lib/adminAuth";
 import AdminDashboard from "@/components/layout/admin-dashboard";
+import { db } from "@/src";
+import { exportLogs, submissions } from "@/src/db/schema";
 
 // Next.js 15: searchParams is async. On Next.js 14, type it as
 // `{ ak?: string }` directly and drop the `await`.
@@ -31,9 +31,11 @@ export default async function AdminPage({
 			id: submissions.id,
 			contestantId: submissions.contestantId,
 			fullName: submissions.fullName,
-			age: submissions.age,
+			dateOfBirth: submissions.dateOfBirth,
+			gender: submissions.gender,
 			stateOfOrigin: submissions.stateOfOrigin,
-			community: submissions.community,
+			stateOfResidence: submissions.stateOfResidence,
+			address: submissions.address,
 			entryTitle: submissions.entryTitle,
 			category: submissions.category,
 			phone: submissions.phone,
@@ -45,6 +47,8 @@ export default async function AdminPage({
 			status: submissions.status,
 			approvedBy: submissions.approvedBy,
 			reviewedAt: submissions.reviewedAt,
+			flaggedForReview: submissions.flaggedForReview,
+			flagReason: submissions.flagReason,
 			createdAt: submissions.createdAt,
 		})
 		.from(submissions)

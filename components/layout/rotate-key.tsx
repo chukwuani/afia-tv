@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Copy, KeyRound } from "lucide-react";
+import { Copy } from "lucide-react";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -93,9 +93,11 @@ export default function RotateKey({ accessKey }: { accessKey: string }) {
 	return (
 		<AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
 			<AlertDialogTrigger asChild>
-				<Button variant="outline" size="sm">
-					<KeyRound className="mr-1.5 h-3.5 w-3.5" />
-					Rotate my key
+				<Button
+					variant="outline"
+					className="inline-flex text-xs text-[10px]! font-normal px-2! h-7"
+					size="sm">
+					Rotate key
 				</Button>
 			</AlertDialogTrigger>
 			<AlertDialogContent>

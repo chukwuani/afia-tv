@@ -32,15 +32,49 @@ const instagramUrlSchema = z.string().url().refine((url) => {
 }, "Must be a valid Instagram profile URL (e.g., https://instagram.com/username)");
 
 export const categoryEnum = z.enum(["essay", "videography", "photography"]);
-export const stateEnum = z.enum(["abia", "anambra", "ebonyi", "enugu", "imo"]);
+
+export const genderEnum = z.enum(["male", "female"]);
+
+// Full Nigerian states + FCT — anyone can select any of these for State of Origin.
+export const nigerianStateEnum = z.enum([
+	"abia", "adamawa", "akwa_ibom", "anambra", "bauchi", "bayelsa", "benue",
+	"borno", "cross_river", "delta", "ebonyi", "edo", "ekiti", "enugu", "gombe",
+	"imo", "jigawa", "kaduna", "kano", "katsina", "kebbi", "kogi", "kwara",
+	"lagos", "nasarawa", "niger", "ogun", "ondo", "osun", "oyo", "plateau",
+	"rivers", "sokoto", "taraba", "yobe", "zamfara", "fct",
+]);
+
+export const NIGERIAN_STATE_LABELS: Record<z.infer<typeof nigerianStateEnum>, string> = {
+	abia: "Abia", adamawa: "Adamawa", akwa_ibom: "Akwa Ibom", anambra: "Anambra",
+	bauchi: "Bauchi", bayelsa: "Bayelsa", benue: "Benue", borno: "Borno",
+	cross_river: "Cross River", delta: "Delta", ebonyi: "Ebonyi", edo: "Edo",
+	ekiti: "Ekiti", enugu: "Enugu", gombe: "Gombe", imo: "Imo", jigawa: "Jigawa",
+	kaduna: "Kaduna", kano: "Kano", katsina: "Katsina", kebbi: "Kebbi", kogi: "Kogi",
+	kwara: "Kwara", lagos: "Lagos", nasarawa: "Nasarawa", niger: "Niger", ogun: "Ogun",
+	ondo: "Ondo", osun: "Osun", oyo: "Oyo", plateau: "Plateau", rivers: "Rivers",
+	sokoto: "Sokoto", taraba: "Taraba", yobe: "Yobe", zamfara: "Zamfara", fct: "FCT (Abuja)",
+};
+
+// Restricted to South East — used for State of Residence, since the competition is SE-specific.
+export const stateOfResidenceEnum = z.enum(["abia", "anambra", "ebonyi", "enugu", "imo"]);
+
+export const STATE_OF_RESIDENCE_LABELS: Record<z.infer<typeof stateOfResidenceEnum>, string> = {
+	abia: "Abia",
+	anambra: "Anambra",
+	ebonyi: "Ebonyi",
+	enugu: "Enugu",
+	imo: "Imo",
+};
 
 // Fields the participant fills in directly. No file data here — files are
 // uploaded separately and their keys/urls are attached before the final POST.
 export const submissionMetadataSchema = z.object({
 	fullName: z.string().min(2, "Full name is required"),
-	age: z.coerce.number().int().min(1, "Age is required").max(100),
-	stateOfOrigin: stateEnum,
-	community: z.string().min(2, "Community is required"),
+	dateOfBirth: z.string().min(5, "Date of Birth is required"),
+	gender: genderEnum,
+	stateOfOrigin: nigerianStateEnum,
+	stateOfResidence: stateOfResidenceEnum,
+	address: z.string().min(5, "Address is required"),
 	entryTitle: z.string().min(2, "Entry title is required").max(150),
 	category: categoryEnum,
 	phone: z

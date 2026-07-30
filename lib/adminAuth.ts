@@ -17,7 +17,7 @@ function generateAdminKey() {
 	return randomBytes(9).toString("base64url");
 }
 
-const MAX_ROTATE_ATTEMPTS = 10;
+const MAX_ROTATE_ATTEMPTS = 20;
 
 /** Replaces an admin's access key with a fresh random one and returns it. */
 export async function rotateAdminKey(adminId: string): Promise<string> {

@@ -1,9 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { Copy } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Copy, TriangleAlert } from "lucide-react";
 import { toast } from "sonner";
+
+import { Button } from "@/components/ui/button";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import {
 	Select,
 	SelectContent,
@@ -11,15 +22,19 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import RotateKey from "@/components/layout/rotate-key";
+import RotateKeyDialog from "@/components/layout/rotate-key";
+
+import { NIGERIAN_STATE_LABELS, STATE_OF_RESIDENCE_LABELS } from "@/lib/validations/submission";
 
 type SubmissionRow = {
 	id: string;
 	contestantId: number;
 	fullName: string;
-	age: number;
-	stateOfOrigin: string;
-	community: string;
+	dateOfBirth: string;
+	gender: string;
+	stateOfOrigin: keyof typeof NIGERIAN_STATE_LABELS;
+	stateOfResidence: keyof typeof STATE_OF_RESIDENCE_LABELS;
+	address: string;
 	entryTitle: string;
 	category: string;
 	phone: string;
@@ -31,10 +46,13 @@ type SubmissionRow = {
 	status: string;
 	approvedBy: string | null;
 	reviewedAt: Date | null;
+	flaggedForReview: boolean;
+	flagReason: string | null;
 	createdAt: Date;
 };
 
 type LastExport = { adminName: string; exportedAt: string } | null;
+type ReviewAction = "approve" | "reject" | "disqualify";
 
 const CATEGORY_OPTIONS = [
 	{ value: "all", label: "All categories" },
@@ -43,11 +61,18 @@ const CATEGORY_OPTIONS = [
 	{ value: "photography", label: "Photography" },
 ];
 
+const ACTION_PAST_TENSE: Record<ReviewAction, string> = {
+	approve: "approved",
+	reject: "rejected",
+	disqualify: "disqualified",
+};
+
 function StatusBadge({ status }: { status: string }) {
 	const styles: Record<string, string> = {
 		pending: "bg-yellow-100 text-yellow-800",
 		approved: "bg-green-100 text-green-800",
 		rejected: "bg-red-100 text-red-800",
+		disqualified: "bg-black text-white",
 	};
 
 	return (
@@ -72,8 +97,9 @@ export default function AdminDashboard({
 	const [rows, setRows] = useState(submissions);
 	const [pendingId, setPendingId] = useState<string | null>(null);
 	const [categoryFilter, setCategoryFilter] = useState("all");
+	const [confirmDisqualifyId, setConfirmDisqualifyId] = useState<string | null>(null);
 
-	const handleReview = async (id: string, action: "approve" | "reject") => {
+	const handleReview = async (id: string, action: ReviewAction) => {
 		setPendingId(id);
 
 		try {
@@ -99,7 +125,13 @@ export default function AdminDashboard({
 				),
 			);
 
-			toast.success(`Submission ${action === "approve" ? "approved" : "rejected"}`);
+			toast.success(`Submission ${ACTION_PAST_TENSE[action]}`);
+
+			if (action === "disqualify") {
+				toast.info(
+					"This contestant is now blocked from submitting to any category — not just this one.",
+				);
+			}
 		} catch (err) {
 			toast.error(err instanceof Error ? err.message : "Something went wrong");
 		} finally {
@@ -129,15 +161,23 @@ export default function AdminDashboard({
 			<div className="flex flex-wrap items-center justify-between gap-3">
 				<div>
 					<h1 className="text-xl font-semibold">Submissions</h1>
+					<p className="text-muted-foreground text-sm">Logged in as {adminName}</p>
 					<p className="text-muted-foreground text-sm">
-						Logged in as {adminName}
 						{lastExport && (
 							<>
-								{" · "}Last exported by {lastExport.adminName} on{" "}
-								{new Date(lastExport.exportedAt).toLocaleString("en-NG")}
+								Last exported by {lastExport.adminName} on{" "}
+								{new Date(lastExport.exportedAt).toLocaleString("en-NG").slice(0, 10)}
 							</>
 						)}
 					</p>
+					<div className="flex items-center gap-2 mt-2">
+						<Button
+							className="inline-flex text-xs text-[10px]! font-normal px-2! h-7"
+							onClick={handleExport}>
+							Export Excel
+						</Button>
+						<RotateKeyDialog accessKey={accessKey} />
+					</div>
 				</div>
 
 				<div className="flex items-center gap-2">
@@ -153,10 +193,6 @@ export default function AdminDashboard({
 							))}
 						</SelectContent>
 					</Select>
-
-					<Button onClick={handleExport}>Export to Excel</Button>
-
-					<RotateKey accessKey={accessKey} />
 				</div>
 			</div>
 
@@ -169,7 +205,7 @@ export default function AdminDashboard({
 							<th className="px-3 py-2">Category</th>
 							<th className="px-3 py-2">Entry Title</th>
 							<th className="px-3 py-2">Caption</th>
-							<th className="px-3 py-2">State</th>
+							<th className="px-3 py-2">Location</th>
 							<th className="px-3 py-2">Contact</th>
 							<th className="px-3 py-2">Files</th>
 							<th className="px-3 py-2">Status</th>
@@ -180,11 +216,23 @@ export default function AdminDashboard({
 					<tbody>
 						{visibleRows.map((row) => (
 							<tr key={row.id} className="border-t">
-								<td className="px-3 py-2 font-mono">{row.contestantId}</td>
+								<td className="px-3 py-2 font-mono">
+									<div className="flex items-center gap-1.5">
+										{row.contestantId}
+										{row.flaggedForReview && (
+											<span title={row.flagReason ?? "Flagged for review"}>
+												<TriangleAlert
+													className="h-3.5 w-3.5 text-amber-600"
+													aria-label={row.flagReason ?? "Flagged for review"}
+												/>
+											</span>
+										)}
+									</div>
+								</td>
 								<td className="px-3 py-2">
 									{row.fullName}
-									<div className="text-muted-foreground text-xs">
-										{row.age} yrs · {row.community}
+									<div className="text-muted-foreground text-xs capitalize">
+										{row.gender} · {row.dateOfBirth}
 									</div>
 								</td>
 								<td className="px-3 py-2 capitalize">{row.category}</td>
@@ -207,7 +255,16 @@ export default function AdminDashboard({
 										<span className="text-muted-foreground">—</span>
 									)}
 								</td>
-								<td className="px-3 py-2 capitalize">{row.stateOfOrigin}</td>
+								<td className="max-w-[180px] px-3 py-2">
+									<div>Origin: {NIGERIAN_STATE_LABELS[row.stateOfOrigin] ?? row.stateOfOrigin}</div>
+									<div className="text-muted-foreground text-xs">
+										Resides:{" "}
+										{STATE_OF_RESIDENCE_LABELS[row.stateOfResidence] ?? row.stateOfResidence}
+									</div>
+									<div className="text-muted-foreground truncate text-xs" title={row.address}>
+										{row.address}
+									</div>
+								</td>
 								<td className="px-3 py-2">
 									<div>{row.phone}</div>
 									<div className="text-muted-foreground text-xs">{row.email}</div>
@@ -233,7 +290,7 @@ export default function AdminDashboard({
 								</td>
 								<td className="px-3 py-2">{row.approvedBy ?? "—"}</td>
 								<td className="px-3 py-2">
-									<div className="flex gap-2">
+									<div className="flex flex-wrap gap-2">
 										<Button
 											size="sm"
 											variant="outline"
@@ -247,6 +304,14 @@ export default function AdminDashboard({
 											disabled={pendingId === row.id || row.status === "rejected"}
 											onClick={() => handleReview(row.id, "reject")}>
 											Reject
+										</Button>
+										<Button
+											size="sm"
+											variant="outline"
+											className="text-red-700 hover:text-red-800"
+											disabled={pendingId === row.id || row.status === "disqualified"}
+											onClick={() => setConfirmDisqualifyId(row.id)}>
+											Disqualify
 										</Button>
 									</div>
 								</td>
@@ -262,6 +327,31 @@ export default function AdminDashboard({
 					</tbody>
 				</table>
 			</div>
+
+			<AlertDialog
+				open={confirmDisqualifyId !== null}
+				onOpenChange={(open) => !open && setConfirmDisqualifyId(null)}>
+				<AlertDialogContent>
+					<AlertDialogHeader>
+						<AlertDialogTitle>Disqualify this contestant?</AlertDialogTitle>
+						<AlertDialogDescription>
+							This blocks them from submitting to any category going forward, not just this one —
+							and they won't be able to resubmit even a rejected entry. This can't be undone from
+							the dashboard.
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter>
+						<AlertDialogCancel>Cancel</AlertDialogCancel>
+						<AlertDialogAction
+							onClick={() => {
+								if (confirmDisqualifyId) handleReview(confirmDisqualifyId, "disqualify");
+								setConfirmDisqualifyId(null);
+							}}>
+							Yes, disqualify
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
 		</div>
 	);
 }

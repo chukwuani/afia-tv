@@ -5,7 +5,7 @@ import { admins } from "@/src/db/schema";
 // Keys should be hard to guess (not sequential/short) since they're the entire auth mechanism.
 const ADMIN_LIST = [
 	{ key: "322465", name: "Stephen" },
-	// { key: "another-key-here", name: "Second Admin" },
+	{ key: "123456", name: "JohnPaul" },
 ];
 
 async function main() {

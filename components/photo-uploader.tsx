@@ -122,7 +122,7 @@ export function PhotoUploader(props: FileUploaderProps) {
 			const newFiles = acceptedFiles.map((file) =>
 				Object.assign(file, {
 					preview: URL.createObjectURL(file),
-				})
+				}),
 			);
 
 			const updatedFiles = files ? [...files, ...newFiles] : newFiles;
@@ -149,7 +149,7 @@ export function PhotoUploader(props: FileUploaderProps) {
 			}
 		},
 
-		[files, maxFiles, multiple, onUpload, setFiles]
+		[files, maxFiles, multiple, onUpload, setFiles],
 	);
 
 	function onRemove(index: number) {
@@ -186,13 +186,17 @@ export function PhotoUploader(props: FileUploaderProps) {
 				{({ getRootProps, getInputProps, isDragActive }) => (
 					<div
 						{...getRootProps()}
-						className="relative flex flex-col items-center gap-2"
+						className="relative flex items-center gap-2"
 						{...dropzoneProps}>
 						<input {...getInputProps()} />
+						<p aria-live="polite" role="region" className="text-muted-foreground mt-2 text-xs w-[50%]">
+							Click here to upload your photo to be featured in your entry flier.
+						</p>
+
 						<div
 							className={cn(
 								buttonVariants({ variant: "outline" }),
-								"relative !size-16 p-0 shadow-none"
+								"relative !size-16 p-0 shadow-none",
 							)}
 							aria-label={files?.length ? "Change image" : "Upload image"}>
 							{files?.length ? (
@@ -238,10 +242,6 @@ export function PhotoUploader(props: FileUploaderProps) {
 								))}
 							</div>
 						) : null}
-
-						<p aria-live="polite" role="region" className="text-muted-foreground mt-2 text-xs">
-							Upload your photo to be featured in your entry flier.
-						</p>
 					</div>
 				)}
 			</Dropzone>
