@@ -34,11 +34,11 @@ export default function TermsGate({ onAgree }: { onAgree: () => void }) {
 
 			<TermsContent />
 
-			<div className="flex items-center justify-between border-t pt-4">
-				<p className="text-muted-foreground text-sm">
+			<div className="flex flex-col justify-between gap-1 border-t pt-4">
+				<p className="text-muted-foreground text-xs">
 					Please read the terms above before continuing.
 				</p>
-				<Button onClick={onAgree} disabled={!canContinue}>
+				<Button className="inline-flex text-xs! font-normal px-3! w-fit" onClick={onAgree} disabled={!canContinue}>
 					{canContinue ? "I Agree — Continue" : `Please wait (${secondsLeft}s)`}
 				</Button>
 			</div>

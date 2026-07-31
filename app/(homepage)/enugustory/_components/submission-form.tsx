@@ -1,9 +1,9 @@
 "use client";
 
 import { useId, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { toast } from "sonner";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,10 +27,12 @@ import {
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { FileUploader } from "@/components/file-uploader";
-import { PhotoUploader } from "@/components/photo-uploader";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { toast } from "sonner";
+
+import { FileUploader } from "@/components/file-uploader";
+import { PhotoUploader } from "@/components/photo-uploader";
 
 import {
 	submissionFormSchema,
@@ -41,7 +43,6 @@ import {
 } from "@/lib/validations/submission";
 import { uploadSubmissionFile, validateVideoDuration } from "@/lib/uploadSubmissionFile";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 
 const FILE_SIZE_LIMITS = {
 	image: 15 * 1024 * 1024, // 15 MB
@@ -53,16 +54,18 @@ const CATEGORY_FILE_CONFIG = {
 	essay: {
 		accept: {
 			"application/pdf": [".pdf"],
+			"application/vnd.openxmlformats-officedocument.wordprocessingml.document": [".docx"],
+			"application/msword": [".doc"],
 		},
-		accepts: ".pdf",
+		accepts: ".pdf,.doc,.docx",
 		maxSize: FILE_SIZE_LIMITS.document,
-		label: "Essay file (PDF only)",
+		label: "Essay file (PDF or Word doc)",
 	},
 	videography: {
 		accept: { "video/mp4": [".mp4"] },
 		accepts: ".mp4",
 		maxSize: FILE_SIZE_LIMITS.video,
-		label: "Video file (MP4, 3-7 minutes)",
+		label: "Video file (MP4, 3–7 minutes)",
 	},
 	photography: {
 		accept: { "image/jpeg": [".jpeg", ".jpg"], "image/png": [".png"] },
@@ -72,17 +75,22 @@ const CATEGORY_FILE_CONFIG = {
 	},
 } as const;
 
-function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => void }) {
-	const router = useRouter();
+function SubmissionForm({
+	verifiedContact,
+	onSuccess,
+}: {
+	verifiedContact: { fullName: string; email: string; phone: string; token: string };
+	onSuccess: (contestantId: number) => void;
+}) {
 	const id = useId();
+	const router = useRouter();
 
 	const [openAlert, setOpenAlert] = useState(false);
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [submitStatus, setSubmitStatus] = useState<string>("");
 	const [openCalendar, setOpenCalendar] = useState(false);
 
 	const [date, setDate] = useState<Date | undefined>(undefined);
-
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [submitStatus, setSubmitStatus] = useState<string>("");
 
 	const {
 		register,
@@ -98,6 +106,9 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 		defaultValues: {
 			category: "essay",
 			stateOfResidence: "enugu",
+			fullName: verifiedContact.fullName,
+			email: verifiedContact.email,
+			phone: verifiedContact.phone,
 		},
 	});
 
@@ -130,7 +141,10 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 				setSubmitStatus("Checking video length...");
 				// Client-side check for fast feedback only — the server re-verifies
 				// this against the actual uploaded file before accepting the entry.
-				await validateVideoDuration(files[0]);
+				const durationCheck = await validateVideoDuration(files[0]);
+				if (!durationCheck.ok) {
+					throw new Error(durationCheck.message);
+				}
 			}
 
 			setSubmitStatus("Uploading your files...");
@@ -149,6 +163,7 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 					fileUrl: entryUpload.fileUrl,
 					photoKey: photoUpload.fileKey,
 					photoUrl: photoUpload.fileUrl,
+					verificationToken: verifiedContact.token,
 				}),
 			});
 
@@ -183,7 +198,7 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 	};
 
 	return (
-		<form className="mx-auto max-w-2xl space-y-4 py-8">
+		<form className="mx-auto max-w-2xl space-y-4 py-8 px-4">
 			<PhotoUploader
 				accept={{
 					"image/jpeg": [".jpeg", ".jpg"],
@@ -204,15 +219,12 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 							setValue("category", newValue);
 							clearErrors("category");
 						}}>
-						<SelectTrigger
-							className="w-full"
-							disabled={isSubmitting || files.length > 0}
-							id={`${id}-category`}>
+						<SelectTrigger className="w-full" disabled={isSubmitting || files.length > 0} id={`${id}-category`}>
 							<SelectValue placeholder="Select category" />
 						</SelectTrigger>
 						<SelectContent>
 							<SelectItem value="essay">Essay</SelectItem>
-							<SelectItem value="photography">Photography/Artwork</SelectItem>
+							<SelectItem value="photography">Photography</SelectItem>
 							<SelectItem value="videography">Videography</SelectItem>
 						</SelectContent>
 					</Select>
@@ -241,19 +253,17 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 			</div>
 
 			<div className="flex flex-col gap-4 sm:flex-row">
-				<div className="flex-2 space-y-2">
+				<div className="flex-[2] space-y-2">
 					<Label htmlFor={`${id}-full-name`}>Full name</Label>
 					<Input
 						id={`${id}-full-name`}
 						placeholder="John Doe"
 						type="text"
 						{...register("fullName")}
-						onChange={(e) => {
-							setValue("fullName", e.target.value);
-							clearErrors("fullName");
-						}}
-						disabled={isSubmitting}
+						readOnly
+						className="bg-muted/50"
 					/>
+					<p className="text-muted-foreground text-xs">Verified — locked to what you confirmed.</p>
 					{errors.fullName && (
 						<p className="text-red-500 text-sm mt-1">{errors.fullName.message}</p>
 					)}
@@ -333,10 +343,7 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 							setValue("stateOfResidence", newValue);
 							clearErrors("stateOfResidence");
 						}}>
-						<SelectTrigger
-							className="w-full"
-							disabled={isSubmitting}
-							id={`${id}-state-of-residence`}>
+						<SelectTrigger className="w-full" disabled={isSubmitting} id={`${id}-state-of-residence`}>
 							<SelectValue placeholder="Select state" />
 						</SelectTrigger>
 						<SelectContent>
@@ -396,11 +403,8 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 						placeholder="080..."
 						type="tel"
 						{...register("phone")}
-						onChange={(e) => {
-							setValue("phone", e.target.value);
-							clearErrors("phone");
-						}}
-						disabled={isSubmitting}
+						readOnly
+						className="bg-muted/50"
 					/>
 					{errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
 				</div>
@@ -412,11 +416,8 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 						placeholder="m@example.com"
 						type="email"
 						{...register("email")}
-						onChange={(e) => {
-							setValue("email", e.target.value);
-							clearErrors("email");
-						}}
-						disabled={isSubmitting}
+						readOnly
+						className="bg-muted/50"
 					/>
 					{errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
 				</div>
@@ -445,7 +446,7 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 					<Label htmlFor={`${id}-caption`}>Photo caption / story</Label>
 					<Textarea
 						id={`${id}-caption`}
-						placeholder="Tell the story behind your photo (100-200 words)..."
+						placeholder="Tell the story behind your photo (100–200 words)..."
 						{...register("caption")}
 						onChange={(e) => {
 							setValue("caption", e.target.value);
@@ -462,7 +463,7 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 						}`}
 						role="status"
 						aria-live="polite">
-						<span className="tabular-nums">{captionWords}</span> / 100-200 words required
+						<span className="tabular-nums">{captionWords}</span> / 100–200 words required
 					</p>
 					{errors.caption && <p className="text-red-500 text-sm mt-1">{errors.caption.message}</p>}
 				</div>
@@ -480,7 +481,7 @@ function SubmissionForm({ onSuccess }: { onSuccess: (contestantId: number) => vo
 				/>
 				{selectedCategory === "videography" && (
 					<p className="text-muted-foreground text-xs">
-						Must be 3-7 minutes long. We check this again automatically after upload.
+						Must be 3–7 minutes long. We check this again automatically after upload.
 					</p>
 				)}
 			</div>

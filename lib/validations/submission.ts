@@ -114,6 +114,7 @@ export const submissionSchema = submissionMetadataSchema
 		fileUrl: z.string().url(),
 		photoKey: z.string().min(1, "Profile photo is required"),
 		photoUrl: z.string().url(),
+		verificationToken: z.string().min(1, "Contact verification is required"),
 	})
 	.superRefine(refineCaption);
 

@@ -1,14 +1,22 @@
-import { NextRequest, NextResponse } from "next/server";
+// ROUTE: POST /api/submissions
+// Final submit step — validates the full payload, re-verifies video duration
+// server-side, assigns/reuses a contestant ID, and saves the record.
+import { NextRequest, NextResponse, after } from "next/server";
 import { and, eq } from "drizzle-orm";
 import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
-
 import { submissionSchema } from "@/lib/validations/submission";
 import { getMp4DurationFromS3 } from "@/lib/mp4Duration";
 import { getOrCreateContestant } from "@/lib/contestant";
 import { checkSubmissionEligibility } from "@/lib/eligibility";
 import { sendSubmissionReceivedEmail } from "@/lib/notifications";
+import { verifyVerificationToken } from "@/lib/verificationToken";
 import { db } from "@/src";
 import { submissions } from "@/src/db/schema";
+
+// Vercel's default timeout is tight for this route: R2 range-fetches for video
+// duration verification plus DB queries can add up on a slow connection. 60 is
+// the max on Hobby; raise further if you're on Pro/Enterprise.
+export const maxDuration = 60;
 
 const s3 = new S3Client({
 	region: process.env.R2_REGION || "auto",
@@ -49,6 +57,14 @@ export async function POST(req: NextRequest) {
 	}
 
 	const data = parsed.data;
+
+	// Checked first, before touching storage or the database at all — an
+	// unverified submission shouldn't even trigger a file cleanup, it should
+	// never have gotten this far with real uploaded files in a well-behaved client.
+	const tokenCheck = verifyVerificationToken(data.verificationToken, data.email, data.phone);
+	if (!tokenCheck.valid) {
+		return NextResponse.json({ error: tokenCheck.reason }, { status: 401 });
+	}
 
 	// Checked before anything else — disqualification (email OR phone) and the
 	// one-resubmission rule both live here. No point verifying video duration
@@ -143,8 +159,9 @@ export async function POST(req: NextRequest) {
 			})
 			.returning();
 
-		// Never allowed to fail the submission itself — sendZeptoMail swallows its own errors.
-		await sendSubmissionReceivedEmail(data.email, data.fullName, data.category, submission.contestantId);
+		// Scheduled after the response is sent — the client shouldn't wait on
+		// ZeptoMail, and sendZeptoMail already never throws so this can't fail silently either.
+		after(() => sendSubmissionReceivedEmail(data.email, data.fullName, data.category, submission.contestantId));
 
 		return NextResponse.json(
 			{ success: true, id: submission.id, contestantId: submission.contestantId },

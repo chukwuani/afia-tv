@@ -36,6 +36,18 @@ export const statusEnum = pgEnum("status", ["pending", "approved", "rejected", "
 
 // One row per person. contestantId is the public-facing 3-digit number;
 // email is what ties a person's multiple category entries together.
+// Self-managed email OTP - code generated and hashed here, delivered via ZeptoMail.
+// Phone OTP is delegated entirely to Termii, which handles generate/send/verify itself.
+export const emailVerifications = pgTable("email_verifications", {
+	id: uuid("id").defaultRandom().primaryKey(),
+	email: text("email").notNull(),
+	codeHash: text("code_hash").notNull(),
+	verified: boolean("verified").notNull().default(false),
+	attempts: integer("attempts").notNull().default(0),
+	expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+	createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export const identifierTypeEnum = pgEnum("identifier_type", ["email", "phone"]);
 
 // Hard-block list. When a contestant is disqualified, their email and every
@@ -81,8 +93,8 @@ export const submissions = pgTable(
 			.notNull()
 			.references(() => contestants.contestantId),
 		fullName: text("full_name").notNull(),
-		gender: genderEnum("gender").notNull(),
 		dateOfBirth: text("date_of_birth").notNull(),
+		gender: genderEnum("gender").notNull(),
 		stateOfOrigin: nigerianStateEnum("state_of_origin").notNull(),
 		stateOfResidence: stateOfResidenceEnum("state_of_residence").notNull(),
 		address: text("address").notNull(),

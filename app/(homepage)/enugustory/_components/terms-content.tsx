@@ -1,11 +1,11 @@
 export default function TermsContent() {
 	return (
 		<>
-			<h2 className="mt-6 scroll-m-20 border-b pb-2 font-epilogue text-2xl font-semibold tracking-tight first:mt-0">
+			<h2 className="mt-6 scroll-m-20 border-b pb-2 font-epilogue text-xl lg:text-2xl font-semibold tracking-tight first:mt-0">
 				Intellectual Property and Submission Terms
 			</h2>
 
-			<p className="leading-7">
+			<p className="text-sm lg:text-base leading-7">
 				By submitting an entry to <strong>My Enugu Story</strong>, participants
 				irrevocably assign all ownership, copyright, and intellectual property
 				rights in their submitted work to <strong>AFIA TV</strong>. All entries,
@@ -13,7 +13,7 @@ export default function TermsContent() {
 				will not be returned.
 			</p>
 
-			<p className="leading-7">
+			<p className="text-sm lg:text-base leading-7">
 				AFIA TV reserves the unrestricted, perpetual, worldwide right to
 				reproduce, publish, broadcast, exhibit, archive, adapt, edit, translate,
 				distribute, and otherwise use submitted entries, in whole or in part,
@@ -22,22 +22,22 @@ export default function TermsContent() {
 				compensation.
 			</p>
 
-			<p className="leading-7">
+			<p className="text-sm lg:text-base leading-7">
 				By entering the competition, participants warrant that their submission
 				is their original work, does not infringe upon the rights of any third
 				party, and that they have obtained all necessary permissions from any
 				identifiable persons featured in the work.
 			</p>
 
-			<p className="leading-7">
+			<p className="text-sm lg:text-base leading-7">
 				All entries, whether selected as winners or not, will not be returned.
 			</p>
 
-			<h2 className="mt-6 scroll-m-20 border-b pb-2 font-epilogue text-2xl font-semibold tracking-tight">
+			<h2 className="mt-6 scroll-m-20 border-b pb-2 font-epilogue text-xl lg:text-2xl font-semibold tracking-tight">
 				Artificial Intelligence (AI) Policy
 			</h2>
 
-			<p className="leading-7">
+			<p className="text-sm lg:text-base leading-7">
 				All entries must be the participant&apos;s original work. The use of
 				artificial intelligence (AI) tools to generate essays, images, artwork,
 				videos, or any substantial portion of a submission is strictly
@@ -47,11 +47,11 @@ export default function TermsContent() {
 				the organisers.
 			</p>
 
-			<h2 className="mt-6 scroll-m-20 border-b pb-2 font-epilogue text-2xl font-semibold tracking-tight">
+			<h2 className="mt-6 scroll-m-20 border-b pb-2 font-epilogue text-xl lg:text-2xl font-semibold tracking-tight">
 				Important Rules
 			</h2>
 
-			<ol className="ml-6 list-decimal space-y-2">
+			<ol className="ml-6 list-decimal space-y-2 text-sm lg:text-base leading-7">
 				<li>Entries must be the participant&apos;s original work.</li>
 
 				<li>
@@ -75,11 +75,11 @@ export default function TermsContent() {
 				</li>
 			</ol>
 
-			<h2 className="mt-6 scroll-m-20 border-b pb-2 font-epilogue text-2xl font-semibold tracking-tight">
+			<h2 className="mt-6 scroll-m-20 border-b pb-2 font-epilogue text-xl lg:text-2xl font-semibold tracking-tight">
 				Eligibility
 			</h2>
 
-			<ol className="ml-6 list-decimal space-y-2">
+			<ol className="ml-6 list-decimal space-y-2 text-sm lg:text-base leading-7">
 				<li>
 					The competition is open to young people of Igbo descent from across Ala
 					Igbo.

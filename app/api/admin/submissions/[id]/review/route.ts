@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { eq } from "drizzle-orm";
 import { getAdminByKey } from "@/lib/adminAuth";
-import { banContestantIdentifiers } from "@/lib/banIdentity"
+import { banContestantIdentifiers } from "@/lib/banIdentity";
 import { sendApprovedEmail, sendRejectedEmail, sendDisqualifiedEmail } from "@/lib/notifications";
 import { db } from "@/src";
 import { contestants, submissions } from "@/src/db/schema";
@@ -29,7 +29,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 	if (!action || !(action in STATUS_BY_ACTION)) {
 		return NextResponse.json(
 			{ error: "action must be 'approve', 'reject', or 'disqualify'" },
-			{ status: 400 }
+			{ status: 400 },
 		);
 	}
 
@@ -64,20 +64,24 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 		await banContestantIdentifiers(updated.contestantId, updated.email, admin.name, body?.reason);
 	}
 
-	// Fire-and-forget — sendZeptoMail never throws, so a broken email provider
-	// can't undo an admin decision that already saved successfully.
+	// Scheduled after the response — the admin shouldn't wait on ZeptoMail for
+	// their approve/reject/disqualify click to complete.
 	if (action === "approve") {
-		await sendApprovedEmail(updated.email, updated.fullName, updated.category, updated.entryTitle);
+		after(() =>
+			sendApprovedEmail(updated.email, updated.fullName, updated.category, updated.entryTitle),
+		);
 	} else if (action === "reject") {
-		await sendRejectedEmail(
-			updated.email,
-			updated.fullName,
-			updated.category,
-			updated.entryTitle,
-			updated.attemptNumber < 2
+		after(() =>
+			sendRejectedEmail(
+				updated.email,
+				updated.fullName,
+				updated.category,
+				updated.entryTitle,
+				updated.attemptNumber < 2,
+			),
 		);
 	} else if (action === "disqualify") {
-		await sendDisqualifiedEmail(updated.email, updated.fullName);
+		after(() => sendDisqualifiedEmail(updated.email, updated.fullName));
 	}
 
 	return NextResponse.json({ success: true, submission: updated });
