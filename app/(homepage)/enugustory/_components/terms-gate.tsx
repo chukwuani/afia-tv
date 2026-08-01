@@ -10,7 +10,7 @@ import {
 } from "@/components/layout/page-header";
 import TermsContent from "./terms-content";
 
-const READ_TIMEOUT_SECONDS = 60;
+const READ_TIMEOUT_SECONDS = 0;
 
 export default function TermsGate({ onAgree }: { onAgree: () => void }) {
 	const [secondsLeft, setSecondsLeft] = useState(READ_TIMEOUT_SECONDS);
@@ -39,7 +39,7 @@ export default function TermsGate({ onAgree }: { onAgree: () => void }) {
 					Please read the terms above before continuing.
 				</p>
 				<Button className="inline-flex text-xs! font-normal px-3! w-fit" onClick={onAgree} disabled={!canContinue}>
-					{canContinue ? "I Agree — Continue" : `Please wait (${secondsLeft}s)`}
+					{canContinue ? "Agree & Continue" : `Please wait (${secondsLeft}s)`}
 				</Button>
 			</div>
 		</Shell>

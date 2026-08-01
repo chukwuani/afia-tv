@@ -1,4 +1,3 @@
-// ROUTE: POST /api/submissions
 // Final submit step — validates the full payload, re-verifies video duration
 // server-side, assigns/reuses a contestant ID, and saves the record.
 import { NextRequest, NextResponse, after } from "next/server";
@@ -61,7 +60,7 @@ export async function POST(req: NextRequest) {
 	// Checked first, before touching storage or the database at all — an
 	// unverified submission shouldn't even trigger a file cleanup, it should
 	// never have gotten this far with real uploaded files in a well-behaved client.
-	const tokenCheck = verifyVerificationToken(data.verificationToken, data.email, data.phone);
+	const tokenCheck = verifyVerificationToken(data.verificationToken, data.email);
 	if (!tokenCheck.valid) {
 		return NextResponse.json({ error: tokenCheck.reason }, { status: 401 });
 	}
@@ -92,7 +91,7 @@ export async function POST(req: NextRequest) {
 					error:
 						"We couldn't verify your video's duration. Please re-export as a standard MP4 and try again.",
 				},
-				{ status: 422 }
+				{ status: 422 },
 			);
 		}
 
@@ -101,10 +100,10 @@ export async function POST(req: NextRequest) {
 			return NextResponse.json(
 				{
 					error: `Video must be between 3 and 7 minutes long (yours is ${Math.round(
-						duration / 60
+						duration / 60,
 					)} min). Please re-upload.`,
 				},
-				{ status: 422 }
+				{ status: 422 },
 			);
 		}
 	}
@@ -161,11 +160,18 @@ export async function POST(req: NextRequest) {
 
 		// Scheduled after the response is sent — the client shouldn't wait on
 		// ZeptoMail, and sendZeptoMail already never throws so this can't fail silently either.
-		after(() => sendSubmissionReceivedEmail(data.email, data.fullName, data.category, submission.contestantId));
+		after(() =>
+			sendSubmissionReceivedEmail(
+				data.email,
+				data.fullName,
+				data.category,
+				submission.contestantId,
+			),
+		);
 
 		return NextResponse.json(
 			{ success: true, id: submission.id, contestantId: submission.contestantId },
-			{ status: 201 }
+			{ status: 201 },
 		);
 	} catch (err) {
 		// Postgres raises error code 23505 (unique_violation) against the
@@ -176,7 +182,7 @@ export async function POST(req: NextRequest) {
 		if (code === "23505" || message.includes("duplicate key value violates unique constraint")) {
 			return NextResponse.json(
 				{ error: `You've already submitted an entry in the ${data.category} category.` },
-				{ status: 409 }
+				{ status: 409 },
 			);
 		}
 

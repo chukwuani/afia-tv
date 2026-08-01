@@ -6,14 +6,13 @@ import TermsGate from "../_components/terms-gate";
 import ContactVerification, { type VerifiedContact } from "../_components/contact-verification";
 import SubmissionForm from "../_components/submission-form";
 
-type Step = "terms" | "verify" | "form" | "success";
+type Step = "terms" | "verify" | "form";
 
 function SubmitPageInner() {
 	const searchParams = useSearchParams();
 	const isTestAccess = searchParams.get("test") === "alpha";
 
 	const [step, setStep] = useState<Step>("terms");
-	const [contestantId, setContestantId] = useState<number | null>(null);
 	const [verifiedContact, setVerifiedContact] = useState<VerifiedContact | null>(null);
 
 	if (!isTestAccess) {
@@ -26,19 +25,6 @@ function SubmitPageInner() {
 		);
 	}
 
-	// if (step === "success") {
-	// 	return (
-	// 		<div className="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center gap-3 px-6 text-center">
-	// 			<h1 className="text-xl font-semibold">Entry Submitted</h1>
-	// 			<p className="text-muted-foreground">Thank you! Your contestant ID is:</p>
-	// 			<p className="font-mono text-3xl font-bold">{contestantId}</p>
-	// 			<p className="text-muted-foreground text-sm">
-	// 				Keep this number — it identifies you across any other categories you enter.
-	// 			</p>
-	// 		</div>
-	// 	);
-	// }
-
 	return (
 		<>
 			{step === "terms" && <TermsGate onAgree={() => setStep("verify")} />}
@@ -50,21 +36,12 @@ function SubmitPageInner() {
 					}}
 				/>
 			)}
-			{step === "form" && verifiedContact && (
-				<SubmissionForm
-					verifiedContact={verifiedContact}
-					onSuccess={(id) => {
-						setContestantId(id);
-						// setStep("success");
-					}}
-				/>
-			)}
+			{step === "form" && verifiedContact && <SubmissionForm verifiedContact={verifiedContact} />}
 		</>
 	);
 }
 
 export default function SubmitPage() {
-	// useSearchParams requires a Suspense boundary in the App Router.
 	return (
 		<Suspense>
 			<SubmitPageInner />

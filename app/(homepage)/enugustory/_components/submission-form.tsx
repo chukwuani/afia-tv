@@ -65,7 +65,7 @@ const CATEGORY_FILE_CONFIG = {
 		accept: { "video/mp4": [".mp4"] },
 		accepts: ".mp4",
 		maxSize: FILE_SIZE_LIMITS.video,
-		label: "Video file (MP4, 3–7 minutes)",
+		label: "Video file (MP4, 3-7 minutes)",
 	},
 	photography: {
 		accept: { "image/jpeg": [".jpeg", ".jpg"], "image/png": [".png"] },
@@ -77,10 +77,8 @@ const CATEGORY_FILE_CONFIG = {
 
 function SubmissionForm({
 	verifiedContact,
-	onSuccess,
 }: {
 	verifiedContact: { fullName: string; email: string; phone: string; token: string };
-	onSuccess: (contestantId: number) => void;
 }) {
 	const id = useId();
 	const router = useRouter();
@@ -183,7 +181,6 @@ function SubmissionForm({
 				duration: 8000,
 			});
 
-			onSuccess(result.contestantId);
 			router.push("/enugustory");
 		} catch (error) {
 			console.error(error);
@@ -219,7 +216,10 @@ function SubmissionForm({
 							setValue("category", newValue);
 							clearErrors("category");
 						}}>
-						<SelectTrigger className="w-full" disabled={isSubmitting || files.length > 0} id={`${id}-category`}>
+						<SelectTrigger
+							className="w-full"
+							disabled={isSubmitting || files.length > 0}
+							id={`${id}-category`}>
 							<SelectValue placeholder="Select category" />
 						</SelectTrigger>
 						<SelectContent>
@@ -343,7 +343,10 @@ function SubmissionForm({
 							setValue("stateOfResidence", newValue);
 							clearErrors("stateOfResidence");
 						}}>
-						<SelectTrigger className="w-full" disabled={isSubmitting} id={`${id}-state-of-residence`}>
+						<SelectTrigger
+							className="w-full"
+							disabled={isSubmitting}
+							id={`${id}-state-of-residence`}>
 							<SelectValue placeholder="Select state" />
 						</SelectTrigger>
 						<SelectContent>
@@ -446,7 +449,7 @@ function SubmissionForm({
 					<Label htmlFor={`${id}-caption`}>Photo caption / story</Label>
 					<Textarea
 						id={`${id}-caption`}
-						placeholder="Tell the story behind your photo (100–200 words)..."
+						placeholder="Tell the story behind your photo (100-200 words)..."
 						{...register("caption")}
 						onChange={(e) => {
 							setValue("caption", e.target.value);
@@ -463,7 +466,7 @@ function SubmissionForm({
 						}`}
 						role="status"
 						aria-live="polite">
-						<span className="tabular-nums">{captionWords}</span> / 100–200 words required
+						<span className="tabular-nums">{captionWords}</span> / 100-200 words required
 					</p>
 					{errors.caption && <p className="text-red-500 text-sm mt-1">{errors.caption.message}</p>}
 				</div>
@@ -479,11 +482,6 @@ function SubmissionForm({
 					onValueChange={setFiles}
 					disabled={isSubmitting}
 				/>
-				{selectedCategory === "videography" && (
-					<p className="text-muted-foreground text-xs">
-						Must be 3–7 minutes long. We check this again automatically after upload.
-					</p>
-				)}
 			</div>
 
 			<div className="flex justify-end border-t pt-4">

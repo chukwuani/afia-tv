@@ -2,13 +2,10 @@
 
 import { useId, useState } from "react";
 import { Input } from "@/components/ui/input";
+import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-
-// Phone number is still collected here (used on the entry and for the
-// disqualification ban-check), it's just not OTP-verified right now.
-// See PHONE_OTP_ENABLED in lib/termii.ts to re-enable that step later.
 
 type Stage = "contact" | "code";
 
@@ -47,7 +44,7 @@ export default function ContactVerification({
 			const res = await fetch("/api/verify/start", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ fullName, email, phone }),
+				body: JSON.stringify({ fullName, email }),
 			});
 			const result = await res.json();
 
@@ -76,7 +73,7 @@ export default function ContactVerification({
 			const res = await fetch("/api/verify/confirm", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email, phone, emailVerificationId, emailCode }),
+				body: JSON.stringify({ email, emailVerificationId, emailCode }),
 			});
 			const result = await res.json();
 
@@ -144,17 +141,30 @@ export default function ContactVerification({
 				We sent a code to <strong>{email}</strong>. It expires in 10 minutes.
 			</p>
 
-			<div className="space-y-2">
+			<div className="space-y-2 w-full">
 				<Label htmlFor={`${id}-email-code`}>Email code</Label>
-				<Input
-					id={`${id}-email-code`}
-					inputMode="numeric"
-					value={emailCode}
-					onChange={(e) => setEmailCode(e.target.value)}
-				/>
+				<InputOTP id={`${id}-email-code`} maxLength={6} value={emailCode} onChange={setEmailCode}>
+					<InputOTPGroup>
+						<InputOTPSlot index={0} />
+						<InputOTPSlot index={1} />
+					</InputOTPGroup>
+					  <InputOTPSeparator />
+					<InputOTPGroup>
+						<InputOTPSlot index={2} />
+						<InputOTPSlot index={3} />
+					</InputOTPGroup>
+					  <InputOTPSeparator />
+					<InputOTPGroup>
+						<InputOTPSlot index={4} />
+						<InputOTPSlot index={5} />
+					</InputOTPGroup>
+				</InputOTP>
 			</div>
 
-			<Button onClick={confirmCode} disabled={isConfirming} className="w-full">
+			<Button
+				onClick={confirmCode}
+				disabled={isConfirming || emailCode.length < 6}
+				className="w-full">
 				{isConfirming ? "Verifying..." : "Verify & Continue"}
 			</Button>
 			<button

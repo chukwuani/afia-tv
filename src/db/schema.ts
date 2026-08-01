@@ -50,9 +50,6 @@ export const emailVerifications = pgTable("email_verifications", {
 
 export const identifierTypeEnum = pgEnum("identifier_type", ["email", "phone"]);
 
-// Hard-block list. When a contestant is disqualified, their email and every
-// phone number they've used gets a row here. This is the actual enforcement
-// point — not contestants.disqualified, which is just a cached display flag.
 export const bannedIdentifiers = pgTable(
 	"banned_identifiers",
 	{
@@ -74,9 +71,6 @@ export const contestants = pgTable("contestants", {
 	contestantId: integer("contestant_id").notNull().unique(),
 	email: text("email").notNull().unique(),
 	fullName: text("full_name").notNull(),
-
-	// Once true, this person is blocked from submitting to ANY category, regardless
-	// of which specific entry triggered it.
 	disqualified: boolean("disqualified").notNull().default(false),
 	disqualifiedReason: text("disqualified_reason"),
 	disqualifiedBy: text("disqualified_by"),
@@ -104,25 +98,14 @@ export const submissions = pgTable(
 		email: text("email").notNull(),
 		instagramLink: text("instagram_link").notNull(),
 		caption: text("caption"),
-
-		// Entry file (essay doc / video / photo artwork)
 		fileKey: text("file_key").notNull(),
 		fileUrl: text("file_url").notNull(),
-
-		// Participant's profile photo
 		photoKey: text("photo_key").notNull(),
 		photoUrl: text("photo_url").notNull(),
-
-		// 1 = original entry, 2 = the one-time resubmission allowed after a rejection.
-		// Never goes higher — enforced in application logic, see lib/eligibility.ts.
 		attemptNumber: integer("attempt_number").notNull().default(1),
-
 		status: statusEnum("status").notNull().default("pending"),
 		approvedBy: text("approved_by"), // name of the admin who last actioned this entry
 		reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
-
-		// Best-effort signal, not an enforcement mechanism — can be spoofed and shared
-		// networks cause false positives, so this only ever flags for human review, never blocks.
 		ipAddress: text("ip_address"),
 		flaggedForReview: boolean("flagged_for_review").notNull().default(false),
 		flagReason: text("flag_reason"),
