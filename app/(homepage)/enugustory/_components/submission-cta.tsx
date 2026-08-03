@@ -19,9 +19,8 @@ export default function SubmissionCTA() {
 						description: "Submissions are currently closed. Please check back later.",
 					});
 				}}
-				variant={"default"}
 				className={
-					"relative z-10 text-xs text-[10px]! p-2 lg:px-4! lg:py-3 h-auto lg:text-[0.75rem]! tracking-[2.4px] uppercase"
+					"mt-4 relative z-10 text-xs text-[10px]! p-2 lg:px-4! lg:py-3 h-auto lg:text-[0.75rem]! tracking-[2.4px] uppercase"
 				}>
 				Submit your Story
 			</Button>
@@ -35,7 +34,7 @@ export default function SubmissionCTA() {
 					href="/enugustory/submit?test=alpha"
 					className={cn(
 						buttonVariants({ variant: "default" }),
-						"relative z-10 text-xs text-[10px]! p-2 lg:px-4! lg:py-3 h-auto lg:text-[0.75rem]! tracking-[2.4px] uppercase",
+						"mt-4 relative z-10 text-xs text-[10px]! p-2 lg:px-4! lg:py-3 h-auto lg:text-[0.75rem]! tracking-[2.4px] uppercase",
 					)}>
 					Submit your Story
 				</a>
