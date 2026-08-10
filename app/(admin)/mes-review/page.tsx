@@ -43,6 +43,7 @@ export default async function AdminPage({
 			instagramLink: submissions.instagramLink,
 			caption: submissions.caption,
 			fileUrl: submissions.fileUrl,
+			fileUrlTwo: submissions.fileUrlTwo,
 			photoUrl: submissions.photoUrl,
 			status: submissions.status,
 			approvedBy: submissions.approvedBy,

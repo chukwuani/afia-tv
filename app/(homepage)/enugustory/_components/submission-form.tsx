@@ -151,6 +151,11 @@ function SubmissionForm({
 				uploadSubmissionFile(photos[0], data.category, "photo"),
 			]);
 
+			const secondFileUpload =
+				files.length > 1 && data.category === "photography"
+					? await uploadSubmissionFile(files[1], data.category, "entry")
+					: null;
+
 			setSubmitStatus("Submitting your entry...");
 			const res = await fetch("/api/submissions", {
 				method: "POST",
@@ -159,6 +164,8 @@ function SubmissionForm({
 					...data,
 					fileKey: entryUpload.fileKey,
 					fileUrl: entryUpload.fileUrl,
+					fileKeyTwo: secondFileUpload?.fileKey || null,
+					fileUrlTwo: secondFileUpload?.fileUrl || null,
 					photoKey: photoUpload.fileKey,
 					photoUrl: photoUpload.fileUrl,
 					verificationToken: verifiedContact.token,
@@ -478,7 +485,8 @@ function SubmissionForm({
 					accept={fileConfig.accept}
 					accepts={fileConfig.accepts}
 					maxSize={fileConfig.maxSize}
-					multiple={false}
+					multiple={selectedCategory === "photography"}
+					maxFiles={selectedCategory === "photography" ? 2 : 1}
 					onValueChange={setFiles}
 					disabled={isSubmitting}
 				/>

@@ -81,6 +81,29 @@ function PostSlug() {
 
 	return (
 		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify({
+						"@context": "https://schema.org",
+						"@type": "NewsArticle",
+						headline: news.title,
+						image: [news.mainImage],
+						datePublished: news.publishedAt,
+						dateModified: news._updatedAt || news.publishedAt,
+						author: [{ "@type": "Person", name: news.author.name }],
+						publisher: {
+							"@type": "Organization",
+							name: "Afia TV",
+							logo: {
+								"@type": "ImageObject",
+								url: "https://afiatv.net/images/afia-logo-small.png",
+							},
+						},
+					}),
+				}}
+			/>
+			
 			<Shell as="article" variant="content">
 				<div className="space-y-2">
 					<h1 className="inline-block text-[36px] lg:text-[68px] font-normal tracking-[-1px] leading-[110%] font-anton">

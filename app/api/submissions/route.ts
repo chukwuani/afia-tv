@@ -149,6 +149,8 @@ export async function POST(req: NextRequest) {
 				caption: data.caption,
 				fileKey: data.fileKey,
 				fileUrl: data.fileUrl,
+				fileKeyTwo: data.fileKeyTwo,
+				fileUrlTwo: data.fileUrlTwo,
 				photoKey: data.photoKey,
 				photoUrl: data.photoUrl,
 				attemptNumber: eligibility.attemptNumber,

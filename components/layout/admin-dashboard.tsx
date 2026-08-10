@@ -42,6 +42,7 @@ type SubmissionRow = {
 	instagramLink: string;
 	caption: string | null;
 	fileUrl: string;
+	fileUrlTwo: string | null;
 	photoUrl: string;
 	status: string;
 	approvedBy: string | null;
@@ -277,6 +278,15 @@ export default function AdminDashboard({
 										rel="noreferrer">
 										Entry
 									</a>
+									{row.fileUrlTwo && (
+										<a
+											className="text-blue-600 underline"
+											href={row.fileUrlTwo}
+											target="_blank"
+											rel="noreferrer">
+											Entry2
+										</a>
+									)}
 									<a
 										className="text-blue-600 underline"
 										href={row.photoUrl}

@@ -10,7 +10,7 @@ import {
 } from "@/components/layout/page-header";
 import TermsContent from "./terms-content";
 
-const READ_TIMEOUT_SECONDS = 0;
+const READ_TIMEOUT_SECONDS = 60;
 
 export default function TermsGate({ onAgree }: { onAgree: () => void }) {
 	const [secondsLeft, setSecondsLeft] = useState(READ_TIMEOUT_SECONDS);
@@ -22,6 +22,10 @@ export default function TermsGate({ onAgree }: { onAgree: () => void }) {
 	}, [secondsLeft]);
 
 	const canContinue = secondsLeft <= 0;
+
+	const scrollToTop = () => {
+		window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+	};
 
 	return (
 		<Shell as="article" variant="content">
@@ -38,7 +42,13 @@ export default function TermsGate({ onAgree }: { onAgree: () => void }) {
 				<p className="text-muted-foreground text-xs">
 					Please read the terms above before continuing.
 				</p>
-				<Button className="inline-flex text-xs! font-normal px-3! w-fit" onClick={onAgree} disabled={!canContinue}>
+				<Button
+					className="inline-flex text-xs! font-normal px-3! w-fit"
+					onClick={() => {
+						scrollToTop();
+						onAgree();
+					}}
+					disabled={!canContinue}>
 					{canContinue ? "Agree & Continue" : `Please wait (${secondsLeft}s)`}
 				</Button>
 			</div>

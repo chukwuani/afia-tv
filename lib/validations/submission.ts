@@ -112,6 +112,8 @@ export const submissionSchema = submissionMetadataSchema
 	.extend({
 		fileKey: z.string().min(1, "Entry file is required"),
 		fileUrl: z.string().url(),
+		fileKeyTwo: z.string().optional(),
+		fileUrlTwo: z.string().url().optional(),
 		photoKey: z.string().min(1, "Profile photo is required"),
 		photoUrl: z.string().url(),
 		verificationToken: z.string().min(1, "Contact verification is required"),

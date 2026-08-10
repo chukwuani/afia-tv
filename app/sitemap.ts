@@ -2,13 +2,15 @@ import { NewsTypes } from '@/types'
 import axios from 'axios'
 import { MetadataRoute } from 'next'
 
+export const revalidate = 3600
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch your news articles
   const articles = await fetchAllArticles() // Your data fetching function
   
   const articleUrls = articles.map((article) => ({
     url: `https://afiatv.net/news/${article.slug}`,
-    lastModified: article._createdAt || article.publishedAt,
+    lastModified: article._updatedAt || article.publishedAt,
     changeFrequency: 'daily' as const,
     priority: 0.8,
   }))

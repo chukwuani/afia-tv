@@ -48,6 +48,7 @@ export interface AuthorTypes {
 export interface NewsTypes {
 	_id: string;
 	_createdAt: string;
+	_updatedAt: string;
 	title: string;
 	description: string;
 	slug: string;

@@ -100,6 +100,8 @@ export const submissions = pgTable(
 		caption: text("caption"),
 		fileKey: text("file_key").notNull(),
 		fileUrl: text("file_url").notNull(),
+		fileKeyTwo: text("file_key_two"),
+		fileUrlTwo: text("file_url_two"),
 		photoKey: text("photo_key").notNull(),
 		photoUrl: text("photo_url").notNull(),
 		attemptNumber: integer("attempt_number").notNull().default(1),
@@ -109,7 +111,6 @@ export const submissions = pgTable(
 		ipAddress: text("ip_address"),
 		flaggedForReview: boolean("flagged_for_review").notNull().default(false),
 		flagReason: text("flag_reason"),
-
 		createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 	},
 	(table) => ({

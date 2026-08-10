@@ -58,6 +58,7 @@ export default function ContactVerification({
 		} catch (err) {
 			toast.error(err instanceof Error ? err.message : "Something went wrong");
 		} finally {
+			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			setIsSending(false);
 		}
 	};
@@ -85,6 +86,7 @@ export default function ContactVerification({
 		} catch (err) {
 			toast.error(err instanceof Error ? err.message : "Something went wrong");
 		} finally {
+			window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 			setIsConfirming(false);
 		}
 	};
@@ -171,7 +173,7 @@ export default function ContactVerification({
 				type="button"
 				onClick={sendCode}
 				disabled={isSending}
-				className="text-muted-foreground w-full text-center text-sm underline">
+				className="text-muted-foreground w-full text-center text-sm underline cursor-pointer">
 				{isSending ? "Resending..." : "Didn't get a code? Resend"}
 			</button>
 		</div>

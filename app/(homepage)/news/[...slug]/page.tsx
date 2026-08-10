@@ -36,7 +36,7 @@ export async function generateStaticParams() {
 				Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
 				"Content-Type": "application/json",
 			},
-		}
+		},
 	);
 
 	const data = res.data;
@@ -80,7 +80,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 				Authorization: `Bearer ${process.env.NEXT_PUBLIC_SANITY_API_TOKEN}`,
 				"Content-Type": "application/json",
 			},
-		}
+		},
 	);
 
 	const data = res.data;
@@ -98,7 +98,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 		title: news.title,
 		description: news.description,
 		authors: { name: news.author.name },
+		alternates: { canonical: absoluteUrl(`/news/${news.slug}`) },
 		openGraph: {
+			type: "article",
+			authors: [news.author.name],
 			title: news.title,
 			description: news.description,
 			url: absoluteUrl(`/news/${news.slug}`),
