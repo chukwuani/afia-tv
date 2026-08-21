@@ -131,13 +131,7 @@ export default function RootLayout({
 			<body
 				suppressHydrationWarning
 				className={`${anton.variable} ${jetBrainsMono.variable} ${azeretMono.variable} antialiased font-outfit overflow-x-hidden max-w-375 mx-auto`}>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="light"
-					enableSystem
-					disableTransitionOnChange>
-					<QueryProvider>{children}</QueryProvider>
-				</ThemeProvider>
+				<QueryProvider>{children}</QueryProvider>
 
 				<Toaster richColors position="top-center" />
 

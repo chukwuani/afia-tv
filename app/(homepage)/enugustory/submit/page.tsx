@@ -28,9 +28,5 @@ function SubmitPageInner() {
 }
 
 export default function SubmitPage() {
-	return (
-		<Suspense>
-			<SubmitPageInner />
-		</Suspense>
-	);
+	return <SubmitPageInner />;
 }

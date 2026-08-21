@@ -75,10 +75,18 @@ const CATEGORY_FILE_CONFIG = {
 	},
 } as const;
 
+// NEW: labels for the origin toggle. Move these into
+// @/lib/validations/submission alongside NIGERIAN_STATE_LABELS if you'd
+// rather keep all label maps in one place.
+const ORIGIN_LABELS = {
+	local: "Nigeria (South East)",
+	international: "Outside Nigeria",
+} as const;
+
 function SubmissionForm({
 	verifiedContact,
 }: {
-	verifiedContact: { fullName: string; email: string; phone: string; token: string };
+	verifiedContact: { fullName: string; email: string; token: string };
 }) {
 	const id = useId();
 	const router = useRouter();
@@ -103,14 +111,15 @@ function SubmissionForm({
 		reValidateMode: "onChange",
 		defaultValues: {
 			category: "essay",
+			origin: "local",
 			stateOfResidence: "enugu",
 			fullName: verifiedContact.fullName,
 			email: verifiedContact.email,
-			phone: verifiedContact.phone,
 		},
 	});
 
 	const selectedCategory = watch("category");
+	const origin = watch("origin");
 	const caption = watch("caption") || "";
 	const captionWords = wordCount(caption);
 
@@ -175,6 +184,8 @@ function SubmissionForm({
 			const result = await res.json();
 
 			if (!res.ok) {
+				console.log(result);
+
 				const message =
 					typeof result?.error === "string"
 						? result.error
@@ -219,8 +230,8 @@ function SubmissionForm({
 					<Label htmlFor={`${id}-category`}>Category</Label>
 					<Select
 						defaultValue="essay"
-						onValueChange={(newValue: SubmissionFormValues["category"]) => {
-							setValue("category", newValue);
+						onValueChange={(newValue: string) => {
+							setValue("category", newValue as SubmissionFormValues["category"]);
 							clearErrors("category");
 						}}>
 						<SelectTrigger
@@ -243,8 +254,8 @@ function SubmissionForm({
 				<div className="flex-1 space-y-2">
 					<Label htmlFor={`${id}-gender`}>Gender</Label>
 					<Select
-						onValueChange={(newValue: SubmissionFormValues["gender"]) => {
-							setValue("gender", newValue);
+						onValueChange={(newValue: string) => {
+							setValue("gender", newValue as SubmissionFormValues["gender"]);
 							clearErrors("gender");
 						}}>
 						<SelectTrigger className="w-full" disabled={isSubmitting} id={`${id}-gender`}>
@@ -260,7 +271,7 @@ function SubmissionForm({
 			</div>
 
 			<div className="flex flex-col gap-4 sm:flex-row">
-				<div className="flex-[2] space-y-2">
+				<div className="flex-1 space-y-2">
 					<Label htmlFor={`${id}-full-name`}>Full name</Label>
 					<Input
 						id={`${id}-full-name`}
@@ -318,74 +329,138 @@ function SubmissionForm({
 				</div>
 			</div>
 
-			<div className="flex flex-col gap-4 sm:flex-row">
-				<div className="flex-1 space-y-2">
-					<Label htmlFor={`${id}-state-of-origin`}>State of origin</Label>
-					<Select
-						onValueChange={(newValue: SubmissionFormValues["stateOfOrigin"]) => {
-							setValue("stateOfOrigin", newValue);
-							clearErrors("stateOfOrigin");
-						}}>
-						<SelectTrigger className="w-full" disabled={isSubmitting} id={`${id}-state-of-origin`}>
-							<SelectValue placeholder="Select state" />
-						</SelectTrigger>
-						<SelectContent>
-							{Object.entries(NIGERIAN_STATE_LABELS).map(([value, label]) => (
-								<SelectItem key={value} value={value}>
-									{label}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
-					{errors.stateOfOrigin && (
-						<p className="text-red-500 text-sm mt-1">{errors.stateOfOrigin.message}</p>
-					)}
-				</div>
-
-				<div className="flex-1 space-y-2">
-					<Label htmlFor={`${id}-state-of-residence`}>State of residence</Label>
-					<Select
-						defaultValue="enugu"
-						onValueChange={(newValue: SubmissionFormValues["stateOfResidence"]) => {
-							setValue("stateOfResidence", newValue);
-							clearErrors("stateOfResidence");
-						}}>
-						<SelectTrigger
-							className="w-full"
-							disabled={isSubmitting}
-							id={`${id}-state-of-residence`}>
-							<SelectValue placeholder="Select state" />
-						</SelectTrigger>
-						<SelectContent>
-							{Object.entries(STATE_OF_RESIDENCE_LABELS).map(([value, label]) => (
-								<SelectItem key={value} value={value}>
-									{label}
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
-					<p className="text-muted-foreground text-xs">Open to South East residents only.</p>
-					{errors.stateOfResidence && (
-						<p className="text-red-500 text-sm mt-1">{errors.stateOfResidence.message}</p>
-					)}
-				</div>
-			</div>
-
+			{/* NEW: origin toggle — determines whether we show Nigerian state
+			    selects or a free-text location field below. */}
 			<div className="*:not-first:mt-2">
-				<Label htmlFor={`${id}-address`}>Address</Label>
-				<Input
-					id={`${id}-address`}
-					placeholder="Street address"
-					type="text"
-					{...register("address")}
-					onChange={(e) => {
-						setValue("address", e.target.value);
-						clearErrors("address");
-					}}
-					disabled={isSubmitting}
-				/>
-				{errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
+				<Label htmlFor={`${id}-origin`}>Where are you submitting from?</Label>
+				<Select
+					defaultValue="local"
+					onValueChange={(newValue: string) => {
+						const typedValue = newValue as SubmissionFormValues["origin"];
+						setValue("origin", typedValue, { shouldValidate: true });
+
+						if (typedValue === "international") {
+							setValue("stateOfOrigin", undefined as never, { shouldValidate: false });
+							setValue("stateOfResidence", undefined as never, { shouldValidate: false });
+							clearErrors(["stateOfOrigin", "stateOfResidence"]);
+						} else {
+							setValue("location", undefined as never, { shouldValidate: false });
+							clearErrors("location");
+						}
+					}}>
+					<SelectTrigger className="w-full" disabled={isSubmitting} id={`${id}-origin`}>
+						<SelectValue placeholder="Select" />
+					</SelectTrigger>
+					<SelectContent>
+						{Object.entries(ORIGIN_LABELS).map(([value, label]) => (
+							<SelectItem key={value} value={value}>
+								{label}
+							</SelectItem>
+						))}
+					</SelectContent>
+				</Select>
+				{errors.origin && <p className="text-red-500 text-sm mt-1">{errors.origin.message}</p>}
 			</div>
+
+			{origin === "international" ? (
+				<div className="*:not-first:mt-2">
+					<Label htmlFor={`${id}-location`}>Your location</Label>
+					<Input
+						id={`${id}-location`}
+						placeholder="City, Country — e.g. London, United Kingdom"
+						type="text"
+						{...register("location")}
+						onChange={(e) => {
+							setValue("location", e.target.value);
+							setValue("address", "international_location");
+							clearErrors("location");
+						}}
+						disabled={isSubmitting}
+					/>
+					{errors.location && (
+						<p className="text-red-500 text-sm mt-1">{errors.location.message}</p>
+					)}
+				</div>
+			) : (
+				<>
+					<div className="flex flex-col gap-4 sm:flex-row">
+						<div className="flex-1 space-y-2">
+							<Label htmlFor={`${id}-state-of-origin`}>State of origin</Label>
+							<Select
+								onValueChange={(newValue: string) => {
+									setValue("stateOfOrigin", newValue as SubmissionFormValues["stateOfOrigin"]);
+									clearErrors("stateOfOrigin");
+								}}>
+								<SelectTrigger
+									className="w-full"
+									disabled={isSubmitting}
+									id={`${id}-state-of-origin`}>
+									<SelectValue placeholder="Select state" />
+								</SelectTrigger>
+								<SelectContent>
+									{Object.entries(NIGERIAN_STATE_LABELS).map(([value, label]) => (
+										<SelectItem key={value} value={value}>
+											{label}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+							{errors.stateOfOrigin && (
+								<p className="text-red-500 text-sm mt-1">{errors.stateOfOrigin.message}</p>
+							)}
+						</div>
+
+						<div className="flex-1 space-y-2">
+							<Label htmlFor={`${id}-state-of-residence`}>State of residence</Label>
+							<Select
+								defaultValue="enugu"
+								onValueChange={(newValue: string) => {
+									setValue(
+										"stateOfResidence",
+										newValue as SubmissionFormValues["stateOfResidence"],
+									);
+									clearErrors("stateOfResidence");
+								}}>
+								<SelectTrigger
+									className="w-full"
+									disabled={isSubmitting}
+									id={`${id}-state-of-residence`}>
+									<SelectValue placeholder="Select state" />
+								</SelectTrigger>
+								<SelectContent>
+									{Object.entries(STATE_OF_RESIDENCE_LABELS).map(([value, label]) => (
+										<SelectItem key={value} value={value}>
+											{label}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
+							<p className="text-muted-foreground text-xs">Open to South East residents only.</p>
+							{errors.stateOfResidence && (
+								<p className="text-red-500 text-sm mt-1">{errors.stateOfResidence.message}</p>
+							)}
+						</div>
+					</div>
+
+					<div className="*:not-first:mt-2">
+						<Label htmlFor={`${id}-address`}>Address</Label>
+						<Input
+							id={`${id}-address`}
+							placeholder="Street address"
+							type="text"
+							{...register("address")}
+							onChange={(e) => {
+								setValue("address", e.target.value);
+								clearErrors("address");
+							}}
+							disabled={isSubmitting}
+						/>
+						{errors.address && (
+							<p className="text-red-500 text-sm mt-1">{errors.address.message}</p>
+						)}
+					</div>
+				</>
+			)}
 
 			<div className="*:not-first:mt-2">
 				<Label htmlFor={`${id}-entry-title`}>Title of entry</Label>
@@ -410,11 +485,14 @@ function SubmissionForm({
 					<Label htmlFor={`${id}-phone`}>Phone number</Label>
 					<Input
 						id={`${id}-phone`}
-						placeholder="080..."
+						placeholder="XXX-XXXX..."
 						type="tel"
 						{...register("phone")}
-						readOnly
-						className="bg-muted/50"
+						onChange={(e) => {
+							setValue("phone", e.target.value);
+							clearErrors("phone");
+						}}
+						disabled={isSubmitting}
 					/>
 					{errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
 				</div>

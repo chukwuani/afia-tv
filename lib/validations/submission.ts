@@ -1,58 +1,122 @@
 import { z } from "zod";
 
-export const wordCount = (str: string) =>
-	str.trim().split(/\s+/).filter(Boolean).length;
+export const wordCount = (str: string) => str.trim().split(/\s+/).filter(Boolean).length;
 
-const instagramUrlSchema = z.string().url().refine((url) => {
-	try {
-		const parsed = new URL(url);
+const instagramUrlSchema = z
+	.string()
+	.url()
+	.refine((url) => {
+		try {
+			const parsed = new URL(url);
 
-		if (parsed.hostname !== "instagram.com" && parsed.hostname !== "www.instagram.com") {
+			if (parsed.hostname !== "instagram.com" && parsed.hostname !== "www.instagram.com") {
+				return false;
+			}
+
+			if (
+				parsed.pathname.startsWith("/p/") ||
+				parsed.pathname.startsWith("/reel/") ||
+				parsed.pathname.startsWith("/tv/") ||
+				parsed.pathname.startsWith("/stories/") ||
+				parsed.pathname.startsWith("/explore/") ||
+				parsed.pathname.startsWith("/accounts/") ||
+				parsed.pathname.includes("/tagged/") ||
+				parsed.pathname.includes("/reels/") ||
+				parsed.pathname.includes("/feed/")
+			) {
+				return false;
+			}
+
+			return /^\/([a-zA-Z0-9_.]+)\/?$/.test(parsed.pathname);
+		} catch {
 			return false;
 		}
-
-		if (
-			parsed.pathname.startsWith("/p/") ||
-			parsed.pathname.startsWith("/reel/") ||
-			parsed.pathname.startsWith("/tv/") ||
-			parsed.pathname.startsWith("/stories/") ||
-			parsed.pathname.startsWith("/explore/") ||
-			parsed.pathname.startsWith("/accounts/") ||
-			parsed.pathname.includes("/tagged/") ||
-			parsed.pathname.includes("/reels/") ||
-			parsed.pathname.includes("/feed/")
-		) {
-			return false;
-		}
-
-		return /^\/([a-zA-Z0-9_.]+)\/?$/.test(parsed.pathname);
-	} catch {
-		return false;
-	}
-}, "Must be a valid Instagram profile URL (e.g., https://instagram.com/username)");
+	}, "Must be a valid Instagram profile URL (e.g., https://instagram.com/username)");
 
 export const categoryEnum = z.enum(["essay", "videography", "photography"]);
 
 export const genderEnum = z.enum(["male", "female"]);
+export const submissionOriginEnum = z.enum(["local", "international"]);
 
 // Full Nigerian states + FCT — anyone can select any of these for State of Origin.
 export const nigerianStateEnum = z.enum([
-	"abia", "adamawa", "akwa_ibom", "anambra", "bauchi", "bayelsa", "benue",
-	"borno", "cross_river", "delta", "ebonyi", "edo", "ekiti", "enugu", "gombe",
-	"imo", "jigawa", "kaduna", "kano", "katsina", "kebbi", "kogi", "kwara",
-	"lagos", "nasarawa", "niger", "ogun", "ondo", "osun", "oyo", "plateau",
-	"rivers", "sokoto", "taraba", "yobe", "zamfara", "fct",
+	"abia",
+	"adamawa",
+	"akwa_ibom",
+	"anambra",
+	"bauchi",
+	"bayelsa",
+	"benue",
+	"borno",
+	"cross_river",
+	"delta",
+	"ebonyi",
+	"edo",
+	"ekiti",
+	"enugu",
+	"gombe",
+	"imo",
+	"jigawa",
+	"kaduna",
+	"kano",
+	"katsina",
+	"kebbi",
+	"kogi",
+	"kwara",
+	"lagos",
+	"nasarawa",
+	"niger",
+	"ogun",
+	"ondo",
+	"osun",
+	"oyo",
+	"plateau",
+	"rivers",
+	"sokoto",
+	"taraba",
+	"yobe",
+	"zamfara",
+	"fct",
 ]);
 
 export const NIGERIAN_STATE_LABELS: Record<z.infer<typeof nigerianStateEnum>, string> = {
-	abia: "Abia", adamawa: "Adamawa", akwa_ibom: "Akwa Ibom", anambra: "Anambra",
-	bauchi: "Bauchi", bayelsa: "Bayelsa", benue: "Benue", borno: "Borno",
-	cross_river: "Cross River", delta: "Delta", ebonyi: "Ebonyi", edo: "Edo",
-	ekiti: "Ekiti", enugu: "Enugu", gombe: "Gombe", imo: "Imo", jigawa: "Jigawa",
-	kaduna: "Kaduna", kano: "Kano", katsina: "Katsina", kebbi: "Kebbi", kogi: "Kogi",
-	kwara: "Kwara", lagos: "Lagos", nasarawa: "Nasarawa", niger: "Niger", ogun: "Ogun",
-	ondo: "Ondo", osun: "Osun", oyo: "Oyo", plateau: "Plateau", rivers: "Rivers",
-	sokoto: "Sokoto", taraba: "Taraba", yobe: "Yobe", zamfara: "Zamfara", fct: "FCT (Abuja)",
+	abia: "Abia",
+	adamawa: "Adamawa",
+	akwa_ibom: "Akwa Ibom",
+	anambra: "Anambra",
+	bauchi: "Bauchi",
+	bayelsa: "Bayelsa",
+	benue: "Benue",
+	borno: "Borno",
+	cross_river: "Cross River",
+	delta: "Delta",
+	ebonyi: "Ebonyi",
+	edo: "Edo",
+	ekiti: "Ekiti",
+	enugu: "Enugu",
+	gombe: "Gombe",
+	imo: "Imo",
+	jigawa: "Jigawa",
+	kaduna: "Kaduna",
+	kano: "Kano",
+	katsina: "Katsina",
+	kebbi: "Kebbi",
+	kogi: "Kogi",
+	kwara: "Kwara",
+	lagos: "Lagos",
+	nasarawa: "Nasarawa",
+	niger: "Niger",
+	ogun: "Ogun",
+	ondo: "Ondo",
+	osun: "Osun",
+	oyo: "Oyo",
+	plateau: "Plateau",
+	rivers: "Rivers",
+	sokoto: "Sokoto",
+	taraba: "Taraba",
+	yobe: "Yobe",
+	zamfara: "Zamfara",
+	fct: "FCT (Abuja)",
 };
 
 // Restricted to South East — used for State of Residence, since the competition is SE-specific.
@@ -72,14 +136,14 @@ export const submissionMetadataSchema = z.object({
 	fullName: z.string().min(2, "Full name is required"),
 	dateOfBirth: z.string().min(5, "Date of Birth is required"),
 	gender: genderEnum,
-	stateOfOrigin: nigerianStateEnum,
-	stateOfResidence: stateOfResidenceEnum,
+	origin: submissionOriginEnum,
+	location: z.string().min(1, "Please enter your location").optional(),
+	stateOfOrigin: nigerianStateEnum.optional(),
+	stateOfResidence: stateOfResidenceEnum.optional(),
 	address: z.string().min(5, "Address is required"),
 	entryTitle: z.string().min(2, "Entry title is required").max(150),
 	category: categoryEnum,
-	phone: z
-		.string()
-		.regex(/^(\+234|0)[789]\d{9}$/, "Enter a valid Nigerian phone number"),
+	phone: z.string().regex(/^(\+234|0)[789]\d{9}$/, "Enter a valid Nigerian phone number"),
 	email: z.string().email("Invalid email address"),
 	instagramLink: instagramUrlSchema,
 	caption: z.string().optional(),
@@ -87,10 +151,7 @@ export const submissionMetadataSchema = z.object({
 
 // Shared so the client (live validation) and server (source of truth) enforce
 // the exact same rule.
-function refineCaption(
-	data: z.infer<typeof submissionMetadataSchema>,
-	ctx: z.RefinementCtx
-) {
+function refineCaption(data: z.infer<typeof submissionMetadataSchema>, ctx: z.RefinementCtx) {
 	if (data.category === "photography") {
 		const count = data.caption ? wordCount(data.caption) : 0;
 
@@ -104,21 +165,39 @@ function refineCaption(
 	}
 }
 
+function refineOrigin(data: z.infer<typeof submissionMetadataSchema>, ctx: z.RefinementCtx) {
+	if (data.origin === "local") {
+		if (!data.stateOfOrigin) {
+			ctx.addIssue({ code: "custom", path: ["stateOfOrigin"], message: "Required" });
+		}
+		if (!data.stateOfResidence) {
+			ctx.addIssue({ code: "custom", path: ["stateOfResidence"], message: "Required" });
+		}
+	} else {
+		if (!data.location) {
+			ctx.addIssue({ code: "custom", path: ["location"], message: "Required" });
+		}
+	}
+}
+
 // Used by the form (react-hook-form resolver) — metadata only.
-export const submissionFormSchema = submissionMetadataSchema.superRefine(refineCaption);
+export const submissionFormSchema = submissionMetadataSchema
+	.superRefine(refineCaption)
+	.superRefine(refineOrigin);
 
 // Used by the API route — metadata + the file keys/urls returned by the upload step.
 export const submissionSchema = submissionMetadataSchema
 	.extend({
 		fileKey: z.string().min(1, "Entry file is required"),
 		fileUrl: z.string().url(),
-		fileKeyTwo: z.string().optional(),
-		fileUrlTwo: z.string().url().optional(),
+		fileKeyTwo: z.string().nullable().optional(),
+		fileUrlTwo: z.string().url().nullable().optional(),
 		photoKey: z.string().min(1, "Profile photo is required"),
 		photoUrl: z.string().url(),
 		verificationToken: z.string().min(1, "Contact verification is required"),
 	})
-	.superRefine(refineCaption);
+	.superRefine(refineCaption)
+	.superRefine(refineOrigin);
 
 export type SubmissionFormValues = z.infer<typeof submissionFormSchema>;
 export type SubmissionInput = z.infer<typeof submissionSchema>;

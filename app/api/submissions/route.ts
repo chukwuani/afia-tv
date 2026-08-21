@@ -1,7 +1,7 @@
 // Final submit step — validates the full payload, re-verifies video duration
 // server-side, assigns/reuses a contestant ID, and saves the record.
 import { NextRequest, NextResponse, after } from "next/server";
-import { and, eq } from "drizzle-orm";
+import { and, eq, desc, sql } from "drizzle-orm";
 import { S3Client, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { submissionSchema } from "@/lib/validations/submission";
 import { getMp4DurationFromS3 } from "@/lib/mp4Duration";
@@ -11,6 +11,7 @@ import { sendSubmissionReceivedEmail } from "@/lib/notifications";
 import { verifyVerificationToken } from "@/lib/verificationToken";
 import { db } from "@/src";
 import { submissions } from "@/src/db/schema";
+import { toGallerySubmission } from "@/lib/gallery-mappers";
 
 // Vercel's default timeout is tight for this route: R2 range-fetches for video
 // duration verification plus DB queries can add up on a slow connection. 60 is
@@ -30,6 +31,8 @@ const s3 = new S3Client({
 
 const MIN_VIDEO_SECONDS = 3 * 60;
 const MAX_VIDEO_SECONDS = 7 * 60;
+const DEFAULT_PAGE_SIZE = 12;
+const MAX_PAGE_SIZE = 48;
 
 async function deleteUploadedFile(key: string) {
 	try {
@@ -45,6 +48,49 @@ function getClientIp(req: NextRequest): string | null {
 	const forwardedFor = req.headers.get("x-forwarded-for");
 	if (forwardedFor) return forwardedFor.split(",")[0]?.trim() || null;
 	return req.headers.get("x-real-ip");
+}
+
+export async function GET(req: NextRequest) {
+	const { searchParams } = new URL(req.url);
+	const origin = searchParams.get("origin");
+	const category = searchParams.get("category");
+	const page = Math.max(1, Number(searchParams.get("page")) || 1);
+	const pageSize = Math.min(
+		MAX_PAGE_SIZE,
+		Math.max(1, Number(searchParams.get("pageSize")) || DEFAULT_PAGE_SIZE),
+	);
+
+	// Public listing only ever shows approved entries — status is not
+	// attacker-controllable even though a client could pass a different value.
+	const conditions = [eq(submissions.status, "approved")];
+	if (origin === "local" || origin === "international") {
+		conditions.push(eq(submissions.origin, origin));
+	}
+	if (category === "essay" || category === "photography" || category === "videography") {
+		conditions.push(eq(submissions.category, category));
+	}
+	const where = and(...conditions);
+
+	const [rows, [{ totalCount }]] = await Promise.all([
+		db
+			.select()
+			.from(submissions)
+			.where(where)
+			.orderBy(desc(submissions.createdAt))
+			.limit(pageSize)
+			.offset((page - 1) * pageSize),
+		db
+			.select({ totalCount: sql<number>`count(*)`.mapWith(Number) })
+			.from(submissions)
+			.where(where),
+	]);
+
+	return NextResponse.json({
+		submissions: rows.map(toGallerySubmission),
+		totalCount,
+		page,
+		pageSize,
+	});
 }
 
 export async function POST(req: NextRequest) {
@@ -140,6 +186,8 @@ export async function POST(req: NextRequest) {
 				gender: data.gender,
 				stateOfOrigin: data.stateOfOrigin,
 				stateOfResidence: data.stateOfResidence,
+				origin: data.origin,
+				location: data.location,
 				address: data.address,
 				entryTitle: data.entryTitle,
 				category: data.category,

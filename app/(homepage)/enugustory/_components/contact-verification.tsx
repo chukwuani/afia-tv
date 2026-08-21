@@ -12,7 +12,6 @@ type Stage = "contact" | "code";
 export type VerifiedContact = {
 	fullName: string;
 	email: string;
-	phone: string;
 	token: string;
 };
 
@@ -28,14 +27,13 @@ export default function ContactVerification({
 
 	const [fullName, setFullName] = useState("");
 	const [email, setEmail] = useState("");
-	const [phone, setPhone] = useState("");
 
 	const [emailVerificationId, setEmailVerificationId] = useState("");
 	const [emailCode, setEmailCode] = useState("");
 
 	const sendCode = async () => {
-		if (!fullName.trim() || !email.trim() || !phone.trim()) {
-			toast.error("Please fill in your name, email, and phone number.");
+		if (!fullName.trim() || !email.trim()) {
+			toast.error("Please fill in your name and email.");
 			return;
 		}
 
@@ -82,7 +80,7 @@ export default function ContactVerification({
 				throw new Error(typeof result?.error === "string" ? result.error : "Verification failed.");
 			}
 
-			onVerified({ fullName, email, phone, token: result.token });
+			onVerified({ fullName, email, token: result.token });
 		} catch (err) {
 			toast.error(err instanceof Error ? err.message : "Something went wrong");
 		} finally {
@@ -116,16 +114,6 @@ export default function ContactVerification({
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
 						placeholder="m@example.com"
-					/>
-				</div>
-				<div className="space-y-2">
-					<Label htmlFor={`${id}-phone`}>Phone number</Label>
-					<Input
-						id={`${id}-phone`}
-						type="tel"
-						value={phone}
-						onChange={(e) => setPhone(e.target.value)}
-						placeholder="080..."
 					/>
 				</div>
 

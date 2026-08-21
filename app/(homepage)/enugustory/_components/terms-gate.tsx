@@ -10,7 +10,7 @@ import {
 } from "@/components/layout/page-header";
 import TermsContent from "./terms-content";
 
-const READ_TIMEOUT_SECONDS = 60;
+const READ_TIMEOUT_SECONDS = 0;
 
 export default function TermsGate({ onAgree }: { onAgree: () => void }) {
 	const [secondsLeft, setSecondsLeft] = useState(READ_TIMEOUT_SECONDS);
