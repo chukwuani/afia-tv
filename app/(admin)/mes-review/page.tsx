@@ -33,6 +33,7 @@ export default async function AdminPage({
 			fullName: submissions.fullName,
 			dateOfBirth: submissions.dateOfBirth,
 			gender: submissions.gender,
+			origin: submissions.origin,
 			stateOfOrigin: submissions.stateOfOrigin,
 			stateOfResidence: submissions.stateOfResidence,
 			address: submissions.address,

@@ -28,6 +28,13 @@ export interface Voter {
 	hasUsedFreeVote: boolean;
 }
 
+export interface TopVoter {
+	voterId: string;
+	fullName: string;
+	location: string;
+	voteCount: number;
+}
+
 export const CATEGORY_LABELS: Record<Category, string> = {
 	essay: "Essay",
 	photography: "Photography",

@@ -1,4 +1,3 @@
-// Route: POST /api/voters/verify-email/confirm
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { eq } from "drizzle-orm";
@@ -11,14 +10,16 @@ import { createVoterSession } from "@/lib/voters/auth";
 const bodySchema = z.object({
 	verificationId: z.string().uuid(),
 	code: z.string().min(4).max(8),
+	fullName: z.string().min(1),
+	location: z.string().min(1),
 });
 
 export async function POST(req: NextRequest) {
 	const parsed = bodySchema.safeParse(await req.json());
 	if (!parsed.success) {
-		return NextResponse.json({ error: "Enter the code we sent you." }, { status: 400 });
+		return NextResponse.json({ error: "Enter your name, location, and the code we sent you." }, { status: 400 });
 	}
-	const { verificationId, code } = parsed.data;
+	const { verificationId, code, fullName, location } = parsed.data;
 
 	const result = await confirmEmailVerificationCode(verificationId, code);
 	if (!result.ok) {
@@ -38,7 +39,12 @@ export async function POST(req: NextRequest) {
 
 	let [voter] = await db.select().from(voters).where(eq(voters.email, verification.email)).limit(1);
 	if (!voter) {
-		[voter] = await db.insert(voters).values({ email: verification.email }).returning();
+		// fullName/location are only used here, on first signup — a returning
+		// voter keeps whatever they set the first time.
+		[voter] = await db
+			.insert(voters)
+			.values({ email: verification.email, fullName, location })
+			.returning();
 	}
 
 	await createVoterSession(voter.id);

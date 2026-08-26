@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient, keepPreviousData } from "@tanstack/react-query";
-import type { CategoryFilter, GallerySubmission, SubmissionOrigin, Voter } from "@/lib/gallery";
+import type { CategoryFilter, GallerySubmission, SubmissionOrigin, TopVoter, Voter } from "@/lib/gallery";
 
 // --- Submissions (paginated) ------------------------------------------------
 
@@ -48,22 +48,16 @@ export function useSubmissions(params: {
 
 // --- Leaderboard -------------------------------------------------------
 
-async function fetchLeaderboard(params: {
-	origin: SubmissionOrigin;
-	category: CategoryFilter;
-	limit?: number;
-}): Promise<{ leaderboard: GallerySubmission[] }> {
-	const search = new URLSearchParams({ origin: params.origin, limit: String(params.limit ?? 10) });
-	if (params.category !== "all") search.set("category", params.category);
-
+async function fetchLeaderboard(params: { origin: SubmissionOrigin }): Promise<{ topVoters: TopVoter[] }> {
+	const search = new URLSearchParams({ origin: params.origin });
 	const res = await fetch(`/api/leaderboard?${search.toString()}`);
 	if (!res.ok) throw new Error("Failed to load leaderboard.");
 	return res.json();
 }
 
-export function useLeaderboard(params: { origin: SubmissionOrigin; category: CategoryFilter }) {
+export function useLeaderboard(params: { origin: SubmissionOrigin }) {
 	return useQuery({
-		queryKey: ["leaderboard", params.origin, params.category],
+		queryKey: ["leaderboard", params.origin],
 		queryFn: () => fetchLeaderboard(params),
 	});
 }
@@ -85,11 +79,11 @@ export function useVoter() {
 
 export function useRequestOtp() {
 	return useMutation({
-		mutationFn: async (email: string) => {
+		mutationFn: async (opts: { email: string; fullName: string }) => {
 			const res = await fetch("/api/voters/verify-email/request", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ email }),
+				body: JSON.stringify(opts),
 			});
 			const result = await res.json();
 			if (!res.ok) throw new Error(result?.error ?? "Could not send the code.");
@@ -101,7 +95,12 @@ export function useRequestOtp() {
 export function useConfirmOtp() {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: async (opts: { verificationId: string; code: string }) => {
+		mutationFn: async (opts: {
+			verificationId: string;
+			code: string;
+			fullName: string;
+			location: string;
+		}) => {
 			const res = await fetch("/api/voters/verify-email/confirm", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -153,7 +152,7 @@ export function useBuyVotes() {
 			return result as { checkoutUrl: string };
 		},
 		// No cache invalidation here — a paid vote only gets credited once
-		// Stripe's webhook confirms the payment, which happens after this
-		// resolves. The redirect to Stripe (and back) is what refreshes state.
+		// Paystack's webhook confirms the payment, which happens after this
+		// resolves. The redirect to Paystack (and back) is what refreshes state.
 	});
 }

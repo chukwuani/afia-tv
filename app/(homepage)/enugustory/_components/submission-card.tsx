@@ -1,9 +1,15 @@
 "use client";
 
-import { FileText, Play } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { FileText, Image as ImageIcon, Video, Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CATEGORY_LABELS, type GallerySubmission } from "@/lib/gallery";
+
+const CATEGORY_ICONS = {
+	essay: FileText,
+	photography: ImageIcon,
+	videography: Video,
+} as const;
 
 function SubmissionCard({
 	submission,
@@ -16,50 +22,60 @@ function SubmissionCard({
 }) {
 	const place =
 		submission.origin === "local" ? submission.stateOfResidenceLabel : submission.location;
-
-	// Same box, same aspect ratio, for every category — only the fill and
-	// overlay differ. Photography shows the actual entry photo; essay and
-	// videography fall back to the entrant's profile photo since neither
-	// has a natural still image (a document, and a video with no stored
-	// thumbnail, respectively).
-	const imageSrc = submission.category === "photography" ? submission.fileUrl : submission.photoUrl;
+	const Icon = CATEGORY_ICONS[submission.category];
 
 	return (
-		<section className="flex flex-col">
-			<img
-				src={imageSrc}
-				alt={submission.entryTitle}
-				sizes="(min-width: 768px) 50vw, (min-width: 1024px) 25vw, 100vw"
-				className="rounded-none bg-muted object-cover aspect-[16/9] w-auto max-sm:mx-4 mb-4"
-			/>
+		<div
+			role="button"
+			tabIndex={0}
+			onClick={() => onView(submission)}
+			onKeyDown={(e) => {
+				if (e.key === "Enter" || e.key === " ") {
+					e.preventDefault();
+					onView(submission);
+				}
+			}}
+			className="bg-background flex flex-col gap-1 rounded-lg border p-2 pe-3 transition-colors duration-300 cursor-pointer hover:border-brand/50">
+			<div className="flex items-center justify-between gap-2">
+				<div className="flex items-center gap-3 overflow-hidden">
+					<div className="relative flex aspect-square size-10 shrink-0 items-center justify-center overflow-hidden rounded border bg-muted">
+						{submission.category === "photography" ? (
+							<img src={submission.fileUrl} alt={submission.entryTitle} className="object-cover" />
+						) : (
+							<Icon className="size-4 text-muted-foreground" aria-hidden="true" />
+						)}
+					</div>
+					<div className="flex min-w-0 flex-col gap-0.5">
+						<p className="truncate text-sm font-medium">{submission.entryTitle}</p>
+						<p className="text-muted-foreground truncate text-xs font-azeret-mono uppercase">
+							{CATEGORY_LABELS[submission.category]} by {submission.fullName}·
+						</p>
+					</div>
+				</div>
 
-			<section className="max-sm:px-4">
-				<section className="flex gap-2 items-center mb-2">
-					<p className="text-xs text-muted-foreground font-medium inline-flex uppercase font-azeret-mono">
-						{submission.category} -
-					</p>
-
-					<p className="text-xs text-muted-foreground font-medium uppercase font-azeret-mono">
-						By {submission.fullName}
-					</p>
-				</section>
-
-				<h3 className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2">
-					{submission.entryTitle}
-				</h3>
-
-<section className="flex gap-3">
-	<Button size="sm" onClick={() => onVoteClick(submission)}>
-					Vote
-				</Button>
-
-				<Button size="sm" variant="outline" onClick={() => onView(submission)}>
-					View entry
-				</Button>
-</section>
-				
-			</section>
-		</section>
+				<div className="flex items-center gap-1">
+					<span className="text-brand text-xs font-medium tabular-nums">
+						{submission.voteCount.toLocaleString()}
+					</span>
+					<button
+						type="button"
+						aria-label="Vote for this entry"
+						onClick={(e) => {
+							e.stopPropagation();
+							onVoteClick(submission);
+						}}
+						className={cn(
+							"text-muted-foreground/80 hover:text-brand -me-2 size-8 hover:bg-transparent",
+							"[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+							"disabled:pointer-events-none disabled:opacity-50 focus-visible:border-ring",
+							"focus-visible:ring-ring/50 inline-flex items-center justify-center gap-2 rounded-md",
+							"text-sm font-medium whitespace-nowrap outline-none transition-[color,box-shadow] focus-visible:ring-[3px]",
+						)}>
+						<Heart aria-hidden="true" className="size-4" />
+					</button>
+				</div>
+			</div>
+		</div>
 	);
 }
 

@@ -20,7 +20,7 @@ import type { GallerySubmission, Voter } from "@/lib/gallery";
 
 type Step = "email" | "otp" | "vote";
 
-// $5.00 per paid vote, charged via Stripe regardless of the entry's origin.
+// $5.00 per paid vote, charged via Paystack in USD regardless of the entry's origin.
 const PRICE_PER_VOTE_USD = 5;
 
 function VoteDialog({
@@ -36,6 +36,8 @@ function VoteDialog({
 }) {
 	const [step, setStep] = useState<Step>(voter ? "vote" : "email");
 	const [email, setEmail] = useState(voter?.email ?? "");
+	const [fullName, setFullName] = useState("");
+	const [location, setLocation] = useState("");
 	const [verificationId, setVerificationId] = useState("");
 	const [code, setCode] = useState("");
 	const [quantity, setQuantity] = useState(1);
@@ -54,17 +56,28 @@ function VoteDialog({
 	};
 
 	const handleRequestOtp = () => {
+		if (!fullName.trim()) {
+			toast.error("Enter your full name.");
+			return;
+		}
+		if (!location.trim()) {
+			toast.error("Enter your location.");
+			return;
+		}
 		if (!email.includes("@")) {
 			toast.error("Enter a valid email address.");
 			return;
 		}
-		requestOtp.mutate(email, {
-			onSuccess: (data) => {
-				setVerificationId(data.verificationId);
-				setStep("otp");
+		requestOtp.mutate(
+			{ email, fullName },
+			{
+				onSuccess: (data) => {
+					setVerificationId(data.verificationId);
+					setStep("otp");
+				},
+				onError: (err) => toast.error(err instanceof Error ? err.message : "Something went wrong."),
 			},
-			onError: (err) => toast.error(err instanceof Error ? err.message : "Something went wrong."),
-		});
+		);
 	};
 
 	const handleConfirmOtp = () => {
@@ -73,7 +86,7 @@ function VoteDialog({
 			return;
 		}
 		confirmOtp.mutate(
-			{ verificationId, code },
+			{ verificationId, code, fullName, location },
 			{
 				onSuccess: () => setStep("vote"),
 				onError: (err) => toast.error(err instanceof Error ? err.message : "Something went wrong."),
@@ -107,7 +120,7 @@ function VoteDialog({
 		<Dialog open={open} onOpenChange={resetAndClose}>
 			<DialogContent className="sm:max-w-md">
 				<DialogHeader>
-					<DialogTitle className="font-anton uppercase font-normal">
+					<DialogTitle className="font-anton uppercase text-[20px] leading-[140%] tracking-normal font-normal">
 						Vote for &ldquo;{submission.entryTitle}&rdquo;
 					</DialogTitle>
 					<DialogDescription>By {submission.fullName}</DialogDescription>
@@ -115,17 +128,40 @@ function VoteDialog({
 
 				{step === "email" && (
 					<div className="space-y-3">
-						<Label htmlFor="vote-email">Your email</Label>
-						<Input
-							id="vote-email"
-							type="email"
-							placeholder="you@example.com"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							disabled={busy}
-						/>
+						<div className="space-y-1.5">
+							<Label htmlFor="vote-name">Full name</Label>
+							<Input
+								id="vote-name"
+								placeholder="Chukwuani Stephen"
+								value={fullName}
+								onChange={(e) => setFullName(e.target.value)}
+								disabled={busy}
+							/>
+						</div>
+						<div className="space-y-1.5">
+							<Label htmlFor="vote-location">Location</Label>
+							<Input
+								id="vote-location"
+								placeholder="e.g. Nigeria"
+								value={location}
+								onChange={(e) => setLocation(e.target.value)}
+								disabled={busy}
+							/>
+						</div>
+						<div className="space-y-1.5">
+							<Label htmlFor="vote-email">Email</Label>
+							<Input
+								id="vote-email"
+								type="email"
+								placeholder="you@example.com"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								disabled={busy}
+							/>
+						</div>
 						<p className="text-xs text-muted-foreground">
-							We&apos;ll send a one-time code — everyone gets one free vote.
+							We&apos;ll send a one-time code — everyone gets one free vote. Your name and
+							location will show on the leaderboard if you make the top voters.
 						</p>
 					</div>
 				)}
@@ -152,8 +188,7 @@ function VoteDialog({
 							</p>
 						) : (
 							<p className="text-sm text-muted-foreground">
-								You&apos;ve used your free vote. Buy more votes to support this entry again —
-								each vote is ${PRICE_PER_VOTE_USD}.
+								You&apos;ve used your free vote. Buy more votes to support this entry again.
 							</p>
 						)}
 
@@ -202,7 +237,7 @@ function VoteDialog({
 									onClick={handleCastFreeVote}
 									disabled={busy}
 									variant="outline"
-									className="flex-1 border-brand text-brand hover:bg-brand hover:text-white">
+									className="flex-1">
 									{castFreeVote.isPending ? "Casting..." : "Cast free vote"}
 								</Button>
 							)}

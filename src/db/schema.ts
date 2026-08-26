@@ -213,10 +213,8 @@ export const paymentStatusEnum = pgEnum("payment_status", ["pending", "success",
 export const voters = pgTable("voters", {
 	id: uuid("id").defaultRandom().primaryKey(),
 	email: text("email").notNull().unique(),
-	fullName: text("full_name"),
-	// One free vote per voter for the whole competition (not per submission).
-	// Flip this to a per-submission model by dropping this column and instead
-	// checking `votes` for an existing free vote against that submissionId.
+	fullName: text("full_name").notNull(),   // was nullable
+	location: text("location").notNull(),     // new
 	hasUsedFreeVote: boolean("has_used_free_vote").notNull().default(false),
 	createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });

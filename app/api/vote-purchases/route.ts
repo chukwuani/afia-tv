@@ -6,7 +6,7 @@ import { and, eq } from "drizzle-orm";
 import { db } from "@/src";
 import { submissions, votePurchases } from "@/src/db/schema";
 import { getCurrentVoter } from "@/lib/voters/auth";
-import { VOTE_PRICE_USD_CENTS, createStripeCheckout } from "@/lib/payments";
+import { VOTE_PRICE_USD_CENTS, initPaystackTransaction } from "@/lib/payments";
 
 const bodySchema = z.object({
 	submissionId: z.string().uuid(),
@@ -38,27 +38,23 @@ export async function POST(req: NextRequest) {
 	const appUrl = req.headers.get("origin") ?? process.env.NEXT_PUBLIC_APP_URL ?? "";
 	const amountTotal = VOTE_PRICE_USD_CENTS * quantity;
 
-	const [purchase] = await db
-		.insert(votePurchases)
-		.values({
-			voterId: voter.id,
-			submissionId,
-			provider: "stripe",
-			providerReference: reference,
-			quantity,
-			unitAmountCents: VOTE_PRICE_USD_CENTS,
-			amountTotalCents: amountTotal,
-			currency: "usd",
-		})
-		.returning();
+	await db.insert(votePurchases).values({
+		voterId: voter.id,
+		submissionId,
+		provider: "paystack",
+		providerReference: reference,
+		quantity,
+		unitAmountCents: VOTE_PRICE_USD_CENTS,
+		amountTotalCents: amountTotal,
+		currency: "usd",
+	});
 
-	const checkoutUrl = await createStripeCheckout({
+	const checkoutUrl = await initPaystackTransaction({
 		email: voter.email,
 		amountCents: amountTotal,
-		quantity,
-		votePurchaseId: purchase.id,
-		successUrl: `${appUrl}/enugustory?vote=success`,
-		cancelUrl: `${appUrl}/enugustory?vote=cancelled`,
+		currency: "USD",
+		reference,
+		callbackUrl: `${appUrl}/enugustory?vote=success`,
 	});
 
 	return NextResponse.json({ checkoutUrl });

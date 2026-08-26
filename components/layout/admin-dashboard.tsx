@@ -32,8 +32,9 @@ type SubmissionRow = {
 	fullName: string;
 	dateOfBirth: string;
 	gender: string;
-	stateOfOrigin: keyof typeof NIGERIAN_STATE_LABELS;
-	stateOfResidence: keyof typeof STATE_OF_RESIDENCE_LABELS;
+	origin: string;
+	stateOfOrigin: keyof typeof NIGERIAN_STATE_LABELS | null;
+	stateOfResidence: keyof typeof STATE_OF_RESIDENCE_LABELS | null;
 	address: string;
 	entryTitle: string;
 	category: string;
@@ -257,10 +258,10 @@ export default function AdminDashboard({
 									)}
 								</td>
 								<td className="max-w-[180px] px-3 py-2">
-									<div>Origin: {NIGERIAN_STATE_LABELS[row.stateOfOrigin] ?? row.stateOfOrigin}</div>
+									<div>Origin: {row.stateOfOrigin ?? row.origin}</div>
 									<div className="text-muted-foreground text-xs">
 										Resides:{" "}
-										{STATE_OF_RESIDENCE_LABELS[row.stateOfResidence] ?? row.stateOfResidence}
+										{ row.stateOfResidence}
 									</div>
 									<div className="text-muted-foreground truncate text-xs" title={row.address}>
 										{row.address}

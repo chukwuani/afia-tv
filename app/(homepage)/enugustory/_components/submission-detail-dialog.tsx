@@ -91,7 +91,7 @@ function SubmissionDetailDialog({
 				<DialogHeader>
 					<div className="flex items-center gap-3">
 						<div className="min-w-0">
-							<DialogTitle className="font-anton uppercase font-normal line-clamp-1">
+							<DialogTitle className="font-anton uppercase text-[20px] leading-[140%] tracking-normal font-normal line-clamp-1">
 								{submission.entryTitle}
 							</DialogTitle>
 						</div>

@@ -1,31 +1,38 @@
-// Route: GET /api/leaderboard
 import { NextRequest, NextResponse } from "next/server";
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, sql } from "drizzle-orm";
 
 import { db } from "@/src";
-import { submissions } from "@/src/db/schema";
-import { toGallerySubmission } from "@/lib/gallery-mappers";
+import { submissions, votes, voters } from "@/src/db/schema";
+
+const TOP_N = 5;
 
 export async function GET(req: NextRequest) {
 	const { searchParams } = new URL(req.url);
 	const origin = searchParams.get("origin");
-	const category = searchParams.get("category");
-	const limit = Math.min(Number(searchParams.get("limit")) || 10, 50);
 
+	// Scoped to origin only — a voter's rank shouldn't shift just because
+	// someone's browsing a specific category.
 	const conditions = [eq(submissions.status, "approved")];
 	if (origin === "local" || origin === "international") {
 		conditions.push(eq(submissions.origin, origin));
 	}
-	if (category === "essay" || category === "photography" || category === "videography") {
-		conditions.push(eq(submissions.category, category));
-	}
+	const where = and(...conditions);
 
-	const rows = await db
-		.select()
-		.from(submissions)
-		.where(and(...conditions))
-		.orderBy(desc(submissions.voteCount))
-		.limit(limit);
+	const voteCountExpr = sql<number>`count(*)`.mapWith(Number);
+	const topVotersRows = await db
+		.select({
+			voterId: votes.voterId,
+			fullName: voters.fullName,
+			location: voters.location,
+			voteCount: voteCountExpr,
+		})
+		.from(votes)
+		.innerJoin(submissions, eq(votes.submissionId, submissions.id))
+		.innerJoin(voters, eq(votes.voterId, voters.id))
+		.where(where)
+		.groupBy(votes.voterId, voters.fullName, voters.location)
+		.orderBy(desc(voteCountExpr))
+		.limit(TOP_N);
 
-	return NextResponse.json({ leaderboard: rows.map(toGallerySubmission) });
+	return NextResponse.json({ topVoters: topVotersRows });
 }
