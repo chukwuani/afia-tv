@@ -6,31 +6,19 @@ export default function TermsContent() {
 			</h2>
 
 			<p className="text-sm lg:text-base leading-7">
-				By submitting an entry to <strong>My Enugu Story</strong>, participants
-				irrevocably assign all ownership, copyright, and intellectual property
-				rights in their submitted work to <strong>AFIA TV</strong>. All entries,
-				whether selected as winners or not, become the property of AFIA TV and
-				will not be returned.
+				By submitting an entry to My Enugu Story, participants grant AFIA TV the right to reproduce, publish, broadcast, exhibit, archive, adapt, edit, translate, distribute, and otherwise use their submitted work, in whole or in part, across all media and platforms for promotional, educational, cultural, editorial, and commercial purposes, without further permission or compensation.
 			</p>
 
 			<p className="text-sm lg:text-base leading-7">
-				AFIA TV reserves the unrestricted, perpetual, worldwide right to
-				reproduce, publish, broadcast, exhibit, archive, adapt, edit, translate,
-				distribute, and otherwise use submitted entries, in whole or in part,
-				across all media and platforms for promotional, educational, cultural,
-				editorial, and commercial purposes without further permission or
-				compensation.
+				AFIA TV will retain the original artwork(s) submitted by the winners of the competition for documentation, exhibition, archival, and promotional purposes. Original artworks submitted by participants who do not win may be returned to them upon request, subject to the collection arrangements communicated by AFIA TV.
 			</p>
 
 			<p className="text-sm lg:text-base leading-7">
-				By entering the competition, participants warrant that their submission
-				is their original work, does not infringe upon the rights of any third
-				party, and that they have obtained all necessary permissions from any
-				identifiable persons featured in the work.
+				By entering the competition, participants warrant that their submission is their original work, does not infringe upon the rights of any third party, and that they have obtained all necessary permissions from any identifiable persons featured in the work.
 			</p>
 
 			<p className="text-sm lg:text-base leading-7">
-				All entries, whether selected as winners or not, will not be returned.
+				Submission of an entry aconstitutes acceptance of these terms.
 			</p>
 
 			<h2 className="mt-6 scroll-m-20 border-b pb-2 font-epilogue text-xl lg:text-2xl font-semibold tracking-tight">
