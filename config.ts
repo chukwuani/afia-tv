@@ -108,6 +108,12 @@ export const siteConfig = {
 			disabled: false,
 		},
 		{
+			title: "Obuzo",
+			href: "/obuzo",
+			external: false,
+			disabled: false,
+		},
+		{
 			title: "News",
 			items: MAIN_CATEGORIES,
 			external: false,

@@ -202,7 +202,7 @@ export const exportLogs = pgTable("export_logs", {
 // ---------------------------------------------------------------------------
 
 export const voteSourceEnum = pgEnum("vote_source", ["free", "paid"]);
-export const paymentProviderEnum = pgEnum("payment_provider", ["paystack", "stripe"]);
+export const paymentProviderEnum = pgEnum("payment_provider", ["flutterwave"]);
 export const paymentStatusEnum = pgEnum("payment_status", ["pending", "success", "failed"]);
 
 // Authenticated voters. Separate from `contestants` — someone can vote without

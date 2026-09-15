@@ -17,6 +17,12 @@ import { Label } from "@/components/ui/label";
 
 import { useRequestOtp, useConfirmOtp, useCastFreeVote, useBuyVotes } from "@/hooks/use-gallery";
 import type { GallerySubmission, Voter } from "@/lib/gallery";
+import {
+	InputOTP,
+	InputOTPGroup,
+	InputOTPSeparator,
+	InputOTPSlot,
+} from "@/components/ui/input-otp";
 
 type Step = "email" | "otp" | "vote";
 
@@ -160,8 +166,8 @@ function VoteDialog({
 							/>
 						</div>
 						<p className="text-xs text-muted-foreground">
-							We&apos;ll send a one-time code — everyone gets one free vote. Your name and
-							location will show on the leaderboard if you make the top voters.
+							We&apos;ll send a one-time code — everyone gets one free vote. Your name and location
+							will show on the leaderboard if you make the top voters.
 						</p>
 					</div>
 				)}
@@ -169,14 +175,22 @@ function VoteDialog({
 				{step === "otp" && (
 					<div className="space-y-3">
 						<Label htmlFor="vote-otp">Enter the code sent to {email}</Label>
-						<Input
-							id="vote-otp"
-							inputMode="numeric"
-							placeholder="123456"
-							value={code}
-							onChange={(e) => setCode(e.target.value)}
-							disabled={busy}
-						/>
+						<InputOTP id="vote-otp" maxLength={6} value={code} onChange={setCode}>
+							<InputOTPGroup>
+								<InputOTPSlot index={0} />
+								<InputOTPSlot index={1} />
+							</InputOTPGroup>
+							<InputOTPSeparator />
+							<InputOTPGroup>
+								<InputOTPSlot index={2} />
+								<InputOTPSlot index={3} />
+							</InputOTPGroup>
+							<InputOTPSeparator />
+							<InputOTPGroup>
+								<InputOTPSlot index={4} />
+								<InputOTPSlot index={5} />
+							</InputOTPGroup>
+						</InputOTP>
 					</div>
 				)}
 

@@ -6,7 +6,7 @@ import { and, eq } from "drizzle-orm";
 import { db } from "@/src";
 import { submissions, votePurchases } from "@/src/db/schema";
 import { getCurrentVoter } from "@/lib/voters/auth";
-import { VOTE_PRICE_USD_CENTS, initPaystackTransaction } from "@/lib/payments";
+import { VOTE_PRICE_USD_CENTS, initFlutterwavePayment } from "@/lib/payments";
 
 const bodySchema = z.object({
 	submissionId: z.string().uuid(),
@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
 	await db.insert(votePurchases).values({
 		voterId: voter.id,
 		submissionId,
-		provider: "paystack",
+		provider: "flutterwave",
 		providerReference: reference,
 		quantity,
 		unitAmountCents: VOTE_PRICE_USD_CENTS,
@@ -49,12 +49,16 @@ export async function POST(req: NextRequest) {
 		currency: "usd",
 	});
 
-	const checkoutUrl = await initPaystackTransaction({
+	const checkoutUrl = await initFlutterwavePayment({
 		email: voter.email,
+		name: voter.fullName,
 		amountCents: amountTotal,
 		currency: "USD",
 		reference,
-		callbackUrl: `${appUrl}/enugustory?vote=success`,
+		// Flutterwave uses one redirect_url for every outcome (success,
+		// cancelled, failed) and appends `status` + `tx_ref` +
+		// `transaction_id` query params — there's no separate cancel_url.
+		redirectUrl: `${appUrl}/enugustory?vote=complete`,
 	});
 
 	return NextResponse.json({ checkoutUrl });

@@ -100,6 +100,16 @@ export const Navbar = () => {
 										alt="My Enugu Story Logo"
 									/>
 								)}
+
+								{pathname === "/obuzo" && (
+									<Image
+										className="w-[60px] lg:w-[80px] max-w-none ml-2"
+										width={100}
+										height={40}
+										src="/images/obuzo-logo.png"
+										alt="Obuzo Logo"
+									/>
+								)}
 							</div>
 						</Link>
 					</section>
