@@ -19,7 +19,8 @@ const HeroSection = () => {
 						</p>
 
 						<a
-							href="#"
+							href="https://forms.gle/P8JVrraajy8hiKQm6"
+							target="_blank"
 							className={cn(
 								buttonVariants({ variant: "default" }),
 								"mt-4 relative z-10 text-xs text-[10px]! p-2 lg:px-4! lg:py-3 h-auto lg:text-[0.75rem]! tracking-[2.4px] uppercase",
