@@ -74,7 +74,7 @@ function SubmissionsGallery() {
 			<section>
 				<CardHeader className="px-0">
 					<CardTitle className="text-brand font-anton text-[28px] md:text-[50px] leading-[1.1em] font-normal tracking-[.5px] mb-2 uppercase">
-						My Enugu Story — Entries
+						Enugu Story Entries
 					</CardTitle>
 					<CardDescription className="font-outfit text-muted-foreground text-sm md:text-base max-w-[480px]">
 						Browse this year&apos;s entries and cast your vote to keep supporting your favorites.
@@ -126,7 +126,9 @@ function SubmissionsGallery() {
 				<div>
 					<section className="grid grid-cols-1 gap-3 md:grid-cols-2">
 						{loadingSubmissions ? (
-							Array.from({ length: 6 }).map((_, index) => <NewsSkeleton key={index} />)
+							<div className="col-span-full rounded-lg p-10 text-center text-sm text-muted-foreground">
+								Loading entries...
+							</div>
 						) : submissions.length === 0 ? (
 							<div className="col-span-full rounded-lg p-10 text-center text-sm text-muted-foreground">
 								No {category === "all" ? "" : `${CATEGORY_LABELS[category]} `}entries yet for{" "}

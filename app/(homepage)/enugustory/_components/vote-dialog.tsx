@@ -148,7 +148,7 @@ function VoteDialog({
 							<Label htmlFor="vote-location">Location</Label>
 							<Input
 								id="vote-location"
-								placeholder="e.g. Nigeria"
+								placeholder="e.g. Enugu, Nigeria"
 								value={location}
 								onChange={(e) => setLocation(e.target.value)}
 								disabled={busy}

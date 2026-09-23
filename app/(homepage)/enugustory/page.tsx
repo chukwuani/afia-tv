@@ -13,7 +13,7 @@ export default function EnuguStoryPage() {
 		<main className="relative w-full">
 			<HeroSection />
 
-			{process.env.NEXT_PUBLIC_NODE_ENV === "development" && <SubmissionsGallery />}
+			<SubmissionsGallery />
 		</main>
 	);
 }
