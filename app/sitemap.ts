@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `https://www.afiatv.net/news/${article.slug}`,
     lastModified: article._updatedAt || article.publishedAt,
     changeFrequency: 'daily' as const,
-    priority: 0.8,
+    priority: 0.9,
   }))
 
   return [
@@ -20,13 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: 'https://www.afiatv.net',
       lastModified: new Date(),
       changeFrequency: 'hourly',
-      priority: 1,
-    },
-    {
-      url: 'https://www.afiatv.net/news',
-      lastModified: new Date(),
-      changeFrequency: 'hourly',
-      priority: 0.9,
+      priority: 1.0,
     },
     ...articleUrls,
   ]

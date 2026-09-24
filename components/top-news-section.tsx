@@ -53,6 +53,8 @@ function TopNewsSection() {
 
 	return (
 		<section>
+			<h1 className="sr-only">Main news section</h1>
+
 			<>
 				{isPending ? (
 					<section className="grid grid-cols-1 lg:grid-cols-3 gap-8 px-6 sm:px-12 py-10">
@@ -88,9 +90,9 @@ function TopNewsSection() {
 													</p>
 												</section>
 
-												<h3 className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
+												<h2 className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
 													{item.title}
-												</h3>
+												</h2>
 
 												<p className="text-sm font-outfit text-muted-foreground mb-4 line-clamp-2">
 													{item.description}
@@ -111,9 +113,9 @@ function TopNewsSection() {
 										href={`/news/${item.slug}`}
 										className="group cols-span-1 gap-2 w-full">
 										<section className="flex flex-col">
-											<h3 className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
+											<h2 className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-3 line-clamp-2 transition-colors group-hover:text-brand">
 												{item.title}
-											</h3>
+											</h2>
 
 											<p className="text-sm font-outfit text-muted-foreground mb-4 line-clamp-3">
 												{item.description}

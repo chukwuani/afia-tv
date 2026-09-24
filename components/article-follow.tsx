@@ -10,7 +10,11 @@ const ArticleFollow = () => {
 			<p className="text-xs font-medium uppercase font-azeret-mono">Follow us :</p>
 
 			<section className="flex gap-2">
-				{/* <a href="https://www.google.com/preferences/source?q=afiatv.net" target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "outline", size: "lg" })}>
+				<a
+					href="https://www.google.com/preferences/source?q=afiatv.net"
+					target="_blank"
+					rel="noopener noreferrer"
+					className={buttonVariants({ variant: "outline", size: "lg" })}>
 					<svg
 						stroke="currentColor"
 						fill="currentColor"
@@ -43,9 +47,13 @@ const ArticleFollow = () => {
 	c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
 					</svg>{" "}
 					Google
-				</a> */}
+				</a>
 
-				<a href={siteConfig.links.whatsapp} target="_blank" rel="noopener noreferrer" className={buttonVariants({ variant: "outline", size: "lg" })}>
+				<a
+					href={siteConfig.links.whatsapp}
+					target="_blank"
+					rel="noopener noreferrer"
+					className={buttonVariants({ variant: "outline", size: "lg" })}>
 					<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 720 720">
 						<path
 							fill="#25d366"
@@ -64,7 +72,3 @@ const ArticleFollow = () => {
 };
 
 export default ArticleFollow;
-
-
-
-

@@ -53,6 +53,8 @@ const VideoFeedSection = ({ layout = "default" }: { layout?: "default" | "second
 	return (
 		<Card className="flex flex-col overflow-hidden border-none bg-background rounded-none shadow-none pt-8 px-4 md:px-10 lg:px-12 pb-8">
 			{/* Section header */}
+			<h2 className="sr-only">Video Feed Section</h2>
+
 			<section className="flex justify-between items-center gap-10">
 				{layout === "default" ? (
 					<CardHeader className="px-0">
@@ -124,9 +126,9 @@ const VideoFeedSection = ({ layout = "default" }: { layout?: "default" | "second
 									</p>
 								</section>
 
-								<p className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-2 line-clamp-2">
+								<h3 className="font-anton uppercase text-[24px] leading-[140%] tracking-normal mt-1 mb-2 line-clamp-2">
 									{item?.title}
-								</p>
+								</h3>
 
 								<p className="text-sm font-outfit text-muted-foreground line-clamp-2">
 									{item?.description}

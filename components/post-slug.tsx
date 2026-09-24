@@ -77,8 +77,6 @@ function PostSlug() {
 	const author = news.author;
 	const content = news.body;
 
-	console.log(slug);
-
 	return (
 		<>
 			<script
@@ -97,7 +95,7 @@ function PostSlug() {
 							name: "Afia TV",
 							logo: {
 								"@type": "ImageObject",
-								url: "https://afiatv.net/images/afia-logo-small.png",
+								url: "https://www.afiatv.net/images/afia-logo-small.png",
 							},
 						},
 					}),
