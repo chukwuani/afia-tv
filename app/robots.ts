@@ -13,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://afiatv.net/sitemap.xml',
+    sitemap: 'https://www.afiatv.net/sitemap.xml',
   }
 }

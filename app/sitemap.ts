@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articles = await fetchAllArticles() // Your data fetching function
   
   const articleUrls = articles.map((article) => ({
-    url: `https://afiatv.net/news/${article.slug}`,
+    url: `https://www.afiatv.net/news/${article.slug}`,
     lastModified: article._updatedAt || article.publishedAt,
     changeFrequency: 'daily' as const,
     priority: 0.8,
@@ -17,13 +17,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: 'https://afiatv.net',
+      url: 'https://www.afiatv.net',
       lastModified: new Date(),
       changeFrequency: 'hourly',
       priority: 1,
     },
     {
-      url: 'https://afiatv.net/news',
+      url: 'https://www.afiatv.net/news',
       lastModified: new Date(),
       changeFrequency: 'hourly',
       priority: 0.9,

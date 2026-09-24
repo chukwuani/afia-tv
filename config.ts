@@ -79,8 +79,8 @@ export const siteConfig = {
 	title: "Afia TV",
 	description:
 		"Celebrating the Heart of the East. Experience our vibrant traditions, stories, and entertainment.",
-	url: "https://afiatv.net",
-	ogImage: "https://afiatv.net/opengraph-image.jpg",
+	url: "https://www.afiatv.net",
+	ogImage: "https://www.afiatv.net/opengraph-image.jpg",
 	links: SOCIAL_LINKS,
 	mainNav: [
 		{

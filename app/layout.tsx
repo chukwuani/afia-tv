@@ -43,7 +43,7 @@ const azeretMono = localFont({
 });
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://afiatv.net"),
+	metadataBase: new URL("https://www.afiatv.net"),
 	title: {
 		template: `%s - ${siteConfig.title}`,
 		default: siteConfig.title,
