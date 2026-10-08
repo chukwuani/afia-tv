@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
 		ContentType: contentType,
 	});
 
-	const uploadUrl = await getSignedUrl(s3, command, { expiresIn: 300 }); // 5 minutes
+	const uploadUrl = await getSignedUrl(s3, command, { expiresIn: 3600 }); // 1 hour
 
 	return NextResponse.json({
 		uploadUrl,
