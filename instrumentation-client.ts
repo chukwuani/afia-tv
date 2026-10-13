@@ -9,10 +9,6 @@ Sentry.init({
 
   // Add optional integrations for additional features
   integrations: [
-    Sentry.replayIntegration({
-      maskAllText: false, 
-      blockAllMedia: false, 
-    }),
     Sentry.replayIntegration()
   ],
 
