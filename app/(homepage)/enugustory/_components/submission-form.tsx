@@ -144,15 +144,15 @@ function SubmissionForm({
 		setIsSubmitting(true);
 
 		try {
-			if (data.category === "videography") {
-				setSubmitStatus("Checking video length...");
-				// Client-side check for fast feedback only — the server re-verifies
-				// this against the actual uploaded file before accepting the entry.
-				const durationCheck = await validateVideoDuration(files[0]);
-				if (!durationCheck.ok) {
-					throw new Error(durationCheck.message);
-				}
-			}
+			// if (data.category === "videography") {
+			// 	setSubmitStatus("Checking video length...");
+			// 	// Client-side check for fast feedback only — the server re-verifies
+			// 	// this against the actual uploaded file before accepting the entry.
+			// 	const durationCheck = await validateVideoDuration(files[0]);
+			// 	if (!durationCheck.ok) {
+			// 		throw new Error(durationCheck.message);
+			// 	}
+			// }
 
 			setSubmitStatus("Uploading your files...");
 			const [entryUpload, photoUpload] = await Promise.all([

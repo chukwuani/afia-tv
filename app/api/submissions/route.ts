@@ -124,35 +124,37 @@ export async function POST(req: NextRequest) {
 
 	// Never trust the client's own duration check — re-verify server-side against
 	// the actual uploaded object before the submission is accepted.
-	if (data.category === "videography") {
-		let duration: number;
+	
+	// if (data.category === "videography") {
+	// 	let duration: number;
 
-		try {
-			duration = await getMp4DurationFromS3(data.fileKey);
-		} catch (err) {
-			console.error("Video duration check failed:", err);
-			await deleteUploadedFile(data.fileKey);
-			return NextResponse.json(
-				{
-					error:
-						"We couldn't verify your video's duration. Please re-export as a standard MP4 and try again.",
-				},
-				{ status: 422 },
-			);
-		}
+	// 	try {
+	// 		duration = await getMp4DurationFromS3(data.fileKey);
+	// 	} catch (err) {
+	// 		console.error("Video duration check failed:", err);
+	// 		await deleteUploadedFile(data.fileKey);
 
-		if (duration < MIN_VIDEO_SECONDS || duration > MAX_VIDEO_SECONDS) {
-			await deleteUploadedFile(data.fileKey);
-			return NextResponse.json(
-				{
-					error: `Video must be between 3 and 7 minutes long (yours is ${Math.round(
-						duration / 60,
-					)} min). Please re-upload.`,
-				},
-				{ status: 422 },
-			);
-		}
-	}
+	// 		return NextResponse.json(
+	// 			{
+	// 				error:
+	// 					"We couldn't verify your video's duration. Please re-export as a standard MP4 and try again.",
+	// 			},
+	// 			{ status: 422 },
+	// 		);
+	// 	}
+
+	// 	if (duration < MIN_VIDEO_SECONDS || duration > MAX_VIDEO_SECONDS) {
+	// 		await deleteUploadedFile(data.fileKey);
+	// 		return NextResponse.json(
+	// 			{
+	// 				error: `Video must be between 3 and 7 minutes long (yours is ${Math.round(
+	// 					duration / 60,
+	// 				)} min). Please re-upload.`,
+	// 			},
+	// 			{ status: 422 },
+	// 		);
+	// 	}
+	// }
 
 	// Soft signal only — an IP match against a past disqualified submission gets
 	// flagged for a human to look at, never auto-blocked (shared IPs are common
